@@ -13,6 +13,10 @@
 
 import React from 'react';
 
+import AppBar from 'material-ui/AppBar';
+import Drawer from 'material-ui/Drawer';
+import { List, ListItem } from 'material-ui/List';
+
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
@@ -22,7 +26,24 @@ export default class App extends React.PureComponent { // eslint-disable-line re
   render() {
     return (
       <div>
-        {React.Children.toArray(this.props.children)}
+        <AppBar
+          title="Zmora"
+          showMenuIconButton={false}
+        />
+        <div>
+          <div style={{ float: 'left', marginRight: 20 }}>
+            <List>
+              <ListItem insetChildren primaryText="Home" />
+              <ListItem insetChildren primaryText="Contests" />
+              <ListItem insetChildren primaryText="Ranking" />
+              <ListItem insetChildren primaryText="News" />
+            </List>
+          </div>
+          <div>{React.Children.toArray(this.props.children)}</div>
+        </div>
+        <Drawer open openSecondary>
+          <AppBar showMenuIconButton={false} />
+        </Drawer>
       </div>
     );
   }

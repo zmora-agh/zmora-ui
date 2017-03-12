@@ -14,8 +14,9 @@
 import React from 'react';
 
 import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-
+import IconButton from 'material-ui/IconButton';
+import Menu from 'material-ui/svg-icons/navigation/menu';
+import RightMenu from '../../components/RightMenu';
 import Navigation from './../../../app/components/Navigation';
 
 export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -30,14 +31,13 @@ export default class App extends React.PureComponent { // eslint-disable-line re
         <AppBar
           title="Zmora"
           showMenuIconButton={false}
+          iconElementRight={<IconButton><Menu /></IconButton>}
         />
         <div>
           <Navigation style={{ width: 200, float: 'left', marginRight: 20 }} />
           <div style={{ float: 'left' }}>{React.Children.toArray(this.props.children)}</div>
         </div>
-        <Drawer open openSecondary>
-          <AppBar showMenuIconButton={false} />
-        </Drawer>
+        <RightMenu />
       </div>
     );
   }

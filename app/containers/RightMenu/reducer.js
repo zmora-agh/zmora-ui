@@ -12,7 +12,7 @@ const initialState = fromJS({
     { id: 2, text: 'Your exercise have been rated' },
     { id: 3, text: 'New contest available' },
   ],
-  username: 'Maxmati',
+  username: 'Mateusz Nowotyński',
 });
 
 function rightMenuReducer(state = initialState, action) {

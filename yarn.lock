@@ -2496,8 +2496,8 @@ es-to-primitive@^1.1.1:
     is-symbol "^1.0.1"
 
 es5-ext@^0.10.7, es5-ext@^0.10.8, es5-ext@~0.10.11, es5-ext@~0.10.2, es5-ext@~0.10.7:
-  version "0.10.12"
-  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.12.tgz#aa84641d4db76b62abba5e45fd805ecbab140047"
+  version "0.10.13"
+  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.13.tgz#a390ab717bde1ce3b4cbaeabe23ca8fbddcb06f6"
   dependencies:
     es6-iterator "2"
     es6-symbol "~3.1"
@@ -4991,11 +4991,11 @@ lodash.uniq@^4.3.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@4.17.2, lodash@^4.15.0, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.6.1:
+lodash@4.17.2, lodash@^4.2.0, lodash@^4.2.1:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.16.4, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.3.0:
+lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.4, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -5110,7 +5110,7 @@ marked@^0.3.6:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
 
-material-ui@^1.0.0-alpha.6:
+material-ui@^1.0.0-alpha.7:
   version "1.0.0-alpha.7"
   resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-alpha.7.tgz#d43edec4379cdc82742dae88200c62213eb9ae0a"
   dependencies:
@@ -7028,10 +7028,10 @@ source-list-map@^0.1.4, source-list-map@~0.1.7:
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
 
 source-map-support@^0.4.2:
-  version "0.4.11"
-  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.11.tgz#647f939978b38535909530885303daf23279f322"
+  version "0.4.12"
+  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.12.tgz#f47d02bf01efaf0c160d3a37d038401b92b1867e"
   dependencies:
-    source-map "^0.5.3"
+    source-map "^0.5.6"
 
 source-map@0.1.x:
   version "0.1.43"

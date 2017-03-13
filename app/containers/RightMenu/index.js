@@ -7,9 +7,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Settings from 'material-ui/svg-icons/action/settings';
-import ExitToApp from 'material-ui/svg-icons/action/exit-to-app';
-import Subheader from 'material-ui/Subheader';
+import Settings from 'react-material-icons/icons/action/settings';
+import ExitToApp from 'react-material-icons/icons/action/exit-to-app';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
@@ -37,7 +36,6 @@ const RightMenu = (props) => (
         {props.username}
       </ListItem>
       <Divider />
-      <Subheader><FormattedMessage {...messages.events} /></Subheader>
       <ListItem>
         {props.events.map((event) => (<p key={event.id}>{event.text}</p>))}
       </ListItem>

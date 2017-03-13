@@ -11,10 +11,10 @@ import { FormattedMessage } from 'react-intl';
 import { List } from 'material-ui/List';
 
 // Icons
-import Home from 'material-ui/svg-icons/action/home';
-import Announcement from 'material-ui/svg-icons/action/announcement';
-import Assignment from 'material-ui/svg-icons/action/assignment';
-import Star from 'material-ui/svg-icons/toggle/star';
+import Home from 'react-material-icons/icons/action/home';
+import Announcement from 'react-material-icons/icons/action/announcement';
+import Assignment from 'react-material-icons/icons/action/assignment';
+import Star from 'react-material-icons/icons/toggle/star';
 
 import NavListItem from '../NavListItem';
 import messagesHomePage from '../../containers/HomePage/messages';

@@ -3,27 +3,74 @@
 * ContestsTable
 *
 */
-
+// TODO: move hide/expand logic to container
 import React from 'react';
 // import styled from 'styled-components';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
-import Add from 'material-ui/svg-icons/content/add';
-import Remove from 'material-ui/svg-icons/content/remove';
+import KeyboardArrowDown from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
+import KeyboardArrowUp from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-function buildRows(indent, data) {
-  return [].concat(...data.map((row) => createTableRow(indent, row)));
+const mockedData = [{
+  expanded: true,
+  name: 'EAIiIB',
+  description: '',
+  children: [
+    {
+      expanded: true,
+      name: 'Informatyka',
+      description: '',
+      children: [
+        {
+          expanded: true,
+          name: 'PWiR',
+          description: 'To jest zadanie z PWiR',
+          children: [],
+        },
+        {
+          expanded: true,
+          name: 'Języki i metody programowania 2',
+          description: 'To jest zadanie z C++',
+          children: [],
+        },
+      ],
+    },
+  ],
+}];
+
+function checkName(row, name) {
+  return row.name === name;
 }
 
-function createTableRow(indent, row) {
-  const addIcon = row.children.length > 0 && row.expanded ? <Add /> : null;
-  const removeIcon = row.children.length > 0 && !row.expanded ? <Remove /> : null;
-  const childrenRows = row.expanded ? buildRows(indent + 1, row.children) : [];
+function findByPath(data, splittedPath) {
+  const foundRow = data.find((row) => checkName(row, splittedPath[0]));
+  return splittedPath.length === 1 ? foundRow : findByPath(foundRow.children, splittedPath.slice(1));
+}
+
+function buildRows(indent, path, data) {
+  return [].concat(...data.map((row) => createTableRow(indent, path, row)));
+}
+
+function expandRow(path) {
+  findByPath(mockedData, path.split('->')).expanded = true;
+}
+
+function hideRow(path) {
+  findByPath(mockedData, path.split('->')).expanded = false;
+}
+
+function createTableRow(indent, path, row) {
+  const rowPath = path === '' ? row.name : path.concat(`->${row.name}`);
+  const expandedIcon = row.children.length > 0 && row.expanded ?
+    <KeyboardArrowDown onClick={() => hideRow(rowPath)} /> : null;
+  const hiddenIcon = row.children.length > 0 && !row.expanded ?
+    <KeyboardArrowUp onClick={() => expandRow(rowPath)} /> : null;
+  const childrenRows = row.expanded ? buildRows(indent + 1, rowPath, row.children) : [];
   const render = (
-    <TableRow key={row.name}>
+    <TableRow key={rowPath}>
       <TableRowColumn style={{ textIndent: 20 * indent }}>
-        {addIcon}{removeIcon} {row.name}
+        {expandedIcon}{hiddenIcon} {row.name}
       </TableRowColumn>
       <TableRowColumn>
         {row.description}
@@ -33,35 +80,8 @@ function createTableRow(indent, row) {
   childrenRows.unshift(render);
   return childrenRows;
 }
-// TODO:expand/hide mechanism, connect to container
 function ContestsTable() {
-  const mockedData = [{
-    expanded: true,
-    name: 'EAIiIB',
-    description: '',
-    children: [
-      {
-        expanded: true,
-        name: 'Informatyka',
-        description: '',
-        children: [
-          {
-            expanded: true,
-            name: 'PWiR',
-            description: 'To jest zadanie z PWiR',
-            children: [],
-          },
-          {
-            expanded: true,
-            name: 'Języki i metody programowania 2',
-            description: 'To jest zadanie z C++',
-            children: [],
-          },
-        ],
-      },
-    ],
-  }];
-  const rows = buildRows(0, mockedData);
+  const rows = buildRows(0, '', mockedData);
   return (
     <div>
       <Table selectable={false}>
@@ -80,7 +100,6 @@ function ContestsTable() {
 }
 
 ContestsTable.propTypes = {
-
 };
 
 export default ContestsTable;

@@ -44,8 +44,12 @@ function App(props, context) {
           <Text type="title" colorInherit>Zmora</Text>
         </Toolbar>
       </AppBar>
-      <Navigation style={{ float: 'left' }} />
-      <div style={{ float: 'left' }}>{React.Children.toArray(props.children)}</div>
+      <div style={{ display: 'flex' }} >
+        <Navigation style={{ margin: 20, width: 200, flex: 'initial' }} />
+        <div style={{ flex: 1, margin: '28px 28px 28px 8px' }} >
+          {React.Children.toArray(props.children)}
+        </div>
+      </div>
     </div>
   );
 }

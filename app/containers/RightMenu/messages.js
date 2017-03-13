@@ -10,4 +10,12 @@ export default defineMessages({
     id: 'app.components.RightMenu.events',
     defaultMessage: 'Events',
   },
+  settings: {
+    id: 'app.components.RightMenu.settings',
+    defaultMessage: 'Settings',
+  },
+  logout: {
+    id: 'app.components.RightMenu.logout',
+    defaultMessage: 'Logout',
+  },
 });

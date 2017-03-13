@@ -12,17 +12,20 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import Menu from 'material-ui/svg-icons/navigation/menu';
-import RightMenu from '../../components/RightMenu';
+import RightMenu from '../RightMenu';
+import { toggleMenu } from '../RightMenu/actions';
 import Navigation from './../../../app/components/Navigation';
 
-export default class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   static propTypes = {
     children: React.PropTypes.node,
+    dispatch: React.PropTypes.func.isRequired,
   };
 
   render() {
@@ -32,6 +35,7 @@ export default class App extends React.PureComponent { // eslint-disable-line re
           title="Zmora"
           showMenuIconButton={false}
           iconElementRight={<IconButton><Menu /></IconButton>}
+          onRightIconButtonTouchTap={() => this.props.dispatch(toggleMenu())}
         />
         <div>
           <Navigation style={{ width: 200, float: 'left', margin: 20 }} />
@@ -42,3 +46,13 @@ export default class App extends React.PureComponent { // eslint-disable-line re
     );
   }
 }
+
+const mapStateToProps = () => ({});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -34,7 +34,7 @@ export default class App extends React.PureComponent { // eslint-disable-line re
           iconElementRight={<IconButton><Menu /></IconButton>}
         />
         <div>
-          <Navigation style={{ width: 200, float: 'left', marginRight: 20 }} />
+          <Navigation style={{ width: 200, float: 'left', margin: 20 }} />
           <div style={{ float: 'left' }}>{React.Children.toArray(this.props.children)}</div>
         </div>
         <RightMenu />

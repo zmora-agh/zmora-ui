@@ -5,32 +5,30 @@
 */
 
 import React from 'react';
-import { Link } from 'react-router';
-// import styled from 'styled-components';
-import * as Colors from 'material-ui/styles/colors';
 
 import { FormattedMessage } from 'react-intl';
 
-import { List, ListItem } from 'material-ui/List';
+import { List } from 'material-ui/List';
 
+// Icons
+import Home from 'material-ui/svg-icons/action/home';
+import Announcement from 'material-ui/svg-icons/action/announcement';
+import Assignment from 'material-ui/svg-icons/action/assignment';
+import Star from 'material-ui/svg-icons/toggle/star';
+
+import NavListItem from '../NavListItem';
 import messagesHomePage from '../../containers/HomePage/messages';
-import messagesContests from '../../containers/ContestsPage/messages';
-import messagesRanking from '../../containers/RankingPage/messages';
-import messagesNews from '../../containers/NewsPage/messages';
+import messagesContestsPage from '../../containers/ContestsPage/messages';
+import messagesRankingPage from '../../containers/RankingPage/messages';
+import messagesNewsPage from '../../containers/NewsPage/messages';
 
 function Navigation(props) {
-  const linkStyle = { textDecoration: 'none' };
-  const activeLinkStyle = {
-    display: 'block',
-    backgroundColor: Colors.grey200,
-  };
-
   return (
     <List style={props.style}>
-      <Link to="/" style={linkStyle} activeStyle={activeLinkStyle}><ListItem insetChildren primaryText={<FormattedMessage {...messagesHomePage.title} />} /></Link>
-      <Link to="/contests" style={linkStyle} activeStyle={activeLinkStyle}><ListItem insetChildren primaryText={<FormattedMessage {...messagesContests.title} />} /></Link>
-      <Link to="/ranking" style={linkStyle} activeStyle={activeLinkStyle}><ListItem insetChildren primaryText={<FormattedMessage {...messagesRanking.title} />} /></Link>
-      <Link to="/news" style={linkStyle} activeStyle={activeLinkStyle}><ListItem insetChildren primaryText={<FormattedMessage {...messagesNews.title} />} /></Link>
+      <NavListItem to="/" icon={<Home />} title={<FormattedMessage {...messagesHomePage.title} />} />
+      <NavListItem to="/contests" icon={<Assignment />} title={<FormattedMessage {...messagesContestsPage.title} />} />
+      <NavListItem to="/ranking" icon={<Star />} title={<FormattedMessage {...messagesRankingPage.title} />} />
+      <NavListItem to="/news" icon={<Announcement />} title={<FormattedMessage {...messagesNewsPage.title} />} />
     </List>
   );
 }

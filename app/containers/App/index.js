@@ -30,17 +30,16 @@ const styleSheet = createStyleSheet('App', () => ({
     flexDirection: 'column',
     minHeight: '100vh',
   },
-  appBar: {
-    position: 'fixed',
+  contentWrapper: {
+    marginTop: 16,
+    marginBottom: 16,
+    marginLeft: 8,
   },
   rightMenu: {
     position: 'fixed',
     right: 0,
-    width: '100%',
     height: '100%',
-    paddingRight: 0,
-    paddingTop: 0,
-    paddingLeft: 15,
+    paddingLeft: 24,
   },
 }));
 
@@ -48,7 +47,7 @@ export default function App(props, context) {
   const classes = context.styleManager.render(styleSheet);
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar}>
+      <AppBar style={{ position: 'fixed' }}>
         <Toolbar>
           <Layout item xs={2}><Text type="title" colorInherit className={classes.flex}>Zmora</Text></Layout>
           <Layout item xs={6}><Breadcrumbs routes={props.routes} params={props.params} /></Layout>
@@ -57,8 +56,10 @@ export default function App(props, context) {
         </Toolbar>
       </AppBar>
       <Layout container gutter={0} style={{ marginTop: 64 }}>
-        <Layout item xs={2}><Navigation style={{ margin: 10 }} /></Layout>
-        <Layout item xs={7} style={{ paddingTop: 10 }}>{React.Children.toArray(props.children)}</Layout>
+        <Layout item xs={2}><Navigation style={{ margin: 8 }} /></Layout>
+        <Layout item xs={8} className={classes.contentWrapper}>
+          {React.Children.toArray(props.children)}
+        </Layout>
         <Layout item xs={2} className={classes.rightMenu}><RightMenu /></Layout>
       </Layout>
     </div>

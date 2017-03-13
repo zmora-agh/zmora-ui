@@ -7,17 +7,15 @@
 import React, { PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 
-import ProblemView from './../../../app/components/ProblemView';
-import ProblemExampleData from './../../../app/components/ProblemExampleData';
-
 import Paper from 'material-ui/Paper';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+
+import ProblemView from './../../../app/components/ProblemView';
+import ProblemExampleData from './../../../app/components/ProblemExampleData';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   appBar: {
@@ -52,7 +50,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
             index={this.state.index}
             onChange={this.handleChange}
             textColor="accent"
-            fullWidth
+            centered
           >
             <Tab label="Treść" />
             <Tab label="Przykłady" />
@@ -64,6 +62,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           <ProblemView />
           <ProblemExampleData />
           <div>asd</div>
+          <div>bsd</div>
         </SwipeableViews>
       </Paper>
     );

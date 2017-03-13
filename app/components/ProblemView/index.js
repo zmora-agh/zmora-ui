@@ -5,12 +5,7 @@
 */
 
 import React from 'react';
-// import styled from 'styled-components';
-
 import Text from 'material-ui/Text';
-import Layout from 'material-ui/Layout';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
 
 function ProblemView() {
   return (

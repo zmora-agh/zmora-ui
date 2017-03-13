@@ -29,7 +29,7 @@ function NavListItem(props) {
 
 NavListItem.propTypes = {
   to: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
+  title: React.PropTypes.object.isRequired,
   icon: React.PropTypes.object,
 };
 

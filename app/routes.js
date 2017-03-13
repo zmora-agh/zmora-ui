@@ -19,7 +19,7 @@ export default function createRoutes(store) {
   return [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/HomePage'),
@@ -35,7 +35,7 @@ export default function createRoutes(store) {
       },
     }, {
       path: '/contests',
-      name: 'contestsPage',
+      name: 'Contests',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/ContestsPage/reducer'),
@@ -55,7 +55,7 @@ export default function createRoutes(store) {
       },
     }, {
       path: '/ranking',
-      name: 'rankingPage',
+      name: 'Ranking',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/RankingPage/reducer'),
@@ -75,7 +75,7 @@ export default function createRoutes(store) {
       },
     }, {
       path: '/news',
-      name: 'newsPage',
+      name: 'News',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/NewsPage/reducer'),

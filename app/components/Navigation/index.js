@@ -8,9 +8,7 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
-import {
-  List,
-} from 'material-ui/List';
+import { List } from 'material-ui/List';
 
 // Icons
 import Home from '../../svg-icons/home';

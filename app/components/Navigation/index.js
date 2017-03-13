@@ -21,12 +21,14 @@ import messagesHomePage from '../../containers/HomePage/messages';
 import messagesContestsPage from '../../containers/ContestsPage/messages';
 import messagesRankingPage from '../../containers/RankingPage/messages';
 import messagesNewsPage from '../../containers/NewsPage/messages';
+import messagesProblemPage from '../../containers/ProblemPage/messages';
 
 function Navigation(props) {
   return (
     <List {...props} >
       <NavListItem to="/" icon={<Home />} title={<FormattedMessage {...messagesHomePage.title} />} />
       <NavListItem to="/contests" icon={<Assignment />} title={<FormattedMessage {...messagesContestsPage.title} />} />
+      <NavListItem to="/problem" icon={<Announcement />} title={<FormattedMessage {...messagesProblemPage.title} />} />
       <NavListItem to="/ranking" icon={<Star />} title={<FormattedMessage {...messagesRankingPage.title} />} />
       <NavListItem to="/news" icon={<Announcement />} title={<FormattedMessage {...messagesNewsPage.title} />} />
     </List>

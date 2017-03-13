@@ -94,6 +94,14 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/problem',
+      name: 'problemPage',
+      getComponent(location, cb) {
+        import('containers/ProblemPage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

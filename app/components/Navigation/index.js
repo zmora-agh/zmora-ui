@@ -10,9 +10,6 @@ import { FormattedMessage } from 'react-intl';
 
 import {
   List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
 } from 'material-ui/List';
 
 // Icons
@@ -29,7 +26,7 @@ import messagesNewsPage from '../../containers/NewsPage/messages';
 
 function Navigation(props) {
   return (
-    <List style={props.style}>
+    <List {...props} >
       <NavListItem to="/" icon={<Home />} title={<FormattedMessage {...messagesHomePage.title} />} />
       <NavListItem to="/contests" icon={<Assignment />} title={<FormattedMessage {...messagesContestsPage.title} />} />
       <NavListItem to="/ranking" icon={<Star />} title={<FormattedMessage {...messagesRankingPage.title} />} />
@@ -37,9 +34,5 @@ function Navigation(props) {
     </List>
   );
 }
-
-Navigation.propTypes = {
-  style: React.PropTypes.object
-};
 
 export default Navigation;

@@ -7,58 +7,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import styled from 'styled-components';
-
-import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
+import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
-import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import { List, ListItem } from 'material-ui/List';
-
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import Paper from 'material-ui/Paper';
+import Text from 'material-ui/Text';
 
 import makeSelectRightMenu from './selectors';
-import { toggleMenu } from './actions';
-
-const EventEntry = styled.p`
-  font-family: Roboto
-`;
 
 import Settings from '../../svg-icons/settings';
 import ExitToApp from '../../svg-icons/exit-to-app';
 
-const RightMenu = (props) => (
-  <Drawer open={props.open} openSecondary style={{ position: 'relative' }}>
-    <AppBar
-      onLeftIconButtonTouchTap={() => props.dispatch(toggleMenu())}
-    />
-    <List>
-      <ListItem
-        leftAvatar={
-          <Avatar src={props.avatar} />
-        }
-      >
-        {props.username}
-      </ListItem>
-      <Divider />
-      <div style={{ margin: 15 }}>
-        {props.events.map((event) => (<EventEntry key={event.id}>{event.text}</EventEntry>))}
+const RightMenu = (props) => {
+  const { avatar, events, username, ...other } = props;
+  return (
+    <Paper {...other} >
+      <div>
+        <Avatar src={avatar} />
+        <Text>{username}</Text>
       </div>
       <Divider />
-      <BottomNavigation style={{ position: 'absolute', bottom: 0 }}>
-        <BottomNavigationItem
-          label={<FormattedMessage {...messages.settings} />}
-          icon={<Settings />}
-        />
-        <BottomNavigationItem
-          label={<FormattedMessage {...messages.logout} />}
-          icon={<ExitToApp />}
-        />
-      </BottomNavigation>
-    </List>
-  </Drawer>);
+      <div>
+        {events.map((event) => (<p key={event.id}>{event.text}</p>))}
+      </div>
+      <Divider />
+      <div>
+        <IconButton><Settings /></IconButton>
+        <IconButton><ExitToApp /></IconButton>
+      </div>
+    </Paper>);
+};
 
 RightMenu.propTypes = {
   open: React.PropTypes.bool.isRequired,
@@ -72,10 +50,8 @@ RightMenu.propTypes = {
 
 const mapStateToProps = makeSelectRightMenu;
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+function mapDispatchToProps() {
+  return {};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu);

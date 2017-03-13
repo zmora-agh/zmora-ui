@@ -25,13 +25,37 @@ import RightMenu from '../RightMenu';
 import { toggleMenu } from '../RightMenu/actions';
 import Navigation from './../../../app/components/Navigation';
 
-const styleSheet = createStyleSheet('SimpleAppBar', () => ({
+const styleSheet = createStyleSheet('App', () => ({
   root: {
     position: 'relative',
     width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
   },
   appBar: {
     position: 'relative',
+  },
+  flex: {
+    flex: 1,
+  },
+  navigation: {
+    margin: 20,
+    width: 200,
+    flex: 'initial',
+  },
+  appContainer: {
+    display: 'flex',
+    flex: '1 1 auto',
+    justifyContent: 'space-between',
+  },
+  contentContainer: {
+    flex: 1,
+    margin: '28px 28px 28px 8px',
+  },
+  rightMenu: {
+    width: 256,
+    minHeight: '100%',
   },
 }));
 
@@ -41,18 +65,27 @@ function App(props, context) {
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
         <Toolbar>
-          <Text type="title" colorInherit>Zmora</Text>
+          <Text type="title" colorInherit className={classes.flex}>Zmora</Text>
+          <IconButton contrast onClick={() => props.dispatch(toggleMenu())}>
+            <Menu />
+          </IconButton>
         </Toolbar>
       </AppBar>
-      <div style={{ display: 'flex' }} >
-        <Navigation style={{ margin: 20, width: 200, flex: 'initial' }} />
-        <div style={{ flex: 1, margin: '28px 28px 28px 8px' }} >
+      <div className={classes.appContainer} >
+        <Navigation className={classes.navigation} />
+        <div className={classes.contentContainer}>
           {React.Children.toArray(props.children)}
         </div>
+        <RightMenu className={classes.rightMenu} />
       </div>
     </div>
   );
 }
+
+App.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
+  children: React.PropTypes.node.isRequired,
+};
 
 App.contextTypes = {
   styleManager: customPropTypes.muiRequired,

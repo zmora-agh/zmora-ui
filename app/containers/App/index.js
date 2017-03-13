@@ -13,6 +13,7 @@
 
 import React from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import Breadcrumbs from 'react-breadcrumbs';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import AppBar from 'material-ui/AppBar';
@@ -20,7 +21,7 @@ import Layout from 'material-ui/Layout';
 import Toolbar from 'material-ui/Toolbar';
 import Text from 'material-ui/Text';
 import RightMenu from '../RightMenu';
-import Navigation from './../../../app/components/Navigation';
+import Navigation from '../../../app/components/Navigation';
 
 const styleSheet = createStyleSheet('App', () => ({
   root: {
@@ -49,7 +50,10 @@ export default function App(props, context) {
     <div className={classes.root}>
       <AppBar className={classes.appBar}>
         <Toolbar>
-          <Text type="title" colorInherit>Zmora</Text>
+          <Layout item xs={2}><Text type="title" colorInherit className={classes.flex}>Zmora</Text></Layout>
+          <Layout item xs={6}><Breadcrumbs routes={props.routes} params={props.params} /></Layout>
+          <Layout item xs={3}><Text colorInherit>Server time: 13:37:66</Text></Layout>
+          <Layout item xs={1}><Text colorInherit>maxmati</Text></Layout>
         </Toolbar>
       </AppBar>
       <Layout container gutter={0} style={{ marginTop: 64 }}>
@@ -63,6 +67,8 @@ export default function App(props, context) {
 
 App.propTypes = {
   children: React.PropTypes.node.isRequired,
+  routes: React.PropTypes.array.isRequired,
+  params: React.PropTypes.object.isRequired,
 };
 
 App.contextTypes = {

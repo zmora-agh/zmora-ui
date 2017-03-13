@@ -17,6 +17,7 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import AppBar from 'material-ui/AppBar';
+import Layout from 'material-ui/Layout';
 import IconButton from 'material-ui/IconButton';
 import Toolbar from 'material-ui/Toolbar';
 import Text from 'material-ui/Text';
@@ -36,27 +37,6 @@ const styleSheet = createStyleSheet('App', () => ({
   appBar: {
     position: 'relative',
   },
-  flex: {
-    flex: 1,
-  },
-  navigation: {
-    margin: 20,
-    width: 200,
-    flex: 'initial',
-  },
-  appContainer: {
-    display: 'flex',
-    flex: '1 1 auto',
-    justifyContent: 'space-between',
-  },
-  contentContainer: {
-    flex: 1,
-    margin: '28px 28px 28px 8px',
-  },
-  rightMenu: {
-    width: 256,
-    minHeight: '100%',
-  },
 }));
 
 function App(props, context) {
@@ -71,13 +51,11 @@ function App(props, context) {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <div className={classes.appContainer} >
-        <Navigation className={classes.navigation} />
-        <div className={classes.contentContainer}>
-          {React.Children.toArray(props.children)}
-        </div>
-        <RightMenu className={classes.rightMenu} />
-      </div>
+      <Layout container gutter={24}>
+        <Layout item xs={2}><Navigation style={{ margin: 10 }} /></Layout>
+        <Layout item xs={7}>{React.Children.toArray(props.children)}</Layout>
+        <Layout item xs={3}><RightMenu /></Layout>
+      </Layout>
     </div>
   );
 }

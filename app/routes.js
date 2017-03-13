@@ -19,7 +19,7 @@ export default function createRoutes(store) {
   return [
     {
       path: '/',
-      name: 'home',
+      name: 'Home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/HomePage'),
@@ -28,6 +28,66 @@ export default function createRoutes(store) {
         const renderRoute = loadModule(cb);
 
         importModules.then(([component]) => {
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/contests',
+      name: 'Contests',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/ContestsPage/reducer'),
+          import('containers/ContestsPage/sagas'),
+          import('containers/ContestsPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('contestsPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/ranking',
+      name: 'Ranking',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/RankingPage/reducer'),
+          import('containers/RankingPage/sagas'),
+          import('containers/RankingPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('rankingPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/news',
+      name: 'News',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/NewsPage/reducer'),
+          import('containers/NewsPage/sagas'),
+          import('containers/NewsPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('newsPage', reducer.default);
+          injectSagas(sagas.default);
           renderRoute(component);
         });
 

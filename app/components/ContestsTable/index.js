@@ -4,89 +4,46 @@
 *
 */
 // TODO: move hide/expand logic to container
-import React from 'react';
-// import styled from 'styled-components';
+import React, { PropTypes } from 'react';
 import { Table, TableBody, TableHead, TableRow, TableCell } from 'material-ui/Table';
 import { FormattedMessage } from 'react-intl';
+import KeyboardArrowUp from '../../svg-icons/keyboard-arrow-up';
+import KeyboardArrowDown from '../../svg-icons/keyboard-arrow-down';
 import messages from './messages';
+import { CONTEST_TYPE } from '../../containers/ContestsPage/constants';
 
-const mockedData = [{
-  expanded: true,
-  name: 'EAIiIB',
-  description: '',
-  children: [
-    {
-      expanded: true,
-      name: 'Informatyka',
-      description: '',
-      children: [
-        {
-          expanded: true,
-          name: 'PWiR',
-          description: 'To jest zadanie z PWiR',
-          children: [],
-        },
-        {
-          expanded: true,
-          name: 'Języki i metody programowania 2',
-          description: 'To jest zadanie z C++',
-          children: [],
-        },
-      ],
-    },
-  ],
-}];
 
-// function checkName(row, name) {
-//   return row.name === name;
-// }
-//
-// function findByPath(data, splittedPath) {
-//   const foundRow = data.find((row) => checkName(row, splittedPath[0]));
-//   return splittedPath.length === 1 ? foundRow : findByPath(foundRow.children, splittedPath.slice(1));
-// }
-
-function buildRows(indent, path, data) {
-  return [].concat(...data.map((row) => createTableRow(indent, path, row)));
+function buildRows(indent, data, props) {
+  return [].concat(...data.map((row) => createTableRow(indent, row, props)));
 }
 
-// function expandRow(path) {
-//   findByPath(mockedData, path.split('->')).expanded = true;
-// }
-//
-// function hideRow(path) {
-//   findByPath(mockedData, path.split('->')).expanded = false;
-// }
-
-function createTableRow(indent, path, row) {
-  const rowPath = path === '' ? row.name : path.concat(`->${row.name}`);
-  const expandedIcon = null;
-    // row.children.length > 0 && row.expanded ? <KeyboardArrowDown onClick={() => hideRow(rowPath)} /> : null;
-  const hiddenIcon = null;
-    // row.children.length > 0 && !row.expanded ? <KeyboardArrowUp onClick={() => expandRow(rowPath)} /> : null;
-  const childrenRows = row.expanded ? buildRows(indent + 1, rowPath, row.children) : [];
+function createTableRow(indent, row, props) {
+  const expandedIcon = row.childContests.length > 0 && row.expanded ? <KeyboardArrowDown onClick={() => props.hideRow(row.id)} /> : null;
+  const hiddenIcon = row.childContests.length > 0 && !row.expanded ? <KeyboardArrowUp onClick={() => props.expandRow(row.id)} /> : null;
+  const childrenRows = row.expanded ? buildRows(indent + 1, row.childContests, props) : [];
   const render = (
-    <TableRow key={rowPath}>
-      <TableCell style={{ textIndent: 20 * indent }}>
-        {expandedIcon}{hiddenIcon} {row.name}
-      </TableCell>
-      <TableCell>
-        {row.description}
-      </TableCell>
+    <TableRow key={row.id}>
+      <TableCell style={{ textIndent: 20 * indent }}>{expandedIcon}{hiddenIcon} {row.name}</TableCell>
+      <TableCell>{row.description}</TableCell>
+      <TableCell>{row.date}</TableCell>
+      <TableCell>{row.owner}</TableCell>
     </TableRow>
   );
   childrenRows.unshift(render);
   return childrenRows;
 }
-function ContestsTable() {
-  const rows = buildRows(0, '', mockedData);
+
+function ContestsTable(props) {
+  const rows = buildRows(0, props.contests, props);
   return (
     <div>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell><FormattedMessage {...messages.name} /></TableCell>
+            <TableCell style={{ width: '30%' }}><FormattedMessage {...messages.name} /></TableCell>
             <TableCell><FormattedMessage {...messages.description} /></TableCell>
+            <TableCell><FormattedMessage {...messages.dateOfOpenning} /></TableCell>
+            <TableCell><FormattedMessage {...messages.owner} /></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -97,7 +54,11 @@ function ContestsTable() {
   );
 }
 
+// reguły niżej są wyłączone bo eslint nie widzi gdy props jest przekazany i propsy są używane dopiero w funkcji
 ContestsTable.propTypes = {
+  contests: PropTypes.arrayOf(CONTEST_TYPE),
+  hideRow: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
+  expandRow: PropTypes.func.isRequired, // eslint-disable-line react/no-unused-prop-types
 };
 
 export default ContestsTable;

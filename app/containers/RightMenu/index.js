@@ -64,8 +64,8 @@ const RightMenu = (props, context) => {
       <div style={{ marginBottom: 64 }}>
         <Divider />
         <Layout container direction="row">
-          <Layout item xs="6"><IconButton className={classes.button}><Settings /></IconButton></Layout>
-          <Layout item xs="6"><IconButton className={classes.button}><ExitToApp /></IconButton></Layout>
+          <Layout item xs={6}><IconButton className={classes.button}><Settings /></IconButton></Layout>
+          <Layout item xs={6}><IconButton className={classes.button}><ExitToApp /></IconButton></Layout>
         </Layout>
       </div>
     </Paper>);

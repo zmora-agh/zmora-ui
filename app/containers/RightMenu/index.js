@@ -7,6 +7,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import styled from 'styled-components';
+
 import Settings from 'material-ui/svg-icons/action/settings';
 import ExitToApp from 'material-ui/svg-icons/action/exit-to-app';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
@@ -21,6 +23,10 @@ import messages from './messages';
 
 import makeSelectRightMenu from './selectors';
 import { toggleMenu } from './actions';
+
+const EventEntry = styled.p`
+  font-family: Roboto
+`;
 
 const RightMenu = (props) => (
   <Drawer open={props.open} openSecondary style={{ position: 'relative' }}>
@@ -37,7 +43,7 @@ const RightMenu = (props) => (
       </ListItem>
       <Divider />
       <div style={{ margin: 15 }}>
-        {props.events.map((event) => (<p key={event.id}>{event.text}</p>))}
+        {props.events.map((event) => (<EventEntry key={event.id}>{event.text}</EventEntry>))}
       </div>
       <Divider />
       <BottomNavigation style={{ position: 'absolute', bottom: 0 }}>

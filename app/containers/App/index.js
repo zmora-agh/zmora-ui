@@ -13,39 +13,46 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import Menu from 'material-ui/svg-icons/navigation/menu';
+import Toolbar from 'material-ui/Toolbar';
+import Text from 'material-ui/Text';
+import Menu from '../../svg-icons/menu';
 import RightMenu from '../RightMenu';
 import { toggleMenu } from '../RightMenu/actions';
 import Navigation from './../../../app/components/Navigation';
 
-class App extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+const styleSheet = createStyleSheet('SimpleAppBar', () => ({
+  root: {
+    position: 'relative',
+    width: '100%',
+  },
+  appBar: {
+    position: 'relative',
+  },
+}));
 
-  static propTypes = {
-    children: React.PropTypes.node,
-    dispatch: React.PropTypes.func.isRequired,
-  };
-
-  render() {
-    return (
-      <div>
-        <AppBar
-          title="Zmora"
-          showMenuIconButton={false}
-          iconElementRight={<IconButton><Menu /></IconButton>}
-          onRightIconButtonTouchTap={() => this.props.dispatch(toggleMenu())}
-        />
-        <div>
-          <Navigation style={{ width: 200, float: 'left', margin: 20 }} />
-          <div style={{ float: 'left' }}>{React.Children.toArray(this.props.children)}</div>
-        </div>
-        <RightMenu />
-      </div>
-    );
-  }
+function App(props, context) {
+  const classes = context.styleManager.render(styleSheet);
+  return (
+    <div className={classes.root}>
+      <AppBar className={classes.appBar}>
+        <Toolbar>
+          <Text type="title" colorInherit>Zmora</Text>
+        </Toolbar>
+      </AppBar>
+      <Navigation style={{ float: 'left' }} />
+      <div style={{ float: 'left' }}>{React.Children.toArray(props.children)}</div>
+    </div>
+  );
 }
+
+App.contextTypes = {
+  styleManager: customPropTypes.muiRequired,
+};
 
 const mapStateToProps = () => ({});
 

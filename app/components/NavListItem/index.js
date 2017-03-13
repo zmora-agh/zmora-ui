@@ -6,23 +6,16 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { ListItem } from 'material-ui/List';
-import * as Colors from 'material-ui/styles/colors';
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
 
 function NavListItem(props) {
-  const borderRadiusSize = 2;
-  const linkStyle = {
-    textDecoration: 'none',
-    borderRadius: borderRadiusSize,
-  };
-  const activeLinkStyle = {
-    display: 'block',
-    backgroundColor: Colors.grey200,
-  };
-
   return (
-    <Link to={props.to} style={linkStyle} activeStyle={activeLinkStyle}>
-      <ListItem insetChildren primaryText={props.title} leftIcon={props.icon} style={{ borderRadius: borderRadiusSize }} />
+    <Link to={props.to}>
+      <ListItem button>
+        <ListItemIcon>{props.icon}</ListItemIcon>
+        <ListItemText primary={props.title} />
+      </ListItem>
     </Link>
   );
 }

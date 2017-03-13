@@ -8,13 +8,18 @@ import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
 
-import { List } from 'material-ui/List';
+import {
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from 'material-ui/List';
 
 // Icons
-import Home from 'material-ui/svg-icons/action/home';
-import Announcement from 'material-ui/svg-icons/action/announcement';
-import Assignment from 'material-ui/svg-icons/action/assignment';
-import Star from 'material-ui/svg-icons/toggle/star';
+import Home from '../../svg-icons/home';
+import Announcement from '../../svg-icons/announcement';
+import Assignment from '../../svg-icons/assignment';
+import Star from '../../svg-icons/star';
 
 import NavListItem from '../NavListItem';
 import messagesHomePage from '../../containers/HomePage/messages';
@@ -34,7 +39,7 @@ function Navigation(props) {
 }
 
 Navigation.propTypes = {
-  style: React.PropTypes.object,
+  style: React.PropTypes.object
 };
 
 export default Navigation;

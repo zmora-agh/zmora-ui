@@ -9,8 +9,6 @@ import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 
-import Settings from 'material-ui/svg-icons/action/settings';
-import ExitToApp from 'material-ui/svg-icons/action/exit-to-app';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
@@ -27,6 +25,9 @@ import { toggleMenu } from './actions';
 const EventEntry = styled.p`
   font-family: Roboto
 `;
+
+import Settings from '../../svg-icons/settings';
+import ExitToApp from '../../svg-icons/exit-to-app';
 
 const RightMenu = (props) => (
   <Drawer open={props.open} openSecondary style={{ position: 'relative' }}>

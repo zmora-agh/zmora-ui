@@ -58,7 +58,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
             <Tab label="Pytania" />
           </Tabs>
         </div>
-        <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex}>
+        <SwipeableViews animateHeight index={this.state.index} onChangeIndex={this.handleChangeIndex}>
           <ProblemView />
           <ProblemExampleData />
           <div>asd</div>

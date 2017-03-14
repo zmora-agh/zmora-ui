@@ -23,8 +23,8 @@ const DataElement = (props) => (
 
 function ProblemExampleData() {
   return (
-    <div>
-      <Layout container gutter={24} style={{ padding: 24 }}>
+    <div style={{ overflow: 'hidden' }}>
+      <Layout container style={{ padding: 24 }}>
         <DataElement xs={6} desc="Dla danych wejściowych:">
           {'foo\nbar\nbaz'}
         </DataElement>
@@ -36,7 +36,19 @@ function ProblemExampleData() {
         </DataElement>
       </Layout>
       <Divider />
-      <Layout container gutter={24} style={{ padding: 24 }}>
+      <Layout container style={{ padding: 24 }}>
+        <DataElement xs={6} desc="Dla danych wejściowych:">
+          {'foo\nbar\nbaz'}
+        </DataElement>
+        <DataElement xs={6} desc="Oczekiwana odpowiedź to:">
+          {'1\n2\n666'}
+        </DataElement>
+        <DataElement xs={12} desc="Uzasadnienie:">
+          {'Szatan czyste zło'}
+        </DataElement>
+      </Layout>
+      <Divider />
+      <Layout container style={{ padding: 24 }}>
         <DataElement xs={6} desc="Dla danych wejściowych:">
           {'foo\nbar\nbaz'}
         </DataElement>

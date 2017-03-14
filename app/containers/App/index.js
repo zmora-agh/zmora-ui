@@ -13,15 +13,13 @@
 
 import React from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
-import Breadcrumbs from 'react-breadcrumbs';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
-import AppBar from 'material-ui/AppBar';
 import Layout from 'material-ui/Layout';
-import Toolbar from 'material-ui/Toolbar';
-import Text from 'material-ui/Text';
+
+import AppToolbar from '../../components/AppToolbar';
 import RightMenu from '../RightMenu';
-import Navigation from '../../../app/components/Navigation';
+import Navigation from '../../components/Navigation';
 
 const styleSheet = createStyleSheet('App', () => ({
   root: {
@@ -29,9 +27,6 @@ const styleSheet = createStyleSheet('App', () => ({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-  },
-  appBar: {
-    position: 'fixed',
   },
   rightMenu: {
     position: 'fixed',
@@ -48,14 +43,7 @@ export default function App(props, context) {
   const classes = context.styleManager.render(styleSheet);
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar}>
-        <Toolbar>
-          <Layout item xs={2}><Text type="title" colorInherit className={classes.flex}>Zmora</Text></Layout>
-          <Layout item xs={6}><Breadcrumbs routes={props.routes} params={props.params} /></Layout>
-          <Layout item xs={3}><Text colorInherit>Server time: 13:37:66</Text></Layout>
-          <Layout item xs={1}><Text colorInherit>maxmati</Text></Layout>
-        </Toolbar>
-      </AppBar>
+      <AppToolbar {...props} />
       <Layout container gutter={0} style={{ marginTop: 64 }}>
         <Layout item xs={2}><Navigation style={{ margin: 10 }} /></Layout>
         <Layout item xs={7} style={{ paddingTop: 10 }}>{React.Children.toArray(props.children)}</Layout>
@@ -67,8 +55,6 @@ export default function App(props, context) {
 
 App.propTypes = {
   children: React.PropTypes.node.isRequired,
-  routes: React.PropTypes.array.isRequired,
-  params: React.PropTypes.object.isRequired,
 };
 
 App.contextTypes = {

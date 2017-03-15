@@ -43,7 +43,7 @@ export default function App(props, context) {
   const classes = context.styleManager.render(styleSheet);
   return (
     <div className={classes.root}>
-      <AppToolbar {...props} />
+      <AppToolbar {...props} username="maxmati" />
       <Layout container gutter={0} style={{ marginTop: 64 }}>
         <Layout item xs={2}><Navigation style={{ margin: 10 }} /></Layout>
         <Layout item xs={7} style={{ paddingTop: 10 }}>{React.Children.toArray(props.children)}</Layout>

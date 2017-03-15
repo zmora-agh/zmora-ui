@@ -32,13 +32,14 @@ function Search(props, context) {
   return (
     <div className={classes.root}>
       <div className={classes.iconBox}><SearchIcon /></div>
-      <input className={classes.input} placeholder="Search" />
+      <input className={classes.input} placeholder="Search" onFocus={props.onFocus} onBlur={props.onBlur} />
     </div>
   );
 }
 
 Search.propTypes = {
-
+  onFocus: React.PropTypes.func.isRequired,
+  onBlur: React.PropTypes.func.isRequired,
 };
 
 Search.contextTypes = {

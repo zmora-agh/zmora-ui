@@ -14,8 +14,9 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import { connect } from 'react-redux';
 
-import ProblemView from './../../../app/components/ProblemView';
-import ProblemExampleData from './../../../app/components/ProblemExampleData';
+import ProblemView from '../../../app/components/ProblemView';
+import ProblemExampleData from '../../../app/components/ProblemExampleData';
+import ProblemSubmits from '../../../app/components/ProblemSubmits';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   appBar: {
@@ -61,7 +62,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
         <SwipeableViews animateHeight index={this.state.index} onChangeIndex={this.handleChangeIndex}>
           <ProblemView />
           <ProblemExampleData />
-          <div>asd</div>
+          <ProblemSubmits />
           <div>bsd</div>
         </SwipeableViews>
       </Paper>

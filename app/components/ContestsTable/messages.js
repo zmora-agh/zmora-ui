@@ -18,9 +18,13 @@ export default defineMessages({
     id: 'app.components.ContestsTable.description',
     defaultMessage: 'Description',
   },
-  dateOfOpenning: {
-    id: 'app.components.ContestsTable.dateOfOpenning',
-    defaultMessage: 'Openning date and hour',
+  date: {
+    id: 'app.components.ContestsTable.date',
+    defaultMessage: 'Date',
+  },
+  status: {
+    id: 'app.components.ContestsTable.status',
+    defaultMessage: 'Status',
   },
   owner: {
     id: 'app.components.ContestsTable.owner',

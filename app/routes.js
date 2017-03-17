@@ -55,7 +55,7 @@ export default function createRoutes(store) {
       },
       childRoutes: [
         {
-          path: '/contest/page',
+          path: '/contests/page',
           name: 'Nested Page',
           getComponent(location, cb) {
             import('containers/DeeplyNestedPage')
@@ -64,7 +64,7 @@ export default function createRoutes(store) {
           },
           childRoutes: [
             {
-              path: '/contest/page/page',
+              path: '/contests/page/page',
               name: 'Super Nested Page',
               getComponent(location, cb) {
                 import('containers/DeeplyNestedPage')

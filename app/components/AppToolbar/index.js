@@ -39,11 +39,11 @@ class AppToolbar extends React.Component {
       <AppBar>
         <Toolbar>
           <Layout item xs={2}><Text type="title" colorInherit >Zmora</Text></Layout>
-          <Layout item xs={2} style={{ display: this.state.inSearch ? 'none' : 'block' }}>
-            <Breadcrumbs routes={this.props.routes} params={this.props.params} />
-          </Layout>
-          <Layout item xs={this.state.inSearch ? 6 : 4}>
-            <Search onFocus={this.toggleSearch} onBlur={this.toggleSearch} />
+          <Layout item container xs={4}>
+            <div style={{ transition: 'all 0.5s', flexGrow: this.state.inSearch ? 0.00001 : 1 }}>
+              {!this.state.inSearch && <Breadcrumbs routes={this.props.routes} params={this.props.params} />}
+            </div>
+            <Search style={{ transition: 'all 0.5s', flex: 2 }} onFocus={this.toggleSearch} onBlur={this.toggleSearch} />
           </Layout>
           <Layout item xs={1} />
           <Layout item xs={2}><ServerTime /></Layout>

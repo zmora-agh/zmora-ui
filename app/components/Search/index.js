@@ -12,7 +12,6 @@ import SearchIcon from '../../svg-icons/search';
 
 const styleSheet = createStyleSheet('Search', () => ({
   root: {
-    display: 'flex',
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
     borderRadius: 2,
     padding: 5,
@@ -21,7 +20,6 @@ const styleSheet = createStyleSheet('Search', () => ({
     padding: '0px 10px',
   },
   input: {
-    width: '100%',
     outlineWidth: 0,
     color: '#fff',
   },
@@ -30,14 +28,15 @@ const styleSheet = createStyleSheet('Search', () => ({
 function Search(props, context) {
   const classes = context.styleManager.render(styleSheet);
   return (
-    <div className={classes.root}>
-      <div className={classes.iconBox}><SearchIcon /></div>
+    <div style={props.style} className={classes.root}>
+      <SearchIcon />
       <input className={classes.input} placeholder="Search" onFocus={props.onFocus} onBlur={props.onBlur} />
     </div>
   );
 }
 
 Search.propTypes = {
+  style: React.PropTypes.object,
   onFocus: React.PropTypes.func.isRequired,
   onBlur: React.PropTypes.func.isRequired,
 };

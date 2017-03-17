@@ -82,7 +82,7 @@ class AppToolbar extends React.Component {
           <Layout item xs={2}><ServerTime /></Layout>
           <Layout item xs={1}><Text colorInherit>{this.props.username}</Text></Layout>
           <Layout item xs={1}>
-            <IconButton onClick={this.props.onToggleMenu}><Menu /></IconButton>
+            <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><Menu /></IconButton>
           </Layout>
         </Toolbar>
       </AppBar>

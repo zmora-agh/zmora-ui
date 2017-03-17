@@ -13,6 +13,7 @@ import Layout from 'material-ui/Layout';
 import Text from 'material-ui/Text';
 import IconButton from 'material-ui/IconButton';
 
+import classNames from 'classnames';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
@@ -20,16 +21,17 @@ import Search from '../Search';
 import ServerTime from '../ServerTime';
 import Ripple from '../../components/Ripple';
 
+import Menu from '../../svg-icons/menu';
 
 const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   toolbar: {
     transform: 'translate3d(0,0,0)',
     overflow: 'hidden',
+  },
+  toolbarInSearch: {
     color: theme.palette.text.primary,
   },
 }));
-
-import Menu from '../../svg-icons/menu';
 
 class AppToolbar extends React.Component {
   static propTypes = {
@@ -57,10 +59,13 @@ class AppToolbar extends React.Component {
 
   render() {
     const classes = this.context.styleManager.render(styleSheet);
+    const toolbarClass = classNames({
+      [classes.toolbarInSearch]: this.state.inSearch,
+    }, classes.toolbar);
 
     return (
       <AppBar>
-        <Toolbar className={classes.toolbar} >
+        <Toolbar className={toolbarClass} >
           <Ripple on={this.state.inSearch} />
           <Layout item xs={2}><Text type="title" colorInherit >Zmora</Text></Layout>
           <Layout item container xs={4}>

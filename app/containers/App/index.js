@@ -16,10 +16,10 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import Layout from 'material-ui/Layout';
-
 import AppToolbar from '../../components/AppToolbar';
 import RightMenu from '../RightMenu';
-import Navigation from '../../components/Navigation';
+import Navigation from '../../../app/components/Navigation';
+
 
 const styleSheet = createStyleSheet('App', () => ({
   root: {
@@ -36,27 +36,53 @@ const styleSheet = createStyleSheet('App', () => ({
     paddingRight: 0,
     paddingTop: 0,
     paddingLeft: 15,
+    transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+  },
+  contentContainer: {
+    padding: 10,
+    transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
   },
 }));
 
-export default function App(props, context) {
-  const classes = context.styleManager.render(styleSheet);
-  return (
-    <div className={classes.root}>
-      <AppToolbar {...props} username="maxmati" />
-      <Layout container gutter={0} style={{ marginTop: 64 }}>
-        <Layout item xs={2}><Navigation style={{ margin: 10 }} /></Layout>
-        <Layout item xs={7} style={{ paddingTop: 10 }}>{React.Children.toArray(props.children)}</Layout>
-        <Layout item xs={2} className={classes.rightMenu}><RightMenu /></Layout>
-      </Layout>
-    </div>
-  );
+export default class App extends React.PureComponent {
+  static propTypes = {
+    children: React.PropTypes.node.isRequired,
+  };
+
+  static contextTypes = {
+    styleManager: customPropTypes.muiRequired,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = { rightMenuOpen: false };
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  toggleMenu() {
+    this.setState({ rightMenuOpen: !this.state.rightMenuOpen });
+  }
+
+  render() {
+    const classes = this.context.styleManager.render(styleSheet);
+    const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
+    return (
+      <div className={classes.root}>
+        <AppToolbar {...this.props} username="maxmati" onToggleMenu={this.toggleMenu} />
+        <Layout container gutter={0} style={{ marginTop: 64 }}>
+          <Layout item xs={2}><Navigation style={{ margin: 10 }} /></Layout>
+          <Layout item xs={this.state.rightMenuOpen ? 7 : 9} className={classes.contentContainer}>
+            {React.Children.toArray(this.props.children)}
+          </Layout>
+          <Layout
+            item xs={2}
+            className={classes.rightMenu}
+            style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
+          >
+            <RightMenu />
+          </Layout>
+        </Layout>
+      </div>
+    );
+  }
 }
-
-App.propTypes = {
-  children: React.PropTypes.node.isRequired,
-};
-
-App.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};

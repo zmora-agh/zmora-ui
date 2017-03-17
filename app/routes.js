@@ -53,6 +53,28 @@ export default function createRoutes(store) {
 
         importModules.catch(errorLoading);
       },
+      childRoutes: [
+        {
+          path: '/contest/page',
+          name: 'Nested Page',
+          getComponent(location, cb) {
+            import('containers/DeeplyNestedPage')
+              .then(loadModule(cb))
+              .catch(errorLoading);
+          },
+          childRoutes: [
+            {
+              path: '/contest/page/page',
+              name: 'Super Nested Page',
+              getComponent(location, cb) {
+                import('containers/DeeplyNestedPage')
+                  .then(loadModule(cb))
+                  .catch(errorLoading);
+              },
+            },
+          ],
+        },
+      ],
     }, {
       path: '/ranking',
       name: 'Ranking',

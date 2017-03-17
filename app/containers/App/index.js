@@ -13,19 +13,13 @@
 
 import React from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
-import Breadcrumbs from 'react-breadcrumbs';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
-import AppBar from 'material-ui/AppBar';
 import Layout from 'material-ui/Layout';
-import Toolbar from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import Text from 'material-ui/Text';
+import AppToolbar from '../../components/AppToolbar';
 import RightMenu from '../RightMenu';
-
 import Navigation from '../../../app/components/Navigation';
 
-import Menu from '../../svg-icons/menu';
 
 const styleSheet = createStyleSheet('App', () => ({
   root: {
@@ -33,9 +27,6 @@ const styleSheet = createStyleSheet('App', () => ({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-  },
-  appBar: {
-    position: 'fixed',
   },
   rightMenu: {
     position: 'fixed',
@@ -56,13 +47,11 @@ const styleSheet = createStyleSheet('App', () => ({
 export default class App extends React.PureComponent {
   static propTypes = {
     children: React.PropTypes.node.isRequired,
-    routes: React.PropTypes.array.isRequired,
-    params: React.PropTypes.object.isRequired,
-  }
+  };
 
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -79,25 +68,16 @@ export default class App extends React.PureComponent {
     const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
     return (
       <div className={classes.root}>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <Layout item xs={2}><Text type="title" colorInherit className={classes.flex}>Zmora</Text></Layout>
-            <Layout item xs={6}><Breadcrumbs routes={this.props.routes} params={this.props.params} /></Layout>
-            <Layout item xs={2}><Text colorInherit>Server time: 13:37:66</Text></Layout>
-            <Layout item xs={1}><Text colorInherit>maxmati</Text></Layout>
-            <Layout item xs={1}>
-              <IconButton className={classes.button} onClick={this.toggleMenu}><Menu /></IconButton>
-            </Layout>
-
-          </Toolbar>
-        </AppBar>
+        <AppToolbar {...this.props} username="maxmati" onToggleMenu={this.toggleMenu} />
         <Layout container gutter={0} style={{ marginTop: 64 }}>
           <Layout item xs={2}><Navigation style={{ margin: 10 }} /></Layout>
           <Layout item xs={this.state.rightMenuOpen ? 7 : 9} className={classes.contentContainer}>
             {React.Children.toArray(this.props.children)}
           </Layout>
           <Layout
-            item xs={2} className={classes.rightMenu} style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
+            item xs={2}
+            className={classes.rightMenu}
+            style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
           >
             <RightMenu />
           </Layout>

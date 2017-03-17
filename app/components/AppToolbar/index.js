@@ -58,12 +58,20 @@ class AppToolbar extends React.Component {
     super(props);
     this.state = {
       inSearch: false,
+      rippleX: 0,
     };
     this.toggleSearch = this.toggleSearch.bind(this);
+    this.moveRipple = this.moveRipple.bind(this);
   }
 
   toggleSearch() {
     this.setState({ inSearch: !this.state.inSearch });
+  }
+
+  moveRipple(e) {
+    if (!this.state.inSearch) {
+      this.setState({ rippleX: e.pageX - (window.innerWidth / 2) });
+    }
   }
 
   render() {
@@ -75,7 +83,7 @@ class AppToolbar extends React.Component {
     return (
       <AppBar>
         <Toolbar className={toolbarClass} >
-          <Ripple on={this.state.inSearch} />
+          <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
           <Layout item xs={2}>{!this.state.inSearch && <Text type="title" colorInherit >Zmora</Text>}</Layout>
           <Layout item container xs={6} align="center">
             <div style={{ transition: 'all 0.5s', flexGrow: this.state.inSearch ? 0.00001 : 1 }}>
@@ -91,6 +99,7 @@ class AppToolbar extends React.Component {
               style={{ display: 'flex', transition: 'all 0.5s', flex: 2 }}
               onFocus={this.toggleSearch}
               onBlur={this.toggleSearch}
+              onMouseMove={this.moveRipple}
             />
           </Layout>
           {!this.state.inSearch && <Layout item xs={2} style={{ textAlign: 'center' }}><ServerTime /></Layout>}

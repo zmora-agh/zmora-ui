@@ -21,7 +21,6 @@ const styleSheet = createStyleSheet('Search', () => ({
   },
   input: {
     outlineWidth: 0,
-    color: '#fff',
   },
 }));
 

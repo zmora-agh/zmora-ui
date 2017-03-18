@@ -12,14 +12,21 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import Layout from 'material-ui/Layout';
-import AppToolbar from '../../components/AppToolbar';
-import RightMenu from '../RightMenu';
-import Navigation from '../../../app/components/Navigation';
 
+import AppToolbar from '../../components/AppToolbar';
+import Navigation from '../../components/Navigation';
+import RightMenu from '../RightMenu';
+
+import { makeSelectApp } from './selectors';
+
+import {
+  getCurrentUser,
+} from './actions';
 
 const styleSheet = createStyleSheet('App', () => ({
   root: {
@@ -44,9 +51,13 @@ const styleSheet = createStyleSheet('App', () => ({
   },
 }));
 
-export default class App extends React.PureComponent {
+class App extends React.PureComponent {
   static propTypes = {
+    dispatch: React.PropTypes.func.isRequired,
     children: React.PropTypes.node.isRequired,
+    routes: React.PropTypes.array.isRequired,
+    params: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object,
   };
 
   static contextTypes = {
@@ -59,6 +70,10 @@ export default class App extends React.PureComponent {
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
+  componentDidMount() {
+    this.props.dispatch(getCurrentUser());
+  }
+
   toggleMenu() {
     this.setState({ rightMenuOpen: !this.state.rightMenuOpen });
   }
@@ -68,7 +83,12 @@ export default class App extends React.PureComponent {
     const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
     return (
       <div className={classes.root}>
-        <AppToolbar {...this.props} username="maxmati" onToggleMenu={this.toggleMenu} />
+        <AppToolbar
+          routes={this.props.routes}
+          params={this.props.params}
+          username={this.props.user.nick}
+          onToggleMenu={this.toggleMenu}
+        />
         <Layout container gutter={0} style={{ marginTop: 64 }}>
           <Layout item xs={2}><Navigation style={{ margin: 10 }} /></Layout>
           <Layout item xs={this.state.rightMenuOpen ? 7 : 9} className={classes.contentContainer}>
@@ -86,3 +106,11 @@ export default class App extends React.PureComponent {
     );
   }
 }
+
+const mapStateToProps = makeSelectApp;
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

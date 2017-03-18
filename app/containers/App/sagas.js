@@ -10,6 +10,9 @@ import {
 function fetchCurrentUser() {
   return fetch('http://localhost:8080/currentUser', {
     method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
   }).then((response) => response.json());
 }
 

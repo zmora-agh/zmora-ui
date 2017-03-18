@@ -14,14 +14,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStyleSheet } from 'jss-theme-reactor';
-import Breadcrumbs from 'react-breadcrumbs';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
-import AppBar from 'material-ui/AppBar';
 import Layout from 'material-ui/Layout';
-import Toolbar from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import Text from 'material-ui/Text';
+
+import AppToolbar from '../../components/AppToolbar';
+import Navigation from '../../components/Navigation';
+import RightMenu from '../RightMenu';
 
 import { makeSelectApp } from './selectors';
 
@@ -29,21 +28,12 @@ import {
   getCurrentUser,
 } from './actions';
 
-import RightMenu from '../RightMenu';
-
-import Navigation from '../../../app/components/Navigation';
-
-import Menu from '../../svg-icons/menu';
-
 const styleSheet = createStyleSheet('App', () => ({
   root: {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-  },
-  appBar: {
-    position: 'fixed',
   },
   rightMenu: {
     position: 'fixed',
@@ -93,25 +83,21 @@ class App extends React.PureComponent {
     const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
     return (
       <div className={classes.root}>
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <Layout item xs={2}><Text type="title" colorInherit className={classes.flex}>Zmora</Text></Layout>
-            <Layout item xs={6}><Breadcrumbs routes={this.props.routes} params={this.props.params} /></Layout>
-            <Layout item xs={2}><Text colorInherit>Server time: 13:37:66</Text></Layout>
-            <Layout item xs={1}>{this.props.user && <Text colorInherit>{this.props.user.nick}</Text>}</Layout>
-            <Layout item xs={1}>
-              <IconButton className={classes.button} onClick={this.toggleMenu}><Menu /></IconButton>
-            </Layout>
-
-          </Toolbar>
-        </AppBar>
+        <AppToolbar
+          routes={this.props.routes}
+          params={this.props.params}
+          username={this.props.user.nick}
+          onToggleMenu={this.toggleMenu}
+        />
         <Layout container gutter={0} style={{ marginTop: 64 }}>
           <Layout item xs={2}><Navigation style={{ margin: 10 }} /></Layout>
           <Layout item xs={this.state.rightMenuOpen ? 7 : 9} className={classes.contentContainer}>
             {React.Children.toArray(this.props.children)}
           </Layout>
           <Layout
-            item xs={2} className={classes.rightMenu} style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
+            item xs={2}
+            className={classes.rightMenu}
+            style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
           >
             <RightMenu />
           </Layout>

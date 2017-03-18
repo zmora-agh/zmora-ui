@@ -21,8 +21,12 @@ import Search from '../Search';
 import ServerTime from '../ServerTime';
 import Ripple from '../../components/Ripple';
 
+import Star from '../../svg-icons/star';
 import MenuIcon from '../../svg-icons/menu';
 import ArrowIcon from '../../svg-icons/keyboard-arrow-right';
+import SearchIcon from '../../svg-icons/search';
+import MoreIcon from '../../svg-icons/more-vert';
+import TimeIcon from '../../svg-icons/access-time';
 
 const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   toolbar: {
@@ -83,30 +87,23 @@ class AppToolbar extends React.Component {
     return (
       <AppBar>
         <Toolbar className={toolbarClass} >
-          <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
-          <Layout item xs={2}>{!this.state.inSearch && <Text type="title" colorInherit >Zmora</Text>}</Layout>
-          <Layout item container xs={6} align="center">
-            <div style={{ transition: 'all 0.5s', flexGrow: this.state.inSearch ? 0.00001 : 1 }}>
-              {!this.state.inSearch && <Breadcrumbs
-                routes={this.props.routes}
-                params={this.props.params}
-                itemClass={classes.breadcrumbItem}
-                activeItemClass={classes.activeBreadcrumbItem}
-                separator={<ArrowIcon />}
-              />}
-            </div>
-            <Search
-              style={{ display: 'flex', transition: 'all 0.5s', flex: 2 }}
-              onFocus={this.toggleSearch}
-              onBlur={this.toggleSearch}
-              onMouseMove={this.moveRipple}
+          <Layout xs={2}>
+            <Text type="title" colorInherit>Zmora</Text>
+          </Layout>
+          <Layout xs={8}>
+            <Breadcrumbs
+              routes={this.props.routes}
+              params={this.props.params}
+              itemClass={classes.breadcrumbItem}
+              activeItemClass={classes.activeBreadcrumbItem}
+              separator={<ArrowIcon />}
             />
           </Layout>
-          {!this.state.inSearch && <Layout item xs={2} style={{ textAlign: 'center' }}><ServerTime /></Layout>}
-          {!this.state.inSearch && <Layout item xs={1}><Text colorInherit>{this.props.username}</Text></Layout>}
-          {!this.state.inSearch && <Layout item xs={1}>
-            <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MenuIcon /></IconButton>
-          </Layout>}
+          <Layout xs={2} style={{ textAlign: 'right' }}>
+            <IconButton style={{ color: 'inherit' }}><SearchIcon /></IconButton>
+            <IconButton style={{ color: 'inherit' }}><TimeIcon /></IconButton>
+            <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>     
+          </Layout>
         </Toolbar>
       </AppBar>
     );

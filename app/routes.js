@@ -55,19 +55,68 @@ export default function createRoutes(store) {
       },
       childRoutes: [
         {
-          path: '/contests/page',
-          name: 'Nested Page',
+          path: ':contest_id',
+          name: 'contestSummaryPage',
           getComponent(location, cb) {
-            import('containers/DeeplyNestedPage')
+            import('containers/ContestSummaryPage')
               .then(loadModule(cb))
               .catch(errorLoading);
           },
           childRoutes: [
             {
-              path: '/contests/page/page',
-              name: 'Super Nested Page',
+              path: 'problems',
+              name: 'Problems',
               getComponent(location, cb) {
-                import('containers/DeeplyNestedPage')
+                import('containers/ProblemsPage')
+                  .then(loadModule(cb))
+                  .catch(errorLoading);
+              },
+              childRoutes: [
+                {
+                  path: ':problem_id',
+                  name: 'Problem',
+                  getComponent(location, cb) {
+                    import('containers/ProblemContents')
+                      .then(loadModule(cb))
+                      .catch(errorLoading);
+                  },
+                  childRoutes: [
+                    {
+                      path: 'submits',
+                      name: 'Submits',
+                      getComponent(location, cb) {
+                        import('containers/ProblemSubmitsPage')
+                          .then(loadModule(cb))
+                          .catch(errorLoading);
+                      },
+                      childRoutes: [
+                        {
+                          path: ':submit_id',
+                          name: 'Submit',
+                          getComponent(location, cb) {
+                            import('containers/SubmitDetailsPage')
+                              .then(loadModule(cb))
+                              .catch(errorLoading);
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            }, {
+              path: 'ranking',
+              name: 'Ranking',
+              getComponent(location, cb) {
+                import('containers/RankingPage')
+                  .then(loadModule(cb))
+                  .catch(errorLoading);
+              },
+            }, {
+              path: 'questions',
+              name: 'Questions',
+              getComponent(location, cb) {
+                import('containers/QuestionsPage')
                   .then(loadModule(cb))
                   .catch(errorLoading);
               },
@@ -76,44 +125,12 @@ export default function createRoutes(store) {
         },
       ],
     }, {
-      path: '/ranking',
-      name: 'Ranking',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/RankingPage/reducer'),
-          import('containers/RankingPage/sagas'),
-          import('containers/RankingPage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('rankingPage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
-      path: '/news',
-      name: 'News',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/NewsPage/reducer'),
-          import('containers/NewsPage/sagas'),
-          import('containers/NewsPage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('newsPage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
+      path: '/about',
+      name: 'About Us',
+      getComponent(location, cb) {
+        import('containers/AboutPage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
       },
     }, {
       path: '*',

@@ -21,12 +21,9 @@ import Search from '../Search';
 import ServerTime from '../ServerTime';
 import Ripple from '../../components/Ripple';
 
-import Star from '../../svg-icons/star';
-import MenuIcon from '../../svg-icons/menu';
 import ArrowIcon from '../../svg-icons/keyboard-arrow-right';
 import SearchIcon from '../../svg-icons/search';
 import MoreIcon from '../../svg-icons/more-vert';
-import TimeIcon from '../../svg-icons/access-time';
 
 const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   toolbar: {
@@ -48,7 +45,6 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
 
 class AppToolbar extends React.Component {
   static propTypes = {
-    username: React.PropTypes.string,
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
     onToggleMenu: React.PropTypes.func.isRequired,
@@ -87,10 +83,10 @@ class AppToolbar extends React.Component {
     return (
       <AppBar>
         <Toolbar className={toolbarClass} >
-          <Layout xs={2}>
+          <Layout item xs={2}>
             <Text type="title" colorInherit>Zmora</Text>
           </Layout>
-          <Layout xs={8}>
+          <Layout item xs={7}>
             <Breadcrumbs
               routes={this.props.routes}
               params={this.props.params}
@@ -99,10 +95,10 @@ class AppToolbar extends React.Component {
               separator={<ArrowIcon />}
             />
           </Layout>
-          <Layout xs={2} style={{ textAlign: 'right' }}>
+          <Layout container item gutter={0} xs={3} justify="flex-end" align="center">
             <IconButton style={{ color: 'inherit' }}><SearchIcon /></IconButton>
-            <IconButton style={{ color: 'inherit' }}><TimeIcon /></IconButton>
-            <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>     
+            <ServerTime />
+            <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
           </Layout>
         </Toolbar>
       </AppBar>

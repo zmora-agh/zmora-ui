@@ -20,7 +20,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     return (
       <Paper style={{ padding: '3em 2em', textAlign: 'justify' }}>
         <Text type="title" gutterBottom>Home page</Text>
-        <Text type="paragraph">
+        <Text type="body1">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consectetur, tellus non venenatis congue, nisi metus efficitur augue, id elementum dui est sed felis. Suspendisse sagittis ultrices ante quis auctor. Curabitur ullamcorper libero a turpis lacinia, sit amet vehicula dolor sagittis. Suspendisse pretium placerat euismod. Cras porta blandit molestie. Ut pharetra maximus nisl sit amet finibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In id sem non purus rutrum viverra. Duis cursus urna ac metus faucibus ornare. Aliquam erat volutpat. Maecenas vitae ultricies libero. Suspendisse tempus lobortis arcu in dictum. Quisque rhoncus ut orci in lacinia. Quisque iaculis rutrum nisi sit amet vehicula. Proin varius velit leo, ut congue dolor euismod in. Mauris eu nibh eget erat rutrum finibus.
 
           Morbi ut maximus turpis, id dignissim lacus. Pellentesque varius sodales pellentesque. Donec at ligula elit. Nunc sed arcu ac risus convallis convallis sit amet vel ante. Suspendisse vel libero semper, congue enim vitae, convallis nibh. Quisque accumsan risus id rhoncus gravida. Sed id augue vitae neque eleifend sagittis. Aliquam erat volutpat. Duis turpis arcu, auctor ut lacus id, dictum auctor orci. Fusce consectetur eu risus et gravida. Mauris tempor tempor eros in pellentesque. Morbi id commodo ante, vitae aliquam ante. Duis efficitur ipsum quis risus molestie, ut facilisis metus laoreet.

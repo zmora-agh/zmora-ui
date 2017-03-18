@@ -10,3 +10,6 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+
+export const GET_CURRENT_USER = 'app/GET_CURRENT_USER';
+export const GET_CURRENT_USER_SUCCESS = 'app/GET_CURRENT_USER_SUCCESS';

@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { createStyleSheet } from 'jss-theme-reactor';
 import Breadcrumbs from 'react-breadcrumbs';
 import customPropTypes from 'material-ui/utils/customPropTypes';
@@ -21,6 +22,13 @@ import Layout from 'material-ui/Layout';
 import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import Text from 'material-ui/Text';
+
+import { makeSelectApp } from './selectors';
+
+import {
+  getCurrentUser,
+} from './actions';
+
 import RightMenu from '../RightMenu';
 
 import Navigation from '../../../app/components/Navigation';
@@ -53,21 +61,27 @@ const styleSheet = createStyleSheet('App', () => ({
   },
 }));
 
-export default class App extends React.PureComponent {
+class App extends React.PureComponent {
   static propTypes = {
+    dispatch: React.PropTypes.func.isRequired,
     children: React.PropTypes.node.isRequired,
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
-  }
+    user: React.PropTypes.object,
+  };
 
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
-  }
+  };
 
   constructor(props) {
     super(props);
     this.state = { rightMenuOpen: false };
     this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(getCurrentUser());
   }
 
   toggleMenu() {
@@ -84,7 +98,7 @@ export default class App extends React.PureComponent {
             <Layout item xs={2}><Text type="title" colorInherit className={classes.flex}>Zmora</Text></Layout>
             <Layout item xs={6}><Breadcrumbs routes={this.props.routes} params={this.props.params} /></Layout>
             <Layout item xs={2}><Text colorInherit>Server time: 13:37:66</Text></Layout>
-            <Layout item xs={1}><Text colorInherit>maxmati</Text></Layout>
+            <Layout item xs={1}>{this.props.user && <Text colorInherit>{this.props.user.nick}</Text>}</Layout>
             <Layout item xs={1}>
               <IconButton className={classes.button} onClick={this.toggleMenu}><Menu /></IconButton>
             </Layout>
@@ -106,3 +120,11 @@ export default class App extends React.PureComponent {
     );
   }
 }
+
+const mapStateToProps = makeSelectApp;
+
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

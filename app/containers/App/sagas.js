@@ -1,5 +1,7 @@
 import { call, takeLatest, put } from 'redux-saga/effects';
 
+import { getCurrentUserURL } from '../../urls';
+
 import {
   getCurrentUserSuccess,
 } from './actions';
@@ -8,7 +10,7 @@ import {
 } from './constants';
 
 function fetchCurrentUser() {
-  return fetch('http://localhost:8080/currentUser', {
+  return fetch(getCurrentUserURL(), {
     method: 'GET',
     headers: {
       Accept: 'application/json',

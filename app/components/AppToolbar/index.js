@@ -22,7 +22,6 @@ import ServerTime from '../ServerTime';
 import Ripple from '../../components/Ripple';
 
 import ArrowIcon from '../../svg-icons/keyboard-arrow-right';
-import SearchIcon from '../../svg-icons/search';
 import MoreIcon from '../../svg-icons/more-vert';
 
 const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
@@ -83,10 +82,11 @@ class AppToolbar extends React.Component {
     return (
       <AppBar>
         <Toolbar className={toolbarClass} >
+          <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
           <Layout item xs={2}>
             <Text type="title" colorInherit>Zmora</Text>
           </Layout>
-          <Layout item xs={7}>
+          {!this.state.inSearch ? <Layout item xs={7}>
             <Breadcrumbs
               routes={this.props.routes}
               params={this.props.params}
@@ -94,10 +94,15 @@ class AppToolbar extends React.Component {
               activeItemClass={classes.activeBreadcrumbItem}
               separator={<ArrowIcon />}
             />
-          </Layout>
-          <Layout container item gutter={0} xs={3} justify="flex-end" align="center">
-            <IconButton style={{ color: 'inherit' }}><SearchIcon /></IconButton>
-            <ServerTime />
+          </Layout> : undefined}
+          <Layout container item gutter={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">
+            <Search
+              expanded={this.state.inSearch}
+              onFocus={this.toggleSearch}
+              onBlur={this.toggleSearch}
+              onMouseMove={this.moveRipple}
+            />
+            <ServerTime style={this.state.inSearch ? { visibility: 'hidden' } : {}} />
             <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
           </Layout>
         </Toolbar>

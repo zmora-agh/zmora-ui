@@ -8,22 +8,22 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
   header: {
     id: 'app.components.StatusPanel.header',
-    defaultMessage: 'Status'
+    defaultMessage: 'Status',
   },
   active: {
     id: 'app.components.StatusPanel.active',
-    defaultMessage: 'Active nodes: '
+    defaultMessage: 'Active nodes: ',
   },
   logged: {
     id: 'app.components.StatusPanel.logged',
-    defaultMessage: 'Logged users: '
+    defaultMessage: 'Logged users: ',
   },
   lastLogged: {
     id: 'app.components.StatusPanel.logged',
-    defaultMessage: 'Last logged '
+    defaultMessage: 'Last logged ',
   },
   showMoreButton: {
     id: 'app.components.StatusPanel.showMoreButton',
-    defaultMessage: 'Show More'
-  }
+    defaultMessage: 'Show More',
+  },
 });

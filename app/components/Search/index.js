@@ -33,33 +33,44 @@ const styleSheet = createStyleSheet('zmoraSearch', () => ({
   },
 }));
 
-function Search(props, context) {
-  const classes = context.styleManager.render(styleSheet);
-  const rootClass = classNames({
-    [classes.root]: props.expanded,
-  });
-  return (
-    <div style={props.style} className={rootClass} onMouseMove={props.onMouseMove} >
-      {props.expanded ? <SearchIcon /> : <IconButton style={{ color: 'inherit' }} onClick={props.onFocus}><SearchIcon /></IconButton>}
-      {props.expanded ? <input
-        className={classes.input}
-        placeholder="Search"
-        onBlur={props.onBlur}
-      /> : undefined}
-    </div>
-  );
+class Search extends React.PureComponent {
+  static propTypes = {
+    style: React.PropTypes.object,
+    expanded: React.PropTypes.bool,
+    onFocus: React.PropTypes.func.isRequired,
+    onBlur: React.PropTypes.func.isRequired,
+    onMouseMove: React.PropTypes.func,
+  };
+
+  static contextTypes = {
+    styleManager: customPropTypes.muiRequired,
+  };
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.expanded && this.props.expanded) {
+      this.input.focus();
+    }
+  }
+
+  render() {
+    const classes = this.context.styleManager.render(styleSheet);
+    const rootClass = classNames({
+      [classes.root]: this.props.expanded,
+    });
+    return (
+      <div style={this.props.style} className={rootClass} onMouseMove={this.props.onMouseMove}>
+        {this.props.expanded ? <SearchIcon /> :
+        <IconButton style={{ color: 'inherit' }} onClick={this.props.onFocus}><SearchIcon /></IconButton>}
+
+        {this.props.expanded ? <input
+          ref={(input) => { this.input = input; }}
+          className={classes.input}
+          placeholder="Search"
+          onBlur={this.props.onBlur}
+        /> : undefined}
+      </div>
+    );
+  }
 }
-
-Search.propTypes = {
-  style: React.PropTypes.object,
-  expanded: React.PropTypes.bool,
-  onFocus: React.PropTypes.func.isRequired,
-  onBlur: React.PropTypes.func.isRequired,
-  onMouseMove: React.PropTypes.func,
-};
-
-Search.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
 
 export default Search;

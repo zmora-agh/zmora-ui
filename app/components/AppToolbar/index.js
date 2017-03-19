@@ -21,8 +21,8 @@ import Search from '../Search';
 import ServerTime from '../ServerTime';
 import Ripple from '../../components/Ripple';
 
-import MenuIcon from '../../svg-icons/menu';
 import ArrowIcon from '../../svg-icons/keyboard-arrow-right';
+import MoreIcon from '../../svg-icons/more-vert';
 
 const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   toolbar: {
@@ -44,7 +44,6 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
 
 class AppToolbar extends React.Component {
   static propTypes = {
-    username: React.PropTypes.string,
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
     onToggleMenu: React.PropTypes.func.isRequired,
@@ -84,29 +83,28 @@ class AppToolbar extends React.Component {
       <AppBar>
         <Toolbar className={toolbarClass} >
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
-          <Layout item xs={2}>{!this.state.inSearch && <Text type="title" colorInherit >Zmora</Text>}</Layout>
-          <Layout item container xs={6} align="center">
-            <div style={{ transition: 'all 0.5s', flexGrow: this.state.inSearch ? 0.00001 : 1 }}>
-              {!this.state.inSearch && <Breadcrumbs
-                routes={this.props.routes}
-                params={this.props.params}
-                itemClass={classes.breadcrumbItem}
-                activeItemClass={classes.activeBreadcrumbItem}
-                separator={<ArrowIcon />}
-              />}
-            </div>
+          <Layout item xs={2}>
+            <Text type="title" colorInherit>Zmora</Text>
+          </Layout>
+          {!this.state.inSearch ? <Layout item xs={7}>
+            <Breadcrumbs
+              routes={this.props.routes}
+              params={this.props.params}
+              itemClass={classes.breadcrumbItem}
+              activeItemClass={classes.activeBreadcrumbItem}
+              separator={<ArrowIcon />}
+            />
+          </Layout> : undefined}
+          <Layout container item gutter={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">
             <Search
-              style={{ display: 'flex', transition: 'all 0.5s', flex: 2 }}
+              expanded={this.state.inSearch}
               onFocus={this.toggleSearch}
               onBlur={this.toggleSearch}
               onMouseMove={this.moveRipple}
             />
+            <ServerTime style={this.state.inSearch ? { visibility: 'hidden' } : {}} />
+            <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
           </Layout>
-          {!this.state.inSearch && <Layout item xs={2} style={{ textAlign: 'center' }}><ServerTime /></Layout>}
-          {!this.state.inSearch && <Layout item xs={1}><Text colorInherit>{this.props.username}</Text></Layout>}
-          {!this.state.inSearch && <Layout item xs={1}>
-            <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MenuIcon /></IconButton>
-          </Layout>}
         </Toolbar>
       </AppBar>
     );

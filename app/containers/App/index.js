@@ -90,8 +90,8 @@ class App extends React.PureComponent {
           onToggleMenu={this.toggleMenu}
         />
         <Layout container gutter={0} style={{ marginTop: 64 }}>
-          <Layout item xs={2}><Navigation style={{ margin: 10 }} /></Layout>
-          <Layout item xs={this.state.rightMenuOpen ? 7 : 9} className={classes.contentContainer}>
+          <Layout item xs={2}><Navigation style={{ padding: 10 }} /></Layout>
+          <Layout item xs={this.state.rightMenuOpen ? 8 : 10} className={classes.contentContainer}>
             {React.Children.toArray(this.props.children)}
           </Layout>
           <Layout

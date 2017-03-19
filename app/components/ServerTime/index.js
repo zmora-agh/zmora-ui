@@ -50,13 +50,13 @@ class ServerTime extends React.Component {
       color: 'inherit',
       background: theme.palette.primary[300],
       transition: 'initial',
+      zIndex: -10,
     };
 
     if (this.state.showTime) {
       return (
         <Chip
           onClick={this.toggleTime}
-          className={classes.chip}
           style={Object.assign({}, chipStyle, this.props.style)}
           avatar={<TimeIcon />}
           label={

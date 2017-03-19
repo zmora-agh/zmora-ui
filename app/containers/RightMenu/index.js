@@ -45,20 +45,20 @@ const styleSheet = createStyleSheet('RightMenu', () => ({
 const RightMenu = (props, context) => {
   const classes = context.styleManager.render(styleSheet);
 
-  const { avatar, events, username, ...other } = props;
+  const { rightMenu, user, ...other } = props;
   return (
     <Paper {...other} className={classes.root}>
       <div style={{ flex: 1 }}>
         <Layout container align="center">
-          <Avatar src={avatar} className={classes.avatar} />
+          <Avatar src={user.avatar} className={classes.avatar} />
           <Layout container direction="column" className={classes.avatarText}>
-            <Text>{username}</Text>
+            <Text>{user.name}</Text>
             <Text>Points: 15</Text>
           </Layout>
         </Layout>
         <Divider />
         <div style={{ padding: 15 }}>
-          {events.map((event) => (<p key={event.id}>{event.text}</p>))}
+          {rightMenu.events.map((event) => (<p key={event.id}>{event.text}</p>))}
         </div>
       </div>
       <div style={{ marginBottom: 64 }}>
@@ -72,12 +72,18 @@ const RightMenu = (props, context) => {
 };
 
 RightMenu.propTypes = {
-  events: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.number.isRequired,
-    text: React.PropTypes.string.isRequired,
-  })).isRequired,
-  avatar: React.PropTypes.string.isRequired,
-  username: React.PropTypes.string.isRequired,
+  rightMenu: React.PropTypes.shape({
+    events: React.PropTypes.arrayOf(React.PropTypes.shape({
+      id: React.PropTypes.number,
+      text: React.PropTypes.string,
+    })),
+  }).isRequired,
+  user: React.PropTypes.shape({
+    name: React.PropTypes.string,
+    nick: React.PropTypes.string,
+    email: React.PropTypes.string,
+    avatar: React.PropTypes.string,
+  }).isRequired,
 };
 
 RightMenu.contextTypes = {

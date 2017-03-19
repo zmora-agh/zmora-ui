@@ -24,7 +24,13 @@ const makeSelectApp = () => createSelector(
   (substate) => substate.toJS()
 );
 
+const makeSelectUser = () => createSelector(
+  selectAppDomain(),
+  (substate) => substate.get('user')
+);
+
 export {
   makeSelectApp,
+  makeSelectUser,
   makeSelectLocationState,
 };

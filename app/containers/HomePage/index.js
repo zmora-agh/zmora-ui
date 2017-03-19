@@ -10,25 +10,26 @@
  */
 
 import React from 'react';
+import Paper from 'material-ui/Paper';
 import Layout from 'material-ui/Layout';
 import StatusPanel from '../../components/StatusPanel';
 import InfoPanel from '../../components/InfoPanel';
 
-export default class HomePage extends React.PureComponent {
-  render() {
-    return (
-      <div>
-        <Layout container style={{ margin: 0 }}>
-          <Layout item xs={7}>
-            <InfoPanel />
-          </Layout>
-          <Layout item xs={1}>
-          </Layout>
-          <Layout item xs={4}>
-            <StatusPanel />
-          </Layout>
+function HomePage() {
+  return (
+    <Paper style={{ padding: '3em 2em', textAlign: 'justify' }}>
+      <Layout container>
+        <Layout item xs={7}>
+          <InfoPanel />
         </Layout>
-      </div>
-    );
-  }
+        <Layout item xs={1}>
+        </Layout>
+        <Layout item xs={4}>
+          <StatusPanel />
+        </Layout>
+      </Layout>
+    </Paper>
+  );
 }
+
+export default HomePage;

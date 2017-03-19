@@ -22,34 +22,34 @@ const styleSheet = createStyleSheet('StatusStyleSheet', () => ({
   dataElement: { 'margin-bottom': '6px' },
 }));
 
-export default class StatusPanel extends React.Component {
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
-  };
+function StatusPanel(props, context) {
+  const classes = context.styleManager.render(styleSheet);
 
-  render() {
-    const classes = this.context.styleManager.render(styleSheet);
+  return (
+    <div>
+      <Text type="headline" component="h2"><FormattedMessage {...messages.header} /></Text>
 
-    return (
-      <div>
-        <Text type="headline" component="h2"><FormattedMessage {...messages.header} /></Text>
-
-        <Text component="p" className={classes.textStyle}>
-          <div className={classes.dataElement}>
-            <Laptop className={classes.iconStyle} />
-            <FormattedMessage {...messages.active} /> 3
+      <Text component="div" className={classes.textStyle}>
+        <div className={classes.dataElement}>
+          <Laptop className={classes.iconStyle} />
+          <FormattedMessage {...messages.active} /> 3
           </div>
-          <div className={classes.dataElement}>
-            <Person className={classes.iconStyle} />
-            <FormattedMessage {...messages.logged} /> 54
+        <div className={classes.dataElement}>
+          <Person className={classes.iconStyle} />
+          <FormattedMessage {...messages.logged} /> 54
           </div>
-          <div className={classes.dataElement}>
-            <div className={classes.textStyle}><FormattedMessage {...messages.lastLogged} /> <b>nologin</b>.</div>
-          </div>
-        </Text>
+        <div className={classes.dataElement}>
+          <div className={classes.textStyle}><FormattedMessage {...messages.lastLogged} /> <b>nologin</b>.</div>
+        </div>
+      </Text>
 
-        <Button compact primary className={classes.showMoreButtonStyle}><FormattedMessage {...messages.showMoreButton} /></Button>
-      </div>
-    );
-  }
+      <Button compact primary className={classes.showMoreButtonStyle}><FormattedMessage {...messages.showMoreButton} /></Button>
+    </div>
+  );
 }
+
+StatusPanel.contextTypes = {
+  styleManager: customPropTypes.muiRequired,
+};
+
+export default StatusPanel;

@@ -1,6 +1,6 @@
 /*
  *
- * RankingPage
+ * ProblemSubmitsPage
  *
  */
 
@@ -10,14 +10,14 @@ import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-export class RankingPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class ProblemSubmitsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
         <Helmet
-          title="RankingPage"
+          title="ProblemSubmitsPage"
           meta={[
-            { name: 'description', content: 'Description of RankingPage' },
+            { name: 'description', content: 'Description of ProblemSubmitsPage' },
           ]}
         />
         <FormattedMessage {...messages.header} />
@@ -26,7 +26,7 @@ export class RankingPage extends React.PureComponent { // eslint-disable-line re
   }
 }
 
-RankingPage.propTypes = {
+ProblemSubmitsPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
@@ -37,4 +37,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(RankingPage);
+export default connect(null, mapDispatchToProps)(ProblemSubmitsPage);

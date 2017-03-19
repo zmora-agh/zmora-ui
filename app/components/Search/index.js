@@ -30,7 +30,13 @@ function Search(props, context) {
   return (
     <div style={props.style} className={classes.root}>
       <SearchIcon />
-      <input className={classes.input} placeholder="Search" onFocus={props.onFocus} onBlur={props.onBlur} />
+      <input
+        className={classes.input}
+        placeholder="Search"
+        onFocus={props.onFocus}
+        onBlur={props.onBlur}
+        onMouseMove={props.onMouseMove}
+      />
     </div>
   );
 }
@@ -39,6 +45,7 @@ Search.propTypes = {
   style: React.PropTypes.object,
   onFocus: React.PropTypes.func.isRequired,
   onBlur: React.PropTypes.func.isRequired,
+  onMouseMove: React.PropTypes.func,
 };
 
 Search.contextTypes = {

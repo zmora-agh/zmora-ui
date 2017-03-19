@@ -12,6 +12,9 @@ import {
 const initialState = fromJS({
   user: {
     name: '',
+    nick: '',
+    email: '',
+    avatar: '',
   },
 });
 

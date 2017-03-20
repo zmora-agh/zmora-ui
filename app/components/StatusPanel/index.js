@@ -27,7 +27,9 @@ function StatusPanel(props, context) {
 
   return (
     <div>
-      <Text type="headline" component="h2"><FormattedMessage {...messages.header} /></Text>
+      <Text type="headline" component="h2">
+        <FormattedMessage {...messages.header} />
+      </Text>
 
       <Text component="div" className={classes.textStyle}>
         <div className={classes.dataElement}>

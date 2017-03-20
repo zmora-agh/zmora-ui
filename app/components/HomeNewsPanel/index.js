@@ -52,7 +52,8 @@ export default class HomeNewsPanel extends Component {
       <div>
         <Card className={classes.card}>
           <CardContent actionSpacing={false} style={{ margin: '0px', 'padding-bottom': '10px' }}>
-            <div style={{ display: 'flex', 'flex-direction': 'row' }}><Text type="headline" component="h2">Co nowego?</Text>
+            <div style={{ display: 'flex', 'flex-direction': 'row' }}>
+              <Text><div>{this.props.date}</div><div style={{ 'font-size': '16px' }}>{this.props.title}</div></Text>
               <div className={classes.flexGrow} />
               <IconButton
                 className={classnames(classes.expand, {
@@ -65,12 +66,7 @@ export default class HomeNewsPanel extends Component {
           </CardContent>
           <Collapse in={this.state.expanded} transitionDuration="auto" unmountOnExit>
             <CardContent style={{ margin: '0px', 'padding-top': '0px' }}>
-              <Text component="p">
-                + Dodany prototyp strony głównej <br />
-                + Dodana animacja prawego panelu <br />
-                + Dodany prototyp drzewka kontestów <br />
-                + Dodany prototyp <br />
-              </Text>
+              {this.props.content}
             </CardContent>
           </Collapse>
         </Card>
@@ -78,3 +74,9 @@ export default class HomeNewsPanel extends Component {
     );
   }
 }
+
+HomeNewsPanel.propTypes = {
+  date: React.PropTypes.string,
+  title: React.PropTypes.string.isRequired,
+  content: React.PropTypes.any,
+};

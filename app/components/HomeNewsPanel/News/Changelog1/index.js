@@ -7,7 +7,7 @@
 import React from 'react';
 import Text from 'material-ui/Text';
 
-function Changelog2() {
+function Changelog1() {
   return (
     <Text component="p">
       + Dodany prototyp strony głównej <br />
@@ -18,4 +18,4 @@ function Changelog2() {
   );
 }
 
-export default Changelog2;
+export default Changelog1;

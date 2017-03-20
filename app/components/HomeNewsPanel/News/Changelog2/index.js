@@ -1,3 +1,4 @@
+
 /**
  *
  * Changelog2
@@ -7,15 +8,15 @@
 import React from 'react';
 import Text from 'material-ui/Text';
 
-function Changelog1() {
+function Changelog2() {
   return (
     <Text component="p">
-      + Dodany prototyp strony głównej <br />
-      + Dodana animacja prawego panelu <br />
-      + Dodany prototyp drzewka kontestów <br />
-      + Dodany prototyp prototypu strony <br />
+      + Dodany news panel na stronie głównej <br />
+      + Dodany prototyp searchera do app baru <br />
+      + Dodany prototyp zegaru systemowego <br />
+      + Bug Fix <br />
     </Text>
   );
 }
 
-export default Changelog1;
+export default Changelog2;

@@ -12,16 +12,21 @@
  */
 
 import React from 'react';
+import { connect } from 'react-redux';
 import { createStyleSheet } from 'jss-theme-reactor';
-import Breadcrumbs from 'react-breadcrumbs';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
-import AppBar from 'material-ui/AppBar';
 import Layout from 'material-ui/Layout';
-import Toolbar from 'material-ui/Toolbar';
-import Text from 'material-ui/Text';
+
+import AppToolbar from '../../components/AppToolbar';
+import Navigation from '../../components/Navigation';
 import RightMenu from '../RightMenu';
-import Navigation from '../../../app/components/Navigation';
+
+import { makeSelectApp } from './selectors';
+
+import {
+  getCurrentUser,
+} from './actions';
 
 const styleSheet = createStyleSheet('App', () => ({
   root: {
@@ -38,40 +43,79 @@ const styleSheet = createStyleSheet('App', () => ({
   rightMenu: {
     position: 'fixed',
     right: 0,
+    width: '100%',
     height: '100%',
-    paddingLeft: 24,
+    paddingRight: 0,
+    paddingTop: 0,
+    paddingLeft: 15,
+    transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
+  },
+  contentContainer: {
+    padding: 10,
+    transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
   },
 }));
 
-export default function App(props, context) {
-  const classes = context.styleManager.render(styleSheet);
-  return (
-    <div className={classes.root}>
-      <AppBar style={{ position: 'fixed' }}>
-        <Toolbar>
-          <Layout item xs={2}><Text type="title" colorInherit className={classes.flex}>Zmora</Text></Layout>
-          <Layout item xs={6}><Breadcrumbs routes={props.routes} params={props.params} /></Layout>
-          <Layout item xs={3}><Text colorInherit>Server time: 13:37:66</Text></Layout>
-          <Layout item xs={1}><Text colorInherit>maxmati</Text></Layout>
-        </Toolbar>
-      </AppBar>
-      <Layout container gutter={0} style={{ marginTop: 64 }}>
-        <Layout item xs={2}><Navigation style={{ margin: 8 }} /></Layout>
-        <Layout item xs={8} className={classes.contentWrapper}>
-          {React.Children.toArray(props.children)}
+class App extends React.PureComponent {
+  static propTypes = {
+    dispatch: React.PropTypes.func.isRequired,
+    children: React.PropTypes.node.isRequired,
+    routes: React.PropTypes.array.isRequired,
+    params: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object,
+  };
+
+  static contextTypes = {
+    styleManager: customPropTypes.muiRequired,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = { rightMenuOpen: false };
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(getCurrentUser());
+  }
+
+  toggleMenu() {
+    this.setState({ rightMenuOpen: !this.state.rightMenuOpen });
+  }
+
+  render() {
+    const classes = this.context.styleManager.render(styleSheet);
+    const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
+    return (
+      <div className={classes.root}>
+        <AppToolbar
+          routes={this.props.routes}
+          params={this.props.params}
+          username={this.props.user.nick}
+          onToggleMenu={this.toggleMenu}
+        />
+        <Layout container gutter={0} style={{ marginTop: 64 }}>
+          <Layout item xs={2}><Navigation style={{ padding: 10 }} /></Layout>
+          <Layout item xs={this.state.rightMenuOpen ? 8 : 10} className={classes.contentContainer}>
+            {React.Children.toArray(this.props.children)}
+          </Layout>
+          <Layout
+            item xs={2}
+            className={classes.rightMenu}
+            style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
+          >
+            <RightMenu />
+          </Layout>
         </Layout>
-        <Layout item xs={2} className={classes.rightMenu}><RightMenu /></Layout>
-      </Layout>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
-App.propTypes = {
-  children: React.PropTypes.node.isRequired,
-  routes: React.PropTypes.array.isRequired,
-  params: React.PropTypes.object.isRequired,
-};
+const mapStateToProps = makeSelectApp;
 
-App.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
+function mapDispatchToProps(dispatch) {
+  return { dispatch };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

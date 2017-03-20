@@ -23,13 +23,14 @@ export class ContestsPage extends React.PureComponent { // eslint-disable-line r
           ]}
         />
         <FormattedMessage {...messages.header} />
+        {this.props.children}
       </div>
     );
   }
 }
 
 ContestsPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  children: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -17,8 +17,14 @@ function InfoPanel() {
         nie istniał już wcześniej.
       </Text>
       <Text gutterBottom>
-        A może i nie żałowali, ale dla nich szczęśliwie najgorsze lata studiów już minęły, a że dostali sposobność
-        stworzyć coś przez co na zawsze pozostaną w waszych pełnych nienawiści sercach, postanowili z tego skorzystać.
+        System porządkuje zadania z wielu przedmiotów, przez to korzystacie ze znajomego i sprawdzonego systemu na wielu
+        zajęciach. Daje to wam również szybki przegląd zdobytego doświadczenia w poszczególnych przedmiotach.
+        Strona oferuje podgląd szczegółowych rankingów. Dla jednych będzie to możliwość pochwalenia się swoim skillem,
+        a innych zmotywuje do bardziej systematycznej pracy.
+      </Text>
+      <Text gutterBottom>
+        Mamy nadzieję, że projekt przypadnie wam do gustu, a wszelkie uwagi przyjmujemy otwarcie,
+        aby mógł być stosowany jak najdłużej.
       </Text>
       <Text>
         Powodzenia z zadankami,

@@ -14,6 +14,7 @@ import Paper from 'material-ui/Paper';
 import Layout from 'material-ui/Layout';
 import StatusPanel from '../../components/StatusPanel';
 import InfoPanel from '../../components/InfoPanel';
+import HomeNewsPanel from '../../components/HomeNewsPanel';
 
 function HomePage() {
   return (
@@ -26,6 +27,9 @@ function HomePage() {
         </Layout>
         <Layout item xs={4}>
           <StatusPanel />
+        </Layout>
+        <Layout item xs={12}>
+          <HomeNewsPanel />
         </Layout>
       </Layout>
     </Paper>

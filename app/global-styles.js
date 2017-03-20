@@ -22,4 +22,9 @@ injectGlobal`
     min-height: 100%;
     min-width: 100%;
   }
+  
+  a {
+    color: inherit;
+    text-decoration: inherit;
+  }
 `;

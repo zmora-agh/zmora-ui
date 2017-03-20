@@ -16,87 +16,101 @@ import { connect } from 'react-redux';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import Toolbar from 'material-ui/Toolbar';
-import Text from 'material-ui/Text';
-import Menu from '../../svg-icons/menu';
+import Layout from 'material-ui/Layout';
+
+import AppToolbar from '../../components/AppToolbar';
+import Navigation from '../../components/Navigation';
 import RightMenu from '../RightMenu';
-import { toggleMenu } from '../RightMenu/actions';
-import Navigation from './../../../app/components/Navigation';
+
+import { makeSelectApp } from './selectors';
+
+import {
+  getCurrentUser,
+} from './actions';
 
 const styleSheet = createStyleSheet('App', () => ({
   root: {
-    position: 'relative',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
   },
-  appBar: {
-    position: 'relative',
-  },
-  flex: {
-    flex: 1,
-  },
-  navigation: {
-    margin: 20,
-    width: 200,
-    flex: 'initial',
-  },
-  appContainer: {
-    display: 'flex',
-    flex: '1 1 auto',
-    justifyContent: 'space-between',
+  rightMenu: {
+    position: 'fixed',
+    right: 0,
+    width: '100%',
+    height: '100%',
+    paddingRight: 0,
+    paddingTop: 0,
+    paddingLeft: 15,
+    transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
   },
   contentContainer: {
-    flex: 1,
-    margin: '28px 28px 28px 8px',
-  },
-  rightMenu: {
-    width: 256,
-    minHeight: '100%',
+    padding: 10,
+    transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
   },
 }));
 
-function App(props, context) {
-  const classes = context.styleManager.render(styleSheet);
-  return (
-    <div className={classes.root}>
-      <AppBar className={classes.appBar}>
-        <Toolbar>
-          <Text type="title" colorInherit className={classes.flex}>Zmora</Text>
-          <IconButton contrast onClick={() => props.dispatch(toggleMenu())}>
-            <Menu />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <div className={classes.appContainer} >
-        <Navigation className={classes.navigation} />
-        <div className={classes.contentContainer}>
-          {React.Children.toArray(props.children)}
-        </div>
-        <RightMenu className={classes.rightMenu} />
+class App extends React.PureComponent {
+  static propTypes = {
+    dispatch: React.PropTypes.func.isRequired,
+    children: React.PropTypes.node.isRequired,
+    routes: React.PropTypes.array.isRequired,
+    params: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object,
+  };
+
+  static contextTypes = {
+    styleManager: customPropTypes.muiRequired,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = { rightMenuOpen: false };
+    this.toggleMenu = this.toggleMenu.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.dispatch(getCurrentUser());
+  }
+
+  toggleMenu() {
+    this.setState({ rightMenuOpen: !this.state.rightMenuOpen });
+  }
+
+  render() {
+    const classes = this.context.styleManager.render(styleSheet);
+    const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
+    return (
+      <div className={classes.root}>
+        <AppToolbar
+          routes={this.props.routes}
+          params={this.props.params}
+          username={this.props.user.nick}
+          onToggleMenu={this.toggleMenu}
+        />
+        <Layout container gutter={0} style={{ marginTop: 64 }}>
+          <Layout item xs={2}><Navigation style={{ padding: 10 }} /></Layout>
+          <Layout item xs={this.state.rightMenuOpen ? 8 : 10} className={classes.contentContainer}>
+            {React.Children.toArray(this.props.children)}
+          </Layout>
+          <Layout
+            item xs={2}
+            className={classes.rightMenu}
+            style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
+          >
+            <RightMenu />
+          </Layout>
+        </Layout>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-App.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  children: React.PropTypes.node.isRequired,
-};
-
-App.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
-
-const mapStateToProps = () => ({});
+const mapStateToProps = makeSelectApp;
 
 function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
+  return { dispatch };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

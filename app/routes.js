@@ -78,9 +78,17 @@ export default function createRoutes(store) {
                   path: ':problem_id',
                   name: 'Problem',
                   getComponent(location, cb) {
-                    import('containers/ProblemPage')
-                      .then((component) => cb(null, withProps(() => ({ tab: 'content' }))(component.default)))
-                      .catch(errorLoading);
+                    const importModules = Promise.all([
+                      import('containers/ProblemPage/reducer'),
+                      import('containers/ProblemPage'),
+                    ]);
+
+                    importModules.then(([reducer, component]) => {
+                      injectReducer('problemPage', reducer.default);
+                      cb(null, withProps(() => ({ tab: 'content' }))(component.default));
+                    });
+
+                    importModules.catch(errorLoading);
                   },
                   childRoutes: [
                     {

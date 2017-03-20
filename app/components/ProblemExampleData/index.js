@@ -5,12 +5,12 @@
 */
 
 import React from 'react';
-// import styled from 'styled-components';
 
 import Paper from 'material-ui/Paper';
 import Layout from 'material-ui/Layout';
 import Text from 'material-ui/Text';
 import Divider from 'material-ui/Divider';
+import { examplesPropType } from './constants';
 
 const DataElement = (props) => (
   <Layout item xs={props.xs}>
@@ -21,50 +21,37 @@ const DataElement = (props) => (
   </Layout>
 );
 
-function ProblemExampleData() {
+DataElement.propTypes = {
+  xs: React.PropTypes.number.isRequired,
+  desc: React.PropTypes.node.isRequired,
+  children: React.PropTypes.node.isRequired,
+};
+
+const createExample = (props) => ([
+  <Layout container style={{ padding: 24 }}>
+    <DataElement xs={6} desc="Dla danych wejściowych:">
+      {props.input}
+    </DataElement>
+    <DataElement xs={6} desc="Oczekiwana odpowiedź to:">
+      {props.output}
+    </DataElement>
+    <DataElement xs={12} desc="Uzasadnienie:">
+      {props.reason}
+    </DataElement>
+  </Layout>,
+  <Divider />,
+]);
+
+function ProblemExampleData(props) {
   return (
     <div style={{ overflow: 'hidden' }}>
-      <Layout container style={{ padding: 24 }}>
-        <DataElement xs={6} desc="Dla danych wejściowych:">
-          {'foo\nbar\nbaz'}
-        </DataElement>
-        <DataElement xs={6} desc="Oczekiwana odpowiedź to:">
-          {'1\n2\n666'}
-        </DataElement>
-        <DataElement xs={12} desc="Uzasadnienie:">
-          {'Szatan czyste zło'}
-        </DataElement>
-      </Layout>
-      <Divider />
-      <Layout container style={{ padding: 24 }}>
-        <DataElement xs={6} desc="Dla danych wejściowych:">
-          {'foo\nbar\nbaz'}
-        </DataElement>
-        <DataElement xs={6} desc="Oczekiwana odpowiedź to:">
-          {'1\n2\n666'}
-        </DataElement>
-        <DataElement xs={12} desc="Uzasadnienie:">
-          {'Szatan czyste zło'}
-        </DataElement>
-      </Layout>
-      <Divider />
-      <Layout container style={{ padding: 24 }}>
-        <DataElement xs={6} desc="Dla danych wejściowych:">
-          {'foo\nbar\nbaz'}
-        </DataElement>
-        <DataElement xs={6} desc="Oczekiwana odpowiedź to:">
-          {'1\n2\n666'}
-        </DataElement>
-        <DataElement xs={12} desc="Uzasadnienie:">
-          {'Szatan czyste zło'}
-        </DataElement>
-      </Layout>
+      {props.examples.map(createExample)}
     </div>
   );
 }
 
 ProblemExampleData.propTypes = {
-
+  examples: examplesPropType,
 };
 
 export default ProblemExampleData;

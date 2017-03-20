@@ -18,6 +18,7 @@ import {
 import IconButton from 'material-ui/IconButton';
 import FileFileDownload from '../../svg-icons/file-download';
 import EditorModeEdit from '../../svg-icons/mode-edit';
+import { submitsPropType } from './constants';
 
 const columnData = [
   { id: 'id', label: 'Identifier' },
@@ -51,21 +52,21 @@ class EnhancedTableHead extends Component {
               </TableSortLabel>
             </TableCell>
           , this)}
-          <TableCell></TableCell>
+          <TableCell />
         </TableRow>
       </TableHead>
     );
   }
 }
 
-export default class ProblemSubmits extends Component {
+export default class ProblemSubmits extends Component { // eslint-disable-line react/no-multi-comp
+  static propTypes = {
+    submits: submitsPropType,
+  };
+
   state = {
     order: 'asc',
     orderBy: 'id',
-    data: [
-      { id: 123, created: '11 minutes ago', status: 'ANS' },
-      { id: 124, created: '11 minutes ago', status: 'ANS' },
-    ],
   };
 
   handleRequestSort = (event, property) => {
@@ -76,17 +77,17 @@ export default class ProblemSubmits extends Component {
       order = 'asc';
     }
 
-    const data = this.state.data.sort(
+    this.setState({ order, orderBy });
+  };
+
+  render() {
+    const { order, orderBy } = this.state;
+
+    const data = this.props.submits.sort(
       (a, b) => (
         order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]
       ),
     );
-
-    this.setState({ data, order, orderBy });
-  };
-
-  render() {
-    const { data, order, orderBy } = this.state;
 
     return (
       <Table>

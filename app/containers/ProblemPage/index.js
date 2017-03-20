@@ -14,10 +14,14 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import { connect } from 'react-redux';
 
-
 import ProblemView from '../../../app/components/ProblemView';
+import { problemContentPropTypes } from '../../components/ProblemView/constants';
 import ProblemExampleData from '../../../app/components/ProblemExampleData';
+import { examplesPropType } from '../../components/ProblemExampleData/constants';
 import ProblemSubmits from '../../../app/components/ProblemSubmits';
+import { submitsPropType } from '../../components/ProblemSubmits/constants';
+
+import makeSelectProblemPage from './selectors';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   appBar: {
@@ -76,9 +80,9 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           </Tabs>
         </div>
         <SwipeableViews animateHeight index={this.state.index} onChangeIndex={this.handleChangeIndex}>
-          <ProblemView />
-          <ProblemExampleData />
-          <ProblemSubmits />
+          <ProblemView {...this.props.content} />
+          <ProblemExampleData examples={this.props.examples} />
+          <ProblemSubmits submits={this.props.submits} />
           <div>bsd</div>
         </SwipeableViews>
       </Paper>
@@ -87,7 +91,10 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 }
 
 ProblemPage.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.node,
+  content: React.PropTypes.shape(problemContentPropTypes),
+  examples: examplesPropType,
+  submits: submitsPropType,
 };
 
 
@@ -97,4 +104,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(ProblemPage);
+export default connect(makeSelectProblemPage, mapDispatchToProps)(ProblemPage);

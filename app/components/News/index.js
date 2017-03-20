@@ -1,6 +1,6 @@
 /**
 *
-* HomeNewsPanel
+* News
 *
 */
 
@@ -36,7 +36,7 @@ const styleSheet = createStyleSheet('RecipeReviewCard', (theme) => ({
 }));
 
 
-export default class HomeNewsPanel extends Component {
+export default class News extends Component {
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
   };
@@ -66,7 +66,7 @@ export default class HomeNewsPanel extends Component {
           </CardContent>
           <Collapse in={this.state.expanded} transitionDuration="auto" unmountOnExit>
             <CardContent style={{ margin: '0px', 'padding-top': '0px' }}>
-              {this.props.content}
+              {this.props.children}
             </CardContent>
           </Collapse>
         </Card>
@@ -75,8 +75,8 @@ export default class HomeNewsPanel extends Component {
   }
 }
 
-HomeNewsPanel.propTypes = {
+News.propTypes = {
   date: React.PropTypes.string,
   title: React.PropTypes.string.isRequired,
-  content: React.PropTypes.any,
+  children: React.PropTypes.any,
 };

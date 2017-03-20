@@ -6,11 +6,16 @@
 
 import React from 'react';
 import Text from 'material-ui/Text';
+import { FormattedMessage } from 'react-intl';
+
+import messages from './messages';
 
 function InfoPanel() {
   return (
     <div>
-      <Text type="headline" component="h2">O Projekcie</Text>
+      <Text type="headline" component="h2">
+        <FormattedMessage {...messages.header} />
+      </Text>
       <Text gutterBottom>
         Zmora, to kompletny system szlifowania Twoich umiejętności programistycznych, stworzony na wzór najlepszych
         stron z tej dziedziny. Powstał z inicjatywy grupy studentów, którzy sami żałowali, że podobny projekt

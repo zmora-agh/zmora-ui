@@ -44,13 +44,11 @@ class ServerTime extends React.Component {
 
   render() {
     const classes = this.context.styleManager.render(styleSheet);
-    const theme = this.context.styleManager.theme;
 
     const chipStyle = {
       color: 'inherit',
-      background: theme.palette.primary[300],
-      transition: 'initial',
-      zIndex: -10,
+      background: 'rgba(255, 255, 255, 0.3)',
+      transition: 'inherit',
     };
 
     if (this.state.showTime) {

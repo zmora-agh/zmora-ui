@@ -17,13 +17,9 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import TimeIcon from '../../svg-icons/access-time';
 
 
-const styleSheet = createStyleSheet('zmoraServerTime', (theme) => ({
+const styleSheet = createStyleSheet('zmoraServerTime', () => ({
   icon: {
     color: 'inherit',
-  },
-  chip: {
-    color: 'inherit',
-    background: theme.palette.primary[300],
   },
 }));
 
@@ -49,12 +45,17 @@ class ServerTime extends React.Component {
   render() {
     const classes = this.context.styleManager.render(styleSheet);
 
+    const chipStyle = {
+      color: 'inherit',
+      background: 'rgba(255, 255, 255, 0.3)',
+      transition: 'inherit',
+    };
+
     if (this.state.showTime) {
       return (
         <Chip
           onClick={this.toggleTime}
-          className={classes.chip}
-          style={this.props.style}
+          style={Object.assign({}, chipStyle, this.props.style)}
           avatar={<TimeIcon />}
           label={
             <Text colorInherit style={{ marginRight: 8 }} type="body2">

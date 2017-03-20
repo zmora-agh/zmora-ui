@@ -6,8 +6,16 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.ProblemExampleData.header',
-    defaultMessage: 'This is the ProblemExampleData component !',
+  input: {
+    id: 'app.components.ProblemExampleData.input',
+    defaultMessage: 'For input data:',
+  },
+  result: {
+    id: 'app.components.ProblemExampleData.result',
+    defaultMessage: 'Expected result:',
+  },
+  reason: {
+    id: 'app.components.ProblemExampleData.reason',
+    defaultMessage: 'Explanation:',
   },
 });

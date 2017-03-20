@@ -6,8 +6,16 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.ProblemSubmits.header',
-    defaultMessage: 'This is the ProblemSubmits component !',
+  id: {
+    id: 'app.components.ProblemSubmits.id',
+    defaultMessage: 'Identifier',
+  },
+  time: {
+    id: 'app.components.ProblemSubmits.time',
+    defaultMessage: 'Time',
+  },
+  status: {
+    id: 'app.components.ProblemSubmits.status',
+    defaultMessage: 'Status',
   },
 });

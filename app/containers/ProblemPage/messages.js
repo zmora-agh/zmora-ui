@@ -10,8 +10,20 @@ export default defineMessages({
     id: 'app.containers.ProblemPage.title',
     defaultMessage: 'Problem',
   },
-  header: {
-    id: 'app.containers.ProblemPage.header',
-    defaultMessage: 'This is ProblemPage container !',
+  content: {
+    id: 'app.containers.ProblemPage.content',
+    defaultMessage: 'Content',
+  },
+  examples: {
+    id: 'app.containers.ProblemPage.examples',
+    defaultMessage: 'Examples',
+  },
+  submits: {
+    id: 'app.containers.ProblemPage.submits',
+    defaultMessage: 'Submits',
+  },
+  questions: {
+    id: 'app.containers.ProblemPage.questions',
+    defaultMessage: 'Questions',
   },
 });

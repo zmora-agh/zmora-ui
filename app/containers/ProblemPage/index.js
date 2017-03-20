@@ -6,6 +6,7 @@
 
 import React, { PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
+import { FormattedMessage } from 'react-intl';
 
 import Paper from 'material-ui/Paper';
 import { Tabs, Tab } from 'material-ui/Tabs';
@@ -22,6 +23,7 @@ import ProblemSubmits from '../../../app/components/ProblemSubmits';
 import { submitsPropType } from '../../components/ProblemSubmits/constants';
 
 import makeSelectProblemPage from './selectors';
+import messages from './messages';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   appBar: {
@@ -73,10 +75,10 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
             textColor="accent"
             centered
           >
-            <Tab label="Treść" />
-            <Tab label="Przykłady" />
-            <Tab label="Zgłoszenia" />
-            <Tab label="Pytania" />
+            <Tab label={<FormattedMessage {...messages.content} />} />
+            <Tab label={<FormattedMessage {...messages.examples} />} />
+            <Tab label={<FormattedMessage {...messages.submits} />} />
+            <Tab label={<FormattedMessage {...messages.questions} />} />
           </Tabs>
         </div>
         <SwipeableViews animateHeight index={this.state.index} onChangeIndex={this.handleChangeIndex}>

@@ -10,7 +10,10 @@ import Paper from 'material-ui/Paper';
 import Layout from 'material-ui/Layout';
 import Text from 'material-ui/Text';
 import Divider from 'material-ui/Divider';
+import { FormattedMessage } from 'react-intl';
+
 import { examplesPropType } from './constants';
+import messages from './messages';
 
 const DataElement = (props) => (
   <Layout item xs={props.xs}>
@@ -29,13 +32,13 @@ DataElement.propTypes = {
 
 const createExample = (props) => ([
   <Layout container style={{ padding: 24 }}>
-    <DataElement xs={6} desc="Dla danych wejściowych:">
+    <DataElement xs={6} desc={<FormattedMessage {...messages.input} />}>
       {props.input}
     </DataElement>
-    <DataElement xs={6} desc="Oczekiwana odpowiedź to:">
+    <DataElement xs={6} desc={<FormattedMessage {...messages.result} />}>
       {props.output}
     </DataElement>
-    <DataElement xs={12} desc="Uzasadnienie:">
+    <DataElement xs={12} desc={<FormattedMessage {...messages.reason} />}>
       {props.reason}
     </DataElement>
   </Layout>,

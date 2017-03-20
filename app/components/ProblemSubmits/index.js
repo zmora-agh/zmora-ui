@@ -15,15 +15,19 @@ import {
   TableSortLabel,
 } from 'material-ui/Table';
 
+import { FormattedMessage } from 'react-intl';
+
 import IconButton from 'material-ui/IconButton';
 import FileFileDownload from '../../svg-icons/file-download';
 import EditorModeEdit from '../../svg-icons/mode-edit';
+
 import { submitsPropType } from './constants';
+import messages from './messages';
 
 const columnData = [
-  { id: 'id', label: 'Identifier' },
-  { id: 'created', label: 'Time' },
-  { id: 'status', label: 'Status' },
+  { id: 'id', label: <FormattedMessage {...messages.id} /> },
+  { id: 'created', label: <FormattedMessage {...messages.time} /> },
+  { id: 'status', label: <FormattedMessage {...messages.status} /> },
 ];
 
 class EnhancedTableHead extends Component {

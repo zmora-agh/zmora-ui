@@ -6,8 +6,12 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.ProblemView.header',
-    defaultMessage: 'This is the ProblemView component !',
+  input: {
+    id: 'app.components.ProblemView.input',
+    defaultMessage: 'Input description',
+  },
+  output: {
+    id: 'app.components.ProblemView.output',
+    defaultMessage: 'Output description',
   },
 });

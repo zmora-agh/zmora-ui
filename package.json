@@ -220,6 +220,7 @@
     "invariant": "2.2.2",
     "ip": "1.1.4",
     "jss": "^6.4.0",
+    "jss-theme-reactor": "^0.10.0",
     "lodash": "4.17.2",
     "material-ui": "^1.0.0-alpha.7",
     "minimist": "1.2.0",

@@ -12,18 +12,26 @@ export default defineMessages({
   },
   active: {
     id: 'app.components.StatusPanel.active',
-    defaultMessage: 'Active nodes: ',
+    defaultMessage: 'Aktywne maszyny: ',
   },
   logged: {
     id: 'app.components.StatusPanel.logged',
-    defaultMessage: 'Logged users: ',
+    defaultMessage: 'Zalogowani użytkownicy: ',
+  },
+  solved: {
+    id: 'app.components.StatusPanel.solved',
+    defaultMessage: 'Wyzwania ukończone dzisiaj: ',
+  },
+  solvedAll: {
+    id: 'app.components.StatusPanel.solvedAll',
+    defaultMessage: 'Wyzwania ukończone ogółem: ',
   },
   lastLogged: {
-    id: 'app.components.StatusPanel.logged',
-    defaultMessage: 'Last logged ',
+    id: 'app.components.StatusPanel.lastLogged',
+    defaultMessage: 'Ostatnio zalogowany ',
   },
   showMoreButton: {
     id: 'app.components.StatusPanel.showMoreButton',
-    defaultMessage: 'Show More',
+    defaultMessage: 'Więcej Statystyk',
   },
 });

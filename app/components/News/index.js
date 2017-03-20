@@ -51,9 +51,9 @@ export default class News extends Component {
     return (
       <div>
         <Card className={classes.card}>
-          <CardContent actionSpacing={false} style={{ margin: '0px', 'padding-bottom': '10px' }}>
-            <div style={{ display: 'flex', 'flex-direction': 'row' }}>
-              <Text><div>{this.props.date}</div><div style={{ 'font-size': '16px' }}>{this.props.title}</div></Text>
+          <CardContent actionSpacing={false} style={{ margin: '0px', paddingBottom: '10px' }}>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <Text><div>{this.props.date}</div><div style={{ fontSize: '16px' }}>{this.props.title}</div></Text>
               <div className={classes.flexGrow} />
               <IconButton
                 className={classnames(classes.expand, {
@@ -65,7 +65,7 @@ export default class News extends Component {
             </div>
           </CardContent>
           <Collapse in={this.state.expanded} transitionDuration="auto" unmountOnExit>
-            <CardContent style={{ margin: '0px', 'padding-top': '0px' }}>
+            <CardContent style={{ margin: '0px', paddingTop: '0px' }}>
               {this.props.children}
             </CardContent>
           </Collapse>

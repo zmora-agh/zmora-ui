@@ -14,6 +14,8 @@ import messages from './messages';
 
 export class ContestsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
+    if (this.props.children) return this.props.children;
+
     return (
       <div>
         <Helmet
@@ -23,14 +25,13 @@ export class ContestsPage extends React.PureComponent { // eslint-disable-line r
           ]}
         />
         <FormattedMessage {...messages.header} />
-        {this.props.children}
       </div>
     );
   }
 }
 
 ContestsPage.propTypes = {
-  children: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

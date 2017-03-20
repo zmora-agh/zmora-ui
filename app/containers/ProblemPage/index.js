@@ -14,6 +14,7 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import { connect } from 'react-redux';
 
+
 import ProblemView from '../../../app/components/ProblemView';
 import ProblemExampleData from '../../../app/components/ProblemExampleData';
 import ProblemSubmits from '../../../app/components/ProblemSubmits';
@@ -29,9 +30,22 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
     styleManager: customPropTypes.muiRequired,
   };
 
-  state = {
-    index: 0,
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: this.getIndex(props),
+    };
+  }
+
+  getIndex(props) {
+    switch (props.tab) {
+      case 'submits':
+        return 2;
+      default:
+        return 0;
+    }
+  }
 
   handleChange = (event, index) => {
     this.setState({ index });
@@ -42,6 +56,8 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
   };
 
   render() {
+    if (this.props.children) return this.props.children;
+
     const classes = this.context.styleManager.render(styleSheet);
 
     return (
@@ -71,7 +87,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 }
 
 ProblemPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  children: PropTypes.object,
 };
 
 

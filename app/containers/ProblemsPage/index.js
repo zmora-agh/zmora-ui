@@ -12,6 +12,8 @@ import messages from './messages';
 
 export class ProblemsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
+    if (this.props.children) return this.props.children;
+
     return (
       <div>
         <Helmet
@@ -27,7 +29,7 @@ export class ProblemsPage extends React.PureComponent { // eslint-disable-line r
 }
 
 ProblemsPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  children: PropTypes.object,
 };
 
 

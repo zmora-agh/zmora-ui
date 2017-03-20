@@ -28,7 +28,7 @@ function Navigation(props) {
     <List {...props} >
       <NavListItem to="/" icon={<Home />} title={<FormattedMessage {...messagesHomePage.title} />} />
       <NavListItem to="/contests" icon={<Assignment />} title={<FormattedMessage {...messagesContestsPage.title} />} />
-      <NavListItem to="/problem" icon={<Announcement />} title={<FormattedMessage {...messagesProblemPage.title} />} />
+      <NavListItem to="/contests/2/problems/30" icon={<Announcement />} title={<FormattedMessage {...messagesProblemPage.title} />} />
       <NavListItem to="/about" icon={<ActionInfo />} title={<FormattedMessage {...messagesAboutPage.title} />} />
     </List>
   );

@@ -4,6 +4,8 @@
 // about the code splitting business
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 
+import withProps from 'recompose/withProps';
+
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
 };
@@ -76,8 +78,8 @@ export default function createRoutes(store) {
                   path: ':problem_id',
                   name: 'Problem',
                   getComponent(location, cb) {
-                    import('containers/ProblemContents')
-                      .then(loadModule(cb))
+                    import('containers/ProblemPage')
+                      .then((component) => cb(null, withProps(() => ({ tab: 'content' }))(component.default)))
                       .catch(errorLoading);
                   },
                   childRoutes: [
@@ -85,8 +87,8 @@ export default function createRoutes(store) {
                       path: 'submits',
                       name: 'Submits',
                       getComponent(location, cb) {
-                        import('containers/ProblemSubmitsPage')
-                          .then(loadModule(cb))
+                        import('containers/ProblemPage')
+                          .then((component) => cb(null, withProps(() => ({ tab: 'submits' }))(component.default)))
                           .catch(errorLoading);
                       },
                       childRoutes: [
@@ -129,14 +131,6 @@ export default function createRoutes(store) {
       name: 'About Us',
       getComponent(location, cb) {
         import('containers/AboutPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
-      },
-    }, {
-      path: '/problem',
-      name: 'problemPage',
-      getComponent(location, cb) {
-        import('containers/ProblemPage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },

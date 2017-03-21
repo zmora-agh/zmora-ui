@@ -35,6 +35,11 @@ const styleSheet = createStyleSheet('App', () => ({
     flexDirection: 'column',
     minHeight: '100vh',
   },
+  contentWrapper: {
+    marginTop: 16,
+    marginBottom: 16,
+    marginLeft: 8,
+  },
   rightMenu: {
     position: 'fixed',
     right: 0,

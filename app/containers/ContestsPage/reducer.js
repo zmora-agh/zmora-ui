@@ -5,16 +5,28 @@
  */
 
 import { fromJS } from 'immutable';
-import {
-  DEFAULT_ACTION,
-} from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  contests: [
+    {
+      id: '1.1.1',
+      name: 'PWiR',
+      date: '27.05.2017 16:00',
+      description: 'To jest zadanie z PWiR',
+      owner: 'Piotr Matyasik',
+    },
+    {
+      id: '1.1.2',
+      name: 'Języki i metody programowania 2',
+      date: '27.05.2017 16:00',
+      description: 'To jest zadanie z C++',
+      owner: 'Krzysztof Kutt',
+    },
+  ],
+});
 
 function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
     default:
       return state;
   }

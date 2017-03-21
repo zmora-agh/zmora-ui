@@ -4,39 +4,24 @@
  *
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
-import { createStructuredSelector } from 'reselect';
+import { CONTEST_TYPE } from './constants';
 import makeSelectContestsPage from './selectors';
-import messages from './messages';
+import ContestsTable from '../../components/ContestsTable';
 
-export class ContestsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    if (this.props.children) return this.props.children;
+const ContestsPage = (props) => {
+  if (props.children) return props.children;
 
-    return (
-      <div>
-        <Helmet
-          title="ContestsPage"
-          meta={[
-            { name: 'description', content: 'Description of ContestsPage' },
-          ]}
-        />
-        <FormattedMessage {...messages.header} />
-      </div>
-    );
-  }
-}
-
-ContestsPage.propTypes = {
-  children: PropTypes.object.isRequired,
+  return (<ContestsTable contests={props.contests} />);
 };
 
-const mapStateToProps = createStructuredSelector({
-  ContestsPage: makeSelectContestsPage(),
-});
+ContestsPage.propTypes = {
+  contests: React.PropTypes.arrayOf(CONTEST_TYPE),
+  children: React.PropTypes.object,
+};
+
+const mapStateToProps = makeSelectContestsPage;
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -12,6 +12,8 @@ import messages from './messages';
 
 export class ContestSummaryPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
+    if (this.props.children) return this.props.children;
+
     return (
       <div>
         <Helmet
@@ -21,14 +23,13 @@ export class ContestSummaryPage extends React.PureComponent { // eslint-disable-
           ]}
         />
         <FormattedMessage {...messages.header} />
-        {this.props.children}
       </div>
     );
   }
 }
 
 ContestSummaryPage.propTypes = {
-  children: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
 };
 
 

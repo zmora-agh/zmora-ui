@@ -102,7 +102,7 @@ class AppToolbar extends React.Component {
               onBlur={this.toggleSearch}
               onMouseMove={this.moveRipple}
             />
-            <ServerTime style={this.state.inSearch ? { visibility: 'hidden' } : {}} />
+            <ServerTime style={this.state.inSearch ? { display: 'none' } : {}} />
             <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
           </Layout>
         </Toolbar>

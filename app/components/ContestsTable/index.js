@@ -29,6 +29,7 @@ const styleSheet = createStyleSheet('zmoraContestsTable', () => ({
     textOverflow: 'ellipsis',
   },
   cardHidden: {
+	backgroundColor: 'inherit',
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '98%',
@@ -36,6 +37,7 @@ const styleSheet = createStyleSheet('zmoraContestsTable', () => ({
     transition: '0.5s',
   },
   cardExpanded: {
+	backgroundColor: 'inherit',
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '100%',
@@ -111,7 +113,7 @@ export class ContestsTable extends React.PureComponent {
     const classes = this.context.styleManager.render(styleSheet);
     const rows = this.props.contests.map((child) => this.createTableRow(child, classes));
     return (
-      <List style={{ width: '100%', backgroundColor: 'inherit' }}>
+      <List style={{ width: '100%', backgroundColor: '#fafafa' }}>
         {rows}
       </List>
     );

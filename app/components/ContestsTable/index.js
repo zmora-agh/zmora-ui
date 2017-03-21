@@ -6,7 +6,6 @@
 import React from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
-import { Paper } from 'material-ui/Paper';
 import { Text } from 'material-ui/Text';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import { createStyleSheet } from 'jss-theme-reactor';
@@ -112,11 +111,9 @@ export class ContestsTable extends React.PureComponent {
     const classes = this.context.styleManager.render(styleSheet);
     const rows = this.props.contests.map((child) => this.createTableRow(child, classes));
     return (
-      <Paper>
-        <List style={{ width: '100%' }}>
-          {rows}
-        </List>
-      </Paper>
+      <List style={{ width: '100%', backgroundColor: 'inherit' }}>
+        {rows}
+      </List>
     );
   }
 }

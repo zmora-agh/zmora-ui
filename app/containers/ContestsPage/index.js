@@ -10,10 +10,15 @@ import { CONTEST_TYPE } from './constants';
 import makeSelectContestsPage from './selectors';
 import ContestsTable from '../../components/ContestsTable';
 
-const ContestsPage = (props) => (<ContestsTable contests={props.contests} />);
+const ContestsPage = (props) => {
+  if (props.children) return props.children;
+
+  return (<ContestsTable contests={props.contests} />);
+};
 
 ContestsPage.propTypes = {
   contests: React.PropTypes.arrayOf(CONTEST_TYPE),
+  children: React.PropTypes.object,
 };
 
 const mapStateToProps = makeSelectContestsPage;

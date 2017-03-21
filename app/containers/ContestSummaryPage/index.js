@@ -29,7 +29,7 @@ export class ContestSummaryPage extends React.PureComponent { // eslint-disable-
 }
 
 ContestSummaryPage.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.object,
 };
 
 

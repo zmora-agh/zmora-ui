@@ -99,9 +99,7 @@ export class ContestsTable extends React.PureComponent {
           </CardContent>
           <Collapse in={isExpanded} transitionDuration={500}>
             <CardContent>
-              <Text>
-                Drogi Marszałku, Wysoka Izbo. PKB rośnie. Różnorakie i znaczenia tych problemów nie zapewni iż zakup nowego sprzętu pomaga w większym stopniu tworzenie kierunków rozwoju. Praca wre. Obywatelu, dokończenie aktualnych projektów pomaga w większym stopniu tworzenie modelu rozwoju. Każdy już mówiłem jasne jest ważne zadanie w tym zakresie spełnia ważne zadanie.
-              </Text>
+              <Text>{row.description}</Text>
             </CardContent>
           </Collapse>
         </Card>

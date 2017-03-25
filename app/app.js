@@ -20,6 +20,7 @@ import 'sanitize.css/sanitize.css';
 // Material-UI with dependencies
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import '!style-loader!css-loader!./fonts/index.css';
 
 // Import root app
 import App from 'containers/App';

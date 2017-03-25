@@ -59,8 +59,8 @@
   src: url('./Roboto-ThinItalic.eot?#iefix') format('embedded-opentype'),
   url('./Roboto-ThinItalic.woff') format('woff'),
   url('./Roboto-ThinItalic.ttf') format('truetype'),
-  url('./Roboto-ThinItalic.svg#RobotoThinItalic') format('svg'); (under the Apache Software License).
-font-weight: 200;
+  url('./Roboto-ThinItalic.svg#RobotoThinItalic') format('svg');
+  font-weight: 200;
   font-style: italic;
 }
 

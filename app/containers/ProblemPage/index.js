@@ -15,14 +15,11 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import { connect } from 'react-redux';
 
-import ProblemView from '../../../app/components/ProblemView';
-import { problemContentPropTypes } from '../../components/ProblemView/constants';
-import ProblemExampleData from '../../../app/components/ProblemExampleData';
-import { examplesPropType } from '../../components/ProblemExampleData/constants';
-import ProblemSubmits from '../../../app/components/ProblemSubmits';
-import { submitsPropType } from '../../components/ProblemSubmits/constants';
+import ProblemViewPage from '../ProblemViewPage';
+import ProblemExampleDataPage from '../ProblemExampleDataPage';
 
-import makeSelectProblemPage from './selectors';
+import ProblemSubmits from '../../../app/components/ProblemSubmits';
+
 import messages from './messages';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
@@ -82,9 +79,9 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           </Tabs>
         </div>
         <SwipeableViews animateHeight index={this.state.index} onChangeIndex={this.handleChangeIndex}>
-          <ProblemView {...this.props.content} />
-          <ProblemExampleData examples={this.props.examples} />
-          <ProblemSubmits submits={this.props.submits} />
+          <ProblemViewPage contestId={1} problemId={1} />
+          <ProblemExampleDataPage contestId={1} problemId={1} />
+          <ProblemSubmits submits={[]} />
           <div>bsd</div>
         </SwipeableViews>
       </Paper>
@@ -94,9 +91,6 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 
 ProblemPage.propTypes = {
   children: PropTypes.node,
-  content: React.PropTypes.shape(problemContentPropTypes),
-  examples: examplesPropType,
-  submits: submitsPropType,
 };
 
 
@@ -106,4 +100,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(makeSelectProblemPage, mapDispatchToProps)(ProblemPage);
+export default connect(mapDispatchToProps)(ProblemPage);

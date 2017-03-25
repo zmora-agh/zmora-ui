@@ -14,8 +14,8 @@ export default defineMessages({
     id: 'app.components.ProblemExampleData.result',
     defaultMessage: 'Expected result:',
   },
-  reason: {
-    id: 'app.components.ProblemExampleData.reason',
+  explanation: {
+    id: 'app.components.ProblemExampleData.explanation',
     defaultMessage: 'Explanation:',
   },
 });

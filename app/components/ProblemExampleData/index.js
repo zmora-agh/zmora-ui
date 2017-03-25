@@ -36,10 +36,10 @@ const createExample = (props) => ([
       {props.input}
     </DataElement>
     <DataElement xs={6} desc={<FormattedMessage {...messages.result} />}>
-      {props.output}
+      {props.result}
     </DataElement>
-    <DataElement xs={12} desc={<FormattedMessage {...messages.reason} />}>
-      {props.reason}
+    <DataElement xs={12} desc={<FormattedMessage {...messages.explanation} />}>
+      {props.explanation}
     </DataElement>
   </Layout>,
   <Divider />,

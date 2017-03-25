@@ -29,7 +29,7 @@ const styleSheet = createStyleSheet('zmoraContestsTable', () => ({
     textOverflow: 'ellipsis',
   },
   cardHidden: {
-	backgroundColor: 'inherit',
+    backgroundColor: 'inherit',
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '98%',
@@ -37,7 +37,7 @@ const styleSheet = createStyleSheet('zmoraContestsTable', () => ({
     transition: '0.5s',
   },
   cardExpanded: {
-	backgroundColor: 'inherit',
+    backgroundColor: 'inherit',
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '100%',

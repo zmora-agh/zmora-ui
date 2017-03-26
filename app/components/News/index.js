@@ -51,7 +51,7 @@ export default class News extends Component {
     return (
       <div>
         <Card className={classes.card}>
-          <CardContent actionSpacing={false} style={{ margin: '0px', paddingBottom: '10px' }}>
+          <CardContent actionSpacing={false} style={{ margin: '0px', paddingBottom: '10px', cursor: 'pointer' }} onClick={this.handleExpandClick}>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               <Text><div>{this.props.date}</div><div style={{ fontSize: '16px' }}>{this.props.title}</div></Text>
               <div className={classes.flexGrow} />
@@ -59,7 +59,6 @@ export default class News extends Component {
                 className={classnames(classes.expand, {
                   [classes.expandOpen]: this.state.expanded,
                 })}
-                onClick={this.handleExpandClick}
               ><HardwareKeyboardArrowDown />
               </IconButton>
             </div>

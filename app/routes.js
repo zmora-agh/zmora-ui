@@ -84,15 +84,24 @@ export default function createRoutes(store) {
                       import('containers/ProblemViewPage/sagas'),
                       import('containers/ProblemExampleDataPage/reducer'),
                       import('containers/ProblemExampleDataPage/sagas'),
+                      import('containers/ProblemSubmitsPage/reducer'),
+                      import('containers/ProblemSubmitsPage/sagas'),
                       import('containers/ProblemPage'),
                     ]);
 
-                    importModules.then(([reducer, viewPageReducer, viewPageSagas, exampleDataReducer, exampleDataSagas, component]) => {
+                    importModules.then(([
+                      reducer,
+                      viewPageReducer, viewPageSagas,
+                      exampleDataReducer, exampleDataSagas,
+                      submitsReducer, submitsSagas,
+                      component]) => {
                       injectReducer('problemPage', reducer.default);
                       injectReducer('problemViewPage', viewPageReducer.default);
                       injectReducer('problemExampleDataPage', exampleDataReducer.default);
+                      injectReducer('problemSubmitsPage', submitsReducer.default);
                       injectSagas(viewPageSagas.default);
                       injectSagas(exampleDataSagas.default);
+                      injectSagas(submitsSagas.default);
                       cb(null, withProps(() => ({ tab: 'content' }))(component.default));
                     });
 

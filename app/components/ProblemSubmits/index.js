@@ -26,7 +26,7 @@ import messages from './messages';
 
 const columnData = [
   { id: 'id', label: <FormattedMessage {...messages.id} /> },
-  { id: 'created', label: <FormattedMessage {...messages.time} /> },
+  { id: 'date', label: <FormattedMessage {...messages.time} /> },
   { id: 'status', label: <FormattedMessage {...messages.status} /> },
 ];
 
@@ -104,7 +104,7 @@ export default class ProblemSubmits extends Component { // eslint-disable-line r
           {data.map((n) =>
             <TableRow key={n.id}>
               <TableCell>{n.id}</TableCell>
-              <TableCell>{n.created}</TableCell>
+              <TableCell>{n.date}</TableCell>
               <TableCell>{n.status}</TableCell>
               <TableCell>
                 <IconButton><EditorModeEdit /></IconButton>

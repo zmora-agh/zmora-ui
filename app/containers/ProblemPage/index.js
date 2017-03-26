@@ -17,8 +17,7 @@ import { connect } from 'react-redux';
 
 import ProblemViewPage from '../ProblemViewPage';
 import ProblemExampleDataPage from '../ProblemExampleDataPage';
-
-import ProblemSubmits from '../../../app/components/ProblemSubmits';
+import ProblemSubmitsPage from '../ProblemSubmitsPage';
 
 import messages from './messages';
 
@@ -32,7 +31,6 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
   };
-
 
   constructor(props) {
     super(props);
@@ -81,7 +79,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
         <SwipeableViews animateHeight index={this.state.index} onChangeIndex={this.handleChangeIndex}>
           <ProblemViewPage contestId={1} problemId={1} />
           <ProblemExampleDataPage contestId={1} problemId={1} />
-          <ProblemSubmits submits={[]} />
+          <ProblemSubmitsPage contestId={1} problemId={1} />
           <div>bsd</div>
         </SwipeableViews>
       </Paper>
@@ -92,7 +90,6 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 ProblemPage.propTypes = {
   children: PropTypes.node,
 };
-
 
 function mapDispatchToProps(dispatch) {
   return {

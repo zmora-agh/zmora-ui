@@ -223,6 +223,7 @@
     "jss": "^6.4.0",
     "jss-theme-reactor": "^0.10.0",
     "lodash": "4.17.2",
+    "markdown-react-js": "^0.3.0",
     "material-ui": "^1.0.0-alpha.7",
     "minimist": "1.2.0",
     "react": "15.4.2",

@@ -81,7 +81,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
             <Tab label={<FormattedMessage {...messages.questions} />} />
           </Tabs>
         </div>
-        <SwipeableViews animateHeight index={this.state.index} onChangeIndex={this.handleChangeIndex}>
+        <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex}>
           <ProblemView {...this.props.content} />
           <ProblemExampleData examples={this.props.examples} />
           <ProblemSubmits submits={this.props.submits} />

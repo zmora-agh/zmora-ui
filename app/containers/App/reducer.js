@@ -32,7 +32,8 @@ function contestsPageReducer(state = initialState, action) {
     case GET_CURRENT_USER_SUCCESS:
       return state.set('user', action.user);
     case GET_CONTESTS_SUCCESS: {
-      const contestsMap = fromJS(action.contests).reduce((result, contest) => result.set(contest.get('id'), contest), Map());
+      const contestsMap = fromJS(action.contests)
+        .reduce((result, contest) => result.set(contest.get('id'), contest), Map());
       return state.mergeDeep({ contests: contestsMap });
     }
     case GET_CURRENT_TIME_SUCCESS: {

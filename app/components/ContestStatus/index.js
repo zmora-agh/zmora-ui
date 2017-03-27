@@ -14,7 +14,8 @@ import messages from './messages';
 function prepareContestStatus(serverTime, enrolEndTime, activeEndTime) {
   const endTime = serverTime.isAfter(enrolEndTime) ? activeEndTime : enrolEndTime;
   const enrolText = serverTime.isBefore(enrolEndTime) ? <FormattedMessage {...messages.enrolmentTo} /> : null;
-  const activeText = serverTime.isBefore(activeEndTime) ? <FormattedMessage {...messages.activeTo} /> : <FormattedMessage {...messages.endedOn} />;
+  const activeText = serverTime.isBefore(activeEndTime) ? <FormattedMessage {...messages.activeTo} />
+    : <FormattedMessage {...messages.endedOn} />;
   const text = enrolText !== null ? enrolText : activeText;
   const timeFormat = endTime.isSame(serverTime, 'days') ? endTime.format('HH:mm') : endTime.format('YYYY-MM-DD');
 

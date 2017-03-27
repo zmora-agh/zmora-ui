@@ -13,6 +13,7 @@ import ContestsTable from '../../components/ContestsTable';
 class ContestsPage extends React.PureComponent {
   static propTypes = {
     contests: React.PropTypes.object,
+    offset: React.PropTypes.number.isRequired,
     children: React.PropTypes.object,
     dispatch: React.PropTypes.func.isRequired,
   };
@@ -24,7 +25,7 @@ class ContestsPage extends React.PureComponent {
   render() {
     if (this.props.children) return this.props.children;
 
-    return (<ContestsTable contests={this.props.contests} />);
+    return (<ContestsTable contests={this.props.contests} offset={this.props.offset} />);
   }
 }
 

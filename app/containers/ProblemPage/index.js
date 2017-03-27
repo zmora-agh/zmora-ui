@@ -16,7 +16,7 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 import { connect } from 'react-redux';
 
 import ProblemViewPage from '../ProblemViewPage';
-import ProblemExampleDataPage from '../ProblemExampleDataPage';
+import ProblemExamplesPage from '../ProblemExamplesPage';
 import ProblemSubmitsPage from '../ProblemSubmitsPage';
 
 import messages from './messages';
@@ -78,7 +78,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
         </div>
         <SwipeableViews animateHeight index={this.state.index} onChangeIndex={this.handleChangeIndex}>
           <ProblemViewPage contestId={1} problemId={1} />
-          <ProblemExampleDataPage contestId={1} problemId={1} />
+          <ProblemExamplesPage contestId={1} problemId={1} />
           <ProblemSubmitsPage contestId={1} problemId={1} />
           <div>bsd</div>
         </SwipeableViews>

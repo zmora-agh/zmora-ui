@@ -1,6 +1,6 @@
 /*
  *
- * ProblemExampleDataPage reducer
+ * ProblemExamplesPage reducer
  *
  */
 

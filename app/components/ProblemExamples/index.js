@@ -1,6 +1,6 @@
 /**
 *
-* ProblemExampleData
+* ProblemExamples
 *
 */
 
@@ -45,7 +45,7 @@ const createExample = (props) => ([
   <Divider />,
 ]);
 
-function ProblemExampleData(props) {
+function ProblemExamples(props) {
   return (
     <div style={{ overflow: 'hidden' }}>
       {props.examples.map(createExample)}
@@ -53,8 +53,8 @@ function ProblemExampleData(props) {
   );
 }
 
-ProblemExampleData.propTypes = {
+ProblemExamples.propTypes = {
   examples: examplesPropType,
 };
 
-export default ProblemExampleData;
+export default ProblemExamples;

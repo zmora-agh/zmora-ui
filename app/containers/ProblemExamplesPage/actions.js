@@ -1,6 +1,6 @@
 /*
  *
- * ProblemExampleDataPage actions
+ * ProblemExamplesPage actions
  *
  */
 

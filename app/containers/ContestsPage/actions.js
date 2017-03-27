@@ -6,7 +6,7 @@
 
 import {
   GET_CONTESTS,
-  GET_CONTESTS_SUCCESS
+  GET_CONTESTS_SUCCESS,
 } from './constants';
 
 export function getContests() {

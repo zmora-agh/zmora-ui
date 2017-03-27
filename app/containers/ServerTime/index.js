@@ -4,16 +4,18 @@
 *
 */
 
-import React from 'react';
-
-import customPropTypes from 'material-ui/utils/customPropTypes';
-
-import IconButton from 'material-ui/IconButton';
-import Chip from 'material-ui/Chip';
-import Text from 'material-ui/Text';
-
 import { createStyleSheet } from 'jss-theme-reactor';
 
+import Chip from 'material-ui/Chip';
+import IconButton from 'material-ui/IconButton';
+import Text from 'material-ui/Text';
+import customPropTypes from 'material-ui/utils/customPropTypes';
+
+import moment from 'moment';
+import React from 'react';
+import { connect } from 'react-redux';
+
+import { makeSelectTime } from '../App/selectors';
 import TimeIcon from '../../svg-icons/access-time';
 
 
@@ -26,6 +28,7 @@ const styleSheet = createStyleSheet('zmoraServerTime', () => ({
 class ServerTime extends React.Component {
   static propTypes = {
     style: React.PropTypes.object,
+    offset: React.PropTypes.number.isRequired,
   };
 
   static contextTypes = {
@@ -36,6 +39,19 @@ class ServerTime extends React.Component {
     super(props);
     this.state = { showTime: false };
     this.toggleTime = this.toggleTime.bind(this);
+    this.timer = null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.showTime !== prevState.showTime) {
+      if (this.timer !== null) {
+        clearInterval(this.timer);
+      }
+
+      if (this.state.showTime) {
+        this.timer = setInterval(() => this.forceUpdate(), 1000);
+      }
+    }
   }
 
   toggleTime() {
@@ -52,6 +68,9 @@ class ServerTime extends React.Component {
     };
 
     if (this.state.showTime) {
+      const time = moment();
+      time.add(this.props.offset, 'seconds');
+
       return (
         <Chip
           onClick={this.toggleTime}
@@ -59,7 +78,7 @@ class ServerTime extends React.Component {
           avatar={<TimeIcon />}
           label={
             <Text colorInherit style={{ marginRight: 8 }} type="body2">
-              12:32:20
+              {time.format('HH:mm:ss')}
             </Text>
           }
         />
@@ -74,4 +93,4 @@ class ServerTime extends React.Component {
   }
 }
 
-export default ServerTime;
+export default connect(makeSelectTime)(ServerTime);

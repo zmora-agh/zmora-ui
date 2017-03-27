@@ -1,11 +1,27 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
+import { getContestsURL } from '../../urls';
+import { bootstrap } from '../../utils/sagas';
+import { getContestsSuccess } from './actions';
+import { GET_CONTESTS } from './constants';
 
-// Individual exports for testing
-export function* defaultSaga() {
-  // See example in containers/HomePage/sagas.js
+function fetchContests() {
+  return fetch(getContestsURL(), {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  }).then((response) => response.json());
 }
 
-// All sagas to be loaded
-export default [
-  defaultSaga,
-];
+function* getContests() {
+  const contests = yield call(fetchContests);
+  yield put(getContestsSuccess(contests));
+}
+
+function* getContestsSaga() {
+  yield takeLatest(GET_CONTESTS, getContests);
+}
+
+export default bootstrap([
+  getContestsSaga,
+]);

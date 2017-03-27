@@ -13,3 +13,6 @@ export const CONTEST_TYPE = React.PropTypes.shape({
   owner: React.PropTypes.string,
   childContests: React.PropTypes.array,
 });
+
+export const GET_CONTESTS = 'app/ContestsPage/GET_CONTESTS';
+export const GET_CONTESTS_SUCCESS = 'app/ContestsPage/GET_CONTESTS_SUCCESS';

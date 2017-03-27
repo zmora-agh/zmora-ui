@@ -18,7 +18,7 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import Search from '../Search';
-import ServerTime from '../ServerTime';
+import ServerTime from '../../containers/ServerTime';
 import Ripple from '../../components/Ripple';
 
 import ArrowIcon from '../../svg-icons/keyboard-arrow-right';

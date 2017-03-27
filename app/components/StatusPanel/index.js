@@ -56,14 +56,30 @@ function StatusPanel(props, context) {
       </Text>
 
       <Text component="div" className={classes.textStyle}>
-        <StatusElement icon={<Laptop className={classes.iconStyle} />} title={<FormattedMessage {...messages.active} />} data="3" />
-        <StatusElement icon={<Person className={classes.iconStyle} />} title={<FormattedMessage {...messages.logged} />} data="54" />
-        <StatusElement icon={<Solved className={classes.iconStyle} />} title={<FormattedMessage {...messages.solved} />} data="17" />
-        <StatusElement icon={<SolvedAll className={classes.iconStyle} />} title={<FormattedMessage {...messages.solvedAll} />} data="255" />
+        <StatusElement
+          icon={<Laptop className={classes.iconStyle} />}
+          title={<FormattedMessage {...messages.active} />} data="3"
+        />
+        <StatusElement
+          icon={<Person className={classes.iconStyle} />}
+          title={<FormattedMessage {...messages.logged} />} data="54"
+        />
+        <StatusElement
+          icon={<Solved className={classes.iconStyle} />}
+          title={<FormattedMessage {...messages.solved} />}
+          data="17"
+        />
+        <StatusElement
+          icon={<SolvedAll className={classes.iconStyle} />}
+          title={<FormattedMessage {...messages.solvedAll} />}
+          data="255"
+        />
         <StatusElement title={<FormattedMessage {...messages.lastLogged} />} data={<b>nologin</b>} />
       </Text>
 
-      <Button compact primary className={classes.showMoreButtonStyle}><FormattedMessage {...messages.showMoreButton} /></Button>
+      <Button compact primary className={classes.showMoreButtonStyle}>
+        <FormattedMessage {...messages.showMoreButton} />
+      </Button>
     </div>
   );
 }

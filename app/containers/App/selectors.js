@@ -29,8 +29,20 @@ const makeSelectUser = () => createSelector(
   (substate) => substate.get('user')
 );
 
+const makeSelectContests = () => createSelector(
+  selectAppDomain(),
+  (substate) => substate.get('contests').toJS()
+);
+
+const makeSelectTime = () => createSelector(
+  selectAppDomain(),
+  (substate) => substate.get('time').toJS()
+);
+
 export {
   makeSelectApp,
   makeSelectUser,
   makeSelectLocationState,
+  makeSelectContests,
+  makeSelectTime,
 };

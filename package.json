@@ -135,7 +135,10 @@
       "jsx-a11y/mouse-events-have-key-events": 2,
       "jsx-a11y/role-has-required-aria-props": 2,
       "jsx-a11y/role-supports-aria-props": 2,
-      "max-len": 0,
+      "max-len": [
+        2,
+        { "code": 120 }
+      ],
       "newline-per-chained-call": 0,
       "no-confusing-arrow": 0,
       "no-console": 1,
@@ -226,6 +229,7 @@
     "material-ui": "^1.0.0-alpha.7",
     "mathjax": "^2.7.0",
     "minimist": "1.2.0",
+    "moment": "^2.18.1",
     "react": "15.4.2",
     "react-breadcrumbs": "^1.5.2",
     "react-dom": "15.4.2",

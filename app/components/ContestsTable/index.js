@@ -132,7 +132,7 @@ export class ContestsTable extends React.PureComponent {
 
   render() {
     const classes = this.context.styleManager.render(styleSheet);
-    const rows = this.props.contests.valueSeq().map((child) => this.createTableRow(child, classes));
+    const rows = Object.keys(this.props.contests).map((key) => this.createTableRow(this.props.contests[key], classes));
     return (
       <List style={{ width: '100%', backgroundColor: '#fafafa' }}>
         {rows}

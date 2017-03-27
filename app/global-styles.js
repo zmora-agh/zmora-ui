@@ -1,4 +1,5 @@
 import { injectGlobal } from 'styled-components';
+import 'roboto-fontface/css/roboto/roboto-fontface.css';
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`

@@ -4,25 +4,34 @@
 *
 */
 import React from 'react';
+import moment from 'moment';
+import { FormattedMessage } from 'react-intl';
 import { List, ListItem } from 'material-ui/List';
 import Collapse from 'material-ui/transitions/Collapse';
 import { Text } from 'material-ui/Text';
+import { Layout } from 'material-ui/Layout';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import { createStyleSheet } from 'jss-theme-reactor';
 import { Card, CardContent } from 'material-ui/Card';
 import KeyboardArrowUp from '../../svg-icons/keyboard-arrow-up';
 import KeyboardArrowDown from '../../svg-icons/keyboard-arrow-down';
+import ContestStatus from '../ContestStatus';
+import TitledTextLayout from '../TitledTextLayout';
+import ContestButton from '../ContestButton';
+import messages from './messages';
+
 
 const styleSheet = createStyleSheet('zmoraContestsTable', () => ({
   cardContentRow: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    cursor: 'pointer',
   },
   columnText: {
     paddingLeft: 10,
     paddingRight: 10,
-    flex: 0.2,
+    flex: 0.25,
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -89,16 +98,31 @@ export class ContestsTable extends React.PureComponent {
     return (
       <ListItem key={row.id} className={listItemClass}>
         <Card className={cardClass}>
-          <CardContent className={classes.cardContentRow} onClick={onClick} >
+          <CardContent className={classes.cardContentRow} onClick={onClick}>
             <Text className={classes.columnText}>{expandedIcon} {row.name}</Text>
             <Text className={classes.columnText}>{row.description}</Text>
             <Text className={classes.columnText}>{row.owner}</Text>
-            <Text className={classes.columnText}>Zapisy do</Text>
-            <Text className={classes.columnText}>{row.date}</Text>
+            <Text className={classes.columnText}><ContestStatus contest={row} time={moment()} /></Text>
           </CardContent>
           <Collapse in={isExpanded} transitionDuration={500}>
             <CardContent>
-              <Text>{row.description}</Text>
+              <Layout container style={{ padding: 10 }}>
+                <TitledTextLayout xs={12} desc={<FormattedMessage {...messages.description} />}>
+                  {row.description}
+                </TitledTextLayout>
+                <TitledTextLayout xs={6} desc={<FormattedMessage {...messages.owners} />}>
+                  {row.owner}
+                </TitledTextLayout>
+                <TitledTextLayout xs={3} desc={<FormattedMessage {...messages.startDate} />}>
+                  {moment(row.start).add(row.signupDuration, 'seconds').format('YYYY-MM-DD HH:mm')}
+                </TitledTextLayout>
+                <TitledTextLayout xs={3} desc={<FormattedMessage {...messages.endDate} />}>
+                  {moment(row.start).add(row.signupDuration + row.duration, 'seconds').format('YYYY-MM-DD HH:mm')}
+                </TitledTextLayout>
+                <Layout item xs={1}>
+                  <ContestButton contest={row} time={moment()} />
+                </Layout>
+              </Layout>
             </CardContent>
           </Collapse>
         </Card>

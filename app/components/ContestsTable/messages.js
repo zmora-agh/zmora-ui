@@ -10,24 +10,20 @@ export default defineMessages({
     id: 'app.components.ContestsTable.header',
     defaultMessage: 'This is the ContestsTable component !',
   },
-  name: {
-    id: 'app.components.ContestsTable.name',
-    defaultMessage: 'Name',
-  },
   description: {
     id: 'app.components.ContestsTable.description',
     defaultMessage: 'Description',
   },
-  date: {
-    id: 'app.components.ContestsTable.date',
-    defaultMessage: 'Date',
+  owners: {
+    id: 'app.components.ContestsTable.owners',
+    defaultMessage: 'Owners',
   },
-  status: {
-    id: 'app.components.ContestsTable.status',
-    defaultMessage: 'Status',
+  startDate: {
+    id: 'app.components.ContestsTable.startDate',
+    defaultMessage: 'Start date',
   },
-  owner: {
-    id: 'app.components.ContestsTable.owner',
-    defaultMessage: 'Owner',
+  endDate: {
+    id: 'app.components.ContestsTable.endDate',
+    defaultMessage: 'End date',
   },
 });

@@ -10,12 +10,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  problem: {
-    problem: {
-      name: '',
-      description: '',
-    },
-  },
+  problem: {},
 });
 
 function problemViewPageReducer(state = initialState, action) {

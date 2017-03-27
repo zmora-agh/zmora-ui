@@ -27,6 +27,9 @@ const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   },
 }));
 
+const iterableProps = (elems, props, indexedProp) =>
+  elems.map((elem, index) => React.createElement(elem, Object.assign({}, props, indexedProp(index)), {}));
+
 export class ProblemPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
@@ -56,6 +59,17 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
     this.setState({ index });
   };
 
+  ids = {
+    contestId: this.props.params.contest_id,
+    problemId: this.props.params.problem_id,
+  };
+
+  tabs = [
+    ProblemViewPage,
+    ProblemExamplesPage,
+    ProblemSubmitsPage,
+  ];
+
   render() {
     if (this.props.children) return this.props.children;
 
@@ -76,11 +90,9 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
             <Tab label={<FormattedMessage {...messages.questions} />} />
           </Tabs>
         </div>
-        <SwipeableViews animateHeight index={this.state.index} onChangeIndex={this.handleChangeIndex}>
-          <ProblemViewPage contestId={1} problemId={1} />
-          <ProblemExamplesPage contestId={1} problemId={1} />
-          <ProblemSubmitsPage contestId={1} problemId={1} />
-          <div>bsd</div>
+        <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex}>
+          {iterableProps(this.tabs, this.ids, (index) => ({ fetch: this.state.index === index }))}
+          <div>empty questions page</div>
         </SwipeableViews>
       </Paper>
     );
@@ -88,6 +100,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 }
 
 ProblemPage.propTypes = {
+  params: React.PropTypes.array,
   children: PropTypes.node,
 };
 

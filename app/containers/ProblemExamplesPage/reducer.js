@@ -10,7 +10,6 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  problemExamples: [],
 });
 
 function problemExampleDataPageReducer(state = initialState, action) {

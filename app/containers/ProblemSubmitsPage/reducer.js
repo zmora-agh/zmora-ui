@@ -10,7 +10,6 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  submits: [],
 });
 
 function problemSubmitsPageReducer(state = initialState, action) {

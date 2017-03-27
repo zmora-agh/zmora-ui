@@ -12,7 +12,6 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import { Card, CardContent } from 'material-ui/Card';
 import KeyboardArrowUp from '../../svg-icons/keyboard-arrow-up';
 import KeyboardArrowDown from '../../svg-icons/keyboard-arrow-down';
-import { CONTEST_TYPE } from '../../containers/ContestsPage/constants';
 
 const styleSheet = createStyleSheet('zmoraContestsTable', () => ({
   cardContentRow: {
@@ -29,7 +28,7 @@ const styleSheet = createStyleSheet('zmoraContestsTable', () => ({
     textOverflow: 'ellipsis',
   },
   cardHidden: {
-	backgroundColor: 'inherit',
+    backgroundColor: 'inherit',
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '98%',
@@ -37,7 +36,7 @@ const styleSheet = createStyleSheet('zmoraContestsTable', () => ({
     transition: '0.5s',
   },
   cardExpanded: {
-	backgroundColor: 'inherit',
+    backgroundColor: 'inherit',
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '100%',
@@ -59,7 +58,7 @@ const styleSheet = createStyleSheet('zmoraContestsTable', () => ({
 export class ContestsTable extends React.PureComponent {
 
   static propTypes = {
-    contests: React.PropTypes.arrayOf(CONTEST_TYPE),
+    contests: React.PropTypes.object.isRequired,
   };
 
   static contextTypes = {
@@ -109,7 +108,7 @@ export class ContestsTable extends React.PureComponent {
 
   render() {
     const classes = this.context.styleManager.render(styleSheet);
-    const rows = this.props.contests.map((child) => this.createTableRow(child, classes));
+    const rows = this.props.contests.valueSeq().map((child) => this.createTableRow(child, classes));
     return (
       <List style={{ width: '100%', backgroundColor: '#fafafa' }}>
         {rows}

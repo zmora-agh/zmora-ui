@@ -11,15 +11,15 @@ export default defineMessages({
     defaultMessage: 'This is the ContestStatus component !',
   },
   enrolmentTo: {
-    id: 'app.components.ContestsTable.enrolmentTo',
+    id: 'app.components.ContestStatus.enrolmentTo',
     defaultMessage: 'Enrolment to',
   },
   activeTo: {
-    id: 'app.components.ContestsTable.activeTo',
+    id: 'app.components.ContestStatus.activeTo',
     defaultMessage: 'Active to',
   },
   endedOn: {
-    id: 'app.components.ContestsTable.endedOn',
+    id: 'app.components.ContestStatus.endedOn',
     defaultMessage: 'Ended on',
   },
 });

@@ -225,6 +225,7 @@
     "lodash": "4.17.2",
     "material-ui": "^1.0.0-alpha.7",
     "minimist": "1.2.0",
+    "moment": "^2.18.1",
     "react": "15.4.2",
     "react-breadcrumbs": "^1.5.2",
     "react-dom": "15.4.2",

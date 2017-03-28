@@ -137,7 +137,9 @@
       "jsx-a11y/role-supports-aria-props": 2,
       "max-len": [
         2,
-        { "code": 120 }
+        {
+          "code": 120
+        }
       ],
       "newline-per-chained-call": 0,
       "no-confusing-arrow": 0,
@@ -236,6 +238,7 @@
     "react-helmet": "3.2.2",
     "react-intl": "2.1.5",
     "react-markdown": "^2.4.6",
+    "react-material-markdown-element": "^1.0.0",
     "react-mathjax": "^0.1.1",
     "react-redux": "4.4.6",
     "react-router": "3.0.0",

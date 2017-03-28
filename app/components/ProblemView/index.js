@@ -1,13 +1,17 @@
 /**
-*
-* ProblemView
-*
-*/
+ *
+ * ProblemView
+ *
+ */
 
 import React from 'react';
 import Text from 'material-ui/Text';
 import MathJax from 'react-mathjax';
 import ReactMarkdown from 'react-markdown';
+
+// needed to get "markdown-body" in scope
+// eslint-disable-next-line no-unused-vars
+import MarkdownElement from 'react-material-markdown-element';
 
 import { problemContentPropTypes } from './constants';
 
@@ -44,7 +48,10 @@ CodeBlock.propTypes = {
 function ProblemView(props) {
   const { title, description } = props;
   return (
-    <div style={{ padding: 24 }}>
+    <div
+      style={{ padding: 24 }}
+      className="markdown-body"
+    >
       <Text type="display1" component="h1" gutterBottom>{title}</Text>
       <MathJax.Context>
         <ReactMarkdown source={description} renderers={{ code: Code, code_block: CodeBlock }} />

@@ -7,9 +7,8 @@ import { fromJS } from 'immutable';
 
 const initialState = fromJS({
   content: {
-    title: 'Zadanie 1',
     description: [
-      '# Live demo\n\nChanges are automatically rendered as you type.\n\n* Follows the ',
+      '# Zadanie 1 \n   Changes  are automatically rendered as you type.\n\n* Follows the ',
       '[CommonMark](http://commonmark.org/) spec\n* Renders actual, "native" React DOM ',
       'elements\n* Allows you to escape or skip HTML (try toggling the checkboxes above)',
       '\n* If you escape or skip the HTML, no `dangerouslySetInnerHTML` is used! Yay!\n',

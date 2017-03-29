@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { makeSelectContests, makeSelectTime } from '../App/selectors';
 
 /**
  * Direct selector to the contestsPage state domain
@@ -15,8 +16,12 @@ const selectContestsPageDomain = () => (state) => state.get('contestsPage');
  */
 
 const makeSelectContestsPage = () => createSelector(
-  selectContestsPageDomain(),
-  (substate) => substate.toJS()
+  makeSelectContests(),
+  makeSelectTime(),
+  (contests, time) => ({
+    contests,
+    offset: time.offset,
+  })
 );
 
 export default makeSelectContestsPage;

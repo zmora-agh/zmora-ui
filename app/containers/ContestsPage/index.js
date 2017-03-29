@@ -6,20 +6,28 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { CONTEST_TYPE } from './constants';
 import makeSelectContestsPage from './selectors';
+import { getContests } from './actions';
 import ContestsTable from '../../components/ContestsTable';
 
-const ContestsPage = (props) => {
-  if (props.children) return props.children;
+class ContestsPage extends React.PureComponent {
+  static propTypes = {
+    contests: React.PropTypes.object,
+    offset: React.PropTypes.number.isRequired,
+    children: React.PropTypes.object,
+    dispatch: React.PropTypes.func.isRequired,
+  };
 
-  return (<ContestsTable contests={props.contests} />);
-};
+  componentDidMount() {
+    this.props.dispatch(getContests());
+  }
 
-ContestsPage.propTypes = {
-  contests: React.PropTypes.arrayOf(CONTEST_TYPE),
-  children: React.PropTypes.object,
-};
+  render() {
+    if (this.props.children) return this.props.children;
+
+    return (<ContestsTable contests={this.props.contests} offset={this.props.offset} />);
+  }
+}
 
 const mapStateToProps = makeSelectContestsPage;
 

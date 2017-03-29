@@ -7,10 +7,22 @@ import { fromJS } from 'immutable';
 
 const initialState = fromJS({
   content: {
-    title: 'Zadanie 1',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales ex tellus, a egestas velit suscipit non. Aliquam erat volutpat. Integer sed ex eleifend, iaculis orci semper, commodo lectus. Sed varius tellus nec ex rutrum, at pretium nunc rutrum. Morbi feugiat arcu enim, quis euismod quam interdum non. Donec dignissim eros nec quam gravida, non consectetur turpis dignissim. Mauris non velit eu est gravida sagittis. Nulla consectetur commodo justo ac tempor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In elit mauris, malesuada eget nisl ac, semper faucibus lacus. Phasellus arcu orci, porta non risus a, mattis gravida quam. Maecenas gravida lacus tellus, id pellentesque lorem tristique fermentum. Fusce sed rhoncus diam, a vulputate massa',
-    input: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales ex tellus, a egestas velit suscipit non. Aliquam erat volutpat. Integer sed ex eleifend, iaculis orci semper, commodo lectus. Sed varius tellus nec ex rutrum, at pretium nunc rutrum. In elit mauris, malesuada eget nisl ac, semper faucibus lacus. Phasellus arcu orci, porta non risus a, mattis gravida quam. Maecenas gravida lacus tellus, id pellentesque lorem tristique fermentum. Fusce sed rhoncus diam, a vulputate massa.',
-    output: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales ex tellus, a egestas velit suscipit non. Aliquam erat volutpat. Integer sed ex eleifend, iaculis orci semper, commodo lectus. Sed varius tellus nec ex Phasellus arcu orci, porta non risus a, mattis gravida quam. Maecenas gravida lacus tellus, id pellentesque lorem tristique fermentum. Fusce sed rhoncus diam, a vulputate massa.',
+    description: [
+      '# Zadanie 1 \n   Changes  are automatically rendered as you type.\n\n* Follows the ',
+      '[CommonMark](http://commonmark.org/) spec\n* Renders actual, "native" React DOM ',
+      'elements\n* Allows you to escape or skip HTML (try toggling the checkboxes above)',
+      '\n* If you escape or skip the HTML, no `dangerouslySetInnerHTML` is used! Yay!\n',
+      '\n## HTML block below\n\n<blockquote>\n    This blockquote will change based ',
+      'on the HTML settings above.\n</blockquote>\n\n## How about some code?\n',
+      '```js\nvar React = require(\'react\');\nvar Markdown = require(\'react-markdown\');',
+      '\n\nReact.render(\n    <Markdown source="# Your markdown here" />,\n    document.',
+      'getElementById(\'content\')\n);\n```\n\nPretty neat, eh?\n\n', '## More info?\n\n',
+      'Read usage information and more on [GitHub](//github.com/rexxars/react-markdown)\n\n',
+      '---------------\n\n',
+      'Normal code in standard, single ticks: `this is code`, `tex \\TeX` inline code: `tex x^2`\n',
+      'and `tex \\TeX` block:\n```tex\na^2+b^2=c^2\n```\n\n',
+      'A component by [VaffelNinja](http://vaffel.ninja) / Espen Hovlandsdal',
+    ].join(''),
   },
   examples: [
     {

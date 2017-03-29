@@ -10,9 +10,10 @@ import {
   GET_CURRENT_USER_SUCCESS,
   GET_CURRENT_TIME_SUCCESS,
 } from './constants';
-import {
-  GET_CONTESTS_SUCCESS,
-} from '../ContestsPage/constants';
+import { GET_CONTESTS_SUCCESS } from '../ContestsPage/constants';
+import { GET_PROBLEM_SUCCESS } from '../ProblemViewPage/constants';
+import { GET_PROBLEM_EXAMPLES_SUCCESS } from '../ProblemExamplesPage/constants';
+import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
 
 const initialState = fromJS({
   user: {
@@ -36,6 +37,15 @@ function contestsPageReducer(state = initialState, action) {
         .reduce((result, contest) => result.set(contest.get('id'), contest), Map());
       return state.mergeDeep({ contests: contestsMap });
     }
+    case GET_PROBLEM_SUCCESS:
+      return state.mergeIn(['contests', action.contestId, 'problems'],
+        Map([[action.problemId, fromJS(action.problem)]]));
+    case GET_PROBLEM_EXAMPLES_SUCCESS:
+      return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'examples'],
+        fromJS(action.examples));
+    case GET_PROBLEM_SUBMITS_SUCCESS:
+      return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'submits'],
+        fromJS(action.submits));
     case GET_CURRENT_TIME_SUCCESS: {
       const offset = action.time.diff(moment(), 'seconds');
 

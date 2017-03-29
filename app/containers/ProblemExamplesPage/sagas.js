@@ -14,8 +14,8 @@ function fetchProblemExamples(contestId, problemId) {
 }
 
 function* getProblemExamples({ contestId, problemId }) {
-  const problem = yield call(fetchProblemExamples, contestId, problemId);
-  yield put(getProblemExamplesSuccess(problem));
+  const examples = yield call(fetchProblemExamples, contestId, problemId);
+  yield put(getProblemExamplesSuccess(contestId, problemId, examples));
 }
 
 function* getProblemExamplesSaga() {

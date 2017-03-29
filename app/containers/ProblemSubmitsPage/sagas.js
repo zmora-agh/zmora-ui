@@ -15,7 +15,7 @@ function fetchProblemSubmits(contestId, problemId) {
 
 function* getProblemSubmits({ contestId, problemId }) {
   const problem = yield call(fetchProblemSubmits, contestId, problemId);
-  yield put(getProblemSubmitsSuccess(problem));
+  yield put(getProblemSubmitsSuccess(contestId, problemId, problem));
 }
 
 function* getProblemSubmitsSaga() {

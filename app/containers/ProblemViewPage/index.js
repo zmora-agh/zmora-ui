@@ -4,16 +4,16 @@
  *
  */
 
+import { CircularProgress } from 'material-ui/Progress';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
-import { CircularProgress } from 'material-ui/Progress';
-
-import makeSelectProblemViewPage from './selectors';
-import { getProblem } from './actions';
+import { createStructuredSelector } from 'reselect';
 
 import ProblemView from '../../components/ProblemView';
 import { problemContentPropTypes } from '../../components/ProblemView/constants';
+
+import { makeSelectProblem } from '../App/selectors';
+import { getProblem } from './actions';
 
 export class ProblemViewPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -31,22 +31,22 @@ export class ProblemViewPage extends React.Component { // eslint-disable-line re
   }
 
   render() {
-    return this.props.problem.problem ?
-      <ProblemView {...this.props.problem.problem} /> :
+    return this.props.problem ?
+      <ProblemView {...this.props.problem} /> :
       <div style={{ textAlign: 'center', margin: '50px auto' }}><CircularProgress size={50} /></div>;
   }
 }
 
 ProblemViewPage.propTypes = {
-  problem: PropTypes.shape({
-    problem: React.PropTypes.shape(problemContentPropTypes),
-  }),
+  problem: PropTypes.shape(problemContentPropTypes),
   contestId: PropTypes.number.isRequired,
   problemId: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = makeSelectProblemViewPage();
+const mapStateToProps = (state, props) => createStructuredSelector({
+  problem: makeSelectProblem(props.contestId, props.problemId),
+});
 
 function mapDispatchToProps(dispatch) {
   return {

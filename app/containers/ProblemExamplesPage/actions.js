@@ -17,9 +17,11 @@ export function getProblemExamples(contestId, problemId) {
   };
 }
 
-export function getProblemExamplesSuccess(problemExamples) {
+export function getProblemExamplesSuccess(contestId, problemId, examples) {
   return {
     type: GET_PROBLEM_EXAMPLES_SUCCESS,
-    problemExamples,
+    contestId,
+    problemId,
+    examples,
   };
 }

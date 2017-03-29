@@ -6,10 +6,11 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { CircularProgress } from 'material-ui/Progress';
 
-import makeSelectProblemSubmitsPage from './selectors';
+import { makeSelectProblemSubmits } from '../App/selectors';
 import { getProblemSubmits } from './actions';
 
 import ProblemSubmits from '../../components/ProblemSubmits';
@@ -44,7 +45,9 @@ ProblemSubmitsPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = makeSelectProblemSubmitsPage();
+const mapStateToProps = (state, props) => createStructuredSelector({
+  submits: makeSelectProblemSubmits(props.contestId, props.problemId),
+});
 
 function mapDispatchToProps(dispatch) {
   return {

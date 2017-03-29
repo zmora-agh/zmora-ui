@@ -60,8 +60,8 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
   };
 
   ids = {
-    contestId: this.props.params.contest_id,
-    problemId: this.props.params.problem_id,
+    contestId: parseInt(this.props.params.contest_id, 10),
+    problemId: parseInt(this.props.params.problem_id, 10),
   };
 
   tabs = [
@@ -100,7 +100,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 }
 
 ProblemPage.propTypes = {
-  params: React.PropTypes.array,
+  params: React.PropTypes.object,
   children: PropTypes.node,
 };
 

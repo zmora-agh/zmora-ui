@@ -78,25 +78,14 @@ export default function createRoutes(store) {
                   getComponent(location, cb) {
                     const importModules = Promise.all([
                       import('containers/ProblemPage/reducer'),
-                      import('containers/ProblemViewPage/reducer'),
                       import('containers/ProblemViewPage/sagas'),
-                      import('containers/ProblemExamplesPage/reducer'),
                       import('containers/ProblemExamplesPage/sagas'),
-                      import('containers/ProblemSubmitsPage/reducer'),
                       import('containers/ProblemSubmitsPage/sagas'),
                       import('containers/ProblemPage'),
                     ]);
 
-                    importModules.then(([
-                      reducer,
-                      viewPageReducer, viewPageSagas,
-                      examplesReducer, examplesSagas,
-                      submitsReducer, submitsSagas,
-                      component]) => {
+                    importModules.then(([reducer, viewPageSagas, examplesSagas, submitsSagas, component]) => {
                       injectReducer('problemPage', reducer.default);
-                      injectReducer('problemViewPage', viewPageReducer.default);
-                      injectReducer('problemExamplesPage', examplesReducer.default);
-                      injectReducer('problemSubmitsPage', submitsReducer.default);
                       injectSagas(viewPageSagas.default);
                       injectSagas(examplesSagas.default);
                       injectSagas(submitsSagas.default);

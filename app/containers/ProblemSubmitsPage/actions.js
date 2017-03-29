@@ -17,9 +17,11 @@ export function getProblemSubmits(contestId, problemId) {
   };
 }
 
-export function getProblemSubmitsSuccess(submits) {
+export function getProblemSubmitsSuccess(contestId, problemId, submits) {
   return {
     type: GET_PROBLEM_SUBMITS_SUCCESS,
+    contestId,
+    problemId,
     submits,
   };
 }

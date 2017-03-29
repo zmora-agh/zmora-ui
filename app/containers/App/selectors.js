@@ -39,10 +39,37 @@ const makeSelectTime = () => createSelector(
   (substate) => substate.get('time').toJS()
 );
 
+const makeSelectProblem = (contestId, problemId) => createSelector(
+  selectAppDomain(),
+  (substate) => {
+    const problem = substate.getIn(['contests', contestId, 'problems', problemId]);
+    return problem ? problem.toJS() : undefined;
+  }
+);
+
+const makeSelectProblemExamples = (contestId, problemId) => createSelector(
+  selectAppDomain(),
+  (substate) => {
+    const examples = substate.getIn(['contests', contestId, 'problems', problemId, 'examples']);
+    return examples ? examples.toJS() : undefined;
+  }
+);
+
+const makeSelectProblemSubmits = (contestId, problemId) => createSelector(
+  selectAppDomain(),
+  (substate) => {
+    const submits = substate.getIn(['contests', contestId, 'problems', problemId, 'submits']);
+    return submits ? submits.toJS() : undefined;
+  }
+);
+
 export {
   makeSelectApp,
   makeSelectUser,
   makeSelectLocationState,
   makeSelectContests,
   makeSelectTime,
+  makeSelectProblem,
+  makeSelectProblemExamples,
+  makeSelectProblemSubmits,
 };

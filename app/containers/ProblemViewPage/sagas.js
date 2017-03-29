@@ -15,7 +15,12 @@ function fetchProblem(contestId, problemId) {
 
 function* getProblem({ contestId, problemId }) {
   const problem = yield call(fetchProblem, contestId, problemId);
-  yield put(getProblemSuccess(problem));
+  yield put(getProblemSuccess(contestId, problemId, {
+    shortcode: problem.shortcode,
+    name: problem.problem.name,
+    author: problem.problem.author,
+    description: problem.problem.description,
+  }));
 }
 
 function* getProblemSaga() {

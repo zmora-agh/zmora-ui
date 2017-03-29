@@ -6,11 +6,12 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { CircularProgress } from 'material-ui/Progress';
 
-import makeSelectProblemExamplesPage from './selectors';
 import { getProblemExamples } from './actions';
+import { makeSelectProblemExamples } from '../App/selectors';
 
 import ProblemExamples from '../../components/ProblemExamples';
 import { examplesPropType } from '../../components/ProblemExamples/constants';
@@ -31,8 +32,8 @@ export class ProblemExamplesPage extends React.Component { // eslint-disable-lin
   }
 
   render() {
-    return this.props.problemExamples ?
-      <ProblemExamples examples={this.props.problemExamples} /> :
+    return this.props.examples ?
+      <ProblemExamples examples={this.props.examples} /> :
       <div style={{ textAlign: 'center', margin: '50px auto' }}><CircularProgress size={50} /></div>;
   }
 }
@@ -40,11 +41,13 @@ export class ProblemExamplesPage extends React.Component { // eslint-disable-lin
 ProblemExamplesPage.propTypes = {
   contestId: PropTypes.number.isRequired,
   problemId: PropTypes.number.isRequired,
-  problemExamples: examplesPropType,
+  examples: examplesPropType,
   dispatch: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = makeSelectProblemExamplesPage();
+const mapStateToProps = (state, props) => createStructuredSelector({
+  examples: makeSelectProblemExamples(props.contestId, props.problemId),
+});
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -8,11 +8,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { CircularProgress } from 'material-ui/Progress';
-
 import { makeSelectProblemSubmits } from '../App/selectors';
 import { getProblemSubmits } from './actions';
 
+import FetchProgress from '../../components/FetchProgress';
 import ProblemSubmits from '../../components/ProblemSubmits';
 import { submitsPropType } from '../../components/ProblemSubmits/constants';
 
@@ -37,7 +36,7 @@ export class ProblemSubmitsPage extends React.PureComponent { // eslint-disable-
   render() {
     return this.props.submits ?
       <ProblemSubmits submits={this.props.submits} /> :
-      <div style={{ textAlign: 'center', margin: '50px auto' }}><CircularProgress size={50} /></div>;
+      <FetchProgress />;
   }
 }
 

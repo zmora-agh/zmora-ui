@@ -8,6 +8,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import makeSelectContestsPage from './selectors';
 import { getContests } from './actions';
+
+import FetchProgress from '../../components/FetchProgress';
 import ContestsTable from '../../components/ContestsTable';
 
 class ContestsPage extends React.PureComponent {
@@ -25,7 +27,9 @@ class ContestsPage extends React.PureComponent {
   render() {
     if (this.props.children) return this.props.children;
 
-    return (<ContestsTable contests={this.props.contests} offset={this.props.offset} />);
+    return this.props.contests ?
+      <ContestsTable contests={this.props.contests} offset={this.props.offset} /> :
+      <FetchProgress />;
   }
 }
 

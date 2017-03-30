@@ -26,6 +26,7 @@ const initialState = fromJS({
     offset: 0,
   },
   contests: {},
+  contestsFetched: false,
 });
 
 function contestsPageReducer(state = initialState, action) {
@@ -35,7 +36,10 @@ function contestsPageReducer(state = initialState, action) {
     case GET_CONTESTS_SUCCESS: {
       const contestsMap = fromJS(action.contests)
         .reduce((result, contest) => result.set(contest.get('id'), contest), Map());
-      return state.mergeDeep({ contests: contestsMap });
+      return state.mergeDeep({
+        contests: contestsMap,
+        contestsFetched: true,
+      });
     }
     case GET_PROBLEM_SUCCESS:
       return state.mergeIn(['contests', action.contestId, 'problems'],

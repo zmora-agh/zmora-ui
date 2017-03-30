@@ -8,11 +8,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { CircularProgress } from 'material-ui/Progress';
-
 import { getProblemExamples } from './actions';
 import { makeSelectProblemExamples } from '../App/selectors';
 
+import FetchProgress from '../../components/FetchProgress';
 import ProblemExamples from '../../components/ProblemExamples';
 import { examplesPropType } from '../../components/ProblemExamples/constants';
 
@@ -37,7 +36,7 @@ export class ProblemExamplesPage extends React.PureComponent { // eslint-disable
   render() {
     return this.props.examples ?
       <ProblemExamples examples={this.props.examples} /> :
-      <div style={{ textAlign: 'center', margin: '50px auto' }}><CircularProgress size={50} /></div>;
+      <FetchProgress />;
   }
 }
 

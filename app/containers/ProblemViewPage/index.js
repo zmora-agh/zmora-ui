@@ -4,11 +4,11 @@
  *
  */
 
-import { CircularProgress } from 'material-ui/Progress';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import FetchProgress from '../../components/FetchProgress';
 import ProblemView from '../../components/ProblemView';
 import { problemContentPropTypes } from '../../components/ProblemView/constants';
 
@@ -36,7 +36,7 @@ export class ProblemViewPage extends React.PureComponent { // eslint-disable-lin
   render() {
     return this.props.problem ?
       <ProblemView {...this.props.problem} /> :
-      <div style={{ textAlign: 'center', margin: '50px auto' }}><CircularProgress size={50} /></div>;
+      <FetchProgress />;
   }
 }
 

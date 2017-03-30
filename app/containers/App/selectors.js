@@ -34,7 +34,7 @@ const makeSelectContests = () => createSelector(
   (substate) => {
     // FIXME define complete selector return value shape
     const contestShape = (contest) => contest.has('owners');
-    return substate.get('contests').filter(contestShape).toJS();
+    return substate.get('contestsFetched') ? substate.get('contests').filter(contestShape).toJS() : undefined;
   }
 );
 

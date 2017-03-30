@@ -15,6 +15,10 @@ const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
 
+const loadExactModule = (cb) => (componentModule) => {
+  cb(null, exactOnly(componentModule.default));
+};
+
 export default function createRoutes(store) {
   // Create reusable async injectors using getAsyncInjectors factory
   const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
@@ -45,11 +49,11 @@ export default function createRoutes(store) {
           import('containers/ContestsPage'),
         ]);
 
-        const renderRoute = loadModule(cb);
+        const renderRoute = loadExactModule(cb);
 
         importModules.then(([sagas, component]) => {
           injectSagas(sagas.default);
-          renderRoute(exactOnly(component));
+          renderRoute(component);
         });
 
         importModules.catch(errorLoading);
@@ -69,7 +73,7 @@ export default function createRoutes(store) {
               name: 'Problems',
               getComponent(location, cb) {
                 import('containers/ProblemsPage')
-                  .then((component) => loadModule(cb)(exactOnly(component)))
+                  .then(loadExactModule(cb))
                   .catch(errorLoading);
               },
               childRoutes: [

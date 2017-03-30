@@ -11,8 +11,8 @@ export default defineMessages({
     defaultMessage: 'Identifier',
   },
   time: {
-    id: 'app.components.ProblemSubmits.time',
-    defaultMessage: 'Time',
+    id: 'app.components.ProblemSubmits.date',
+    defaultMessage: 'Date',
   },
   status: {
     id: 'app.components.ProblemSubmits.status',

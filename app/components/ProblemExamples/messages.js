@@ -7,15 +7,15 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   input: {
-    id: 'app.components.ProblemExampleData.input',
+    id: 'app.components.ProblemExamples.input',
     defaultMessage: 'For input data:',
   },
   result: {
-    id: 'app.components.ProblemExampleData.result',
+    id: 'app.components.ProblemExamples.result',
     defaultMessage: 'Expected result:',
   },
-  reason: {
-    id: 'app.components.ProblemExampleData.reason',
+  explanation: {
+    id: 'app.components.ProblemExamples.explanation',
     defaultMessage: 'Explanation:',
   },
 });

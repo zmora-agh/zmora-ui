@@ -1,6 +1,6 @@
 /**
 *
-* ProblemExampleData
+* ProblemExamples
 *
 */
 
@@ -36,16 +36,16 @@ const createExample = (props) => ([
       {props.input}
     </DataElement>
     <DataElement xs={6} desc={<FormattedMessage {...messages.result} />}>
-      {props.output}
+      {props.result}
     </DataElement>
-    <DataElement xs={12} desc={<FormattedMessage {...messages.reason} />}>
-      {props.reason}
+    <DataElement xs={12} desc={<FormattedMessage {...messages.explanation} />}>
+      {props.explanation}
     </DataElement>
   </Layout>,
   <Divider />,
 ]);
 
-function ProblemExampleData(props) {
+function ProblemExamples(props) {
   return (
     <div style={{ overflow: 'hidden' }}>
       {props.examples.map(createExample)}
@@ -53,8 +53,8 @@ function ProblemExampleData(props) {
   );
 }
 
-ProblemExampleData.propTypes = {
+ProblemExamples.propTypes = {
   examples: examplesPropType,
 };
 
-export default ProblemExampleData;
+export default ProblemExamples;

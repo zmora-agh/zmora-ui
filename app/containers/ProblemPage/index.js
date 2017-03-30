@@ -15,14 +15,10 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import { connect } from 'react-redux';
 
-import ProblemView from '../../../app/components/ProblemView';
-import { problemContentPropTypes } from '../../components/ProblemView/constants';
-import ProblemExampleData from '../../../app/components/ProblemExampleData';
-import { examplesPropType } from '../../components/ProblemExampleData/constants';
-import ProblemSubmits from '../../../app/components/ProblemSubmits';
-import { submitsPropType } from '../../components/ProblemSubmits/constants';
+import ProblemViewPage from '../ProblemViewPage';
+import ProblemExamplesPage from '../ProblemExamplesPage';
+import ProblemSubmitsPage from '../ProblemSubmitsPage';
 
-import makeSelectProblemPage from './selectors';
 import messages from './messages';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
@@ -31,11 +27,13 @@ const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   },
 }));
 
+const iterableProps = (elems, props, indexedProp) =>
+  elems.map((elem, index) => React.createElement(elem, Object.assign({}, props, indexedProp(index)), {}));
+
 export class ProblemPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
   };
-
 
   constructor(props) {
     super(props);
@@ -61,6 +59,17 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
     this.setState({ index });
   };
 
+  ids = {
+    contestId: parseInt(this.props.params.contest_id, 10),
+    problemId: parseInt(this.props.params.problem_id, 10),
+  };
+
+  tabs = [
+    ProblemViewPage,
+    ProblemExamplesPage,
+    ProblemSubmitsPage,
+  ];
+
   render() {
     if (this.props.children) return this.props.children;
 
@@ -82,10 +91,8 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           </Tabs>
         </div>
         <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex}>
-          <ProblemView {...this.props.content} />
-          <ProblemExampleData examples={this.props.examples} />
-          <ProblemSubmits submits={this.props.submits} />
-          <div>bsd</div>
+          {iterableProps(this.tabs, this.ids, (index) => ({ key: index, defer: this.state.index !== index }))}
+          <div>empty questions page</div>
         </SwipeableViews>
       </Paper>
     );
@@ -93,12 +100,9 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 }
 
 ProblemPage.propTypes = {
+  params: React.PropTypes.object,
   children: PropTypes.node,
-  content: React.PropTypes.shape(problemContentPropTypes),
-  examples: examplesPropType,
-  submits: submitsPropType,
 };
-
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -106,4 +110,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(makeSelectProblemPage, mapDispatchToProps)(ProblemPage);
+export default connect(mapDispatchToProps)(ProblemPage);

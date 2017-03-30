@@ -3,11 +3,11 @@
  */
 import React from 'react';
 
-export function exactOnly(component) {
+export function exactOnly(Component) {
   const parent = (props) => {
     if (props.children) return props.children;
 
-    return (<component {...props} />);
+    return (<Component {...props} />);
   };
 
   parent.propTypes = {

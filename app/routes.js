@@ -3,6 +3,7 @@
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
 import { getAsyncInjectors } from 'utils/asyncInjectors';
+import { exactOnly } from 'utils/routing';
 
 import withProps from 'recompose/withProps';
 
@@ -48,7 +49,7 @@ export default function createRoutes(store) {
 
         importModules.then(([sagas, component]) => {
           injectSagas(sagas.default);
-          renderRoute(component);
+          renderRoute(exactOnly(component));
         });
 
         importModules.catch(errorLoading);
@@ -68,7 +69,7 @@ export default function createRoutes(store) {
               name: 'Problems',
               getComponent(location, cb) {
                 import('containers/ProblemsPage')
-                  .then(loadModule(cb))
+                  .then((component) => loadModule(cb)(exactOnly(component)))
                   .catch(errorLoading);
               },
               childRoutes: [

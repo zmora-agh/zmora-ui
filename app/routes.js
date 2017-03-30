@@ -3,7 +3,7 @@
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
 import { getAsyncInjectors } from 'utils/asyncInjectors';
-import { exactOnly } from 'utils/routing';
+import { exactOnly, fetchName } from 'utils/routing';
 
 import withProps from 'recompose/withProps';
 
@@ -62,6 +62,7 @@ export default function createRoutes(store) {
         {
           path: ':contest_id',
           name: 'contestSummaryPage',
+          prettifyParam: fetchName(store, ['app', 'contests', ':contest_id', 'name']),
           getComponent(location, cb) {
             import('containers/ContestSummaryPage')
               .then(loadModule(cb))
@@ -80,6 +81,8 @@ export default function createRoutes(store) {
                 {
                   path: ':problem_id',
                   name: 'Problem',
+                  prettifyParam: fetchName(store,
+                    ['app', 'contests', ':contest_id', 'problems', ':problem_id', 'shortcode']),
                   getComponent(location, cb) {
                     const importModules = Promise.all([
                       import('containers/ProblemPage/reducer'),

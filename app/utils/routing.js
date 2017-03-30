@@ -16,3 +16,10 @@ export function exactOnly(Component) {
 
   return parent;
 }
+
+export const fetchName = (store, pathPattern) => (name, params) => {
+  const path = pathPattern.map((entry) =>
+    entry.charAt(0) === ':' ? parseInt(params[entry.substring(1)], 10) : entry
+  );
+  return store.getState().getIn(path, name);
+};

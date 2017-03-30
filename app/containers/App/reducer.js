@@ -43,7 +43,7 @@ function contestsPageReducer(state = initialState, action) {
     }
     case GET_PROBLEM_SUCCESS:
       return state.mergeIn(['contests', action.contestId, 'problems'],
-        Map([[action.problemId, fromJS(action.problem)]]));
+        fromJS({ [action.problemId]: action.problem }));
     case GET_PROBLEM_EXAMPLES_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'examples'],
         fromJS(action.examples));

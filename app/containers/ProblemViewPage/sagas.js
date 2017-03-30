@@ -1,8 +1,10 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { getProblemURL } from '../../urls';
 import { bootstrap } from '../../utils/sagas';
+import { makeSelectProblem } from '../App/selectors';
 import { GET_PROBLEM } from './constants';
 import { getProblemSuccess } from './actions';
+
 
 function fetchProblem(contestId, problemId) {
   return fetch(getProblemURL(contestId, problemId), {
@@ -14,6 +16,12 @@ function fetchProblem(contestId, problemId) {
 }
 
 function* getProblem({ contestId, problemId }) {
+  const cachedProblem = yield select(makeSelectProblem(contestId, problemId));
+  if (cachedProblem) {
+    yield put(getProblemSuccess(contestId, problemId, cachedProblem));
+    return;
+  }
+
   const problem = yield call(fetchProblem, contestId, problemId);
   yield put(getProblemSuccess(contestId, problemId, {
     shortcode: problem.shortcode,

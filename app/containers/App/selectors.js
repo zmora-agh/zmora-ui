@@ -31,7 +31,11 @@ const makeSelectUser = () => createSelector(
 
 const makeSelectContests = () => createSelector(
   selectAppDomain(),
-  (substate) => substate.get('contests').toJS()
+  (substate) => {
+    // FIXME define complete selector return value shape
+    const contestShape = (contest) => contest.has('owners');
+    return substate.get('contests').filter(contestShape).toJS();
+  }
 );
 
 const makeSelectTime = () => createSelector(

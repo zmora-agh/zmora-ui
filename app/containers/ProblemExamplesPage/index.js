@@ -16,19 +16,22 @@ import { makeSelectProblemExamples } from '../App/selectors';
 import ProblemExamples from '../../components/ProblemExamples';
 import { examplesPropType } from '../../components/ProblemExamples/constants';
 
-export class ProblemExamplesPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class ProblemExamplesPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this.state = {
-      fetched: false,
-    };
+    this.requestData = this.requestData.bind(this);
+  }
+
+  componentDidMount() {
+    if (!this.props.defer) this.requestData();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.fetched && nextProps.fetch) {
-      this.props.dispatch(getProblemExamples(this.props.contestId, this.props.problemId));
-      this.setState({ fetched: true });
-    }
+    if (this.props.defer && !nextProps.defer) this.requestData();
+  }
+
+  requestData() {
+    this.props.dispatch(getProblemExamples(this.props.contestId, this.props.problemId));
   }
 
   render() {
@@ -42,6 +45,7 @@ ProblemExamplesPage.propTypes = {
   contestId: PropTypes.number.isRequired,
   problemId: PropTypes.number.isRequired,
   examples: examplesPropType,
+  defer: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
 };
 

@@ -91,7 +91,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           </Tabs>
         </div>
         <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex}>
-          {iterableProps(this.tabs, this.ids, (index) => ({ fetch: this.state.index === index }))}
+          {iterableProps(this.tabs, this.ids, (index) => ({ defer: this.state.index !== index }))}
           <div>empty questions page</div>
         </SwipeableViews>
       </Paper>

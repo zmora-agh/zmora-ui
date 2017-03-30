@@ -1,8 +1,9 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { getProblemExamplesURL } from '../../urls';
 import { bootstrap } from '../../utils/sagas';
 import { GET_PROBLEM_EXAMPLES } from './constants';
 import { getProblemExamplesSuccess } from './actions';
+import { makeSelectProblemExamples } from '../App/selectors';
 
 function fetchProblemExamples(contestId, problemId) {
   return fetch(getProblemExamplesURL(contestId, problemId), {
@@ -14,6 +15,12 @@ function fetchProblemExamples(contestId, problemId) {
 }
 
 function* getProblemExamples({ contestId, problemId }) {
+  const cachedExample = yield select(makeSelectProblemExamples(contestId, problemId));
+  if (cachedExample) {
+    yield put(getProblemExamplesSuccess(contestId, problemId, cachedExample));
+    return;
+  }
+
   const examples = yield call(fetchProblemExamples, contestId, problemId);
   yield put(getProblemExamplesSuccess(contestId, problemId, examples));
 }

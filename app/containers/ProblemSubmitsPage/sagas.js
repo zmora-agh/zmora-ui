@@ -1,6 +1,7 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { getProblemSubmitsURL } from '../../urls';
 import { bootstrap } from '../../utils/sagas';
+import { makeSelectProblemSubmits } from '../App/selectors';
 import { GET_PROBLEM_SUBMITS } from './constants';
 import { getProblemSubmitsSuccess } from './actions';
 
@@ -14,8 +15,13 @@ function fetchProblemSubmits(contestId, problemId) {
 }
 
 function* getProblemSubmits({ contestId, problemId }) {
-  const problem = yield call(fetchProblemSubmits, contestId, problemId);
-  yield put(getProblemSubmitsSuccess(contestId, problemId, problem));
+  const cachedSubmits = yield select(makeSelectProblemSubmits(contestId, problemId));
+  if (cachedSubmits) {
+    yield put(getProblemSubmitsSuccess(contestId, problemId, cachedSubmits));
+    return;
+  }
+  const submits = yield call(fetchProblemSubmits, contestId, problemId);
+  yield put(getProblemSubmitsSuccess(contestId, problemId, submits));
 }
 
 function* getProblemSubmitsSaga() {

@@ -15,19 +15,22 @@ import { problemContentPropTypes } from '../../components/ProblemView/constants'
 import { makeSelectProblem } from '../App/selectors';
 import { getProblem } from './actions';
 
-export class ProblemViewPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class ProblemViewPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this.state = {
-      fetched: false,
-    };
+    this.requestData = this.requestData.bind(this);
+  }
+
+  componentDidMount() {
+    if (!this.props.defer) this.requestData();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.fetched && nextProps.fetch) {
-      this.props.dispatch(getProblem(this.props.contestId, this.props.problemId));
-      this.setState({ fetched: true });
-    }
+    if (this.props.defer && !nextProps.defer) this.requestData();
+  }
+
+  requestData() {
+    this.props.dispatch(getProblem(this.props.contestId, this.props.problemId));
   }
 
   render() {
@@ -38,9 +41,10 @@ export class ProblemViewPage extends React.Component { // eslint-disable-line re
 }
 
 ProblemViewPage.propTypes = {
-  problem: PropTypes.shape(problemContentPropTypes),
   contestId: PropTypes.number.isRequired,
   problemId: PropTypes.number.isRequired,
+  problem: PropTypes.shape(problemContentPropTypes),
+  defer: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
 };
 

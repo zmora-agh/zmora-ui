@@ -16,19 +16,22 @@ import { getProblemSubmits } from './actions';
 import ProblemSubmits from '../../components/ProblemSubmits';
 import { submitsPropType } from '../../components/ProblemSubmits/constants';
 
-export class ProblemSubmitsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class ProblemSubmitsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this.state = {
-      fetched: false,
-    };
+    this.requestData = this.requestData.bind(this);
+  }
+
+  componentDidMount() {
+    if (!this.props.defer) this.requestData();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.fetched && nextProps.fetch) {
-      this.props.dispatch(getProblemSubmits(this.props.contestId, this.props.problemId));
-      this.setState({ fetched: true });
-    }
+    if (this.props.defer && !nextProps.defer) this.requestData();
+  }
+
+  requestData() {
+    this.props.dispatch(getProblemSubmits(this.props.contestId, this.props.problemId));
   }
 
   render() {
@@ -42,6 +45,7 @@ ProblemSubmitsPage.propTypes = {
   contestId: PropTypes.number.isRequired,
   problemId: PropTypes.number.isRequired,
   submits: submitsPropType,
+  defer: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
 };
 

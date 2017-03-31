@@ -95,15 +95,13 @@ export default function createRoutes(store) {
                     ['app', 'contests', ':contest_id', 'problems', ':problem_id', 'shortcode']),
                   getComponent(location, cb) {
                     const importModules = Promise.all([
-                      import('containers/ProblemPage/reducer'),
                       import('containers/ProblemViewPage/sagas'),
                       import('containers/ProblemExamplesPage/sagas'),
                       import('containers/ProblemSubmitsPage/sagas'),
                       import('containers/ProblemPage'),
                     ]);
 
-                    importModules.then(([reducer, viewPageSagas, examplesSagas, submitsSagas, component]) => {
-                      injectReducer('problemPage', reducer.default);
+                    importModules.then(([viewPageSagas, examplesSagas, submitsSagas, component]) => {
                       injectSagas(viewPageSagas.default);
                       injectSagas(examplesSagas.default);
                       injectSagas(submitsSagas.default);

@@ -233,7 +233,7 @@
     "minimist": "1.2.0",
     "moment": "^2.18.1",
     "react": "15.4.2",
-    "react-breadcrumbs": "^1.5.2",
+    "react-breadcrumbs": "git+https://github.com/zmora-agh/react-breadcrumbs.git#e3fe175f1658d3e5d8a5e3eb346685f31b384330",
     "react-dom": "15.4.2",
     "react-helmet": "3.2.2",
     "react-intl": "2.1.5",

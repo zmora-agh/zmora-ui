@@ -17,10 +17,7 @@ function fetchProblem(contestId, problemId) {
 
 function* getProblem({ contestId, problemId }) {
   const cachedProblem = yield select(makeSelectProblem(contestId, problemId));
-  if (cachedProblem) {
-    yield put(getProblemSuccess(contestId, problemId, cachedProblem));
-    return;
-  }
+  if (cachedProblem) return;
 
   const problem = yield call(fetchProblem, contestId, problemId);
   yield put(getProblemSuccess(contestId, problemId, {

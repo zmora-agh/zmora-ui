@@ -10,8 +10,4 @@ export default defineMessages({
     id: 'app.containers.ContestsPage.title',
     defaultMessage: 'Contests',
   },
-  header: {
-    id: 'app.containers.ContestsPage.header',
-    defaultMessage: 'This is ContestsPage container !',
-  },
 });

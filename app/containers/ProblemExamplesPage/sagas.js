@@ -16,10 +16,7 @@ function fetchProblemExamples(contestId, problemId) {
 
 function* getProblemExamples({ contestId, problemId }) {
   const cachedExample = yield select(makeSelectProblemExamples(contestId, problemId));
-  if (cachedExample) {
-    yield put(getProblemExamplesSuccess(contestId, problemId, cachedExample));
-    return;
-  }
+  if (cachedExample) return;
 
   const examples = yield call(fetchProblemExamples, contestId, problemId);
   yield put(getProblemExamplesSuccess(contestId, problemId, examples));

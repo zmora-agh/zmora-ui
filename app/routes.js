@@ -61,12 +61,22 @@ export default function createRoutes(store) {
       childRoutes: [
         {
           path: ':contest_id',
-          name: 'contestSummaryPage',
+          name: 'contestPage',
           prettifyParam: fetchName(store, ['app', 'contests', ':contest_id', 'name']),
           getComponent(location, cb) {
-            import('containers/ContestSummaryPage')
-              .then(loadModule(cb))
-              .catch(errorLoading);
+            const importModules = Promise.all([
+              import('containers/ContestPage/sagas'),
+              import('containers/ContestPage'),
+            ]);
+
+            const renderRoute = loadModule(cb);
+
+            importModules.then(([sagas, component]) => {
+              injectSagas(sagas.default);
+              renderRoute(component);
+            });
+
+            importModules.catch(errorLoading);
           },
           childRoutes: [
             {

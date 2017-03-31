@@ -16,10 +16,8 @@ function fetchProblemSubmits(contestId, problemId) {
 
 function* getProblemSubmits({ contestId, problemId }) {
   const cachedSubmits = yield select(makeSelectProblemSubmits(contestId, problemId));
-  if (cachedSubmits) {
-    yield put(getProblemSubmitsSuccess(contestId, problemId, cachedSubmits));
-    return;
-  }
+  if (cachedSubmits) return;
+
   const submits = yield call(fetchProblemSubmits, contestId, problemId);
   yield put(getProblemSubmitsSuccess(contestId, problemId, submits));
 }

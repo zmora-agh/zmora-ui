@@ -45,7 +45,7 @@ const styleSheet = createStyleSheet('zmoraContestsTable', () => ({
     transition: '0.5s',
   },
   cardExpanded: {
-    backgroundColor: 'inherit',
+    backgroundColor: '#ffffff',
     marginLeft: 'auto',
     marginRight: 'auto',
     width: '100%',
@@ -93,7 +93,7 @@ export class ContestsTable extends React.PureComponent {
   createTableRow(row, classes) {
     const isExpanded = this.isExpanded(row.id);
     const onClick = () => this.toggleExpanded(row.id);
-    const expandedIcon = isExpanded ? <KeyboardArrowDown /> : <KeyboardArrowUp onClick={onClick} />;
+    const expandedIcon = isExpanded ? <KeyboardArrowUp /> : <KeyboardArrowDown />;
     const cardClass = !isExpanded ? classes.cardHidden : classes.cardExpanded;
     const listItemClass = !isExpanded ? classes.listItemHidden : classes.listItemExpanded;
     const ownersNames = row.owners.map((owner) => owner.name).join(', ');
@@ -110,6 +110,9 @@ export class ContestsTable extends React.PureComponent {
           <Collapse in={isExpanded} transitionDuration={500}>
             <CardContent>
               <Layout container style={{ padding: 10 }}>
+                <TitledTextLayout xs={12} desc={<FormattedMessage {...messages.name} />} >
+                  {row.name}
+                </TitledTextLayout>
                 <TitledTextLayout xs={12} desc={<FormattedMessage {...messages.description} />}>
                   {row.description}
                 </TitledTextLayout>

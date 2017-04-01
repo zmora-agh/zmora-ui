@@ -92,7 +92,7 @@ export default function createRoutes(store) {
                   path: ':problem_id',
                   name: 'Problem',
                   prettifyParam: fetchName(store,
-                    ['app', 'contests', ':contest_id', 'problems', ':problem_id', 'shortcode']),
+                    ['app', 'contests', ':contest_id', 'problems', ':problem_id', 'name']),
                   getComponent(location, cb) {
                     const importModules = Promise.all([
                       import('containers/ProblemPage/reducer'),

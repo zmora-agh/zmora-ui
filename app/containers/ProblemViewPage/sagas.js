@@ -20,12 +20,7 @@ function* getProblem({ contestId, problemId }) {
   if (cachedProblem) return;
 
   const problem = yield call(fetchProblem, contestId, problemId);
-  yield put(getProblemSuccess(contestId, problemId, {
-    shortcode: problem.shortcode,
-    name: problem.problem.name,
-    author: problem.problem.author,
-    description: problem.problem.description,
-  }));
+  yield put(getProblemSuccess(contestId, problemId, problem));
 }
 
 function* getProblemSaga() {

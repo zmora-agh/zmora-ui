@@ -227,6 +227,7 @@
     "ip": "1.1.4",
     "jss": "^6.4.0",
     "jss-theme-reactor": "^0.10.0",
+    "jwt-decode": "^2.2.0",
     "lodash": "4.17.2",
     "material-ui": "1.0.0-alpha.8",
     "mathjax": "^2.7.0",

@@ -26,7 +26,7 @@ const makeSelectApp = () => createSelector(
 
 const makeSelectUser = () => createSelector(
   selectAppDomain(),
-  (substate) => substate.get('user')
+  (substate) => substate.get('user').toJS()
 );
 
 const makeSelectContest = (contestId) => createSelector(

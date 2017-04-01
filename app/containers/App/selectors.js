@@ -29,6 +29,14 @@ const makeSelectUser = () => createSelector(
   (substate) => substate.get('user')
 );
 
+const makeSelectContest = (contestId) => createSelector(
+  selectAppDomain(),
+  (substate) => {
+    const contest = substate.getIn(['contests', contestId]);
+    return contest ? contest.toJS() : undefined;
+  }
+);
+
 const makeSelectContests = () => createSelector(
   selectAppDomain(),
   (substate) => {
@@ -71,6 +79,7 @@ export {
   makeSelectApp,
   makeSelectUser,
   makeSelectLocationState,
+  makeSelectContest,
   makeSelectContests,
   makeSelectTime,
   makeSelectProblem,

@@ -16,10 +16,7 @@ function fetchContests() {
 
 function* getContests() {
   const cachedContests = yield select(makeSelectContests());
-  if (cachedContests) {
-    yield put(getContestsSuccess(cachedContests));
-    return;
-  }
+  if (cachedContests) return;
 
   const contests = yield call(fetchContests);
   yield put(getContestsSuccess(contests));

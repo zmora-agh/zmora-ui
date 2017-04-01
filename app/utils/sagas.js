@@ -1,5 +1,6 @@
 import { fork, take, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import _ from 'lodash';
 
 export function bootstrap(sagas, exitSaga) {
   function* bootstrapSaga() {
@@ -33,4 +34,23 @@ function throwMessageOnError(responsePromise) {
 
 export function checkedFetch(input, init) {
   return throwMessageOnError(fetch(input, init));
+}
+
+
+const defaultFetchOptions = () => ({
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+});
+
+export function fetchWithCredentials(input, init) {
+  const opts = defaultFetchOptions();
+  const jwtToken = sessionStorage.getItem('jwtToken');
+  if (jwtToken) {
+    _.merge(opts, { headers: { Authorization: `Bearer ${jwtToken}` } });
+  }
+  _.merge(opts, init);
+
+  return checkedFetch(input, opts);
 }

@@ -1,12 +1,12 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { getProblemExamplesURL } from '../../urls';
-import { bootstrap } from '../../utils/sagas';
+import { bootstrap, fetchWithCredentials } from '../../utils/sagas';
 import { GET_PROBLEM_EXAMPLES } from './constants';
 import { getProblemExamplesSuccess } from './actions';
 import { makeSelectProblemExamples } from '../App/selectors';
 
 function fetchProblemExamples(contestId, problemId) {
-  return fetch(getProblemExamplesURL(contestId, problemId), {
+  return fetchWithCredentials(getProblemExamplesURL(contestId, problemId), {
     method: 'GET',
     headers: {
       Accept: 'application/json',

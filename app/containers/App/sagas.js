@@ -1,15 +1,15 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, take } from 'redux-saga/effects';
 import moment from 'moment';
-import { getCurrentTimeURL } from '../../urls';
 
-import {
-  getCurrentTimeSuccess,
-} from './actions';
-import {
-} from './constants';
+import { getCurrentTimeURL } from '../../urls';
+import { fetchWithCredentials } from '../../utils/sagas';
+import { LOGIN_SUCCESS } from '../LoginForm/constants';
+
+import { getCurrentTimeSuccess } from './actions';
+
 
 function fetchCurrentTime() {
-  return fetch(getCurrentTimeURL(), {
+  return fetchWithCredentials(getCurrentTimeURL(), {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -25,6 +25,7 @@ function* sleep(time) {
 function* synchronizeTime() {
 // eslint-disable-next-line no-constant-condition
   while (true) {
+    if (!sessionStorage.getItem('jwtToken')) yield take(LOGIN_SUCCESS);
     const time = yield call(fetchCurrentTime);
     yield put(getCurrentTimeSuccess(time));
     yield* sleep(5 * 60 * 1000);

@@ -12,3 +12,5 @@
 export const DEFAULT_LOCALE = 'en';
 
 export const GET_CURRENT_TIME_SUCCESS = 'app/GET_CURRENT_TIME_SUCCESS';
+export const LOGOUT = 'app/LoginForm/LOGOUT';
+

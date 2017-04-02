@@ -1,0 +1,14 @@
+import { loginPage } from '../localUrls';
+
+
+const jwtTokenKey = 'jwtToken';
+export const getJwtToken = () => localStorage.getItem(jwtTokenKey);
+export const haveJwtToken = () => getJwtToken() !== null;
+export const setJwtToken = (token) => localStorage.setItem(jwtTokenKey, token);
+export const deleteJwtToken = () => localStorage.removeItem(jwtTokenKey);
+
+export function requireAuth(nextState, replace, callback) {
+  if (!haveJwtToken()) replace(loginPage());
+
+  callback();
+}

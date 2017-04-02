@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode';
 import { push } from 'react-router-redux';
 import { loginURL } from '../../urls';
 import { bootstrap, checkedFetch } from '../../utils/sagas';
+import { setJwtToken } from '../../utils/auth';
 import { loginError, loginSuccess } from './actions';
 import { LOGIN } from './constants';
 
@@ -22,7 +23,7 @@ function* login({ credentials }) {
   try {
     const response = yield call(sendLogin, credentials);
     const userInfo = jwtDecode(response.token).dat;
-    sessionStorage.setItem('jwtToken', response.token);
+    setJwtToken(response.token);
     yield put(loginSuccess(userInfo));
     yield put(push('/'));
   } catch (e) {

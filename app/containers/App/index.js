@@ -24,10 +24,6 @@ import RightMenu from '../RightMenu';
 
 import { makeSelectApp } from './selectors';
 
-import {
-  getCurrentUser,
-} from './actions';
-
 const styleSheet = createStyleSheet('App', () => ({
   root: {
     width: '100%',
@@ -58,7 +54,6 @@ const styleSheet = createStyleSheet('App', () => ({
 
 class App extends React.PureComponent {
   static propTypes = {
-    dispatch: React.PropTypes.func.isRequired,
     children: React.PropTypes.node.isRequired,
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
@@ -73,10 +68,6 @@ class App extends React.PureComponent {
     super(props);
     this.state = { rightMenuOpen: false };
     this.toggleMenu = this.toggleMenu.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.dispatch(getCurrentUser());
   }
 
   toggleMenu() {

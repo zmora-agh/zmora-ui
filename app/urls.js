@@ -8,3 +8,5 @@ export const getContestURL = (contestId) => `${getContestsURL()}/${contestId}`;
 export const getProblemURL = (contestId, problemId) => `${getContestURL(contestId)}/problems/${problemId}`;
 export const getProblemExamplesURL = (contestId, problemId) => `${getProblemURL(contestId, problemId)}/examples`;
 export const getProblemSubmitsURL = (contestId, problemId) => `${getProblemURL(contestId, problemId)}/submits`;
+
+export const loginURL = () => `${API_URL}users/auth`;

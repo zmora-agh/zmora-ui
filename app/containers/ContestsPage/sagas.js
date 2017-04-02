@@ -1,12 +1,12 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { getContestsURL } from '../../urls';
 import { makeSelectContests } from '../App/selectors';
-import { bootstrap } from '../../utils/sagas';
+import { bootstrap, fetchWithCredentials } from '../../utils/sagas';
 import { getContestsSuccess } from './actions';
 import { GET_CONTESTS } from './constants';
 
 function fetchContests() {
-  return fetch(getContestsURL(), {
+  return fetchWithCredentials(getContestsURL(), {
     method: 'GET',
     headers: {
       Accept: 'application/json',

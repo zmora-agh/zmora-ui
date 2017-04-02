@@ -3,7 +3,7 @@ import moment from 'moment';
 import { push } from 'react-router-redux';
 
 import { getCurrentTimeURL } from '../../urls';
-import { loginPage } from '../../localUrls';
+import { homePage } from '../../localUrls';
 import { fetchWithCredentials } from '../../utils/sagas';
 import { deleteJwtToken, haveJwtToken } from '../../utils/auth';
 import { LOGIN_SUCCESS } from '../LoginForm/constants';
@@ -38,7 +38,7 @@ function* synchronizeTime() {
 
 function* logout() {
   deleteJwtToken();
-  yield put(push(loginPage()));
+  yield put(push(homePage()));
 }
 
 function* logoutSaga() {

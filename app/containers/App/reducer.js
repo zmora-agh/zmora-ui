@@ -6,10 +6,13 @@
 
 import { fromJS, Map } from 'immutable';
 import moment from 'moment';
+import { pickBy } from 'lodash';
+
 import { GET_CURRENT_TIME_SUCCESS } from './constants';
 import { GET_CONTEST_SUCCESS } from '../ContestPage/constants';
 import { GET_CONTESTS_SUCCESS } from '../ContestsPage/constants';
-import { GET_PROBLEM_SUCCESS } from '../ProblemViewPage/constants';
+import { GET_PROBLEMS_SUCCESS } from '../ProblemsPage/constants';
+import { GET_PROBLEM_SUCCESS } from '../ProblemPage/constants';
 import { GET_PROBLEM_EXAMPLES_SUCCESS } from '../ProblemExamplesPage/constants';
 import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
 import { LOGIN_SUCCESS } from '../LoginForm/constants';
@@ -28,23 +31,38 @@ const initialState = fromJS({
   contestsFetched: false,
 });
 
+const stripIdProperty = (entity) => pickBy(entity, (value, key) => key !== 'id');
+
+const createProblem = (problem) => ({
+  shortcode: problem.shortcode,
+  ...problem.problem,
+});
+
+const createContest = (contest) => stripIdProperty(contest);
+
 function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return state.set('user', fromJS(action.user));
     case GET_CONTEST_SUCCESS:
-      return state.mergeIn(['contests', action.contestId], fromJS(action.contest));
+      return state.mergeIn(['contests', action.contestId], fromJS(createContest(action.contest)));
     case GET_CONTESTS_SUCCESS: {
       const contestsMap = fromJS(action.contests)
-        .reduce((result, contest) => result.set(contest.get('id'), contest), Map());
+        .reduce((result, contest) => result.set(contest.get('id'), createContest(contest)), Map());
       return state.mergeDeep({
         contests: contestsMap,
         contestsFetched: true,
       });
     }
+    case GET_PROBLEMS_SUCCESS: {
+      return state
+        .setIn(['contests', action.contestId, 'fetched', true])
+        .mergeDeepIn(['contests', action.contestId, 'problems'],
+          Map(action.problems.map((problem) => [problem.id, fromJS(createProblem(problem))])));
+    }
     case GET_PROBLEM_SUCCESS:
       return state.mergeIn(['contests', action.contestId, 'problems'],
-        Map([[action.problemId, fromJS(action.problem)]]));
+        Map([[action.problemId, fromJS(createProblem(action.problem))]]));
     case GET_PROBLEM_EXAMPLES_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'examples'],
         fromJS(action.examples));

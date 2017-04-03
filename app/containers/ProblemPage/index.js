@@ -7,18 +7,22 @@
 import React, { PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import Paper from 'material-ui/Paper';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
-import { connect } from 'react-redux';
-
-import ProblemViewPage from '../ProblemViewPage';
+import { makeSelectProblem } from '../App/selectors';
+import FetchView from '../../components/FetchView';
+import { problemContentPropTypes } from '../../components/ProblemView/constants';
+import ProblemView from '../../components/ProblemView';
 import ProblemExamplesPage from '../ProblemExamplesPage';
 import ProblemSubmitsPage from '../ProblemSubmitsPage';
 
+import { getProblem } from './actions';
 import messages from './messages';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
@@ -27,8 +31,10 @@ const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   },
 }));
 
-const iterableProps = (elems, props, indexedProp) =>
-  elems.map((elem, index) => React.createElement(elem, Object.assign({}, props, indexedProp(index)), {}));
+const getIds = (props) => ({
+  contestId: parseInt(props.params.contest_id, 10),
+  problemId: parseInt(props.params.problem_id, 10),
+});
 
 export class ProblemPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static contextTypes = {
@@ -38,17 +44,12 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
   constructor(props) {
     super(props);
     this.state = {
-      index: this.getIndex(props),
+      index: 0,
     };
   }
 
-  getIndex(props) {
-    switch (props.tab) {
-      case 'submits':
-        return 2;
-      default:
-        return 0;
-    }
+  componentDidMount() {
+    this.props.dispatch(getProblem(this.ids.contestId, this.ids.problemId));
   }
 
   handleChange = (event, index) => {
@@ -59,16 +60,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
     this.setState({ index });
   };
 
-  ids = {
-    contestId: parseInt(this.props.params.contest_id, 10),
-    problemId: parseInt(this.props.params.problem_id, 10),
-  };
-
-  tabs = [
-    ProblemViewPage,
-    ProblemExamplesPage,
-    ProblemSubmitsPage,
-  ];
+  ids = getIds(this.props);
 
   render() {
     if (this.props.children) return this.props.children;
@@ -91,7 +83,9 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           </Tabs>
         </div>
         <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex}>
-          {iterableProps(this.tabs, this.ids, (index) => ({ key: index, defer: this.state.index !== index }))}
+          <FetchView node={ProblemView} data={this.props.problem} />
+          <ProblemExamplesPage {...this.ids} defer={this.state.index !== 1} />
+          <ProblemSubmitsPage {...this.ids} defer={this.state.index !== 2} />
           <div>empty questions page</div>
         </SwipeableViews>
       </Paper>
@@ -100,8 +94,16 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 }
 
 ProblemPage.propTypes = {
-  params: React.PropTypes.object,
+  problem: PropTypes.shape(problemContentPropTypes),
   children: PropTypes.node,
+  dispatch: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state, props) => {
+  const ids = getIds(props);
+  return createStructuredSelector({
+    problem: makeSelectProblem(ids.contestId, ids.problemId),
+  });
 };
 
 function mapDispatchToProps(dispatch) {
@@ -110,4 +112,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapDispatchToProps)(ProblemPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProblemPage);

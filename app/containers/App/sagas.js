@@ -1,41 +1,25 @@
-import { call, takeLatest, put } from 'redux-saga/effects';
+import { call, put, take, takeLatest } from 'redux-saga/effects';
 import moment from 'moment';
-import { getCurrentUserURL, getCurrentTimeURL } from '../../urls';
+import { push } from 'react-router-redux';
 
-import {
-  getCurrentUserSuccess,
-  getCurrentTimeSuccess,
-} from './actions';
-import {
-  GET_CURRENT_USER,
-} from './constants';
+import { getCurrentTimeURL } from '../../urls';
+import { homePage } from '../../localUrls';
+import { fetchWithCredentials } from '../../utils/sagas';
+import { deleteJwtToken, haveJwtToken } from '../../utils/auth';
+import { LOGIN_SUCCESS } from '../LoginForm/constants';
 
-function fetchCurrentUser() {
-  return fetch(getCurrentUserURL(), {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-    },
-  }).then((response) => response.json());
-}
+import { getCurrentTimeSuccess } from './actions';
+import { LOGOUT } from './constants';
+
 
 function fetchCurrentTime() {
-  return fetch(getCurrentTimeURL(), {
+  return fetchWithCredentials(getCurrentTimeURL(), {
     method: 'GET',
     headers: {
       Accept: 'application/json',
     },
   }).then((response) => response.json())
     .then((response) => moment(response.time));
-}
-
-function* getCurrentUser() {
-  const user = yield call(fetchCurrentUser);
-  yield put(getCurrentUserSuccess(user));
-}
-
-function* getCurrentUserSaga() {
-  yield takeLatest(GET_CURRENT_USER, getCurrentUser);
 }
 
 function* sleep(time) {
@@ -45,14 +29,24 @@ function* sleep(time) {
 function* synchronizeTime() {
 // eslint-disable-next-line no-constant-condition
   while (true) {
+    if (!haveJwtToken()) yield take(LOGIN_SUCCESS);
     const time = yield call(fetchCurrentTime);
     yield put(getCurrentTimeSuccess(time));
     yield* sleep(5 * 60 * 1000);
   }
 }
 
+function* logout() {
+  deleteJwtToken();
+  yield put(push(homePage()));
+}
+
+function* logoutSaga() {
+  yield takeLatest(LOGOUT, logout);
+}
+
 // All sagas to be loaded
 export default [
-  getCurrentUserSaga,
   synchronizeTime,
+  logoutSaga,
 ];

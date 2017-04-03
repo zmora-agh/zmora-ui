@@ -22,6 +22,7 @@ import makeSelectRightMenu from './selectors';
 
 import Settings from '../../svg-icons/settings';
 import ExitToApp from '../../svg-icons/exit-to-app';
+import { logout } from '../App/actions';
 
 const styleSheet = createStyleSheet('RightMenu', () => ({
   root: {
@@ -45,7 +46,7 @@ const styleSheet = createStyleSheet('RightMenu', () => ({
 const RightMenu = (props, context) => {
   const classes = context.styleManager.render(styleSheet);
 
-  const { rightMenu, user, ...other } = props;
+  const { rightMenu, user, dispatch, ...other } = props;
   return (
     <Paper {...other} className={classes.root}>
       <div style={{ flex: 1 }}>
@@ -65,7 +66,9 @@ const RightMenu = (props, context) => {
         <Divider />
         <Layout container direction="row">
           <Layout item xs={6}><IconButton className={classes.button}><Settings /></IconButton></Layout>
-          <Layout item xs={6}><IconButton className={classes.button}><ExitToApp /></IconButton></Layout>
+          <Layout item xs={6}><IconButton className={classes.button} onClick={() => dispatch(logout())}>
+            <ExitToApp />
+          </IconButton></Layout>
         </Layout>
       </div>
     </Paper>);
@@ -84,6 +87,7 @@ RightMenu.propTypes = {
     email: React.PropTypes.string,
     avatar: React.PropTypes.string,
   }).isRequired,
+  dispatch: React.PropTypes.func.isRequired,
 };
 
 RightMenu.contextTypes = {
@@ -92,8 +96,10 @@ RightMenu.contextTypes = {
 
 const mapStateToProps = makeSelectRightMenu;
 
-function mapDispatchToProps() {
-  return {};
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu);

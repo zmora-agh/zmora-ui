@@ -2,10 +2,13 @@
 // They are all wrapped in the App component, which should contain the navbar etc
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
+import withProps from 'recompose/withProps';
+
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 import { exactOnly, fetchName } from 'utils/routing';
+import { loginPage } from './localUrls';
+import { requireAuth } from './utils/auth';
 
-import withProps from 'recompose/withProps';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -43,6 +46,7 @@ export default function createRoutes(store) {
     }, {
       path: '/contests',
       name: 'Contests',
+      onEnter: requireAuth,
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/ContestsPage/sagas'),
@@ -62,6 +66,7 @@ export default function createRoutes(store) {
         {
           path: ':contest_id',
           name: 'contestPage',
+          onEnter: requireAuth,
           prettifyParam: fetchName(store, ['app', 'contests', ':contest_id', 'name']),
           getComponent(location, cb) {
             const importModules = Promise.all([
@@ -82,6 +87,7 @@ export default function createRoutes(store) {
             {
               path: 'problems',
               name: 'Problems',
+              onEnter: requireAuth,
               getComponent(location, cb) {
                 import('containers/ProblemsPage')
                   .then(loadExactModule(cb))
@@ -93,6 +99,7 @@ export default function createRoutes(store) {
                   name: 'Problem',
                   prettifyParam: fetchName(store,
                     ['app', 'contests', ':contest_id', 'problems', ':problem_id', 'name']),
+                  onEnter: requireAuth,
                   getComponent(location, cb) {
                     const importModules = Promise.all([
                       import('containers/ProblemViewPage/sagas'),
@@ -114,6 +121,7 @@ export default function createRoutes(store) {
                     {
                       path: 'submits',
                       name: 'Submits',
+                      onEnter: requireAuth,
                       getComponent(location, cb) {
                         import('containers/ProblemPage')
                           .then((component) => cb(null, withProps(() => ({ tab: 'submits' }))(component.default)))
@@ -137,6 +145,7 @@ export default function createRoutes(store) {
             }, {
               path: 'ranking',
               name: 'Ranking',
+              onEnter: requireAuth,
               getComponent(location, cb) {
                 import('containers/RankingPage')
                   .then(loadModule(cb))
@@ -145,6 +154,7 @@ export default function createRoutes(store) {
             }, {
               path: 'questions',
               name: 'Questions',
+              onEnter: requireAuth,
               getComponent(location, cb) {
                 import('containers/QuestionsPage')
                   .then(loadModule(cb))
@@ -161,6 +171,26 @@ export default function createRoutes(store) {
         import('containers/AboutPage')
           .then(loadModule(cb))
           .catch(errorLoading);
+      },
+    }, {
+      path: loginPage(),
+      name: 'loginForm',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/LoginForm/reducer'),
+          import('containers/LoginForm/sagas'),
+          import('containers/LoginForm'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('loginForm', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
       },
     }, {
       path: '*',

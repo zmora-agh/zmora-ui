@@ -5,7 +5,6 @@ import { makeSelectProblem } from '../App/selectors';
 import { GET_PROBLEM } from './constants';
 import { getProblemSuccess } from './actions';
 
-
 function fetchProblem(contestId, problemId) {
   return fetchWithCredentials(getProblemURL(contestId, problemId), {
     method: 'GET',

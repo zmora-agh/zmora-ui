@@ -5,7 +5,8 @@ export const getCurrentTimeURL = () => `${API_URL}time`;
 
 export const getContestsURL = () => `${API_URL}contests`;
 export const getContestURL = (contestId) => `${getContestsURL()}/${contestId}`;
-export const getProblemURL = (contestId, problemId) => `${getContestURL(contestId)}/problems/${problemId}`;
+export const getProblemsURL = (contestId) => `${getContestURL(contestId)}/problems`;
+export const getProblemURL = (contestId, problemId) => `${getProblemsURL(contestId)}/${problemId}`;
 export const getProblemExamplesURL = (contestId, problemId) => `${getProblemURL(contestId, problemId)}/examples`;
 export const getProblemSubmitsURL = (contestId, problemId) => `${getProblemURL(contestId, problemId)}/submits`;
 

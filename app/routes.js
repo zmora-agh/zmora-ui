@@ -89,29 +89,39 @@ export default function createRoutes(store) {
               name: 'Problems',
               onEnter: requireAuth,
               getComponent(location, cb) {
-                import('containers/ProblemsPage')
-                  .then(loadExactModule(cb))
-                  .catch(errorLoading);
+                const importModules = Promise.all([
+                  import('containers/ProblemsPage/sagas'),
+                  import('containers/ProblemsPage'),
+                ]);
+
+                const renderRoute = loadExactModule(cb);
+
+                importModules.then(([sagas, component]) => {
+                  injectSagas(sagas.default);
+                  renderRoute(component);
+                });
+
+                importModules.catch(errorLoading);
               },
               childRoutes: [
                 {
                   path: ':problem_id',
                   name: 'Problem',
                   prettifyParam: fetchName(store,
-                    ['app', 'contests', ':contest_id', 'problems', ':problem_id', 'name']),
+                    ['app', 'contests', ':contest_id', 'problems', ':problem_id', 'shortcode']),
                   onEnter: requireAuth,
                   getComponent(location, cb) {
                     const importModules = Promise.all([
-                      import('containers/ProblemViewPage/sagas'),
                       import('containers/ProblemExamplesPage/sagas'),
                       import('containers/ProblemSubmitsPage/sagas'),
+                      import('containers/ProblemPage/sagas'),
                       import('containers/ProblemPage'),
                     ]);
 
-                    importModules.then(([viewPageSagas, examplesSagas, submitsSagas, component]) => {
-                      injectSagas(viewPageSagas.default);
+                    importModules.then(([examplesSagas, submitsSagas, sagas, component]) => {
                       injectSagas(examplesSagas.default);
                       injectSagas(submitsSagas.default);
+                      injectSagas(sagas.default);
                       cb(null, withProps(() => ({ tab: 'content' }))(component.default));
                     });
 

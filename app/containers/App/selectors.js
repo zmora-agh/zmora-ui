@@ -39,16 +39,19 @@ const makeSelectContest = (contestId) => createSelector(
 
 const makeSelectContests = () => createSelector(
   selectAppDomain(),
-  (substate) => {
-    // FIXME define complete selector return value shape
-    const contestShape = (contest) => contest.has('owners');
-    return substate.get('contestsFetched') ? substate.get('contests').filter(contestShape).toJS() : undefined;
-  }
+  (substate) => substate.get('contestsFetched') ? substate.get('contests').toJS() : undefined
 );
 
 const makeSelectTime = () => createSelector(
   selectAppDomain(),
   (substate) => substate.get('time').toJS()
+);
+
+const makeSelectProblems = (contestId) => createSelector(
+  selectAppDomain(),
+  (substate) => substate.getIn(['contests', contestId, 'fetched']) ?
+    substate.getIn(['contests', contestId, 'problems']).toJS() :
+    undefined
 );
 
 const makeSelectProblem = (contestId, problemId) => createSelector(
@@ -82,6 +85,7 @@ export {
   makeSelectContest,
   makeSelectContests,
   makeSelectTime,
+  makeSelectProblems,
   makeSelectProblem,
   makeSelectProblemExamples,
   makeSelectProblemSubmits,

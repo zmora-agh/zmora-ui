@@ -1,12 +1,15 @@
 import { call, put, take, takeLatest } from 'redux-saga/effects';
 import moment from 'moment';
 import { push } from 'react-router-redux';
+import jwtDecode from 'jwt-decode';
+
 
 import { getCurrentTimeURL } from '../../urls';
 import { homePage } from '../../localUrls';
 import { fetchWithCredentials } from '../../utils/sagas';
-import { deleteJwtToken, haveJwtToken } from '../../utils/auth';
+import { deleteJwtToken, getJwtToken, haveJwtToken } from '../../utils/auth';
 import { LOGIN_SUCCESS } from '../LoginForm/constants';
+import { loginSuccess } from '../LoginForm/actions';
 
 import { getCurrentTimeSuccess } from './actions';
 import { LOGOUT } from './constants';
@@ -45,8 +48,14 @@ function* logoutSaga() {
   yield takeLatest(LOGOUT, logout);
 }
 
+function* decodeJWT() {
+  if (!haveJwtToken()) return;
+  yield put(loginSuccess(jwtDecode(getJwtToken()).dat));
+}
+
 // All sagas to be loaded
 export default [
   synchronizeTime,
   logoutSaga,
+  decodeJWT,
 ];

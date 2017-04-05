@@ -1,6 +1,5 @@
 import { API_URL } from './constants';
 
-export const getCurrentUserURL = () => `${API_URL}currentUser`;
 export const getCurrentTimeURL = () => `${API_URL}time`;
 
 export const getContestsURL = () => `${API_URL}contests`;
@@ -11,3 +10,4 @@ export const getProblemExamplesURL = (contestId, problemId) => `${getProblemURL(
 export const getProblemSubmitsURL = (contestId, problemId) => `${getProblemURL(contestId, problemId)}/submits`;
 
 export const loginURL = () => `${API_URL}users/auth`;
+export const registerURL = () => `${API_URL}users`;

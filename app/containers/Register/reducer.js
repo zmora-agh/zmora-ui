@@ -1,6 +1,6 @@
 /*
  *
- * RegisterForm reducer
+ * Register reducer
  *
  */
 
@@ -12,10 +12,10 @@ import {
 
 const initialState = fromJS({ error: undefined });
 
-function registerFormReducer(state = initialState, action) {
+function registerReducer(state = initialState, action) {
   switch (action.type) {
     case REGISTER_SUCCESS:
-      return state.set('error', false);
+      return state.delete('error');
     case REGISTER_ERROR:
       return state.set('error', true);
     default:
@@ -23,4 +23,4 @@ function registerFormReducer(state = initialState, action) {
   }
 }
 
-export default registerFormReducer;
+export default registerReducer;

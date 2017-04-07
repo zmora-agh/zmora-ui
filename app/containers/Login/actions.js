@@ -1,6 +1,6 @@
 /*
  *
- * LoginForm actions
+ * Login actions
  *
  */
 

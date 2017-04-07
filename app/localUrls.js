@@ -1,3 +1,2 @@
-
-export const loginPage = () => '/login';
+export const loginPage = () => '/auth';
 export const homePage = () => '/';

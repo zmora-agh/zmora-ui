@@ -184,23 +184,21 @@ export default function createRoutes(store) {
       },
     }, {
       path: loginPage(),
-      name: 'loginForm',
+      name: 'Authentication',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/LoginForm/reducer'),
-          import('containers/LoginForm/sagas'),
-          import('containers/RegisterForm/reducer'),
-          import('containers/RegisterForm/sagas'),
+          import('containers/Login/sagas'),
+          import('containers/Register/sagas'),
+          import('containers/AuthPage/reducer'),
           import('containers/AuthPage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([loginReducer, loginSagas, registerReducer, registerSagas, component]) => {
-          injectReducer('loginForm', loginReducer.default);
+        importModules.then(([loginSagas, registerSagas, authPageReducer, component]) => {
           injectSagas(loginSagas.default);
-          injectReducer('registerForm', registerReducer.default);
           injectSagas(registerSagas.default);
+          injectReducer('auth', authPageReducer.default);
           renderRoute(component);
         });
 

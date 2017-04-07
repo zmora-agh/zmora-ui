@@ -10,6 +10,8 @@ import { FormattedMessage } from 'react-intl';
 import { Card, CardHeader, CardContent, CardActions } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import { InputLabel } from 'material-ui/Input';
+import { LinearProgress } from 'material-ui/Progress';
 
 import { loginPropType } from './constants';
 import messages from './messages';
@@ -44,6 +46,7 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
     return (
       <Card>
         <CardHeader title={<FormattedMessage {...messages.header} />} />
+        {this.props.loading && <LinearProgress mode="indeterminate" />}
         <form onSubmit={this.onSubmit}>
           <CardContent>
             <TextField
@@ -51,6 +54,7 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
               required
               value={this.state.username}
               error={this.props.error}
+              disabled={this.props.loading}
               onChange={this.onUsernameChange}
             />
             <TextField
@@ -59,17 +63,21 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
               required
               value={this.state.password}
               error={this.props.error}
+              disabled={this.props.loading}
               onChange={this.onPasswordChange}
             />
+            {this.props.error && <InputLabel error><FormattedMessage {...messages.invalid} /></InputLabel>}
           </CardContent>
           <CardActions>
             <Button
               type="submit"
               primary
               raised
-              disabled={!this.state.username || !this.state.password}
+              disabled={!this.state.username || !this.state.password || this.props.loading}
               style={{ width: '100%' }}
-            ><FormattedMessage {...messages.submit} /></Button>
+            >
+              <FormattedMessage {...messages.submit} />
+            </Button>
           </CardActions>
         </form>
       </Card>

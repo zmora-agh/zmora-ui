@@ -7,19 +7,23 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   header: {
-    id: 'app.components.Login.header',
+    id: 'app.components.LoginForm.header',
     defaultMessage: 'Login',
   },
   username: {
-    id: 'app.components.Login.username',
+    id: 'app.components.LoginForm.username',
     defaultMessage: 'Username',
   },
   password: {
-    id: 'app.components.Login.password',
+    id: 'app.components.LoginForm.password',
     defaultMessage: 'Password',
   },
   submit: {
-    id: 'app.components.Login.submit',
+    id: 'app.components.LoginForm.submit',
     defaultMessage: 'Log me in',
+  },
+  invalid: {
+    id: 'app.components.LoginForm.invalid',
+    defaultMessage: 'Invalid username or password',
   },
 });

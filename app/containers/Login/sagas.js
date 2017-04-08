@@ -7,7 +7,6 @@ import { setJwtToken } from '../../utils/auth';
 import { loginError, loginSuccess } from './actions';
 import { LOGIN } from './constants';
 
-
 function sendLogin(credentials) {
   return checkedFetch(loginURL(), {
     method: 'POST',

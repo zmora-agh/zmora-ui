@@ -8,8 +8,8 @@ import { getCurrentTimeURL } from '../../urls';
 import { homePage } from '../../localUrls';
 import { fetchWithCredentials } from '../../utils/sagas';
 import { deleteJwtToken, getJwtToken, haveJwtToken } from '../../utils/auth';
-import { LOGIN_SUCCESS } from '../LoginForm/constants';
-import { loginSuccess } from '../LoginForm/actions';
+import { LOGIN_SUCCESS } from '../Login/constants';
+import { loginSuccess } from '../Login/actions';
 
 import { getCurrentTimeSuccess } from './actions';
 import { LOGOUT } from './constants';

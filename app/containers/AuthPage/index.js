@@ -4,31 +4,20 @@
  *
  */
 
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import RegisterForm from '../RegisterForm';
-import LoginForm from '../LoginForm';
+import React from 'react';
 
-export class AuthPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    return (
-      <div>
-        <LoginForm />
-        <RegisterForm />
-      </div>
-    );
-  }
+import Layout from 'material-ui/Layout';
+import RegisterForm from '../Register';
+import Login from '../Login';
+
+
+function AuthPage() {
+  return (
+    <Layout container>
+      <Layout item xs={12} md={6}><Login /></Layout>
+      <Layout item xs={12} md={6}><RegisterForm /></Layout>
+    </Layout>
+  );
 }
 
-AuthPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
-
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-export default connect(null, mapDispatchToProps)(AuthPage);
+export default AuthPage;

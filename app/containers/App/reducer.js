@@ -15,7 +15,7 @@ import { GET_PROBLEMS_SUCCESS } from '../ProblemsPage/constants';
 import { GET_PROBLEM_SUCCESS } from '../ProblemPage/constants';
 import { GET_PROBLEM_EXAMPLES_SUCCESS } from '../ProblemExamplesPage/constants';
 import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
-import { LOGIN_SUCCESS } from '../LoginForm/constants';
+import { LOGIN_SUCCESS } from '../Login/constants';
 
 const initialState = fromJS({
   user: {

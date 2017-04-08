@@ -1,6 +1,6 @@
 /*
  *
- * RegisterForm actions
+ * Register actions
  *
  */
 

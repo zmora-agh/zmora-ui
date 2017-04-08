@@ -1,17 +1,19 @@
 /*
  *
- * RegisterForm
+ * Register
  *
  */
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'material-ui/Button';
 import { createStructuredSelector } from 'reselect';
-import makeSelectRegisterForm from './selectors';
+
+import { Button } from 'material-ui/Button';
+
+import { makeSelectRegister } from '../AuthPage/selectors';
 import { register } from './actions';
 
-class RegisterForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class Register extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
@@ -20,17 +22,21 @@ class RegisterForm extends React.PureComponent { // eslint-disable-line react/pr
         >
           Register
         </Button>
+        {this.props.register.error && 'error'}
       </div>
     );
   }
 }
 
-RegisterForm.propTypes = {
+Register.propTypes = {
+  register: PropTypes.shape({
+    error: PropTypes.bool,
+  }),
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  RegisterForm: makeSelectRegisterForm(),
+  register: makeSelectRegister(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -39,4 +45,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

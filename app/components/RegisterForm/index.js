@@ -79,12 +79,16 @@ class RegisterForm extends React.PureComponent { // eslint-disable-line react/pr
           <CardContent>
             <ErrorTextField
               label={<FormattedMessage {...messages.username} />}
+              error={!valid.username && this.state.username}
+              errorText={<FormattedMessage {...messages.validUsername} />}
               required
               onChange={this.onUsernameChange}
             />
             <ErrorTextField
               label={<FormattedMessage {...messages.password} />}
               required
+              error={!valid.password && this.state.password}
+              errorText={<FormattedMessage {...messages.validPassword} />}
               type="password"
               onChange={this.onPasswordChange}
             />
@@ -103,6 +107,8 @@ class RegisterForm extends React.PureComponent { // eslint-disable-line react/pr
             />
             <ErrorTextField
               required
+              error={!valid.email && this.state.email}
+              errorText={<FormattedMessage {...messages.wrongEmail} />}
               label={<FormattedMessage {...messages.email} />}
               onChange={(event) => this.setState({ email: event.target.value })}
             />

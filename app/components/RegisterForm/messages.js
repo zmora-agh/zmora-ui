@@ -42,4 +42,21 @@ export default defineMessages({
     id: 'app.components.RegisterForm.error',
     defaultMessage: 'User can\'be registered',
   },
+  validUsername: {
+    id: 'app.components.RegisterForm.validUsername',
+    defaultMessage: 'Username must be of 3 to 15 characters. Use big or small letters and following special ' +
+    'characters: .-_',
+  },
+  validPassword: {
+    id: 'app.components.RegisterForm.passwordValid',
+    defaultMessage: 'Password should have at least 8 characters',
+  },
+  validName: {
+    id: 'app.components.RegisterForm.validName',
+    defaultMessage: 'Use big or small letters separated only by spaces',
+  },
+  wrongEmail: {
+    id: 'app.components.RegisterForm.wrongEmail',
+    defaultMessage: 'Wrong email',
+  },
 });

@@ -8,22 +8,29 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { Button } from 'material-ui/Button';
+import RegisterForm from '../../components/RegisterForm';
 
 import { makeSelectRegister } from '../AuthPage/selectors';
 import { register } from './actions';
 
 class Register extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(nick, name, about, email, password) {
+    this.props.dispatch(register(nick, name, about, email, password));
+  }
+
   render() {
     return (
-      <div>
-        <Button
-          onClick={() => this.props.dispatch(register('test', 'test name', 'sth about me', 'test@sadf.pl', 'szatan'))}
-        >
-          Register
-        </Button>
-        {this.props.register.error && 'error'}
-      </div>
+      <RegisterForm
+        error={this.props.register.error}
+        onSubmit={this.onSubmit}
+        loading={this.props.register.loading}
+      />
     );
   }
 }
@@ -31,6 +38,7 @@ class Register extends React.PureComponent { // eslint-disable-line react/prefer
 Register.propTypes = {
   register: PropTypes.shape({
     error: PropTypes.bool,
+    loading: PropTypes.bool,
   }),
   dispatch: PropTypes.func.isRequired,
 };

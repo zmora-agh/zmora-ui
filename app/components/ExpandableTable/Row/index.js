@@ -48,6 +48,7 @@ export class ExpandableTableRow extends React.PureComponent {
   static propTypes = {
     children: React.PropTypes.node,
     header: React.PropTypes.node,
+    startExpanded: React.PropTypes.bool,
   };
 
   static contextTypes = {
@@ -56,7 +57,7 @@ export class ExpandableTableRow extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = { expanded: false };
+    this.state = { expanded: props.startExpanded || false };
   }
 
   toggleExpanded() {

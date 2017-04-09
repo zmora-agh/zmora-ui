@@ -14,4 +14,8 @@ export default defineMessages({
     id: 'app.components.AboutPage.header',
     defaultMessage: 'This is AboutPage component!',
   },
+  aboutUs: {
+    id: 'app.components.AboutPage.aboutUs',
+    defaultMessage: 'Who we are?'
+  }
 });

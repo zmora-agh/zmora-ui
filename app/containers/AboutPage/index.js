@@ -12,6 +12,7 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Layout from 'material-ui/Layout';
 import Avatar from 'material-ui/Avatar';
+import Chip from 'material-ui/Chip';
 
 import messages from './messages';
 
@@ -22,11 +23,15 @@ const styleSheet = createStyleSheet('zmoraAboutPage', (theme) => ({
     maxWidth: 950,
     margin: '0 auto',
   },
+  headerMessage: {
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
   paper: {
     padding: 16,
     color: theme.palette.text.secondary,
   },
-  bigAvatar: {
+  avatar: {
     margin: '0 auto',
     width: 150,
     height: 150,
@@ -41,8 +46,6 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
   };
-
-
   render() {
     const classes = this.context.styleManager.render(styleSheet);
     return (
@@ -50,69 +53,77 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
         <div className={classes.root}>
           <Layout container gutter={24}>
             <Layout item xs={12}>
-              <FormattedMessage {...messages.title} />
+              <div className={classes.headerMessage}> <FormattedMessage {...messages.title} /></div>
+            </Layout>
+            <Layout item xs="{12}">
+              <Chip
+                avatar={<Avatar src={require('../../img/GitHub-Mark-64px.png')} />}
+                label="zmora-agh"
+                className={classes.chip}
+              />
             </Layout>
             <Layout item xs={12}>
               <FormattedMessage {...messages.aboutText} />
             </Layout>
             <Layout style={{ padding: 20 }} item xs={3}>
               <Avatar
+                title="text"
                 alt="Feels Man"
                 src={require('../../img/avatar.png')}
-                className={classes.bigAvatar}
+                className={classes.avatar}
               />
             </Layout>
             <Layout style={{ padding: 20 }} item xs={3}>
               <Avatar
                 alt="Feels Man"
                 src={require('../../img/avatar.png')}
-                className={classes.bigAvatar}
+                className={classes.avatar}
               />
             </Layout>
             <Layout style={{ padding: 20 }} item xs={3}>
               <Avatar
                 alt="Feels Man"
                 src={require('../../img/avatar.png')}
-                className={classes.bigAvatar}
+                className={classes.avatar}
               />
             </Layout>
             <Layout style={{ padding: 20 }} item xs={3}>
               <Avatar
                 alt="Feels Man"
                 src={require('../../img/avatar.png')}
-                className={classes.bigAvatar}
+                className={classes.avatar}
               />
             </Layout>
             <Layout style={{ padding: 20 }} item xs={3}>
               <Avatar
                 alt="Feels Man"
                 src={require('../../img/avatar.png')}
-                className={classes.bigAvatar}
+                className={classes.avatar}
               />
             </Layout>
             <Layout style={{ padding: 20 }} item xs={3}>
               <Avatar
                 alt="Feels Man"
                 src={require('../../img/avatar.png')}
-                className={classes.bigAvatar}
+                className={classes.avatar}
               />
             </Layout>
             <Layout style={{ padding: 20 }} item xs={3}>
               <Avatar
                 alt="Feels Man"
                 src={require('../../img/avatar.png')}
-                className={classes.bigAvatar}
+                className={classes.avatar}
               />
             </Layout>
             <Layout style={{ padding: 20 }} item xs={3}>
               <Avatar
                 alt="Feels Man"
                 src={require('../../img/avatar.png')}
-                className={classes.bigAvatar}
+                className={classes.avatar}
               />
             </Layout>
             <Layout item xs={12}>
-              <FormattedMessage {...messages.title} />
+              <FormattedMessage {...messages.aboutUs} />
             </Layout>
           </Layout>
         </div>

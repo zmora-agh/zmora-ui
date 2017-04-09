@@ -8,14 +8,14 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
   title: {
     id: 'app.containers.AboutPage.title',
-    defaultMessage: 'About',
+    defaultMessage: 'About Zmora',
   },
-  header: {
-    id: 'app.components.AboutPage.header',
+  aboutText: {
+    id: 'app.components.AboutPage.aboutText',
     defaultMessage: 'This is AboutPage component!',
   },
   aboutUs: {
     id: 'app.components.AboutPage.aboutUs',
-    defaultMessage: 'Who we are?'
-  }
+    defaultMessage: 'Who we are?',
+  },
 });

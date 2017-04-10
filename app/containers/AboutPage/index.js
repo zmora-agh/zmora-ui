@@ -43,7 +43,6 @@ const styleSheet = createStyleSheet('zmoraAboutPage', (theme) => ({
 }));
 
 function handleClick() {
-  window.location = 'https://github.com/zmora-agh';
 }
 
 export class AboutPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -61,12 +60,14 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
               <div className={classes.headerMessage}><FormattedMessage {...messages.title} /></div>
             </Layout>
             <Layout item xs={12}>
-              <Chip
-                avatar={<Avatar src={require('../../img/GitHub-Mark-64px.png')} />}
-                label="zmora-agh"
-                onClick={handleClick}
-                className={classes.chip}
-              />
+              <a href="https://github.com/zmora-agh">
+                <Chip
+                  avatar={<Avatar src={require('../../img/GitHub-Mark-64px.png')} />}
+                  label="zmora-agh"
+                  onClick={handleClick}
+                  className={classes.chip}
+                />
+              </a>
             </Layout>
             <Layout item xs={12}>
               <FormattedMessage {...messages.aboutText} />

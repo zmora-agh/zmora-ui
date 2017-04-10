@@ -3,7 +3,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import _ from 'lodash';
 import { deleteJwtToken, getJwtToken } from './auth';
-import { loginPage } from '../localUrls';
+import { loginPage } from '../local-urls';
 
 export function bootstrap(sagas, exitSaga) {
   function* bootstrapSaga() {

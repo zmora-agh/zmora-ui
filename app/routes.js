@@ -6,7 +6,7 @@ import withProps from 'recompose/withProps';
 
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 import { exactOnly, fetchName } from 'utils/routing';
-import { loginPage } from './localUrls';
+import { loginPage } from './local-urls';
 import { requireAuth } from './utils/auth';
 
 

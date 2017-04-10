@@ -42,10 +42,15 @@ const styleSheet = createStyleSheet('zmoraAboutPage', (theme) => ({
   },
 }));
 
+function handleClick() {
+  window.location = 'https://github.com/zmora-agh';
+}
+
 export class AboutPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
   };
+
   render() {
     const classes = this.context.styleManager.render(styleSheet);
     return (
@@ -53,12 +58,13 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
         <div className={classes.root}>
           <Layout container gutter={24}>
             <Layout item xs={12}>
-              <div className={classes.headerMessage}> <FormattedMessage {...messages.title} /></div>
+              <div className={classes.headerMessage}><FormattedMessage {...messages.title} /></div>
             </Layout>
-            <Layout item xs="{12}">
+            <Layout item xs={12}>
               <Chip
                 avatar={<Avatar src={require('../../img/GitHub-Mark-64px.png')} />}
                 label="zmora-agh"
+                onClick={handleClick}
                 className={classes.chip}
               />
             </Layout>

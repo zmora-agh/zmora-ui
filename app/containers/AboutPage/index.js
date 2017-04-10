@@ -36,10 +36,6 @@ const styleSheet = createStyleSheet('zmoraAboutPage', (theme) => ({
     width: 150,
     height: 150,
   },
-  row: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
 }));
 
 function handleClick() {

@@ -5,7 +5,9 @@
 */
 
 import React from 'react';
-// import styled from 'styled-components';
+
+import { problemContentPropTypes } from '../ProblemView/constants';
+
 import ExpandableTableRow from '../ExpandableTable/Row';
 import ProblemsTable from '../ProblemsTable';
 
@@ -22,7 +24,11 @@ function ProblemCategory(props) {
 }
 
 ProblemCategory.propTypes = {
-
+  name: React.PropTypes.string.isRequired,
+  onProblemClick: React.PropTypes.func.isRequired,
+  onPdfClick: React.PropTypes.func.isRequired,
+  onSubmitClick: React.PropTypes.func.isRequired,
+  problems: React.PropTypes.arrayOf(React.PropTypes.shape(problemContentPropTypes)),
 };
 
 export default ProblemCategory;

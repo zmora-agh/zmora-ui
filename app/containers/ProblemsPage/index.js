@@ -10,8 +10,6 @@ import { createStructuredSelector } from 'reselect';
 import _ from 'lodash';
 
 import { makeSelectProblems } from '../App/selectors';
-import { problemContentPropTypes } from '../../components/ProblemView/constants';
-import FetchProgress from '../../components/FetchProgress';
 import ProblemCategory from '../../components/ProblemCategory';
 import ExpandableTable from '../../components/ExpandableTable';
 import { getProblems } from './actions';
@@ -29,27 +27,27 @@ export class ProblemsPage extends React.PureComponent { // eslint-disable-line r
       shortcode: 'DUP',
       category: 'Logiczne myślenie',
       name: 'Jesteś kretynem?',
-      gradingType: 'JDG',
       points: '15',
       deadline: '15.06.2017',
+      description: '',
     },
     {
       id: 2,
       shortcode: 'WKURW',
       category: 'Logiczne myślenie',
       name: 'Implementacja listy w 18 językach',
-      gradingType: 'INT',
       points: '21',
       deadline: '13.06.2017',
+      description: '',
     },
     {
       id: 3,
       shortcode: 'JPRDL',
       category: 'BoiTZO',
       name: 'AHP',
-      gradingType: 'IMPOSSIBRU',
       points: '0',
       deadline: 'You should know',
+      description: '',
     },
   ];
 
@@ -60,7 +58,7 @@ export class ProblemsPage extends React.PureComponent { // eslint-disable-line r
 
     return (<ExpandableTable>
       {Object.keys(categories).map((category) => <ProblemCategory
-        key={category.id}
+        key={category}
         onProblemClick={(problemId) => console.log(problemId)}
         onPdfClick={(problemId) => console.log(problemId)}
         onSubmitClick={(problemId) => console.log(problemId)}
@@ -72,7 +70,6 @@ export class ProblemsPage extends React.PureComponent { // eslint-disable-line r
 }
 
 ProblemsPage.propTypes = {
-  problems: PropTypes.objectOf(PropTypes.shape(problemContentPropTypes)),
   children: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
 };

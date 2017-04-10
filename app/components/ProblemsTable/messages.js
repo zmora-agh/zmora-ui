@@ -14,10 +14,6 @@ export default defineMessages({
     id: 'app.components.ProblemsTable.title',
     defaultMessage: 'Title',
   },
-  gradingType: {
-    id: 'app.components.ProblemsTable.gradingType',
-    defaultMessage: 'Grading type',
-  },
   points: {
     id: 'app.components.ProblemsTable.points',
     defaultMessage: 'Points',

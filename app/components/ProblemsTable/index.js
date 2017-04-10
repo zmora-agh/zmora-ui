@@ -5,6 +5,8 @@
  */
 
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
 import {
   Table,
   TableHead,
@@ -12,10 +14,10 @@ import {
   TableRow,
   TableCell,
 } from 'material-ui/Table';
-// import styled from 'styled-components';
-
 import Button from 'material-ui/Button';
-import { FormattedMessage } from 'react-intl';
+
+import { problemContentPropTypes } from '../ProblemView/constants';
+
 import messages from './messages';
 import FileUpload from '../../svg-icons/file-upload';
 import Pdf from '../../svg-icons/picture-as-pdf';
@@ -27,7 +29,6 @@ function ProblemsTable(props) {
         <TableRow>
           <TableCell><FormattedMessage {...messages.shortcode} /></TableCell>
           <TableCell><FormattedMessage {...messages.title} /></TableCell>
-          <TableCell><FormattedMessage {...messages.gradingType} /></TableCell>
           <TableCell><FormattedMessage{...messages.points} /></TableCell>
           <TableCell><FormattedMessage{...messages.deadline} /></TableCell>
           <TableCell />
@@ -39,7 +40,6 @@ function ProblemsTable(props) {
           <TableRow key={problem.shortcode} onClick={() => props.onRowClick(problem.id)}>
             <TableCell>{problem.shortcode}</TableCell>
             <TableCell>{problem.name}</TableCell>
-            <TableCell>{problem.gradingType}</TableCell>
             <TableCell>{problem.points}</TableCell>
             <TableCell>{problem.deadline}</TableCell>
             <TableCell>
@@ -49,12 +49,12 @@ function ProblemsTable(props) {
           </TableRow>)
         }
       </TableBody>
-
     </Table>
-
   );
 }
 
-ProblemsTable.propTypes = {};
+ProblemsTable.propTypes = {
+  problems: React.PropTypes.arrayOf(React.PropTypes.shape(problemContentPropTypes)).isRequired,
+};
 
 export default ProblemsTable;

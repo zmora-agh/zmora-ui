@@ -1,7 +1,9 @@
 import { fork, take, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import _ from 'lodash';
 import { deleteJwtToken, getJwtToken } from './auth';
+import { loginPage } from '../localUrls';
 
 export function bootstrap(sagas, exitSaga) {
   function* bootstrapSaga() {
@@ -52,11 +54,13 @@ export function fetchWithCredentials(input, init) {
     _.merge(opts, { headers: { Authorization: `Bearer ${jwtToken}` } });
   }
   _.merge(opts, init);
-  try {
-    return checkedFetch(input, opts);
-  } catch (e) {
-    if (e instanceof RestError && e.status === 403) deleteJwtToken();
 
-    throw e;
-  }
+  return checkedFetch(input, opts).catch((e) => {
+    if (e instanceof RestError && e.status === 403) {
+      deleteJwtToken();
+      browserHistory.push(loginPage());
+    } else {
+      throw e;
+    }
+  });
 }

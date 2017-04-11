@@ -14,7 +14,7 @@ import { makeSelectContest } from '../App/selectors';
 import { CONTEST_TYPE } from './constants';
 import { getContest } from './actions';
 
-import FetchProgress from '../../components/FetchProgress';
+import FetchView from '../../components/FetchView';
 import ContestSummary from '../../components/ContestSummary';
 
 const getContestId = (props) => parseInt(props.params.contest_id, 10);
@@ -30,9 +30,7 @@ export class ContestPage extends React.PureComponent { // eslint-disable-line re
   render() {
     if (this.props.children) return this.props.children;
 
-    return this.props.contest ?
-      <ContestSummary {...this.props.contest} /> :
-      <FetchProgress />;
+    return <FetchView>{this.props.contest && <ContestSummary {...this.props.contest} />}</FetchView>;
   }
 }
 

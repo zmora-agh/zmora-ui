@@ -83,7 +83,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           </Tabs>
         </div>
         <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex}>
-          <FetchView node={ProblemView} data={this.props.problem} />
+          <FetchView>{this.props.problem && <ProblemView {...this.props.problem} />}</FetchView>
           <ProblemExamplesPage {...this.ids} defer={this.state.index !== 1} />
           <ProblemSubmitsPage {...this.ids} defer={this.state.index !== 2} />
           <div>empty questions page</div>

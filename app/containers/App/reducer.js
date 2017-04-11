@@ -33,12 +33,9 @@ const initialState = fromJS({
 
 const stripIdProperty = (entity) => pickBy(entity, (value, key) => key !== 'id');
 
-const createProblem = (problem) => ({
-  shortcode: problem.shortcode,
-  category: problem.category,
-  points: problem.points,
-  deadline: problem.deadline,
-  ...problem.problem,
+const flattenProblem = ({ problem, ...meta }) => ({
+  ...meta,
+  ...problem,
 });
 
 const createContest = (contest) => stripIdProperty(contest);
@@ -61,11 +58,11 @@ function contestsPageReducer(state = initialState, action) {
       return state
         .setIn(['contests', action.contestId, 'fetched', true])
         .mergeDeepIn(['contests', action.contestId, 'problems'],
-          Map(action.problems.map((problem) => [problem.id, fromJS(createProblem(problem))])));
+          Map(action.problems.map((problem) => [problem.id, fromJS(flattenProblem(problem))])));
     }
     case GET_PROBLEM_SUCCESS:
       return state.mergeIn(['contests', action.contestId, 'problems'],
-        Map([[action.problemId, fromJS(createProblem(action.problem))]]));
+        Map([[action.problemId, fromJS(flattenProblem(action.problem))]]));
     case GET_PROBLEM_EXAMPLES_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'examples'],
         fromJS(action.examples));

@@ -21,6 +21,7 @@ import Layout from 'material-ui/Layout';
 import AppToolbar from '../../components/AppToolbar';
 import Navigation from '../../components/Navigation';
 import RightMenu from '../RightMenu';
+import Submit from '../Submit';
 
 import { makeSelectApp } from './selectors';
 
@@ -98,6 +99,7 @@ class App extends React.PureComponent {
             <RightMenu />
           </Layout>
         </Layout>
+        <Submit />
       </div>
     );
   }

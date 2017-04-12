@@ -54,7 +54,7 @@ function contestsPageReducer(state = initialState, action) {
         contestsFetched: true,
       });
     }
-    case GET_PROBLEMS_SUCCESS: {
+    case GET_PROBLEMS_SUCCESS:
       /* Merging empty Map with state.mergeDeepIn() does not create empty Map inside tree, so we have to handle this
        * special case manually: */
       return (action.problems.length === 0 ?
@@ -65,7 +65,6 @@ function contestsPageReducer(state = initialState, action) {
           Map(action.problems.map((problem) => [problem.id, fromJS(flattenProblem(problem))]))))
       // ...after all, set fetched flag
         .setIn(['contests', action.contestId, 'fetched'], true);
-    }
     case GET_PROBLEM_SUCCESS:
       return state.mergeIn(['contests', action.contestId, 'problems'],
         Map([[action.problemId, fromJS(flattenProblem(action.problem))]]));

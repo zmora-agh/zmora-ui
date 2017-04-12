@@ -40,24 +40,30 @@ function ProblemsTable(props) {
       </TableHead>
 
       <TableBody>
-        {Object.keys(props.problems).map((problemId) =>
-          <TableRow
+        {Object.keys(props.problems).map((problemId) => {
+          const problem = props.problems[problemId];
+          const numProblemId = parseInt(problemId, 10);
+          return (<TableRow
             key={props.problems[problemId].shortcode}
             onClick={() => props.onRowClick(problemId)}
             style={{ cursor: 'pointer' }}
           >
-            <TableCell>{props.problems[problemId].shortcode}</TableCell>
-            <TableCell>{props.problems[problemId].name}</TableCell>
-            <TableCell>{props.problems[problemId].basePoints}</TableCell>
-            <TableCell>{moment(props.problems[problemId].softDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-            <TableCell>{moment(props.problems[problemId].hardDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-            <TableCell>{!props.problems[problemId].optional && <Done />}</TableCell>
+            <TableCell>{problem.shortcode}</TableCell>
+            <TableCell>{problem.name}</TableCell>
+            <TableCell>{problem.basePoints}</TableCell>
+            <TableCell>{moment(problem.softDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+            <TableCell>{moment(problem.hardDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+            <TableCell>{!problem.optional && <Done />}</TableCell>
             <TableCell>
-              <Button onClick={(e) => { e.stopPropagation(); props.onSubmitClick(problemId); }}><FileUpload /></Button>
-              <Button onClick={(e) => { e.stopPropagation(); props.onPdfClick(problemId); }}><Pdf /></Button>
+              <Button onClick={(e) => { e.stopPropagation(); props.onSubmitClick(numProblemId); }}>
+                <FileUpload />
+              </Button>
+              <Button onClick={(e) => { e.stopPropagation(); props.onPdfClick(numProblemId); }}>
+                <Pdf />
+              </Button>
             </TableCell>
-          </TableRow>)
-        }
+          </TableRow>);
+        })}
       </TableBody>
     </Table>
   );

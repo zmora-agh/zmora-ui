@@ -4,7 +4,6 @@ import { bootstrap, fetchWithCredentials } from '../../utils/sagas';
 import { submitSuccess, submitError } from './actions';
 import { SUBMIT } from './constants';
 
-
 function sendSubmit({ files, contestId, problemId }) {
   const formData = new FormData();
   Object.keys(files).map((file) => formData.append(file, files[file]));

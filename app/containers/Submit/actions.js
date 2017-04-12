@@ -1,6 +1,6 @@
 /*
  *
- * SubmitForm actions
+ * Submit actions
  *
  */
 
@@ -8,6 +8,8 @@ import {
   SUBMIT,
   SUBMIT_ERROR,
   SUBMIT_SUCCESS,
+  SUBMIT_MODAL_OPEN,
+  SUBMIT_MODAL_CLOSE,
 } from './constants';
 
 export function submit(files, contestId, problemId) {
@@ -30,5 +32,19 @@ export function submitSuccess() {
 export function submitError() {
   return {
     type: SUBMIT_ERROR,
+  };
+}
+
+export function submitModalOpen(contestId, problemId) {
+  return {
+    type: SUBMIT_MODAL_OPEN,
+    contestId,
+    problemId,
+  };
+}
+
+export function submitModalClose() {
+  return {
+    type: SUBMIT_MODAL_CLOSE,
   };
 }

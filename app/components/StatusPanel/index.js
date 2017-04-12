@@ -10,6 +10,10 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import { FormattedMessage } from 'react-intl';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Button from 'material-ui/Button';
+import {
+  Card,
+  CardContent,
+} from 'material-ui/Card';
 import Person from '../../svg-icons/person';
 import Laptop from '../../svg-icons/laptop';
 import Solved from '../../svg-icons/action-done';
@@ -18,9 +22,10 @@ import SolvedAll from '../../svg-icons/action-done-all';
 import messages from './messages';
 
 const styleSheet = createStyleSheet('StatusStyleSheet', () => ({
-  textStyle: { 'margin-top': '5px', 'font-size': '16px' },
-  iconStyle: { 'margin-bottom': '6px', 'margin-right': '12px' },
-  showMoreButtonStyle: { float: 'right' },
+  header: { color: '#000000' },
+  textStyle: { 'margin-top': '5px', 'font-size': '21px', color: '#000000' },
+  iconStyle: { 'margin-bottom': '6px', 'margin-right': '12px', color: '#000000' },
+  showMoreButtonStyle: { float: 'right', 'font-size': '18px', color: '#000000' },
   dataElement: { 'margin-bottom': '6px' },
 }));
 
@@ -50,37 +55,38 @@ function StatusPanel(props, context) {
   const classes = context.styleManager.render(styleSheet);
 
   return (
-    <div>
-      <Text type="headline" component="h2">
-        <FormattedMessage {...messages.header} />
-      </Text>
+    <Card style={{ backgroundColor: '#FF6833', height: 300 }}>
+      <CardContent>
+        <Text type="headline" component="h2" className={classes.header}>
+          <FormattedMessage {...messages.header} />
+        </Text>
 
-      <Text component="div" className={classes.textStyle}>
-        <StatusElement
-          icon={<Laptop className={classes.iconStyle} />}
-          title={<FormattedMessage {...messages.active} />} data="3"
-        />
-        <StatusElement
-          icon={<Person className={classes.iconStyle} />}
-          title={<FormattedMessage {...messages.logged} />} data="54"
-        />
-        <StatusElement
-          icon={<Solved className={classes.iconStyle} />}
-          title={<FormattedMessage {...messages.solved} />}
-          data="17"
-        />
-        <StatusElement
-          icon={<SolvedAll className={classes.iconStyle} />}
-          title={<FormattedMessage {...messages.solvedAll} />}
-          data="255"
-        />
-        <StatusElement title={<FormattedMessage {...messages.lastLogged} />} data={<b>nologin</b>} />
-      </Text>
-
-      <Button compact primary className={classes.showMoreButtonStyle}>
-        <FormattedMessage {...messages.showMoreButton} />
-      </Button>
-    </div>
+        <Text component="div" className={classes.textStyle}>
+          <StatusElement
+            icon={<Laptop className={classes.iconStyle} />}
+            title={<FormattedMessage {...messages.active} />} data="3"
+          />
+          <StatusElement
+            icon={<Person className={classes.iconStyle} />}
+            title={<FormattedMessage {...messages.logged} />} data="54"
+          />
+          <StatusElement
+            icon={<Solved className={classes.iconStyle} />}
+            title={<FormattedMessage {...messages.solved} />}
+            data="17"
+          />
+          <StatusElement
+            icon={<SolvedAll className={classes.iconStyle} />}
+            title={<FormattedMessage {...messages.solvedAll} />}
+            data="255"
+          />
+          <StatusElement title={<FormattedMessage {...messages.lastLogged} />} data={<b>nologin</b>} />
+        </Text>
+        <Button compact primary className={classes.showMoreButtonStyle}>
+          <FormattedMessage {...messages.showMoreButton} />
+        </Button>
+      </CardContent>
+    </Card>
   );
 }
 

@@ -12,7 +12,7 @@ import {
 
 function InfoCard(props) {
   return (
-    <Card>
+    <Card style={{backgroundColor: props.color, height: 280}}>
       <CardContent style={{ backgroundColor: props.color }}>
         {props.children}
       </CardContent>
@@ -23,6 +23,7 @@ function InfoCard(props) {
 InfoCard.propTypes = {
   children: React.PropTypes.any,
   color: React.PropTypes.any,
+  fontColor: React.PropTypes.any
 };
 
 

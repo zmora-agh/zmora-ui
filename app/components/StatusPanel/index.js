@@ -14,6 +14,10 @@ import Person from '../../svg-icons/person';
 import Laptop from '../../svg-icons/laptop';
 import Solved from '../../svg-icons/action-done';
 import SolvedAll from '../../svg-icons/action-done-all';
+import {
+  Card,
+  CardContent,
+} from 'material-ui/Card';
 
 import messages from './messages';
 
@@ -50,8 +54,9 @@ function StatusPanel(props, context) {
   const classes = context.styleManager.render(styleSheet);
 
   return (
-    <div>
-      <Text type="headline" component="h2">
+    <Card style={{ backgroundColor:"#FF6833", height: 280}}>
+      <CardContent>
+      <Text type="headline" component="h2" style={{color:"#FFFFFF"}}>
         <FormattedMessage {...messages.header} />
       </Text>
 
@@ -80,7 +85,8 @@ function StatusPanel(props, context) {
       <Button compact primary className={classes.showMoreButtonStyle}>
         <FormattedMessage {...messages.showMoreButton} />
       </Button>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 

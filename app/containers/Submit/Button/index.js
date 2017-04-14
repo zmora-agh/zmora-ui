@@ -9,7 +9,7 @@ import { submitModalOpen } from '../actions';
 function Button(props) {
   return (<IconButton
     style={props.style}
-    onClick={() => props.dispatch(submitModalOpen())}
+    onClick={(e) => { props.dispatch(submitModalOpen()); e.stopPropagation() }}
   >
     <FileUpload />
   </IconButton>);

@@ -15,13 +15,14 @@ import {
   TableRow,
   TableCell,
 } from 'material-ui/Table';
-import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+
+import SubmitButton from '../../containers/Submit/Button';
 
 import { problemRowPropType } from './constants';
 import messages from './messages';
 
 import Done from '../../svg-icons/action-done';
-import FileUpload from '../../svg-icons/file-upload';
 import Pdf from '../../svg-icons/picture-as-pdf';
 
 function ProblemsTable(props) {
@@ -55,12 +56,10 @@ function ProblemsTable(props) {
             <TableCell>{moment(problem.hardDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
             <TableCell>{!problem.optional && <Done />}</TableCell>
             <TableCell>
-              <Button onClick={(e) => { e.stopPropagation(); props.onSubmitClick(numProblemId); }}>
-                <FileUpload />
-              </Button>
-              <Button onClick={(e) => { e.stopPropagation(); props.onPdfClick(numProblemId); }}>
+              <SubmitButton />
+              <IconButton onClick={(e) => { e.stopPropagation(); props.onPdfClick(numProblemId); }}>
                 <Pdf />
-              </Button>
+              </IconButton>
             </TableCell>
           </TableRow>);
         })}

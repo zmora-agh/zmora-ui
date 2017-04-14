@@ -19,6 +19,7 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import Search from '../Search';
 import ServerTime from '../../containers/ServerTime';
+import SubmitButton from '../../containers/Submit/Button';
 import Ripple from '../../components/Ripple';
 
 import ArrowIcon from '../../svg-icons/keyboard-arrow-right';
@@ -103,6 +104,7 @@ class AppToolbar extends React.Component {
               onMouseMove={this.moveRipple}
             />
             <ServerTime style={this.state.inSearch ? { display: 'none' } : {}} />
+            <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />
             <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
           </Layout>
         </Toolbar>

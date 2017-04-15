@@ -16,7 +16,6 @@ import Text from 'material-ui/Text';
 import { problemPage } from '../../local-urls';
 import { makeSelectProblems } from '../App/selectors';
 import { problemRowPropType } from '../../components/ProblemsTable/constants';
-import { submitModalOpen } from '../Submit/actions';
 
 import FetchView from '../../components/FetchView';
 import ProblemCategory from '../../components/ProblemCategory';
@@ -53,11 +52,11 @@ export class ProblemsPage extends React.PureComponent { // eslint-disable-line r
       <ExpandableTable>
         {Object.keys(categories).map((category) => <ProblemCategory
           key={category}
+          name={category}
+          contestId={this.contestId}
+          problems={categories[category]}
           onProblemClick={(problemId) => this.props.dispatch(push(problemPage(this.contestId, problemId)))}
           onPdfClick={(problemId) => console.log(problemId)}
-          onSubmitClick={(problemId) => this.props.dispatch(submitModalOpen(this.contestId, problemId))}
-          problems={categories[category]}
-          name={category}
         />)}
       </ExpandableTable>}
     </FetchView>);

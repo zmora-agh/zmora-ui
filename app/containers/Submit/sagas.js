@@ -5,6 +5,10 @@ import { submitSuccess, submitError } from './actions';
 import { SUBMIT } from './constants';
 
 function sendSubmit({ files, contestId, problemId }) {
+  if (!contestId || !problemId) {
+    throw Error('Submit requires both contest and problem IDs.');
+  }
+
   const formData = new FormData();
   Object.keys(files).map((file) => formData.append(file, files[file]));
 
@@ -24,7 +28,7 @@ function* submit({ data }) {
   }
 }
 
-function* submitSaga() {
+export function* submitSaga() {
   yield takeLatest(SUBMIT, submit);
 }
 

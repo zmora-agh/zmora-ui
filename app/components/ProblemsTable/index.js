@@ -56,7 +56,7 @@ function ProblemsTable(props) {
             <TableCell>{moment(problem.hardDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
             <TableCell>{!problem.optional && <Done />}</TableCell>
             <TableCell>
-              <SubmitButton />
+              <SubmitButton contestId={props.contestId} problemId={numProblemId} />
               <IconButton onClick={(e) => { e.stopPropagation(); props.onPdfClick(numProblemId); }}>
                 <Pdf />
               </IconButton>
@@ -69,6 +69,7 @@ function ProblemsTable(props) {
 }
 
 ProblemsTable.propTypes = {
+  contestId: React.PropTypes.number.isRequired,
   problems: React.PropTypes.objectOf(React.PropTypes.shape(problemRowPropType)).isRequired,
 };
 

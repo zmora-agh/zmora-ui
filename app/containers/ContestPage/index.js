@@ -10,6 +10,7 @@ import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { makeSelectContest } from '../App/selectors';
+import { submitSetContext } from '../Submit/actions';
 
 import { CONTEST_TYPE } from './constants';
 import { getContest } from './actions';
@@ -22,10 +23,17 @@ const getContestId = (props) => parseInt(props.params.contest_id, 10);
 export class ContestPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.dispatch(getContest(getContestId(this.props)));
+    this.props.dispatch(submitSetContext({ contestId: this.contestId }));
     if (!this.props.children) {
-      this.props.dispatch(push(`/contests/${this.props.params.contest_id}/problems`));
+      this.props.dispatch(push(`/contests/${this.contestId}/problems`));
     }
   }
+
+  componentWillUnmount() {
+    this.props.dispatch(submitSetContext({ contestId: undefined }));
+  }
+
+  contestId = parseInt(this.props.params.contest_id, 10);
 
   render() {
     if (this.props.children) return this.props.children;

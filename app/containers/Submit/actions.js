@@ -10,6 +10,7 @@ import {
   SUBMIT_SUCCESS,
   SUBMIT_MODAL_OPEN,
   SUBMIT_MODAL_CLOSE,
+  SUBMIT_SET_CONTEXT,
 } from './constants';
 
 export function submit(files, contestId, problemId) {
@@ -48,3 +49,11 @@ export function submitModalClose() {
     type: SUBMIT_MODAL_CLOSE,
   };
 }
+
+export function submitSetContext(context) {
+  return {
+    type: SUBMIT_SET_CONTEXT,
+    ...context,
+  };
+}
+

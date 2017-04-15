@@ -14,12 +14,20 @@ export default defineMessages({
     id: 'app.components.ProblemsTable.title',
     defaultMessage: 'Title',
   },
-  points: {
-    id: 'app.components.ProblemsTable.points',
-    defaultMessage: 'Points',
+  basePoints: {
+    id: 'app.components.ProblemsTable.basePoints',
+    defaultMessage: 'Base points',
   },
-  deadline: {
-    id: 'app.components.ProblemsTable.deadline',
-    defaultMessage: 'Deadline',
+  softDeadline: {
+    id: 'app.components.ProblemsTable.softDeadline',
+    defaultMessage: 'Soft deadline',
+  },
+  hardDeadline: {
+    id: 'app.components.ProblemsTable.hardDeadline',
+    defaultMessage: 'Hard deadline',
+  },
+  optional: {
+    id: 'app.components.ProblemsTable.optional',
+    defaultMessage: 'Optional',
   },
 });

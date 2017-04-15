@@ -35,6 +35,9 @@ const stripIdProperty = (entity) => pickBy(entity, (value, key) => key !== 'id')
 
 const createProblem = (problem) => ({
   shortcode: problem.shortcode,
+  category: problem.category,
+  points: problem.points,
+  deadline: problem.deadline,
   ...problem.problem,
 });
 

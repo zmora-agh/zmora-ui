@@ -5,7 +5,7 @@ import jwtDecode from 'jwt-decode';
 
 
 import { getCurrentTimeURL } from '../../urls';
-import { homePage } from '../../local-urls';
+import { homePage } from '../../localUrls';
 import { fetchWithCredentials } from '../../utils/sagas';
 import { deleteJwtToken, getJwtToken, haveJwtToken } from '../../utils/auth';
 import { LOGIN_SUCCESS } from '../Login/constants';

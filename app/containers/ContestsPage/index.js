@@ -10,7 +10,7 @@ import makeSelectContestsPage from './selectors';
 import { getContests } from './actions';
 
 import FetchProgress from '../../components/FetchProgress';
-import ContestsTable from '../../components/ContestsTable';
+import { ContestsTable } from '../../components/ContestsTable';
 
 class ContestsPage extends React.PureComponent {
   static propTypes = {
@@ -28,8 +28,10 @@ class ContestsPage extends React.PureComponent {
     if (this.props.children) return this.props.children;
 
     return this.props.contests ?
-      <ContestsTable contests={this.props.contests} offset={this.props.offset} /> :
-      <FetchProgress />;
+      <ContestsTable
+        contests={this.props.contests}
+        offset={this.props.offset}
+      /> : <FetchProgress />;
   }
 }
 

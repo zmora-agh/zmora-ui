@@ -1,4 +1,4 @@
-import { loginPage } from '../local-urls';
+import { loginPage } from '../localUrls';
 
 
 const jwtTokenKey = 'jwtToken';

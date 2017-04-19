@@ -7,9 +7,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-
+import { Text } from 'material-ui/Text';
 import FetchView from '../../components/FetchView';
-import ContestsTable from '../../components/ContestsTable';
+import { ContestsTable } from '../../components/ContestsTable';
 
 import makeSelectContestsPage from './selectors';
 import { getContests } from './actions';

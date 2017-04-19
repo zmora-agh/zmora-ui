@@ -6,11 +6,14 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
+
+import FetchView from '../../components/FetchView';
+import ContestsTable from '../../components/ContestsTable';
+
 import makeSelectContestsPage from './selectors';
 import { getContests } from './actions';
-
-import FetchProgress from '../../components/FetchProgress';
-import { ContestsTable } from '../../components/ContestsTable';
+import messages from './messages';
 
 class ContestsPage extends React.PureComponent {
   static propTypes = {
@@ -27,11 +30,14 @@ class ContestsPage extends React.PureComponent {
   render() {
     if (this.props.children) return this.props.children;
 
-    return this.props.contests ?
-      <ContestsTable
-        contests={this.props.contests}
-        offset={this.props.offset}
-      /> : <FetchProgress />;
+    // FIXME This code is totally unusable as ContestsTable render() fails when this.props.contests === {}
+    if (this.props.contests && Object.keys(this.props.contests).length === 0) {
+      return <Text><FormattedMessage {...messages.empty} /></Text>;
+    }
+
+    return (<FetchView>
+      {this.props.contests && <ContestsTable contests={this.props.contests} offset={this.props.offset} />}
+    </FetchView>);
   }
 }
 

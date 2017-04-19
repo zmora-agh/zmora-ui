@@ -11,7 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { getProblemExamples } from './actions';
 import { makeSelectProblemExamples } from '../App/selectors';
 
-import FetchProgress from '../../components/FetchProgress';
+import FetchView from '../../components/FetchView';
 import ProblemExamples from '../../components/ProblemExamples';
 import { examplesPropType } from '../../components/ProblemExamples/constants';
 
@@ -34,9 +34,7 @@ export class ProblemExamplesPage extends React.PureComponent { // eslint-disable
   }
 
   render() {
-    return this.props.examples ?
-      <ProblemExamples examples={this.props.examples} /> :
-      <FetchProgress />;
+    return <FetchView>{this.props.examples && <ProblemExamples examples={this.props.examples} />}</FetchView>;
   }
 }
 

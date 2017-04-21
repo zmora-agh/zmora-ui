@@ -47,8 +47,8 @@ const defaultFetchOptions = () => ({
   },
 });
 
-export function fetchWithCredentials(input, init) {
-  const opts = defaultFetchOptions();
+export function fetchWithCredentials(input, init, mergeOpts = true) {
+  const opts = mergeOpts ? defaultFetchOptions() : {};
   const jwtToken = getJwtToken();
   if (jwtToken) {
     _.merge(opts, { headers: { Authorization: `Bearer ${jwtToken}` } });

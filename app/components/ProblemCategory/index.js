@@ -14,10 +14,10 @@ import ProblemsTable from '../ProblemsTable';
 function ProblemCategory(props) {
   return (<ExpandableTableRow header={<span style={{ flex: 1 }}>{props.name}</span>} startExpanded>
     <ProblemsTable
+      contestId={props.contestId}
+      problems={props.problems}
       onRowClick={props.onProblemClick}
       onPdfClick={props.onPdfClick}
-      onSubmitClick={props.onSubmitClick}
-      problems={props.problems}
     />
   </ExpandableTableRow>
   );
@@ -25,9 +25,9 @@ function ProblemCategory(props) {
 
 ProblemCategory.propTypes = {
   name: React.PropTypes.string.isRequired,
+  contestId: React.PropTypes.number.isRequired,
   onProblemClick: React.PropTypes.func.isRequired,
   onPdfClick: React.PropTypes.func.isRequired,
-  onSubmitClick: React.PropTypes.func.isRequired,
   problems: React.PropTypes.objectOf(React.PropTypes.shape(problemContentPropTypes)),
 };
 

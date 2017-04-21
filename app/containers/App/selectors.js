@@ -18,10 +18,16 @@ const makeSelectLocationState = () => {
 };
 
 const selectAppDomain = () => (state) => state.get('app');
+const selectUiDomain = () => (state) => state.get('ui');
 
 const makeSelectApp = () => createSelector(
   selectAppDomain(),
-  (substate) => substate.toJS()
+  (app) => app.toJS()
+);
+
+const makeSelectUi = () => createSelector(
+  selectUiDomain(),
+  (ui) => ui.toJS()
 );
 
 const makeSelectUser = () => createSelector(
@@ -80,6 +86,7 @@ const makeSelectProblemSubmits = (contestId, problemId) => createSelector(
 
 export {
   makeSelectApp,
+  makeSelectUi,
   makeSelectUser,
   makeSelectLocationState,
   makeSelectContest,

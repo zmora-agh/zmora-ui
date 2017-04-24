@@ -27,22 +27,23 @@ const styleSheet = createStyleSheet('HomePageLayout', () => ({
   },
   lightTextStyle: {
     color: '#FFFFFF',
-    lineHeight: '28px',
-    fontSize: 22,
+    lineHeight: '30px',
+    fontSize: 21,
   },
   darkTextStyle: {
     color: '#000000',
-    lineHeight: '28px',
-    fontSize: 22,
+    lineHeight: '30px',
+    fontSize: 21,
   },
   logoStyle: {
-    height: 320,
-    width: 220,
+    height: 300,
+    width: 205,
     margin: '0 auto',
   },
 }));
 
 const logo = require('../../logo.jpg');
+const cardHeight = 270;
 
 function HomePage(props, context) {
   const classes = context.styleManager.render(styleSheet);
@@ -52,7 +53,7 @@ function HomePage(props, context) {
       <Layout container className={classes.root}>
         <Layout container item xs={12}>
           <Layout item xs={7}>
-            <Info color="#03A9F4" height={300}>
+            <Info color="#03A9F4" height={cardHeight}>
               <Text className={classes.lightTextStyle}>
                 <strong>Zmora</strong> to zautomatyzowana platforma edukacyjna, kierowana do studentów
                 kierunków informatycznych <strong>AGH</strong>. W przystępny sposób sprawdza poprawność i
@@ -61,17 +62,17 @@ function HomePage(props, context) {
             </Info>
           </Layout>
           <Layout item xs={5}>
-            <StatusPanel />
+            <StatusPanel height={cardHeight} />
           </Layout>
         </Layout>
         <Layout container item xs={12}>
           <Layout item xs={4} style={{ textAlign: 'center' }}>
-            <Info color="#4CB050" height={350}>
+            <Info color="#4CB050" height={cardHeight + 50}>
               <img src={logo} className={classes.logoStyle} alt="logo" />
             </Info>
           </Layout>
           <Layout item xs={8}>
-            <Info color="#FEC106" height={350}>
+            <Info color="#FEC106" height={cardHeight + 50}>
               <Text className={classes.darkTextStyle}>
                 Nazwa została wybrana nieprzypadkowo - w mitologii słowiańskiej zmora to istota pół demoniczna,
                 która nocą męczy śpiących i wysysa z nich krew. Taki scenariusz również jest możliwy - wystarczy

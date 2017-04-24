@@ -23,7 +23,7 @@ import messages from './messages';
 
 const styleSheet = createStyleSheet('StatusStyleSheet', () => ({
   header: { color: '#000000' },
-  textStyle: { 'margin-top': '5px', 'font-size': '21px', color: '#000000' },
+  textStyle: { 'margin-top': '5px', 'font-size': '20px', color: '#000000' },
   iconStyle: { 'margin-bottom': '6px', 'margin-right': '12px', color: '#000000' },
   showMoreButtonStyle: { float: 'right', 'font-size': '18px', color: '#000000' },
   dataElement: { 'margin-bottom': '6px' },
@@ -55,7 +55,7 @@ function StatusPanel(props, context) {
   const classes = context.styleManager.render(styleSheet);
 
   return (
-    <Card style={{ backgroundColor: '#FF6833', height: 300 }}>
+    <Card style={{ backgroundColor: '#FF6833', height: props.height }}>
       <CardContent>
         <Text type="headline" component="h2" className={classes.header}>
           <FormattedMessage {...messages.header} />
@@ -89,6 +89,10 @@ function StatusPanel(props, context) {
     </Card>
   );
 }
+
+StatusPanel.propTypes = {
+  height: React.PropTypes.number.isRequired,
+};
 
 StatusPanel.contextTypes = {
   styleManager: customPropTypes.muiRequired,

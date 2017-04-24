@@ -55,7 +55,12 @@ function StatusPanel(props, context) {
   const classes = context.styleManager.render(styleSheet);
 
   return (
-    <Card style={{ backgroundColor: '#FF6833', height: props.height }}>
+    <Card
+      style={{
+        boxShadow: '6px 10px 10px rgba(0,0,0,0.19), 3px 6px 6px rgba(0,0,0,0.23)',
+        backgroundColor: '#FF6833',
+        height: props.height }}
+    >
       <CardContent>
         <Text type="headline" component="h2" className={classes.header}>
           <FormattedMessage {...messages.header} />

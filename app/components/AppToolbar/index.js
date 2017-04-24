@@ -17,6 +17,8 @@ import classNames from 'classnames';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
+import '!style-loader!css-loader!../../fonts/index.css';
+
 import Search from '../Search';
 import ServerTime from '../../containers/ServerTime';
 import Ripple from '../../components/Ripple';
@@ -39,6 +41,23 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   },
   activeBreadcrumbItem: {
     color: theme.palette.getContrastText(theme.palette.primary[500]),
+  },
+  firstTitleLetter: {
+    textShadowOffset: { width: '20px', height: '20px' },
+    textShadowRadius: '20px',
+    textShadowColor: '#000000',
+    font: '56pt Sanctuary',
+    position: 'relative',
+    marginBottom: '20px',
+  },
+  titleLetter: {
+    textShadowOffset: { width: 4, height: 4 },
+    textShadowRadius: 2,
+    textShadowColor: '#000000',
+    font: '38pt Sanctuary',
+    position: 'absolute',
+    marginTop: '15px',
+    marginLeft: '32px',
   },
 }));
 
@@ -84,7 +103,10 @@ class AppToolbar extends React.Component {
         <Toolbar className={toolbarClass} >
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
           <Layout item xs={2}>
-            <Text type="title" colorInherit>Zmora</Text>
+            <div style={{ display: 'flex', flexDirection: 'row', position: 'relative', marginLeft: '20px' }}>
+              <Text colorInherit className={classes.firstTitleLetter}>Z</Text>
+              <Text colorInherit className={classes.titleLetter}>mora</Text>
+            </div>
           </Layout>
           {!this.state.inSearch ? <Layout item xs={7}>
             <Breadcrumbs

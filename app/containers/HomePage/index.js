@@ -17,30 +17,43 @@ import Layout from 'material-ui/Layout';
 import Text from 'material-ui/Text';
 import StatusPanel from '../../components/StatusPanel';
 import Info from '../../components/InfoCard';
+import StatusInfoList from '../../components/StatusInfoList/index';
 
-const styleSheet = createStyleSheet('GuttersLayout', () => ({
-  root: {
-    flexGrow: 1,
-  },
+const styleSheet = createStyleSheet('HomePageLayout', () => ({
   paper: {
-    height: 140,
-    width: 100,
+    padding: '0em 1em',
+    textAlign: 'justify',
+    backgroundColor: '#DDDDDD',
   },
-  control: {
-    padding: 12,
+  lightTextStyle: {
+    color: '#FFFFFF',
+    lineHeight: '28px',
+    fontSize: 22,
+  },
+  darkTextStyle: {
+    color: '#000000',
+    lineHeight: '28px',
+    fontSize: 22,
+  },
+  logoStyle: {
+    height: 320,
+    width: 220,
+    margin: '0 auto',
   },
 }));
+
+const logo = require('../../logo.jpg');
 
 function HomePage(props, context) {
   const classes = context.styleManager.render(styleSheet);
 
   return (
-    <Paper style={{ padding: '0em 1em', textAlign: 'justify', backgroundColor: '#DDDDDD' }}>
+    <Paper className={classes.paper}>
       <Layout container className={classes.root}>
         <Layout container item xs={12}>
           <Layout item xs={7}>
             <Info color="#03A9F4" height={300}>
-              <Text style={{ color: '#FFFFFF', lineHeight: '28px', fontSize: '22' }}>
+              <Text className={classes.lightTextStyle}>
                 <strong>Zmora</strong> to zautomatyzowana platforma edukacyjna, kierowana do studentów
                 kierunków informatycznych <strong>AGH</strong>. W przystępny sposób sprawdza poprawność i
                 wydajność rozwiązań na specjalnie przystosowanych do tego zadaniach. System ocenia sprawiedliwie
@@ -52,20 +65,31 @@ function HomePage(props, context) {
           </Layout>
         </Layout>
         <Layout container item xs={12}>
-          <Layout item xs={4}>
+          <Layout item xs={4} style={{ textAlign: 'center' }}>
             <Info color="#4CB050" height={350}>
-              <img src="../../logo.jpg" style={{ height: 320, width: 220, marginLeft: 95 }} alt="logo" />
+              <img src={logo} className={classes.logoStyle} alt="logo" />
             </Info>
           </Layout>
           <Layout item xs={8}>
             <Info color="#FEC106" height={350}>
-              <Text style={{ lineHeight: '28px', fontSize: '22' }}>
+              <Text className={classes.darkTextStyle}>
                 Nazwa została wybrana nieprzypadkowo - w mitologii słowiańskiej zmora to istota pół demoniczna,
                 która nocą męczy śpiących i wysysa z nich krew. Taki scenariusz również jest możliwy - wystarczy
                 nie rozwiązywać zadań w terminie lub próbować zaliczać je podstępem.<br /><br />
                 Tak czy inaczej - <strong>powodzenia!</strong>
               </Text>
             </Info>
+          </Layout>
+        </Layout>
+        <Layout container item xs={12}>
+          <Layout item xs={12}>
+            <StatusInfoList
+              statuses={[{ title: 'Zaliczone', info: 'Uniknięto zemsty Zmory, zadanie zaliczone' },
+              { title: 'Po terminie', info: 'Do roboty' },
+              { title: 'Niezaliczone', info: 'Zemsta zmory jest bliska, życie Ci nie miłe, wędrowcze?' },
+              { title: 'Tekst', info: 'Co tu własciwie ma być w tej tabelce? :D' },
+              ]}
+            />
           </Layout>
         </Layout>
       </Layout>

@@ -24,7 +24,7 @@ const styleSheet = createStyleSheet('StatusInfoList', () => ({
     backgroundColor: '#3F51B5',
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 26,
   },
   odd: {
     backgroundColor: '#6E7CC7',
@@ -33,10 +33,10 @@ const styleSheet = createStyleSheet('StatusInfoList', () => ({
     backgroundColor: '#9CA6D7',
   },
   textTitle: {
-    fontSize: 18,
+    fontSize: 22,
   },
   textInfo: {
-    fontSize: 18,
+    fontSize: 22,
   },
 }));
 
@@ -79,10 +79,12 @@ class StatusInfoList extends React.Component {
     const rows = this.renderRows();
 
     return (
-      <Table>
+      <Table style={{ boxShadow: '6px 10px 10px rgba(0,0,0,0.19), 4px 7px 7px rgba(0,0,0,0.26)' }}>
         <TableHead>
           <TableRow className={classes.header}>
-            <TableCell><Text className={classes.headerText}><FormattedMessage {...messages.header} /></Text></TableCell>
+            <TableCell>
+              <Text className={classes.headerText}><FormattedMessage {...messages.header} /></Text>
+            </TableCell>
             <TableCell />
           </TableRow>
         </TableHead>

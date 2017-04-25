@@ -43,15 +43,21 @@ const styleSheet = createStyleSheet('HomePageLayout', () => ({
 
 const logo = require('../../resources/logo.jpg');
 const cardHeight = 340;
+const verticalGutter = 16;
+const horizontalGutter = 16;
+const descriptionColor = '#03A9F4';
+const statusPaneColor = '#FE5722';
+const logoPaneColor = '#4CB050';
+const namePaneColor = '#FEC106';
 
 function HomePage(props, context) {
   const classes = context.styleManager.render(styleSheet);
 
   return (
-    <Layout container className={classes.root}>
-      <Layout container item xs={12}>
+    <Layout container className={classes.root} gutter={verticalGutter}>
+      <Layout container item xs={12} gutter={horizontalGutter}>
         <Layout item xs={7}>
-          <Card color="#03A9F4" height={cardHeight}>
+          <Card color={descriptionColor} height={cardHeight}>
             <Text className={classes.lightTextStyle}>
               <strong>Zmora</strong> to zautomatyzowana platforma edukacyjna, kierowana do studentów
               kierunków informatycznych <strong>AGH</strong>. W przystępny sposób sprawdza poprawność i
@@ -60,17 +66,17 @@ function HomePage(props, context) {
           </Card>
         </Layout>
         <Layout item xs={5}>
-          <StatusCard color="#FE5722" height={cardHeight} />
+          <StatusCard color={statusPaneColor} height={cardHeight} />
         </Layout>
       </Layout>
-      <Layout container item xs={12}>
+      <Layout container item xs={12} gutter={horizontalGutter}>
         <Layout item xs={4} style={{ textAlign: 'center' }}>
-          <Card color="#4CB050" height={cardHeight + 50}>
+          <Card color={logoPaneColor} height={cardHeight + 50}>
             <img src={logo} className={classes.logoStyle} alt="logo" />
           </Card>
         </Layout>
         <Layout item xs={8}>
-          <Card color="#FEC106" height={cardHeight + 50}>
+          <Card color={namePaneColor} height={cardHeight + 50}>
             <Text className={classes.darkTextStyle}>
               Nazwa została wybrana nieprzypadkowo - w mitologii słowiańskiej zmora to istota pół demoniczna,
               która nocą męczy śpiących i wysysa z nich krew. Taki scenariusz również jest możliwy - wystarczy
@@ -80,13 +86,13 @@ function HomePage(props, context) {
           </Card>
         </Layout>
       </Layout>
-      <Layout container item xs={12}>
+      <Layout container item xs={12} gutter={horizontalGutter}>
         <Layout item xs={12}>
           <StatusInfoList
             statuses={[{ title: 'Zaliczone', info: 'Uniknięto zemsty Zmory, zadanie zaliczone' },
             { title: 'Po terminie', info: 'Do roboty' },
             { title: 'Niezaliczone', info: 'Zemsta zmory jest bliska, życie Ci nie miłe, wędrowcze?' },
-            { title: 'Tekst', info: 'Co tu własciwie ma być w tej tabelce? :D' },
+            { title: 'Ulane', info: 'Absolutne dno bez cienia nadziei na zaliczenie' },
             ]}
           />
         </Layout>

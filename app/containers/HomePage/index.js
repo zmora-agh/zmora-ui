@@ -14,8 +14,8 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Layout from 'material-ui/Layout';
 import Text from 'material-ui/Text';
-import StatusPanel from '../../components/StatusPanel';
-import Info from '../../components/InfoCard';
+import StatusCard from '../../components/StatusPanel';
+import Card from '../../components/ZmoraCard';
 import StatusInfoList from '../../components/StatusInfoList/index';
 
 const styleSheet = createStyleSheet('HomePageLayout', () => ({
@@ -41,7 +41,7 @@ const styleSheet = createStyleSheet('HomePageLayout', () => ({
   },
 }));
 
-const logo = require('../../logo.jpg');
+const logo = require('../../resources/logo.jpg');
 const cardHeight = 340;
 
 function HomePage(props, context) {
@@ -51,33 +51,33 @@ function HomePage(props, context) {
     <Layout container className={classes.root}>
       <Layout container item xs={12}>
         <Layout item xs={7}>
-          <Info color="#03A9F4" height={cardHeight}>
+          <Card color="#03A9F4" height={cardHeight}>
             <Text className={classes.lightTextStyle}>
               <strong>Zmora</strong> to zautomatyzowana platforma edukacyjna, kierowana do studentów
               kierunków informatycznych <strong>AGH</strong>. W przystępny sposób sprawdza poprawność i
               wydajność rozwiązań na specjalnie przystosowanych do tego zadaniach. System ocenia sprawiedliwie
               wkład pracy oraz postępy każdego z uczestników.</Text>
-          </Info>
+          </Card>
         </Layout>
         <Layout item xs={5}>
-          <StatusPanel color="#FE5722" height={cardHeight} />
+          <StatusCard color="#FE5722" height={cardHeight} />
         </Layout>
       </Layout>
       <Layout container item xs={12}>
         <Layout item xs={4} style={{ textAlign: 'center' }}>
-          <Info color="#4CB050" height={cardHeight + 50}>
+          <Card color="#4CB050" height={cardHeight + 50}>
             <img src={logo} className={classes.logoStyle} alt="logo" />
-          </Info>
+          </Card>
         </Layout>
         <Layout item xs={8}>
-          <Info color="#FEC106" height={cardHeight + 50}>
+          <Card color="#FEC106" height={cardHeight + 50}>
             <Text className={classes.darkTextStyle}>
               Nazwa została wybrana nieprzypadkowo - w mitologii słowiańskiej zmora to istota pół demoniczna,
               która nocą męczy śpiących i wysysa z nich krew. Taki scenariusz również jest możliwy - wystarczy
               nie rozwiązywać zadań w terminie lub próbować zaliczać je podstępem.<br /><br />
               Tak czy inaczej - <strong>powodzenia!</strong>
             </Text>
-          </Info>
+          </Card>
         </Layout>
       </Layout>
       <Layout container item xs={12}>

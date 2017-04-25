@@ -1,6 +1,7 @@
 /**
 *
-* InfoCard
+* ZmoraCard - Our version of material card
+* to keep all card properties in one place
 *
 */
 
@@ -10,7 +11,7 @@ import {
   CardContent,
 } from 'material-ui/Card';
 
-function InfoCard(props) {
+function ZmoraCard(props) {
   return (
     <Card
       style={{
@@ -25,11 +26,10 @@ function InfoCard(props) {
   );
 }
 
-InfoCard.propTypes = {
+ZmoraCard.propTypes = {
   children: React.PropTypes.any,
-  color: React.PropTypes.any,
-  height: React.PropTypes.any,
+  color: React.PropTypes.string,
+  height: React.PropTypes.number,
 };
 
-
-export default InfoCard;
+export default ZmoraCard;

@@ -84,6 +84,14 @@ const makeSelectProblemSubmits = (contestId, problemId) => createSelector(
   }
 );
 
+const makeSelectProblemQuestions = (contestId, problemId) => createSelector(
+  selectAppDomain(),
+  (substate) => {
+    const questions = substate.getIn(['contests', contestId, 'problems', problemId, 'questions']);
+    return questions ? questions.toJS() : undefined;
+  }
+);
+
 export {
   makeSelectApp,
   makeSelectUi,
@@ -96,4 +104,5 @@ export {
   makeSelectProblem,
   makeSelectProblemExamples,
   makeSelectProblemSubmits,
+  makeSelectProblemQuestions,
 };

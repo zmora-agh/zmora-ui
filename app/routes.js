@@ -114,13 +114,15 @@ export default function createRoutes(store) {
                   onEnter: requireAuth,
                   getComponent(location, cb) {
                     const importModules = Promise.all([
+                      import('containers/QuestionsPage/sagas'),
                       import('containers/ProblemExamplesPage/sagas'),
                       import('containers/ProblemSubmitsPage/sagas'),
                       import('containers/ProblemPage/sagas'),
                       import('containers/ProblemPage'),
                     ]);
 
-                    importModules.then(([examplesSagas, submitsSagas, sagas, component]) => {
+                    importModules.then(([questionSagas, examplesSagas, submitsSagas, sagas, component]) => {
+                      injectSagas(questionSagas.default);
                       injectSagas(examplesSagas.default);
                       injectSagas(submitsSagas.default);
                       injectSagas(sagas.default);

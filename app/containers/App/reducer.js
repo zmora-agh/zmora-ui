@@ -15,6 +15,7 @@ import { GET_PROBLEMS_SUCCESS } from '../ProblemsPage/constants';
 import { GET_PROBLEM_SUCCESS } from '../ProblemPage/constants';
 import { GET_PROBLEM_EXAMPLES_SUCCESS } from '../ProblemExamplesPage/constants';
 import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
+import { GET_QUESTIONS_SUCCESS } from '../QuestionsPage/constants';
 import { LOGIN_SUCCESS } from '../Login/constants';
 
 
@@ -75,6 +76,9 @@ function contestsPageReducer(state = initialState, action) {
     case GET_PROBLEM_SUBMITS_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'submits'],
         fromJS(action.submits));
+    case GET_QUESTIONS_SUCCESS:
+      return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'questions'],
+        fromJS(action.questions));
     case GET_CURRENT_TIME_SUCCESS: {
       const offset = action.time.diff(moment(), 'seconds');
 

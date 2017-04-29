@@ -23,7 +23,7 @@ function ContestButton(props) {
     </Button>
   );
 
-  return ((!props.time.isAfter(enrolEndTime) || props.contest.joined) ? enterButton : joinButton);
+  return ((props.time.isAfter(enrolEndTime) || props.contest.joined) ? enterButton : joinButton);
 }
 
 ContestButton.propTypes = {

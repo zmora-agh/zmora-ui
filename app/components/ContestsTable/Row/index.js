@@ -61,7 +61,7 @@ const ContestRow = (props, context) => {
           {moment(contest.start).add(contest.signupDuration + contest.duration, 'seconds').format('YYYY-MM-DD HH:mm')}
         </TitledTextLayout>
         <Layout item xs={1}>
-          <ContestButton contest={contest} time={props.serverTime} onClick={() => props.onJoinClick(contest)} />
+          <ContestButton contest={contest} time={props.serverTime} onClick={() => props.onJoinClick(contest.id)} />
         </Layout>
       </Layout>
     </ExpandableTableRow>

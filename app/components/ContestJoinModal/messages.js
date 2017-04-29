@@ -30,4 +30,8 @@ export default defineMessages({
     id: 'app.components.ContestJoinModal.contestJoinMessage',
     defaultMessage: 'Enter a password to join {contestName}',
   },
+  invalidPassword: {
+    id: 'app.components.ContestJoinModal.invalidPassword',
+    defaultMessage: 'Invalid password',
+  },
 });

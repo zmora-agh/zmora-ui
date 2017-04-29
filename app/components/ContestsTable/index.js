@@ -3,32 +3,21 @@ import moment from 'moment';
 import ContestRow from './Row';
 import ContestJoinModal from '../ContestJoinModal';
 import ExpandableTable from '../ExpandableTable';
+import { DIALOG_TYPE } from '../../containers/ContestsPage/constants';
 
 export class ContestsTable extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     offset: React.PropTypes.number.isRequired,
     contests: React.PropTypes.object.isRequired,
+    dialog: DIALOG_TYPE,
+    onJoinModalOpen: React.PropTypes.func.isRequired,
+    onJoinModalClose: React.PropTypes.func.isRequired,
+    onJoinContest: React.PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      dialog: {
-        contest: undefined,
-        open: false,
-      },
-    };
-    this.handleJoinClick = this.handleJoinClick.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
     this.isVisible = this.isVisible.bind(this);
-  }
-
-  handleJoinClick(contest) {
-    this.setState({ dialog: { contest, open: true } });
-  }
-
-  handleCloseModal() {
-    this.setState({ dialog: { ...this.state.dialog, open: false } });
   }
 
   isVisible(contest, serverTime) {
@@ -45,14 +34,14 @@ export class ContestsTable extends React.PureComponent { // eslint-disable-line 
           key={key}
           contest={this.props.contests[key]}
           serverTime={serverTime}
-          onJoinClick={this.handleJoinClick}
+          onJoinClick={this.props.onJoinModalOpen}
         />
       ));
-    const dialog = this.state.dialog.contest ? (
+    const dialog = this.props.dialog.contestId ? (
       <ContestJoinModal
-        open={this.state.dialog.open}
-        contest={this.state.dialog.contest}
-        onClose={this.handleCloseModal}
+        dialog={this.props.dialog}
+        onClose={this.props.onJoinModalClose}
+        onJoin={this.props.onJoinContest}
       />) : null;
 
     return (

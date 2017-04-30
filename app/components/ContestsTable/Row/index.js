@@ -30,18 +30,17 @@ const styleSheet = createStyleSheet('zmoraContestsTableRow', () => ({
   },
 }));
 
-const ContestsTable = (props, context) => {
+const ContestRow = (props, context) => {
   const classes = context.styleManager.render(styleSheet);
 
   const contest = props.contest;
 
   const ownersNames = contest.owners.map((owner) => owner.name).join(', ');
-  const serverTime = moment().add(props.offset, 'seconds');
 
   const header = [<Text key={1} className={classes.columnText}> {contest.name}</Text>,
     <Text key={2} className={classes.columnText}>{contest.description}</Text>,
     <Text key={3} className={classes.columnText}>{ownersNames}</Text>,
-    <Text key={4} className={classes.columnText}><ContestStatus contest={contest} time={serverTime} /></Text>];
+    <Text key={4} className={classes.columnText}><ContestStatus contest={contest} time={props.serverTime} /></Text>];
 
   return (
     <ExpandableTableRow header={header}>
@@ -62,20 +61,21 @@ const ContestsTable = (props, context) => {
           {moment(contest.start).add(contest.signupDuration + contest.duration, 'seconds').format('YYYY-MM-DD HH:mm')}
         </TitledTextLayout>
         <Layout item xs={1}>
-          <ContestButton contest={contest} time={serverTime} />
+          <ContestButton contest={contest} time={props.serverTime} onClick={() => props.onJoinClick(contest.id)} />
         </Layout>
       </Layout>
     </ExpandableTableRow>
   );
 };
 
-ContestsTable.propTypes = {
-  offset: React.PropTypes.number.isRequired,
+ContestRow.propTypes = {
+  serverTime: React.PropTypes.object.isRequired,
   contest: React.PropTypes.object.isRequired,
+  onJoinClick: React.PropTypes.func,
 };
 
-ContestsTable.contextTypes = {
+ContestRow.contextTypes = {
   styleManager: customPropTypes.muiRequired,
 };
 
-export default ContestsTable;
+export default ContestRow;

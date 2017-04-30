@@ -10,12 +10,13 @@ import { pickBy } from 'lodash';
 
 import { GET_CURRENT_TIME_SUCCESS } from './constants';
 import { GET_CONTEST_SUCCESS } from '../ContestPage/constants';
-import { GET_CONTESTS_SUCCESS } from '../ContestsPage/constants';
+import { GET_CONTESTS_SUCCESS, JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
 import { GET_PROBLEMS_SUCCESS } from '../ProblemsPage/constants';
 import { GET_PROBLEM_SUCCESS } from '../ProblemPage/constants';
 import { GET_PROBLEM_EXAMPLES_SUCCESS } from '../ProblemExamplesPage/constants';
 import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
 import { LOGIN_SUCCESS } from '../Login/constants';
+
 
 const initialState = fromJS({
   user: {
@@ -79,6 +80,8 @@ function contestsPageReducer(state = initialState, action) {
 
       return state.set('time', fromJS({ offset }));
     }
+    case JOIN_CONTEST_SUCCESS:
+      return state.setIn(['contests', action.contestId, 'joined'], true);
     default:
       return state;
   }

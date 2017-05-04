@@ -21,7 +21,7 @@ import SolvedAll from '../../svg-icons/action-done-all';
 
 import messages from './messages';
 
-const styleSheet = createStyleSheet('StatusStyleSheet', () => ({
+const styleSheet = createStyleSheet('zmoraAppStatusInfoPanelStyleSheet', () => ({
   header: { color: '#000000' },
   textStyle: { 'margin-top': '5px', 'font-size': '20px', color: '#000000' },
   iconStyle: { 'margin-bottom': '6px', 'margin-right': '12px', color: '#000000' },

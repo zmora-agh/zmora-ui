@@ -14,7 +14,7 @@ import Card from '../ZmoraCard';
 import messages from './messages';
 
 
-const styleSheet = createStyleSheet('StatusStyleSheet', () => ({
+const styleSheet = createStyleSheet('zmoraAppStatusStyleSheet', () => ({
   header: { color: '#ffffff', fontSize: 34 },
   dataElement: { 'margin-bottom': '6px' },
   logo: {

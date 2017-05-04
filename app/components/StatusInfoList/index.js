@@ -19,7 +19,7 @@ import {
 import Text from 'material-ui/Text';
 import messages from './messages';
 
-const styleSheet = createStyleSheet('StatusInfoList', () => ({
+const styleSheet = createStyleSheet('zmoraAppStatusInfoList', () => ({
   header: {
     backgroundColor: '#3F51B5',
   },

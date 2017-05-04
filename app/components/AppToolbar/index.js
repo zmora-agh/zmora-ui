@@ -30,6 +30,7 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   toolbar: {
     transform: 'translate3d(0,0,0)',
     overflow: 'hidden',
+    backgroundColor: '#673BB7',
   },
   toolbarInSearch: {
     color: theme.palette.text.primary,
@@ -43,17 +44,13 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
     color: theme.palette.getContrastText(theme.palette.primary[500]),
   },
   firstTitleLetter: {
-    textShadowOffset: { width: '20px', height: '20px' },
-    textShadowRadius: '20px',
-    textShadowColor: '#000000',
+    textShadow: '1px 1px 1px rgba(0, 0, 0, 1)',
     font: '56pt Sanctuary',
     position: 'relative',
     marginBottom: '20px',
   },
   titleLetter: {
-    textShadowOffset: { width: 4, height: 4 },
-    textShadowRadius: 2,
-    textShadowColor: '#000000',
+    textShadow: '1px 1px 1px rgba(0, 0, 0, 1)',
     font: '38pt Sanctuary',
     position: 'absolute',
     marginTop: '15px',

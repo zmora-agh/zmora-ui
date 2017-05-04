@@ -26,7 +26,7 @@ export default function createRoutes(store) {
   return [
     {
       path: '/',
-      name: 'Home',
+      name: ' ',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/HomePage'),

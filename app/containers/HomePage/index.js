@@ -18,7 +18,7 @@ import StatusCard from '../../components/StatusPanel';
 import Card from '../../components/ZmoraCard';
 import StatusInfoList from '../../components/StatusInfoList/index';
 
-const styleSheet = createStyleSheet('HomePageLayout', () => ({
+const styleSheet = createStyleSheet('zmoraAppHomePageLayout', () => ({
   paper: {
     padding: '0em 1em',
     textAlign: 'justify',

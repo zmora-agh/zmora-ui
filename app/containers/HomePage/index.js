@@ -26,16 +26,16 @@ const styleSheet = createStyleSheet('HomePageLayout', () => ({
   },
   lightTextStyle: {
     color: '#FFFFFF',
-    lineHeight: '32px',
-    fontSize: 28,
+    lineHeight: '34px',
+    fontSize: 30,
   },
   darkTextStyle: {
     color: '#000000',
-    lineHeight: '32px',
-    fontSize: 28,
+    lineHeight: '34px',
+    fontSize: 30,
   },
   logoStyle: {
-    height: 340,
+    height: 325,
     width: 230,
     margin: '0 auto',
   },
@@ -43,9 +43,10 @@ const styleSheet = createStyleSheet('HomePageLayout', () => ({
 
 const logo = require('../../resources/logo.jpg');
 const cardHeight = 340;
+const cardPadding = 17;
 const verticalGutter = 16;
 const horizontalGutter = 16;
-const descriptionColor = '#03A9F4';
+const descriptionColor = '#2196F3';
 const statusPaneColor = '#FE5722';
 const logoPaneColor = '#4CB050';
 const namePaneColor = '#FEC106';
@@ -57,7 +58,7 @@ function HomePage(props, context) {
     <Layout container className={classes.root} gutter={verticalGutter}>
       <Layout container item xs={12} gutter={horizontalGutter}>
         <Layout item xs={7}>
-          <Card color={descriptionColor} height={cardHeight}>
+          <Card color={descriptionColor} height={cardHeight} padding={cardPadding}>
             <Text className={classes.lightTextStyle}>
               <strong>Zmora</strong> to zautomatyzowana platforma edukacyjna, kierowana do studentów
               kierunków informatycznych <strong>AGH</strong>. W przystępny sposób sprawdza poprawność i
@@ -71,12 +72,12 @@ function HomePage(props, context) {
       </Layout>
       <Layout container item xs={12} gutter={horizontalGutter}>
         <Layout item xs={4} style={{ textAlign: 'center' }}>
-          <Card color={logoPaneColor} height={cardHeight + 50}>
+          <Card color={logoPaneColor} height={cardHeight + 35} padding={cardPadding}>
             <img src={logo} className={classes.logoStyle} alt="logo" />
           </Card>
         </Layout>
         <Layout item xs={8}>
-          <Card color={namePaneColor} height={cardHeight + 50}>
+          <Card color={namePaneColor} height={cardHeight + 35} padding={cardPadding}>
             <Text className={classes.darkTextStyle}>
               Nazwa została wybrana nieprzypadkowo - w mitologii słowiańskiej zmora to istota pół demoniczna,
               która nocą męczy śpiących i wysysa z nich krew. Taki scenariusz również jest możliwy - wystarczy

@@ -17,7 +17,8 @@ function ZmoraCard(props) {
       style={{
         boxShadow: '6px 10px 10px rgba(0,0,0,0.19), 3px 6px 6px rgba(0,0,0,0.23)',
         backgroundColor: props.color,
-        height: props.height }}
+        height: props.height,
+        padding: props.padding }}
     >
       <CardContent style={{ backgroundColor: props.color }}>
         {props.children}
@@ -30,6 +31,7 @@ ZmoraCard.propTypes = {
   children: React.PropTypes.any,
   color: React.PropTypes.string,
   height: React.PropTypes.number,
+  padding: React.PropTypes.number,
 };
 
 export default ZmoraCard;

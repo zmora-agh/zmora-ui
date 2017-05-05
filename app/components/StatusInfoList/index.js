@@ -79,7 +79,7 @@ class StatusInfoList extends React.Component {
     const rows = this.renderRows();
 
     return (
-      <Table style={{ boxShadow: '6px 10px 10px rgba(0,0,0,0.19), 4px 7px 7px rgba(0,0,0,0.26)' }}>
+      <Table>
         <TableHead>
           <TableRow className={classes.header}>
             <TableCell>

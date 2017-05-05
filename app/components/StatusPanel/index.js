@@ -18,7 +18,7 @@ const styleSheet = createStyleSheet('zmoraAppStatusStyleSheet', () => ({
   header: { color: '#ffffff', fontSize: 34 },
   dataElement: { 'margin-bottom': '6px' },
   logo: {
-    width: '320px',
+    width: '280px',
     height: '170px',
     margin: '0 auto',
   },

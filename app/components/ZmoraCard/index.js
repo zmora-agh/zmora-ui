@@ -18,9 +18,9 @@ function ZmoraCard(props) {
         boxShadow: '6px 10px 10px rgba(0,0,0,0.19), 3px 6px 6px rgba(0,0,0,0.23)',
         backgroundColor: props.color,
         height: props.height,
-        padding: props.padding }}
+      }}
     >
-      <CardContent style={{ backgroundColor: props.color }}>
+      <CardContent style={{ backgroundColor: props.color, padding: props.padding }}>
         {props.children}
       </CardContent>
     </Card>

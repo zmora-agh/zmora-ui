@@ -26,13 +26,13 @@ const styleSheet = createStyleSheet('zmoraAppHomePageLayout', () => ({
   },
   lightTextStyle: {
     color: '#FFFFFF',
-    lineHeight: '34px',
-    fontSize: 30,
+    lineHeight: '33px',
+    fontSize: 28,
   },
   darkTextStyle: {
     color: '#000000',
-    lineHeight: '34px',
-    fontSize: 30,
+    lineHeight: '33px',
+    fontSize: 28,
   },
   logoStyle: {
     height: 325,
@@ -90,10 +90,11 @@ function HomePage(props, context) {
       <Layout container item xs={12} gutter={horizontalGutter}>
         <Layout item xs={12}>
           <StatusInfoList
-            statuses={[{ title: 'Zaliczone', info: 'Uniknięto zemsty Zmory, zadanie zaliczone' },
-            { title: 'Po terminie', info: 'Do roboty' },
-            { title: 'Niezaliczone', info: 'Zemsta zmory jest bliska, życie Ci nie miłe, wędrowcze?' },
-            { title: 'Ulane', info: 'Absolutne dno bez cienia nadziei na zaliczenie' },
+            statuses={[{ title: 'Zaliczone', info: 'Zadanie zaliczone bez uwag.' },
+            { title: 'Zaliczone*', info: 'Zadanie zaliczone. Sprawdź uwagi prowadzącego.' },
+            { title: 'Po Terminie', info: 'Przekroczono termin. Nadal możesz wykonać zadanie z karnymi punktami.' },
+            { title: 'Niezaliczone', info: 'Źle wykonane zadanie, lub zbyt długa zwłoka.' },
+            { title: 'Ulane', info: 'Absolutne dno bez cienia nadziei na zaliczenie.' },
             ]}
           />
         </Layout>

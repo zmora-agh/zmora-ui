@@ -43,18 +43,14 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   activeBreadcrumbItem: {
     color: theme.palette.getContrastText(theme.palette.primary[500]),
   },
-  firstTitleLetter: {
-    textShadow: '1px 1px 1px rgba(0, 0, 0, 1)',
-    font: '56pt Sanctuary',
-    position: 'relative',
-    marginBottom: '20px',
-  },
   titleLetter: {
+    '&:first-letter': {
+      font: '56pt Sanctuary',
+    },
     textShadow: '1px 1px 1px rgba(0, 0, 0, 1)',
     font: '38pt Sanctuary',
-    position: 'absolute',
-    marginTop: '15px',
     marginLeft: '32px',
+    marginBottom: '20px',
   },
 }));
 
@@ -100,10 +96,7 @@ class AppToolbar extends React.Component {
         <Toolbar className={toolbarClass} >
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
           <Layout item xs={2}>
-            <div style={{ display: 'flex', flexDirection: 'row', position: 'relative', marginLeft: '20px' }}>
-              <Text colorInherit className={classes.firstTitleLetter}>Z</Text>
-              <Text colorInherit className={classes.titleLetter}>mora</Text>
-            </div>
+            <Text colorInherit className={classes.titleLetter}>Zmora</Text>
           </Layout>
           {!this.state.inSearch ? <Layout item xs={7}>
             <Breadcrumbs
@@ -112,6 +105,7 @@ class AppToolbar extends React.Component {
               itemClass={classes.breadcrumbItem}
               activeItemClass={classes.activeBreadcrumbItem}
               separator={<ArrowIcon />}
+              excludes={['Home']}
             />
           </Layout> : undefined}
           <Layout container item gutter={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">

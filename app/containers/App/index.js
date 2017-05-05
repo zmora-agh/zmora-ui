@@ -44,7 +44,7 @@ const styleSheet = createStyleSheet('App', () => ({
     height: '100%',
     paddingRight: 0,
     paddingTop: 0,
-    paddingLeft: 15,
+    paddingLeft: 0,
     transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
   },
   contentContainer: {

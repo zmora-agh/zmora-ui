@@ -10,13 +10,13 @@ import { Typography } from 'material-ui/Typography';
 
 
 function QuestionCard(props) {
-  const { question } = props;
+  const { question, answers } = props;
 
   return (
     <Card>
       <CardContent>
-        <Typography type="title">asdf</Typography>
-        <Typography type="title">{question}</Typography>
+        <Typography key={question} type="title">{question}</Typography>
+        {answers.map((a) => <Typography key={a} >{a}</Typography>)}
       </CardContent>
     </Card>);
 }
@@ -28,6 +28,7 @@ QuestionCard.defaultProps = {
 
 QuestionCard.propTypes = {
   question: PropTypes.string.isRequired,
+  answers: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export { QuestionCard };

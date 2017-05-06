@@ -13,7 +13,7 @@ import React from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Layout from 'material-ui/Layout';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import StatusCard from '../../components/StatusPanel';
 import ZmoraCard from '../../components/ZmoraCard';
 import StatusInfoList from '../../components/StatusInfoList';
@@ -59,11 +59,11 @@ function HomePage(props, context) {
       <Layout container item xs={12} gutter={horizontalGutter}>
         <Layout item xs={8}>
           <ZmoraCard color={descriptionColor} height={cardHeight} padding={cardPadding}>
-            <Text className={classes.lightTextStyle}>
+            <Typography className={classes.lightTextStyle}>
               <strong>Zmora</strong> to zautomatyzowana platforma edukacyjna, kierowana do studentów
               kierunków informatycznych <strong>AGH</strong>. W przystępny sposób sprawdza poprawność i
               wydajność rozwiązań na specjalnie przystosowanych do tego zadaniach. System ocenia sprawiedliwie
-              wkład pracy oraz postępy każdego z uczestników.</Text>
+              wkład pracy oraz postępy każdego z uczestników.</Typography>
           </ZmoraCard>
         </Layout>
         <Layout item xs={4}>
@@ -78,12 +78,12 @@ function HomePage(props, context) {
         </Layout>
         <Layout item xs={8}>
           <ZmoraCard color={namePaneColor} height={cardHeight + 35} padding={cardPadding}>
-            <Text className={classes.darkTextStyle}>
+            <Typography className={classes.darkTextStyle}>
               Nazwa została wybrana nieprzypadkowo - w mitologii słowiańskiej zmora to istota pół demoniczna,
               która nocą męczy śpiących i wysysa z nich krew. Taki scenariusz również jest możliwy - wystarczy
               nie rozwiązywać zadań w terminie lub próbować zaliczać je podstępem.<br /><br />
               Tak czy inaczej - <strong>powodzenia!</strong>
-            </Text>
+            </Typography>
           </ZmoraCard>
         </Layout>
       </Layout>

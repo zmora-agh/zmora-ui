@@ -8,7 +8,7 @@ import React from 'react';
 
 import Paper from 'material-ui/Paper';
 import Layout from 'material-ui/Layout';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import Divider from 'material-ui/Divider';
 import { FormattedMessage } from 'react-intl';
 
@@ -17,7 +17,7 @@ import messages from './messages';
 
 const DataElement = (props) => (
   <Layout item xs={props.xs}>
-    <Text type="title" component="h2" gutterBottom>{props.desc}</Text>
+    <Typography type="title" component="h2" gutterBottom>{props.desc}</Typography>
     <Paper style={{ padding: '8px 16px' }}>
       <pre>{ props.children }</pre>
     </Paper>

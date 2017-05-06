@@ -14,7 +14,7 @@ import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import Layout from 'material-ui/Layout';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
@@ -53,8 +53,8 @@ const RightMenu = (props, context) => {
         <Layout container align="center">
           <Avatar src={user.avatar} className={classes.avatar} />
           <Layout container direction="column" className={classes.avatarText}>
-            <Text>{user.name}</Text>
-            <Text>Points: 15</Text>
+            <Typography>{user.name}</Typography>
+            <Typography>Points: 15</Typography>
           </Layout>
         </Layout>
         <Divider />

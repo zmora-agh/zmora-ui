@@ -10,7 +10,7 @@ import AppBar from 'material-ui/AppBar';
 import Breadcrumbs from 'react-breadcrumbs';
 import Toolbar from 'material-ui/Toolbar';
 import Layout from 'material-ui/Layout';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 
 import classNames from 'classnames';
@@ -97,7 +97,7 @@ class AppToolbar extends React.Component {
         <Toolbar className={toolbarClass} >
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
           <Layout item xs={2}>
-            <Text colorInherit className={classes.titleLetter}>Zmora</Text>
+            <Typography colorInherit className={classes.titleLetter}>Zmora</Typography>
           </Layout>
           {!this.state.inSearch ? <Layout item xs={7}>
             <Breadcrumbs

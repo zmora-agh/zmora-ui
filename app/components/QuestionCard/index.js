@@ -6,7 +6,7 @@
 
 import React, { PropTypes } from 'react';
 import { Card, CardContent } from 'material-ui/Card';
-import { Typography } from 'material-ui/styles';
+import { Typography } from 'material-ui/Typography';
 
 
 function QuestionCard(props) {

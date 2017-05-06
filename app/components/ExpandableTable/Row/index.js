@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListItem } from 'material-ui/List';
-import { Text } from 'material-ui/Text';
+import { Typography } from 'material-ui/Typography';
 import Collapse from 'material-ui/transitions/Collapse';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import { createStyleSheet } from 'jss-theme-reactor';
@@ -77,7 +77,7 @@ export class ExpandableTableRow extends React.PureComponent {
       <ListItem className={listItemClass}>
         <Card className={cardClass}>
           <CardContent className={classes.cardContentRow} onClick={onClick}>
-            <Text>{expandedIcon}</Text>
+            <Typography>{expandedIcon}</Typography>
             {this.props.header}
           </CardContent>
           <Collapse in={isExpanded} transitionDuration={500}>

@@ -16,7 +16,7 @@ import {
   TableRow,
   TableCell,
 } from 'material-ui/Table';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import messages from './messages';
 
 const styleSheet = createStyleSheet('zmoraAppStatusInfoList', () => ({
@@ -62,10 +62,10 @@ class StatusInfoList extends React.Component {
       rows.push(
         <TableRow className={rowClass}>
           <TableCell>
-            <Text className={this.classes.textTitle}>{status.title}</Text>
+            <Typography className={this.classes.textTitle}>{status.title}</Typography>
           </TableCell>
           <TableCell>
-            <Text className={this.classes.textInfo}>{status.info}</Text>
+            <Typography className={this.classes.textInfo}>{status.info}</Typography>
           </TableCell>
         </TableRow>
       );
@@ -83,7 +83,7 @@ class StatusInfoList extends React.Component {
         <TableHead>
           <TableRow className={classes.header}>
             <TableCell>
-              <Text className={classes.headerText}><FormattedMessage {...messages.header} /></Text>
+              <Typography className={classes.headerText}><FormattedMessage {...messages.header} /></Typography>
             </TableCell>
             <TableCell />
           </TableRow>

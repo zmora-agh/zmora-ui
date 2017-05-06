@@ -6,18 +6,18 @@
 
 import React from 'react';
 import { Layout } from 'material-ui/Layout';
-import { Text } from 'material-ui/Text';
+import { Typography } from 'material-ui/Typography';
 // import styled from 'styled-components';
 
 
 function TitledTextLayout(props) {
   return (
     <Layout item xs={props.xs}>
-      <Text type="title" component="h2" gutterBottom>
+      <Typography type="title" component="h2" gutterBottom>
         {props.desc}
-      </Text>
-      <Text style={{ padding: '8x 16px' }}>
-        {props.children}</Text>
+      </Typography>
+      <Typography style={{ padding: '8x 16px' }}>
+        {props.children}</Typography>
     </Layout>
   );
 }

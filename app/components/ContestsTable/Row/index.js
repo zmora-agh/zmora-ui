@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
-import { Text } from 'material-ui/Text';
+import { Typography } from 'material-ui/Typography';
 import { Layout } from 'material-ui/Layout';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import { createStyleSheet } from 'jss-theme-reactor';
@@ -37,10 +37,14 @@ const ContestRow = (props, context) => {
 
   const ownersNames = contest.owners.map((owner) => owner.name).join(', ');
 
-  const header = [<Text key={1} className={classes.columnText}> {contest.name}</Text>,
-    <Text key={2} className={classes.columnText}>{contest.description}</Text>,
-    <Text key={3} className={classes.columnText}>{ownersNames}</Text>,
-    <Text key={4} className={classes.columnText}><ContestStatus contest={contest} time={props.serverTime} /></Text>];
+  const header = [
+    <Typography key={1} className={classes.columnText}> {contest.name}</Typography>,
+    <Typography key={2} className={classes.columnText}>{contest.description}</Typography>,
+    <Typography key={3} className={classes.columnText}>{ownersNames}</Typography>,
+    <Typography key={4} className={classes.columnText}>
+      <ContestStatus contest={contest} time={props.serverTime} />
+    </Typography>,
+  ];
 
   return (
     <ExpandableTableRow header={header}>

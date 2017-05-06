@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import { createStyleSheet } from 'jss-theme-reactor';
 import { FormattedMessage } from 'react-intl';
 import customPropTypes from 'material-ui/utils/customPropTypes';
@@ -46,7 +46,7 @@ function StatusPanel(props, context) {
 
   return (
     <Card height={props.height} color={props.color}>
-      <Text type="headline" className={classes.header}><FormattedMessage {...messages.header} /></Text>
+      <Typography type="headline" className={classes.header}><FormattedMessage {...messages.header} /></Typography>
       <Layout container className={classes.root}>
         <Layout container item xs={12}>
           <Layout item xs={12} className={classes.chart}>
@@ -55,10 +55,10 @@ function StatusPanel(props, context) {
         </Layout>
         <Layout container item xs={13} className={classes.clusterInfoContainer} style={{ height: props.height }}>
           <Layout item xs={12} className={classes.clusterInfoItem}>
-            <Text className={classes.clusterInfoTitle}><FormattedMessage {...messages.details} /></Text>
+            <Typography className={classes.clusterInfoTitle}><FormattedMessage {...messages.details} /></Typography>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <Text style={{ fontSize: '47px' }}>60.0</Text>
-              <Text style={{ marginLeft: '12px' }}>zadań / godzine</Text>
+              <Typography style={{ fontSize: '47px' }}>60.0</Typography>
+              <Typography style={{ marginLeft: '12px' }}>zadań / godzine</Typography>
             </div>
           </Layout>
         </Layout>

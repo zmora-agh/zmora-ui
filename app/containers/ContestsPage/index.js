@@ -7,7 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Text } from 'material-ui/Text';
+import { Typography } from 'material-ui/Typography';
 import FetchView from '../../components/FetchView';
 import { ContestsTable } from '../../components/ContestsTable';
 
@@ -53,7 +53,7 @@ class ContestsPage extends React.PureComponent {
 
     // FIXME This code is totally unusable as ContestsTable render() fails when this.props.contests === {}
     if (this.props.contests && Object.keys(this.props.contests).length === 0) {
-      return <Text><FormattedMessage {...messages.empty} /></Text>;
+      return <Typography><FormattedMessage {...messages.empty} /></Typography>;
     }
 
     return (<FetchView>

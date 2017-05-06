@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import { createStyleSheet } from 'jss-theme-reactor';
 import { FormattedMessage } from 'react-intl';
 import customPropTypes from 'material-ui/utils/customPropTypes';
@@ -62,9 +62,9 @@ function StatusInfoPanel(props, context) {
         height: props.height }}
     >
       <CardContent>
-        <Text type="headline" component="h2" className={classes.header}>
+        <Typography type="headline" component="h2" className={classes.header}>
           <FormattedMessage {...messages.header} />
-        </Text>
+        </Typography>
 
         <Text component="div" className={classes.textStyle}>
           <StatusElement

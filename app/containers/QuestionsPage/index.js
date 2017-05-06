@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectProblemQuestions } from '../App/selectors';
 import { getQuestions } from './actions';
-
+import { QuestionCard } from '../../components/QuestionCard';
 
 export class QuestionsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -26,14 +26,9 @@ export class QuestionsPage extends React.PureComponent { // eslint-disable-line 
 
   render() {
     return (
-      <div>
-        {String(this.props.questions && this.props.questions
-            .map((question) => `q: ${question.question} a:${question.answers.map((answer) => answer.answer)} `))}
-      </div>
+      <QuestionCard question="adfs" />
     );
   }
-
-
 }
 
 

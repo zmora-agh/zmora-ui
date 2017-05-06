@@ -21,6 +21,7 @@ import Layout from 'material-ui/Layout';
 import AppToolbar from '../../components/AppToolbar';
 import Navigation from '../../components/Navigation';
 import RightMenu from '../RightMenu';
+import Submit from '../Submit';
 
 import { makeSelectApp } from './selectors';
 
@@ -43,7 +44,7 @@ const styleSheet = createStyleSheet('App', () => ({
     height: '100%',
     paddingRight: 0,
     paddingTop: 0,
-    paddingLeft: 15,
+    paddingLeft: 0,
     transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
   },
   contentContainer: {
@@ -98,6 +99,7 @@ class App extends React.PureComponent {
             <RightMenu />
           </Layout>
         </Layout>
+        <Submit />
       </div>
     );
   }

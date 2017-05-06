@@ -79,7 +79,7 @@ class RegisterForm extends React.PureComponent { // eslint-disable-line react/pr
           <CardContent>
             <ErrorTextField
               label={<FormattedMessage {...messages.username} />}
-              error={!valid.username && this.state.username}
+              error={!valid.username && this.state.username.length > 0}
               errorText={<FormattedMessage {...messages.validUsername} />}
               required
               onChange={this.onUsernameChange}
@@ -87,7 +87,7 @@ class RegisterForm extends React.PureComponent { // eslint-disable-line react/pr
             <ErrorTextField
               label={<FormattedMessage {...messages.password} />}
               required
-              error={!valid.password && this.state.password}
+              error={!valid.password && this.state.password.length > 0}
               errorText={<FormattedMessage {...messages.validPassword} />}
               type="password"
               onChange={this.onPasswordChange}
@@ -102,12 +102,14 @@ class RegisterForm extends React.PureComponent { // eslint-disable-line react/pr
             />
             <ErrorTextField
               required
+              error={!valid.name && this.state.name.length > 0}
+              errorText={<FormattedMessage {...messages.validName} />}
               label={<FormattedMessage {...messages.name} />}
               onChange={this.onNameChange}
             />
             <ErrorTextField
               required
-              error={!valid.email && this.state.email}
+              error={!valid.email && this.state.email.length > 0}
               errorText={<FormattedMessage {...messages.wrongEmail} />}
               label={<FormattedMessage {...messages.email} />}
               onChange={(event) => this.setState({ email: event.target.value })}

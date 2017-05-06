@@ -10,12 +10,14 @@ import { pickBy } from 'lodash';
 
 import { GET_CURRENT_TIME_SUCCESS } from './constants';
 import { GET_CONTEST_SUCCESS } from '../ContestPage/constants';
-import { GET_CONTESTS_SUCCESS } from '../ContestsPage/constants';
+import { GET_CONTESTS_SUCCESS, JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
 import { GET_PROBLEMS_SUCCESS } from '../ProblemsPage/constants';
 import { GET_PROBLEM_SUCCESS } from '../ProblemPage/constants';
 import { GET_PROBLEM_EXAMPLES_SUCCESS } from '../ProblemExamplesPage/constants';
 import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
+import { GET_QUESTIONS_SUCCESS } from '../QuestionsPage/constants';
 import { LOGIN_SUCCESS } from '../Login/constants';
+
 
 const initialState = fromJS({
   user: {
@@ -33,9 +35,9 @@ const initialState = fromJS({
 
 const stripIdProperty = (entity) => pickBy(entity, (value, key) => key !== 'id');
 
-const createProblem = (problem) => ({
-  shortcode: problem.shortcode,
-  ...problem.problem,
+const flattenProblem = ({ problem, ...meta }) => ({
+  ...meta,
+  ...problem,
 });
 
 const createContest = (contest) => stripIdProperty(contest);
@@ -54,26 +56,36 @@ function contestsPageReducer(state = initialState, action) {
         contestsFetched: true,
       });
     }
-    case GET_PROBLEMS_SUCCESS: {
-      return state
-        .setIn(['contests', action.contestId, 'fetched', true])
-        .mergeDeepIn(['contests', action.contestId, 'problems'],
-          Map(action.problems.map((problem) => [problem.id, fromJS(createProblem(problem))])));
-    }
+    case GET_PROBLEMS_SUCCESS:
+      /* Merging empty Map with state.mergeDeepIn() does not create empty Map inside tree, so we have to handle this
+       * special case manually: */
+      return (action.problems.length === 0 ?
+        // case 1) – explicitly emplace empty Map inside
+        state.setIn(['contests', action.contestId, 'problems'], fromJS({})) :
+        // case 2) – just merge, as there is something to merge
+        state.mergeDeepIn(['contests', action.contestId, 'problems'],
+          Map(action.problems.map((problem) => [problem.id, fromJS(flattenProblem(problem))]))))
+      // ...after all, set fetched flag
+        .setIn(['contests', action.contestId, 'fetched'], true);
     case GET_PROBLEM_SUCCESS:
       return state.mergeIn(['contests', action.contestId, 'problems'],
-        Map([[action.problemId, fromJS(createProblem(action.problem))]]));
+        Map([[action.problemId, fromJS(flattenProblem(action.problem))]]));
     case GET_PROBLEM_EXAMPLES_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'examples'],
         fromJS(action.examples));
     case GET_PROBLEM_SUBMITS_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'submits'],
         fromJS(action.submits));
+    case GET_QUESTIONS_SUCCESS:
+      return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'questions'],
+        fromJS(action.questions));
     case GET_CURRENT_TIME_SUCCESS: {
       const offset = action.time.diff(moment(), 'seconds');
 
       return state.set('time', fromJS({ offset }));
     }
+    case JOIN_CONTEST_SUCCESS:
+      return state.setIn(['contests', action.contestId, 'joined'], true);
     default:
       return state;
   }

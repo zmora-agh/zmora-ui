@@ -11,7 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectProblemSubmits } from '../App/selectors';
 import { getProblemSubmits } from './actions';
 
-import FetchProgress from '../../components/FetchProgress';
+import FetchView from '../../components/FetchView';
 import ProblemSubmits from '../../components/ProblemSubmits';
 import { submitsPropType } from '../../components/ProblemSubmits/constants';
 
@@ -34,9 +34,7 @@ export class ProblemSubmitsPage extends React.PureComponent { // eslint-disable-
   }
 
   render() {
-    return this.props.submits ?
-      <ProblemSubmits submits={this.props.submits} /> :
-      <FetchProgress />;
+    return <FetchView>{this.props.submits && <ProblemSubmits submits={this.props.submits} />}</FetchView>;
   }
 }
 
@@ -51,7 +49,6 @@ ProblemSubmitsPage.propTypes = {
 const mapStateToProps = (state, props) => createStructuredSelector({
   submits: makeSelectProblemSubmits(props.contestId, props.problemId),
 });
-
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,

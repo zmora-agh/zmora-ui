@@ -36,7 +36,7 @@ function ErrorTextField(props, context) {
         label={props.label}
         onChange={props.onChange}
       />
-      {props.error && errorText}
+      {props.error ? errorText : null}
     </div>
   );
 }

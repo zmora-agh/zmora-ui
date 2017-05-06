@@ -9,18 +9,21 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import SwipeableViews from 'react-swipeable-views';
 
 import Paper from 'material-ui/Paper';
 import { Tabs, Tab } from 'material-ui/Tabs';
-import SwipeableViews from 'react-swipeable-views';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import { makeSelectProblem } from '../App/selectors';
-import FetchView from '../../components/FetchView';
 import { problemContentPropTypes } from '../../components/ProblemView/constants';
+import { submitSetContext } from '../Submit/actions';
+
+import FetchView from '../../components/FetchView';
 import ProblemView from '../../components/ProblemView';
 import ProblemExamplesPage from '../ProblemExamplesPage';
 import ProblemSubmitsPage from '../ProblemSubmitsPage';
+import QuestionsPage from '../QuestionsPage';
 
 import { getProblem } from './actions';
 import messages from './messages';
@@ -50,6 +53,11 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 
   componentDidMount() {
     this.props.dispatch(getProblem(this.ids.contestId, this.ids.problemId));
+    this.props.dispatch(submitSetContext({ problemId: this.ids.problemId }));
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(submitSetContext({ problemId: undefined }));
   }
 
   handleChange = (event, index) => {
@@ -83,10 +91,10 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           </Tabs>
         </div>
         <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex}>
-          <FetchView node={ProblemView} data={this.props.problem} />
+          <FetchView>{this.props.problem && <ProblemView {...this.props.problem} />}</FetchView>
           <ProblemExamplesPage {...this.ids} defer={this.state.index !== 1} />
           <ProblemSubmitsPage {...this.ids} defer={this.state.index !== 2} />
-          <div>empty questions page</div>
+          <QuestionsPage {...this.ids} />
         </SwipeableViews>
       </Paper>
     );

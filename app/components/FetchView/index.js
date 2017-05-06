@@ -5,17 +5,16 @@
 */
 
 import React from 'react';
-import FetchProgress from '../FetchProgress';
+import { CircularProgress } from 'material-ui/Progress';
 
 function FetchView(props) {
-  return props.data ?
-    React.createElement(props.node, props.data, {}) :
-    <FetchProgress />;
+  return props.children !== undefined ?
+    props.children :
+    <div style={{ textAlign: 'center', margin: '50px auto' }}><CircularProgress size={50} /></div>;
 }
 
 FetchView.propTypes = {
-  node: React.PropTypes.func.isRequired,
-  data: React.PropTypes.object,
+  children: React.PropTypes.node,
 };
 
 export default FetchView;

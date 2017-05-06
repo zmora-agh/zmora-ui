@@ -1,88 +1,76 @@
 /**
- *
- * StatusPanel
- *
- */
+*
+* StatusPanelBeta
+*
+*/
 
 import React from 'react';
 import Text from 'material-ui/Text';
 import { createStyleSheet } from 'jss-theme-reactor';
 import { FormattedMessage } from 'react-intl';
 import customPropTypes from 'material-ui/utils/customPropTypes';
-import Button from 'material-ui/Button';
-import Person from '../../svg-icons/person';
-import Laptop from '../../svg-icons/laptop';
-import Solved from '../../svg-icons/action-done';
-import SolvedAll from '../../svg-icons/action-done-all';
-
+import Layout from 'material-ui/Layout';
+import Card from '../ZmoraCard';
 import messages from './messages';
 
-const styleSheet = createStyleSheet('StatusStyleSheet', () => ({
-  textStyle: { 'margin-top': '5px', 'font-size': '16px' },
-  iconStyle: { 'margin-bottom': '6px', 'margin-right': '12px' },
-  showMoreButtonStyle: { float: 'right' },
+
+const styleSheet = createStyleSheet('zmoraAppStatusStyleSheet', () => ({
+  header: { color: '#ffffff', fontSize: 34 },
   dataElement: { 'margin-bottom': '6px' },
+  logo: {
+    width: '280px',
+    height: '170px',
+    margin: '0 auto',
+  },
+  chart: {
+    textAlign: 'center',
+    marginBottom: '10px',
+  },
+  clusterInfoContainer: {
+    backgroundColor: '#ffffff',
+  },
+  clusterInfoItem: {
+    backgroundColor: '#ffffff',
+  },
+  clusterInfoTitle: {
+    color: '#777777',
+    fontSize: '18px',
+    marginBottom: '20px',
+  },
 }));
 
-function StatusElement(props, context) {
-  const classes = context.styleManager.render(styleSheet);
-
-  return (
-    <div className={classes.dataElement}>
-      {props.icon}
-      {props.title}
-      {props.data}
-    </div>
-  );
-}
-
-StatusElement.propTypes = {
-  icon: React.PropTypes.object,
-  title: React.PropTypes.object.isRequired,
-  data: React.PropTypes.any,
-};
-
-StatusElement.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
+const statusChart = require('../../resources/statusChart.png');
 
 function StatusPanel(props, context) {
   const classes = context.styleManager.render(styleSheet);
 
   return (
-    <div>
-      <Text type="headline" component="h2">
-        <FormattedMessage {...messages.header} />
-      </Text>
-
-      <Text component="div" className={classes.textStyle}>
-        <StatusElement
-          icon={<Laptop className={classes.iconStyle} />}
-          title={<FormattedMessage {...messages.active} />} data="3"
-        />
-        <StatusElement
-          icon={<Person className={classes.iconStyle} />}
-          title={<FormattedMessage {...messages.logged} />} data="54"
-        />
-        <StatusElement
-          icon={<Solved className={classes.iconStyle} />}
-          title={<FormattedMessage {...messages.solved} />}
-          data="17"
-        />
-        <StatusElement
-          icon={<SolvedAll className={classes.iconStyle} />}
-          title={<FormattedMessage {...messages.solvedAll} />}
-          data="255"
-        />
-        <StatusElement title={<FormattedMessage {...messages.lastLogged} />} data={<b>nologin</b>} />
-      </Text>
-
-      <Button compact primary className={classes.showMoreButtonStyle}>
-        <FormattedMessage {...messages.showMoreButton} />
-      </Button>
-    </div>
+    <Card height={props.height} color={props.color}>
+      <Text type="headline" className={classes.header}><FormattedMessage {...messages.header} /></Text>
+      <Layout container className={classes.root}>
+        <Layout container item xs={12}>
+          <Layout item xs={12} className={classes.chart}>
+            <img src={statusChart} className={classes.logo} alt="logo" />
+          </Layout>
+        </Layout>
+        <Layout container item xs={13} className={classes.clusterInfoContainer} style={{ height: props.height }}>
+          <Layout item xs={12} className={classes.clusterInfoItem}>
+            <Text className={classes.clusterInfoTitle}><FormattedMessage {...messages.details} /></Text>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <Text style={{ fontSize: '47px' }}>60.0</Text>
+              <Text style={{ marginLeft: '12px' }}>zadań / godzine</Text>
+            </div>
+          </Layout>
+        </Layout>
+      </Layout>
+    </Card>
   );
 }
+
+StatusPanel.propTypes = {
+  height: React.PropTypes.number.isRequired,
+  color: React.PropTypes.any,
+};
 
 StatusPanel.contextTypes = {
   styleManager: customPropTypes.muiRequired,

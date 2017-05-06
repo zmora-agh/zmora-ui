@@ -5,7 +5,6 @@
 */
 
 import React from 'react';
-// import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 import { CONTEST_TYPE } from '../../containers/ContestPage/constants';

@@ -6,7 +6,7 @@ import withProps from 'recompose/withProps';
 
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 import { exactOnly, fetchName } from 'utils/routing';
-import { loginPage } from './localUrls';
+import { loginPage } from './local-urls';
 import { requireAuth } from './utils/auth';
 
 
@@ -50,13 +50,15 @@ export default function createRoutes(store) {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/ContestsPage/sagas'),
+          import('containers/ContestsPage/reducer'),
           import('containers/ContestsPage'),
         ]);
 
         const renderRoute = loadExactModule(cb);
 
-        importModules.then(([sagas, component]) => {
+        importModules.then(([sagas, contestsPageReducer, component]) => {
           injectSagas(sagas.default);
+          injectReducer('contestsPage', contestsPageReducer.default);
           renderRoute(component);
         });
 
@@ -112,13 +114,15 @@ export default function createRoutes(store) {
                   onEnter: requireAuth,
                   getComponent(location, cb) {
                     const importModules = Promise.all([
+                      import('containers/QuestionsPage/sagas'),
                       import('containers/ProblemExamplesPage/sagas'),
                       import('containers/ProblemSubmitsPage/sagas'),
                       import('containers/ProblemPage/sagas'),
                       import('containers/ProblemPage'),
                     ]);
 
-                    importModules.then(([examplesSagas, submitsSagas, sagas, component]) => {
+                    importModules.then(([questionSagas, examplesSagas, submitsSagas, sagas, component]) => {
+                      injectSagas(questionSagas.default);
                       injectSagas(examplesSagas.default);
                       injectSagas(submitsSagas.default);
                       injectSagas(sagas.default);

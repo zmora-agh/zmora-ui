@@ -17,8 +17,11 @@ import classNames from 'classnames';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
+import '!style-loader!css-loader!../../fonts/index.css';
+
 import Search from '../Search';
 import ServerTime from '../../containers/ServerTime';
+import SubmitButton from '../../containers/Submit/Button';
 import Ripple from '../../components/Ripple';
 
 import ArrowIcon from '../../svg-icons/keyboard-arrow-right';
@@ -28,6 +31,7 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   toolbar: {
     transform: 'translate3d(0,0,0)',
     overflow: 'hidden',
+    backgroundColor: '#673BB7',
   },
   toolbarInSearch: {
     color: theme.palette.text.primary,
@@ -39,6 +43,15 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   },
   activeBreadcrumbItem: {
     color: theme.palette.getContrastText(theme.palette.primary[500]),
+  },
+  titleLetter: {
+    '&:first-letter': {
+      font: '56pt Sanctuary',
+    },
+    textShadow: '1px 1px 1px rgba(0, 0, 0, 1)',
+    font: '38pt Sanctuary',
+    marginLeft: '32px',
+    marginBottom: '20px',
   },
 }));
 
@@ -84,7 +97,7 @@ class AppToolbar extends React.Component {
         <Toolbar className={toolbarClass} >
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
           <Layout item xs={2}>
-            <Text type="title" colorInherit>Zmora</Text>
+            <Text colorInherit className={classes.titleLetter}>Zmora</Text>
           </Layout>
           {!this.state.inSearch ? <Layout item xs={7}>
             <Breadcrumbs
@@ -93,6 +106,7 @@ class AppToolbar extends React.Component {
               itemClass={classes.breadcrumbItem}
               activeItemClass={classes.activeBreadcrumbItem}
               separator={<ArrowIcon />}
+              excludes={['Home']}
             />
           </Layout> : undefined}
           <Layout container item gutter={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">
@@ -103,6 +117,7 @@ class AppToolbar extends React.Component {
               onMouseMove={this.moveRipple}
             />
             <ServerTime style={this.state.inSearch ? { display: 'none' } : {}} />
+            <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />
             <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
           </Layout>
         </Toolbar>

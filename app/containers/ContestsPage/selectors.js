@@ -15,11 +15,18 @@ const selectContestsPageDomain = () => (state) => state.get('contestsPage');
  * Default selector used by ContestsPage
  */
 
+const makeSelectDialog = () => createSelector(
+  selectContestsPageDomain(),
+  (substate) => substate.get('dialog').toJS()
+);
+
 const makeSelectContestsPage = () => createSelector(
+  makeSelectDialog(),
   makeSelectContests(),
   makeSelectTime(),
-  (contests, time) => ({
+  (dialog, contests, time) => ({
     contests,
+    dialog,
     offset: time.offset,
   })
 );

@@ -5,15 +5,15 @@ import jwtDecode from 'jwt-decode';
 
 
 import { getCurrentTimeURL } from '../../urls';
-import { homePage } from '../../localUrls';
+import { homePage } from '../../local-urls';
 import { fetchWithCredentials } from '../../utils/sagas';
 import { deleteJwtToken, getJwtToken, haveJwtToken } from '../../utils/auth';
+import { submitSaga } from '../Submit/sagas';
 import { LOGIN_SUCCESS } from '../Login/constants';
 import { loginSuccess } from '../Login/actions';
 
 import { getCurrentTimeSuccess } from './actions';
 import { LOGOUT } from './constants';
-
 
 function fetchCurrentTime() {
   return fetchWithCredentials(getCurrentTimeURL(), {
@@ -58,4 +58,5 @@ export default [
   synchronizeTime,
   logoutSaga,
   decodeJWT,
+  submitSaga,
 ];

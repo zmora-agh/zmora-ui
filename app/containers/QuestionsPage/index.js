@@ -6,29 +6,35 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectProblemQuestions } from '../App/selectors';
+import { getQuestions } from './actions';
+
 
 export class QuestionsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  static propTypes = {
+    contestId: PropTypes.number.isRequired,
+    problemId: PropTypes.number.isRequired,
+    questions: PropTypes.array,
+    dispatch: PropTypes.func.isRequired,
+  };
+
+  componentDidMount() {
+    this.props.dispatch(getQuestions(this.props.contestId, this.props.problemId));
+  }
+
+
   render() {
     return (
       <div>
-        <Helmet
-          title="QuestionsPage"
-          meta={[
-            { name: 'description', content: 'Description of QuestionsPage' },
-          ]}
-        />
-        <FormattedMessage {...messages.header} />
+        {String(this.props.questions && this.props.questions
+            .map((question) => `q: ${question.question} a:${question.answers.map((answer) => answer.answer)} `))}
       </div>
     );
   }
-}
 
-QuestionsPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+
+}
 
 
 function mapDispatchToProps(dispatch) {
@@ -37,4 +43,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(QuestionsPage);
+const mapStateToProps = (state, props) => createStructuredSelector({
+  questions: makeSelectProblemQuestions(props.contestId, props.problemId),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionsPage);
+

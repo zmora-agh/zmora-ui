@@ -13,7 +13,7 @@ import { blue } from 'material-ui/styles/colors';
 import Typography from 'material-ui/Typography';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import moment from 'moment';
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes } from 'react';
 import Markdown from '../Markdown';
 
 const styleSheet = createStyleSheet('SimpleCard', {
@@ -34,48 +34,46 @@ const styleSheet = createStyleSheet('SimpleCard', {
 });
 
 
-export default class QuestionCard extends PureComponent {
-  static propTypes = {
-    question: PropTypes.object,
-  };
+function QuestionCard(props, context) {
+  const classes = context.styleManager.render(styleSheet);
+  return (
 
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
-  };
-
-
-  render() {
-    const classes = this.context.styleManager.render(styleSheet);
-    return (
-
-      <Card >
-        <CardHeader
-          avatar={<Avatar className={classes.avatar}>R</Avatar>}
-          title={this.props.question.author.name}
-          subheader={moment(this.props.question.asked).fromNow()}
-        />
-        <CardContent>
-          <Markdown text={this.props.question.question} />
-          <Divider />
-          <List>
-            {this.props.question.answers.map((a) =>
-              <div>
-                <ListItem key={a.answer} className={classes.lItem} >
-                  <Avatar className={classes.avatar}>A</Avatar>
+    <Card >
+      <CardHeader
+        avatar={<Avatar className={classes.avatar}>R</Avatar>}
+        title={props.question.author.name}
+        subheader={moment(props.question.asked).fromNow()}
+      />
+      <CardContent>
+        <Markdown text={props.question.question} />
+        <Divider />
+        <List>
+          {props.question.answers.map((a) =>
+            <div>
+              <ListItem key={a.answer} className={classes.lItem} >
+                <Avatar className={classes.avatar}>A</Avatar>
+                <div>
                   <div>
-                    <div>
-                      <Typography type="body2" >{a.author.name}</Typography>
-                      <Typography type="body1" secondary >{moment(a.answered).fromNow()}</Typography>
-                    </div>
-                    <Markdown text={a.answer} />
+                    <Typography type="body2" >{a.author.name}</Typography>
+                    <Typography type="body1" secondary >{moment(a.answered).fromNow()}</Typography>
                   </div>
+                  <Markdown text={a.answer} />
+                </div>
 
-                </ListItem>
-              </div>
+              </ListItem>
+            </div>
             )}
-          </List>
-        </CardContent>
-      </Card>);
-  }
+        </List>
+      </CardContent>
+    </Card>);
 }
+
+export default QuestionCard;
+QuestionCard.propTypes = {
+  question: PropTypes.object,
+};
+
+QuestionCard.contextTypes = {
+  styleManager: customPropTypes.muiRequired,
+};
 

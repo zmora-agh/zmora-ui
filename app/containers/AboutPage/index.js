@@ -13,14 +13,16 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 import Layout from 'material-ui/Layout';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
+import MemberAvatar from '../../components/MemberAvatar';
 
 import messages from './messages';
 
 const styleSheet = createStyleSheet('zmoraAboutPage', (theme) => ({
+  card: { maxWidth: 345 },
   root: {
     flexGrow: 1,
     marginTop: 30,
-    maxWidth: 950,
+    maxWidth: 1080,
     margin: '0 auto',
   },
   headerMessage: {
@@ -38,9 +40,6 @@ const styleSheet = createStyleSheet('zmoraAboutPage', (theme) => ({
   },
 }));
 
-function handleClick() {
-}
-
 export class AboutPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
@@ -55,12 +54,12 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
             <Layout item xs={12}>
               <div className={classes.headerMessage}><FormattedMessage {...messages.title} /></div>
             </Layout>
-            <Layout item xs={12}>
+            <Layout item xs={2}>
               <a href="https://github.com/zmora-agh">
                 <Chip
                   avatar={<Avatar src={require('../../img/GitHub-Mark-64px.png')} />}
                   label="zmora-agh"
-                  onClick={handleClick}
+                  onClick={() => {}}
                   className={classes.chip}
                 />
               </a>
@@ -68,66 +67,89 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
             <Layout item xs={12}>
               <FormattedMessage {...messages.aboutText} />
             </Layout>
-            <Layout style={{ padding: 20 }} item xs={3}>
-              <Avatar
-                title="text"
-                alt="Feels Man"
-                src={require('../../img/avatar.png')}
-                className={classes.avatar}
+            <Layout style={{ padding: 20 }} item xs={4}>
+              <MemberAvatar
+                name="Janusz"
+                description="Człowiek sukcesu"
+                avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-01.jpg"
+                bgUrl="https://cdn.dribbble.com/users/58267/screenshots/1779481/attachments/291187/Perkse-Pattern.png"
+                bgColor="#2196f3"
               />
             </Layout>
-            <Layout style={{ padding: 20 }} item xs={3}>
-              <Avatar
-                alt="Feels Man"
-                src={require('../../img/avatar.png')}
-                className={classes.avatar}
+            <Layout style={{ padding: 20 }} item xs={4}>
+              <MemberAvatar
+                name="Andrzej"
+                description="Najlepszy developer"
+                avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-02.jpg"
+                bgUrl="http://www.bestpsdfreebies.com/wp-content/uploads/2014/05/shards_pattern.jpg"
+                bgColor="#4caf50"
               />
             </Layout>
-            <Layout style={{ padding: 20 }} item xs={3}>
-              <Avatar
-                alt="Feels Man"
-                src={require('../../img/avatar.png')}
-                className={classes.avatar}
+            <Layout style={{ padding: 20 }} item xs={4}>
+              <MemberAvatar
+                name="Mirosław"
+                description="Tylko mirko"
+                avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-03.jpg"
+                bgUrl="https://goo.gl/32xGr3"
+                bgColor="#ff5722"
               />
             </Layout>
-            <Layout style={{ padding: 20 }} item xs={3}>
-              <Avatar
-                alt="Feels Man"
-                src={require('../../img/avatar.png')}
-                className={classes.avatar}
+            <Layout style={{ padding: 20 }} item xs={4}>
+              <MemberAvatar
+                name="Przemysław"
+                description="Rekin przemysłu"
+                avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-04.jpg"
+                bgUrl="https://goo.gl/CaKbO2"
+                bgColor="#fb8c00"
               />
             </Layout>
-            <Layout style={{ padding: 20 }} item xs={3}>
-              <Avatar
-                alt="Feels Man"
-                src={require('../../img/avatar.png')}
-                className={classes.avatar}
+            <Layout style={{ padding: 20 }} item xs={4}>
+              <MemberAvatar
+                name="Zbigniew"
+                description="Prawdziwy patriota"
+                avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-05.jpg"
+                bgUrl="https://goo.gl/lZGpvu"
+                bgColor="#673ab7"
               />
             </Layout>
-            <Layout style={{ padding: 20 }} item xs={3}>
-              <Avatar
-                alt="Feels Man"
-                src={require('../../img/avatar.png')}
-                className={classes.avatar}
+            <Layout style={{ padding: 20 }} item xs={4}>
+              <MemberAvatar
+                name="Van"
+                description="Artysta wykonawczy"
+                avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-06.jpg"
+                bgUrl="https://goo.gl/Kum3q4"
+                bgColor="#607d8b"
               />
             </Layout>
-            <Layout style={{ padding: 20 }} item xs={3}>
-              <Avatar
-                alt="Feels Man"
-                src={require('../../img/avatar.png')}
-                className={classes.avatar}
+
+            <Layout style={{ padding: 20 }} item xs={4}>
+              <MemberAvatar
+                name="Jan"
+                description="member"
+                avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-07.jpg"
+                bgUrl="https://cdn.dribbble.com/users/58267/screenshots/1779481/attachments/291187/Perkse-Pattern.png"
+                bgColor="lightblue"
               />
             </Layout>
-            <Layout style={{ padding: 20 }} item xs={3}>
-              <Avatar
-                alt="Feels Man"
-                src={require('../../img/avatar.png')}
-                className={classes.avatar}
+            <Layout style={{ padding: 20 }} item xs={4}>
+              <MemberAvatar
+                name="Jan"
+                description="member"
+                avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-08.jpg"
+                bgUrl="https://cdn.dribbble.com/users/58267/screenshots/1779481/attachments/291187/Perkse-Pattern.png"
+                bgColor="lightblue"
               />
             </Layout>
-            <Layout item xs={12}>
-              <FormattedMessage {...messages.aboutUs} />
+            <Layout style={{ padding: 20 }} item xs={4}>
+              <MemberAvatar
+                name="Jan"
+                description="member"
+                avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-09.jpg"
+                bgUrl="https://cdn.dribbble.com/users/58267/screenshots/1779481/attachments/291187/Perkse-Pattern.png"
+                bgColor="lightblue"
+              />
             </Layout>
+            {/* <FormattedMessage {...messages.aboutUs} />*/}
           </Layout>
         </div>
       </div>

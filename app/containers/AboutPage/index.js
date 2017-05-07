@@ -127,8 +127,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 name="Jan"
                 description="member"
                 avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-07.jpg"
-                bgUrl="https://cdn.dribbble.com/users/58267/screenshots/1779481/attachments/291187/Perkse-Pattern.png"
-                bgColor="lightblue"
+                bgUrl="https://s-media-cache-ak0.pinimg.com/originals/88/eb/a5/88eba554eb141ad1bc126daaab018594.jpg"
+                bgColor="#039BE5"
               />
             </Layout>
             <Layout style={{ padding: 20 }} item xs={4}>
@@ -136,8 +136,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 name="Jan"
                 description="member"
                 avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-08.jpg"
-                bgUrl="https://cdn.dribbble.com/users/58267/screenshots/1779481/attachments/291187/Perkse-Pattern.png"
-                bgColor="lightblue"
+                bgUrl="http://ultrawidewallpapers.com/wp-content/uploads/2015/09/fog-of-war-3440x1440.jpg"
+                bgColor="#00796B"
               />
             </Layout>
             <Layout style={{ padding: 20 }} item xs={4}>
@@ -145,8 +145,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 name="Jan"
                 description="member"
                 avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-09.jpg"
-                bgUrl="https://cdn.dribbble.com/users/58267/screenshots/1779481/attachments/291187/Perkse-Pattern.png"
-                bgColor="lightblue"
+                bgUrl="https://cdn-images-1.medium.com/max/1400/1*278tqw9zNPe2WCAz29Wzdw.jpeg"
+                bgColor="#9C27B0"
               />
             </Layout>
             {/* <FormattedMessage {...messages.aboutUs} />*/}

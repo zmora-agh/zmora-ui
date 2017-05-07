@@ -27,6 +27,9 @@ const styleSheet = createStyleSheet('SimpleCard', {
   date: {
     top: '35%',
   },
+  list: {
+    marginBottom: 40,
+  },
 });
 
 
@@ -34,7 +37,7 @@ function QuestionCard(props, context) {
   const classes = context.styleManager.render(styleSheet);
   return (
 
-    <Card >
+    <Card className={classes.list}>
       <CardHeader
         avatar={<Avatar className={classes.avatar}>R</Avatar>}
         title={props.question.author.name}
@@ -43,22 +46,20 @@ function QuestionCard(props, context) {
       <CardContent>
         <Markdown text={props.question.question} />
         <Divider />
-        <List>
+        <List >
           {props.question.answers.map((a) =>
-            <div>
-              <ListItem key={a.answer} className={classes.lItem} disableGutters >
-                <Avatar className={classes.avatar}>A</Avatar>
+            <ListItem key={a.answer} className={classes.lItem} disableGutters >
+              <Avatar className={classes.avatar}>A</Avatar>
+              <div>
                 <div>
-                  <div>
-                    <Typography type="body2" >{a.author.name}</Typography>
-                  </div>
-                  <Markdown text={a.answer} />
+                  <Typography type="body2" >{a.author.name}</Typography>
                 </div>
-                <ListItemSecondaryAction className={classes.date} >
-                  <Typography type="body1" secondary >{moment(a.answered).fromNow()}</Typography>
-                </ListItemSecondaryAction>
-              </ListItem>
-            </div>
+                <Markdown text={a.answer} />
+              </div>
+              <ListItemSecondaryAction className={classes.date} >
+                <Typography type="body1" secondary >{moment(a.answered).fromNow()}</Typography>
+              </ListItemSecondaryAction>
+            </ListItem>
           )}
         </List>
       </CardContent>

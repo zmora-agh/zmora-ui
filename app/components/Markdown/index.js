@@ -43,7 +43,6 @@ function Markdown(props) {
   const { text } = props;
   return (
     <div
-      style={{ padding: 24 }}
       className="markdown-body"
     >
       <MathJax.Context>
@@ -56,3 +55,4 @@ function Markdown(props) {
 Markdown.propTypes = markdownPropTypes;
 
 export default Markdown;
+// style={{ padding: 24 }}

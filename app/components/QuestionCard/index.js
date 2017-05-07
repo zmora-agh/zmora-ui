@@ -20,17 +20,10 @@ const styleSheet = createStyleSheet('SimpleCard', {
   avatar: {
     backgroundColor: blue[500],
     marginRight: 16,
-    marginLeft: 0,
-
   },
   lItem: {
     paddingLeft: 0,
   },
-  ansName: {
-    marginBottom: 16,
-    paddingRight: 16,
-  },
-
 });
 
 

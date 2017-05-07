@@ -8,7 +8,7 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import Avatar from 'material-ui/Avatar';
 import { Card, CardContent, CardHeader } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
-import { List, ListItem } from 'material-ui/List';
+import { List, ListItem, ListItemSecondaryAction } from 'material-ui/List';
 import { blue } from 'material-ui/styles/colors';
 import Typography from 'material-ui/Typography';
 import customPropTypes from 'material-ui/utils/customPropTypes';
@@ -23,6 +23,9 @@ const styleSheet = createStyleSheet('SimpleCard', {
   },
   lItem: {
     paddingLeft: 0,
+  },
+  date: {
+    top: '35%',
   },
 });
 
@@ -43,19 +46,20 @@ function QuestionCard(props, context) {
         <List>
           {props.question.answers.map((a) =>
             <div>
-              <ListItem key={a.answer} className={classes.lItem} >
+              <ListItem key={a.answer} className={classes.lItem} disableGutters >
                 <Avatar className={classes.avatar}>A</Avatar>
                 <div>
                   <div>
                     <Typography type="body2" >{a.author.name}</Typography>
-                    <Typography type="body1" secondary >{moment(a.answered).fromNow()}</Typography>
                   </div>
                   <Markdown text={a.answer} />
                 </div>
-
+                <ListItemSecondaryAction className={classes.date} >
+                  <Typography type="body1" secondary >{moment(a.answered).fromNow()}</Typography>
+                </ListItemSecondaryAction>
               </ListItem>
             </div>
-            )}
+          )}
         </List>
       </CardContent>
     </Card>);

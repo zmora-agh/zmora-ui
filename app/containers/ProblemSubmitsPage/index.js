@@ -36,7 +36,7 @@ export class ProblemSubmitsPage extends React.PureComponent { // eslint-disable-
   }
 
   render() {
-    if (this.props.submits && Object.keys(this.props.submits).length === 0) {
+    if (this.props.submits && this.props.submits.length === 0) {
       return <Text><FormattedMessage {...messages.empty} /></Text>;
     }
 

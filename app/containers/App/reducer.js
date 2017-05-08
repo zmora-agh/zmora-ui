@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, Map } from 'immutable';
+import { fromJS, Map, List } from 'immutable';
 import moment from 'moment';
 import { pickBy } from 'lodash';
 
@@ -50,7 +50,7 @@ const createSubmit = ({ date, ...rest }) => ({
 
 const mapFromList = (list) => Map(list.map((el) => {
   const { id, ...other } = el.toJS();
-  return [id, other];
+  return [id, { id, ...other }];
 }));
 
 function contestsPageReducer(state = initialState, action) {
@@ -84,23 +84,24 @@ function contestsPageReducer(state = initialState, action) {
     case GET_PROBLEM_EXAMPLES_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'examples'],
         fromJS(action.examples));
-    case GET_PROBLEM_SUBMITS_SUCCESS:
-      return action.submits.length === 0 ?
-        state.setIn(['contests', action.contestId, 'problems', action.problemId, 'submits'], fromJS({})) :
+    case GET_PROBLEM_SUBMITS_SUCCESS: {
+      if (action.submits.length === 0) {
+        return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'submits'], fromJS({}));
+      }
 
-        state.mergeDeepIn(['contests', action.contestId, 'problems', action.problemId, 'submits'],
-        Map(action.submits.map((submit) => [submit.id, fromJS(createSubmit(submit))])));
+      return state.mergeDeepIn(['submits'],
+        Map(action.submits.map((submit) => [submit.id, fromJS(createSubmit(submit))])))
+        .setIn(['contests', action.contestId, 'problems', action.problemId, 'submits'],
+          List(action.submits.map((submit) => submit.id)));
+    }
     case GET_SUBMIT_DETAILS_SUCCESS: {
       const submit = fromJS(createSubmit(action.submit));
 
-      return state.mergeDeepIn(
-        ['contests', action.contestId, 'problems', action.problemId, 'submits', action.submitId], submit)
+      return state.setIn(['submits', action.submitId], submit)
         .mergeIn(['testsResults'], mapFromList(submit.get('tests')))
         .mergeIn(['submitFiles'], mapFromList(submit.get('files')))
-        .setIn(['contests', action.contestId, 'problems', action.problemId, 'submits', action.submitId, 'tests'],
-          submit.get('tests').map((t) => t.get('id')))
-        .setIn(['contests', action.contestId, 'problems', action.problemId, 'submits', action.submitId, 'files'],
-          submit.get('files').map((t) => t.get('id')));
+        .setIn(['submits', action.submitId, 'tests'], submit.get('tests').map((t) => t.get('id')))
+        .setIn(['submits', action.submitId, 'files'], submit.get('files').map((t) => t.get('id')));
     }
     case GET_QUESTIONS_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'questions'],

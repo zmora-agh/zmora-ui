@@ -18,6 +18,8 @@ const makeSelectLocationState = () => {
 };
 
 const selectAppDomain = () => (state) => state.get('app');
+const selectSubmitsDomain = () => (state) => state.get('app').get('submits');
+const selectSubmitDomain = (submitId) => (state) => state.getIn(['app', 'submits', submitId]);
 const selectTestsResultsDomain = () => (state) => state.get('app').get('testsResults');
 const selectSubmitFilesDomain = () => (state) => state.get('app').get('submitFiles');
 const selectUiDomain = () => (state) => state.get('ui');
@@ -80,19 +82,21 @@ const makeSelectProblemExamples = (contestId, problemId) => createSelector(
 
 const makeSelectProblemSubmits = (contestId, problemId) => createSelector(
   selectAppDomain(),
-  (substate) => {
-    const submits = substate.getIn(['contests', contestId, 'problems', problemId, 'submits']);
-    return submits ? submits.toJS() : undefined;
+  selectSubmitsDomain(),
+  (substate, submits) => {
+    const problemSubmits = substate.getIn(['contests', contestId, 'problems', problemId, 'submits']);
+    if (problemSubmits && submits) {
+      return problemSubmits.map((s) => submits.get(s)).toJS();
+    }
+    return undefined;
   }
 );
 
 const makeSelectSubmitDetails = (contestId, problemId, submitId) => createSelector(
-  selectAppDomain(),
+  selectSubmitDomain(submitId),
   selectTestsResultsDomain(),
   selectSubmitFilesDomain(),
-  (substate, testsResults, submitFiles) => {
-    const submit = substate.getIn(['contests', contestId, 'problems', problemId, 'submits', submitId]);
-
+  (submit, testsResults, submitFiles) => {
     if (submit && submit.has('tests') && submit.has('files') && submitFiles && testsResults) {
       return submit.set('tests', submit.get('tests').map((id) => testsResults.get(id)))
         .set('files', submit.get('files').map((id) => submitFiles.get(id))).toJS();

@@ -6,23 +6,30 @@
 
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
-import styled from 'styled-components';
 import Text from 'material-ui/Text';
-// eslint-disable-next-line no-unused-vars
-import { Card, CardContent } from 'material-ui/Card';
+import { createStyleSheet } from 'jss-theme-reactor';
+import customPropTypes from 'material-ui/utils/customPropTypes';
+import { Card } from 'material-ui/Card';
 
-function MemberAvatar(props) {
-  const StyledMemberAvatar = styled.div`
-    background: url(${() => props.bgUrl}) no-repeat;
-    background-size: 100% 42%;
-    padding-bottom: 30px;
-    background-color: ${() => props.bgColor};
-    padding-top: 40px;
-  `;
+const styleSheet = createStyleSheet('zmoraMemberAvatar', () => ({
+  root: {
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 42%',
+    paddingBottom: '30px',
+    paddingTop: '40px',
+  },
+}));
+
+function MemberAvatar(props, context) {
+  const classes = context.styleManager.render(styleSheet);
+  const variantStyle = {
+    backgroundImage: `url(${props.bgUrl})`,
+    backgroundColor: props.bgColor,
+  };
 
   return (
     <Card raised>
-      <StyledMemberAvatar bgUrl={props.bgUrl}>
+      <div className={classes.root} style={variantStyle}>
         <Avatar
           alt="memberPhoto"
           src={props.avatarUrl}
@@ -32,7 +39,7 @@ function MemberAvatar(props) {
           <Text type="display2" style={{ color: 'white', fontSize: 34 }}>{props.name}</Text>
           <Text type="display1" style={{ color: 'white', fontSize: 22 }}>{props.description}</Text>
         </div>
-      </StyledMemberAvatar>
+      </div>
     </Card>
   );
 }
@@ -43,6 +50,10 @@ MemberAvatar.propTypes = {
   bgUrl: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
   description: React.PropTypes.string.isRequired,
+};
+
+MemberAvatar.contextTypes = {
+  styleManager: customPropTypes.muiRequired,
 };
 
 export default MemberAvatar;

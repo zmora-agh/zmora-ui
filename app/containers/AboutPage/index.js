@@ -149,7 +149,9 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 bgColor="#9C27B0"
               />
             </Layout>
-            {/* <FormattedMessage {...messages.aboutUs} />*/}
+            <Layout item xs={12}>
+              <FormattedMessage {...messages.aboutUs} />
+            </Layout>
           </Layout>
         </div>
       </div>

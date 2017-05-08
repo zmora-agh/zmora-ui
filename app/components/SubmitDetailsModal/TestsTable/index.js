@@ -3,7 +3,7 @@
  */
 import React, { PropTypes, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Table, TableRow, TableCell } from 'material-ui/Table';
+import { Table, TableRow, TableCell, TableBody } from 'material-ui/Table';
 import { Text } from 'material-ui/Text';
 import { SUBMIT_TEST_PROP_TYPE } from '../../../containers/SubmitDetails/constants';
 import EnhancedTableHead from '../../EnhancedTableHead';
@@ -55,14 +55,16 @@ class TestsTable extends Component { // eslint-disable-line react/prefer-statele
             orderBy={orderBy}
             onRequestSort={this.handleRequestSort}
           />
-          {tests.map((test) =>
-            <TableRow key={test.id}>
-              <TableCell>{test.test}</TableCell>
-              <TableCell>{test.status}</TableCell>
-              <TableCell>{test.executionTime}</TableCell>
-              <TableCell>{test.ramUsage}</TableCell>
-            </TableRow>
-          )}
+          <TableBody>
+            {tests.map((test) =>
+              <TableRow key={test.id}>
+                <TableCell>{test.test}</TableCell>
+                <TableCell>{test.status}</TableCell>
+                <TableCell>{test.executionTime}</TableCell>
+                <TableCell>{test.ramUsage}</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
         </Table>
       </div>
     );

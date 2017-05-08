@@ -48,6 +48,11 @@ const createSubmit = ({ date, ...rest }) => ({
   ...rest,
 });
 
+const mapFromList = (list) => Map(list.map((el) => {
+  const { id, ...other } = el.toJS();
+  return [id, other];
+}));
+
 function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
@@ -85,10 +90,15 @@ function contestsPageReducer(state = initialState, action) {
 
         state.mergeDeepIn(['contests', action.contestId, 'problems', action.problemId, 'submits'],
         Map(action.submits.map((submit) => [submit.id, fromJS(createSubmit(submit))])));
-    case GET_SUBMIT_DETAILS_SUCCESS:
+    case GET_SUBMIT_DETAILS_SUCCESS: {
+      const submit = fromJS(createSubmit(action.submit));
+
       return state.mergeDeepIn(
-        ['contests', action.contestId, 'problems', action.problemId, 'submits', action.submitId],
-        fromJS(createSubmit(action.submit)));
+        ['contests', action.contestId, 'problems', action.problemId, 'submits', action.submitId], submit)
+        .mergeIn(['testsResults'], mapFromList(submit.get('tests')))
+        .setIn(['contests', action.contestId, 'problems', action.problemId, 'submits', action.submitId, 'tests'],
+          submit.get('tests').map((t) => t.get('id')));
+    }
     case GET_QUESTIONS_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'questions'],
         fromJS(action.questions));

@@ -27,6 +27,8 @@ import QuestionsPage from '../QuestionsPage';
 
 import { getProblem } from './actions';
 import messages from './messages';
+import { HASH_PREFIX_SUBMIT, SWIPEABLE_VIEW_SUBMITS_INDEX } from './constants';
+import SubmitDetails from '../SubmitDetails/index';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   appBar: {
@@ -39,6 +41,20 @@ const getIds = (props) => ({
   problemId: parseInt(props.params.problem_id, 10),
 });
 
+const parseHash = (hash) => ({
+  prefix: hash.split('=')[0].replace('#', ''),
+  value: hash.split('=')[1],
+});
+
+function getSwipeableViewIndex(hashPrefix) {
+  switch (hashPrefix) {
+    case HASH_PREFIX_SUBMIT:
+      return SWIPEABLE_VIEW_SUBMITS_INDEX;
+    default:
+      return 0;
+  }
+}
+
 export class ProblemPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
@@ -46,8 +62,10 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 
   constructor(props) {
     super(props);
+    const hash = parseHash(this.props.location.hash);
     this.state = {
-      index: 0,
+      hash,
+      index: getSwipeableViewIndex(hash.prefix),
     };
   }
 
@@ -68,7 +86,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
     this.setState({ index });
   };
 
-  ids = getIds(this.props);
+  ids=getIds(this.props);
 
   render() {
     if (this.props.children) return this.props.children;
@@ -96,12 +114,17 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           <ProblemSubmitsPage {...this.ids} defer={this.state.index !== 2} />
           <QuestionsPage {...this.ids} />
         </SwipeableViews>
+        <SubmitDetails
+          {...this.ids}
+          submitId={this.state.hash.prefix === HASH_PREFIX_SUBMIT ? parseInt(this.state.hash.value, 10) : undefined}
+        />
       </Paper>
     );
   }
 }
 
 ProblemPage.propTypes = {
+  location: PropTypes.object,
   problem: PropTypes.shape(problemContentPropTypes),
   children: PropTypes.node,
   dispatch: PropTypes.func.isRequired,

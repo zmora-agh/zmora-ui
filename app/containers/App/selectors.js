@@ -84,6 +84,18 @@ const makeSelectProblemSubmits = (contestId, problemId) => createSelector(
   }
 );
 
+const makeSelectSubmitDetails = (contestId, problemId, submitId) => createSelector(
+  selectAppDomain(),
+  (substate) => {
+    const submit = substate.getIn(['contests', contestId, 'problems', problemId, 'submits', submitId]);
+    if (submit) {
+      const keys = Object.keys(submit.toJS());
+      return (keys.includes('files')) ? submit.toJS() : undefined;
+    }
+    return undefined;
+  }
+);
+
 const makeSelectProblemQuestions = (contestId, problemId) => createSelector(
   selectAppDomain(),
   (substate) => {
@@ -104,5 +116,6 @@ export {
   makeSelectProblem,
   makeSelectProblemExamples,
   makeSelectProblemSubmits,
+  makeSelectSubmitDetails,
   makeSelectProblemQuestions,
 };

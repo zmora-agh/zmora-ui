@@ -68,7 +68,7 @@ export default class ProblemSubmits extends Component { // eslint-disable-line r
           {data.map((submit) =>
             <TableRow key={submit.id}>
               <TableCell>{submit.id}</TableCell>
-              <TableCell>{submit.date.format('DD-MM-YYYY hh:mm:ss')}</TableCell>
+              <TableCell>{submit.date.format('DD-MM-YYYY HH:mm:ss')}</TableCell>
               <TableCell>{submit.status}</TableCell>
               <TableCell>
                 <a href={`#submit=${submit.id}`}>

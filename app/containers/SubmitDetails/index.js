@@ -16,6 +16,7 @@ import messages from './messages';
 import { SUBMIT_DETAILS_PROP_TYPE } from './constants';
 import { makeSelectSubmitDetails } from '../App/selectors';
 import { getSubmitDetails } from './actions';
+import { SUBMITS_HASH_PREFIX } from '../ProblemPage/constants';
 
 class SubmitDetails extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -31,7 +32,7 @@ class SubmitDetails extends React.Component { // eslint-disable-line react/prefe
   }
 
   onModalClose() {
-    window.location.hash = '';
+    window.location.hash = SUBMITS_HASH_PREFIX;
   }
 
   render() {

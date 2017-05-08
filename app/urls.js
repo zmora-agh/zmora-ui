@@ -10,6 +10,7 @@ export const getProblemExamplesURL = (contestId, problemId) => `${getProblemURL(
 export const getProblemSubmitsURL = (contestId, problemId) => `${getProblemURL(contestId, problemId)}/submits`;
 export const getSubmitDetailsURL = (contestId, problemId, submitId) =>
   `${getProblemSubmitsURL(contestId, problemId)}/${submitId}`;
+export const getProblemQustionsURL = (contestId, problemId) => `${getProblemURL(contestId, problemId)}/questions`;
 export const joinContestUrl = (contestId) => `${getContestURL(contestId)}/join`;
 
 export const loginURL = () => `${API_URL}users/auth`;

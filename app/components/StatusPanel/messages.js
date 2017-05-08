@@ -1,7 +1,7 @@
 /*
- * NotFoundPage Messages
+ * StatusPanelBeta Messages
  *
- * This contains all the text for the NotFoundPage component.
+ * This contains all the text for the StatusPanelBeta component.
  */
 import { defineMessages } from 'react-intl';
 
@@ -10,28 +10,8 @@ export default defineMessages({
     id: 'app.components.StatusPanel.header',
     defaultMessage: 'Status',
   },
-  active: {
-    id: 'app.components.StatusPanel.active',
-    defaultMessage: 'Aktywne maszyny: ',
-  },
-  logged: {
-    id: 'app.components.StatusPanel.logged',
-    defaultMessage: 'Zalogowani użytkownicy: ',
-  },
-  solved: {
-    id: 'app.components.StatusPanel.solved',
-    defaultMessage: 'Wyzwania ukończone dzisiaj: ',
-  },
-  solvedAll: {
-    id: 'app.components.StatusPanel.solvedAll',
-    defaultMessage: 'Wyzwania ukończone ogółem: ',
-  },
-  lastLogged: {
-    id: 'app.components.StatusPanel.lastLogged',
-    defaultMessage: 'Ostatnio zalogowany ',
-  },
-  showMoreButton: {
-    id: 'app.components.StatusPanel.showMoreButton',
-    defaultMessage: 'Więcej Statystyk',
+  details: {
+    id: 'app.components.StatusPanel.details',
+    defaultMessage: 'Aktualne obciążenie klastra',
   },
 });

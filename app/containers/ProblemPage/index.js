@@ -23,6 +23,7 @@ import FetchView from '../../components/FetchView';
 import ProblemView from '../../components/ProblemView';
 import ProblemExamplesPage from '../ProblemExamplesPage';
 import ProblemSubmitsPage from '../ProblemSubmitsPage';
+import QuestionsPage from '../QuestionsPage';
 
 import { getProblem } from './actions';
 import messages from './messages';
@@ -111,7 +112,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           <FetchView>{this.props.problem && <ProblemView {...this.props.problem} />}</FetchView>
           <ProblemExamplesPage {...this.ids} defer={this.state.index !== 1} />
           <ProblemSubmitsPage {...this.ids} defer={this.state.index !== 2} />
-          <div>empty questions page</div>
+          <QuestionsPage {...this.ids} />
         </SwipeableViews>
         <SubmitDetails
           {...this.ids}

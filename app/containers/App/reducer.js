@@ -16,6 +16,7 @@ import { GET_PROBLEM_SUCCESS } from '../ProblemPage/constants';
 import { GET_PROBLEM_EXAMPLES_SUCCESS } from '../ProblemExamplesPage/constants';
 import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
 import { LOGIN_SUCCESS } from '../Login/constants';
+import { GET_SUBMIT_DETAILS_SUCCESS } from '../SubmitDetails/constants';
 
 
 const initialState = fromJS({
@@ -40,6 +41,11 @@ const flattenProblem = ({ problem, ...meta }) => ({
 });
 
 const createContest = (contest) => stripIdProperty(contest);
+
+const createSubmit = ({ date, ...rest }) => ({
+  date: moment(date),
+  ...rest,
+});
 
 function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
@@ -73,8 +79,15 @@ function contestsPageReducer(state = initialState, action) {
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'examples'],
         fromJS(action.examples));
     case GET_PROBLEM_SUBMITS_SUCCESS:
-      return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'submits'],
-        fromJS(action.submits));
+      return action.submits.length === 0 ?
+        state.setIn(['contests', action.contestId, 'problems', action.problemId, 'submits'], fromJS({})) :
+
+        state.mergeDeepIn(['contests', action.contestId, 'problems', action.problemId, 'submits'],
+        Map(action.submits.map((submit) => [submit.id, fromJS(createSubmit(submit))])));
+    case GET_SUBMIT_DETAILS_SUCCESS:
+      return state.mergeDeepIn(
+        ['contests', action.contestId, 'problems', action.problemId, 'submits', action.submitId],
+        fromJS(createSubmit(action.submit)));
     case GET_CURRENT_TIME_SUCCESS: {
       const offset = action.time.diff(moment(), 'seconds');
 

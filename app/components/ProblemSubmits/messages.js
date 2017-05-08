@@ -18,4 +18,8 @@ export default defineMessages({
     id: 'app.components.ProblemSubmits.status',
     defaultMessage: 'Status',
   },
+  seeDetails: {
+    id: 'app.components.ProblemSubmits.seeDetails',
+    defaultMessage: 'See details',
+  },
 });

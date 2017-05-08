@@ -4,25 +4,20 @@
 *
 */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 import {
   Table,
-  TableHead,
   TableBody,
   TableRow,
   TableCell,
-  TableSortLabel,
 } from 'material-ui/Table';
 
 import { FormattedMessage } from 'react-intl';
-
-import IconButton from 'material-ui/IconButton';
-import FileFileDownload from '../../svg-icons/file-download';
-import EditorModeEdit from '../../svg-icons/mode-edit';
-
+import { Button } from 'material-ui/Button';
 import { submitsPropType } from './constants';
 import messages from './messages';
+import EnhancedTableHead from '../EnhancedTableHead';
 
 const columnData = [
   { id: 'id', label: <FormattedMessage {...messages.id} /> },
@@ -30,48 +25,19 @@ const columnData = [
   { id: 'status', label: <FormattedMessage {...messages.status} /> },
 ];
 
-class EnhancedTableHead extends Component {
-  static propTypes = {
-    onRequestSort: PropTypes.func.isRequired,
-    order: PropTypes.string.isRequired,
-    orderBy: PropTypes.string.isRequired,
-  };
-
-  createSortHandler = (property) => (event) => this.props.onRequestSort(event, property);
-
-  render() {
-    const { order, orderBy } = this.props;
-
-    return (
-      <TableHead>
-        <TableRow>
-          {columnData.map((column) =>
-            <TableCell key={column.id}>
-              <TableSortLabel
-                active={orderBy === column.id}
-                direction={order}
-                onClick={this.createSortHandler(column.id)}
-              >
-                {column.label}
-              </TableSortLabel>
-            </TableCell>
-          , this)}
-          <TableCell />
-        </TableRow>
-      </TableHead>
-    );
-  }
-}
 
 export default class ProblemSubmits extends Component { // eslint-disable-line react/no-multi-comp
   static propTypes = {
     submits: submitsPropType,
   };
 
-  state = {
-    order: 'asc',
-    orderBy: 'id',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      order: 'desc',
+      orderBy: 'date',
+    };
+  }
 
   handleRequestSort = (event, property) => {
     const orderBy = property;
@@ -87,28 +53,27 @@ export default class ProblemSubmits extends Component { // eslint-disable-line r
   render() {
     const { order, orderBy } = this.state;
 
-    const data = this.props.submits.sort(
-      (a, b) => (
-        order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]
-      ),
-    );
+    const data = Object.values(this.props.submits)
+      .sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
 
     return (
       <Table>
         <EnhancedTableHead
+          columns={columnData}
           order={order}
           orderBy={orderBy}
           onRequestSort={this.handleRequestSort}
         />
         <TableBody>
-          {data.map((n) =>
-            <TableRow key={n.id}>
-              <TableCell>{n.id}</TableCell>
-              <TableCell>{n.date}</TableCell>
-              <TableCell>{n.status}</TableCell>
+          {data.map((submit) =>
+            <TableRow key={submit.id}>
+              <TableCell>{submit.id}</TableCell>
+              <TableCell>{submit.date.format('DD-MM-YYYY hh:mm:ss')}</TableCell>
+              <TableCell>{submit.status}</TableCell>
               <TableCell>
-                <IconButton><EditorModeEdit /></IconButton>
-                <IconButton><FileFileDownload /></IconButton>
+                <a href={`#submit=${submit.id}`}>
+                  <Button raised primary><FormattedMessage {...messages.seeDetails} /></Button>
+                </a>
               </TableCell>
             </TableRow>
           )}

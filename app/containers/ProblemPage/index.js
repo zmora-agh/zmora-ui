@@ -27,7 +27,7 @@ import QuestionsPage from '../QuestionsPage';
 
 import { getProblem } from './actions';
 import messages from './messages';
-import { HASH_PREFIX_SUBMIT, SWIPEABLE_VIEW_SUBMITS_INDEX } from './constants';
+import { HASH_PREFIXES, SUBMITS_HASH_PREFIX } from './constants';
 import SubmitDetails from '../SubmitDetails/index';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
@@ -47,12 +47,7 @@ const parseHash = (hash) => ({
 });
 
 function getSwipeableViewIndex(hashPrefix) {
-  switch (hashPrefix) {
-    case HASH_PREFIX_SUBMIT:
-      return SWIPEABLE_VIEW_SUBMITS_INDEX;
-    default:
-      return 0;
-  }
+  return HASH_PREFIXES.includes(hashPrefix) ? HASH_PREFIXES.indexOf(hashPrefix) : 0;
 }
 
 export class ProblemPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -80,10 +75,12 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 
   handleChange = (event, index) => {
     this.setState({ index });
+    window.location.hash = HASH_PREFIXES[index];
   };
 
   handleChangeIndex = (index) => {
     this.setState({ index });
+    window.location.hash = HASH_PREFIXES[index];
   };
 
   ids=getIds(this.props);
@@ -116,7 +113,8 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
         </SwipeableViews>
         <SubmitDetails
           {...this.ids}
-          submitId={this.state.hash.prefix === HASH_PREFIX_SUBMIT ? parseInt(this.state.hash.value, 10) : undefined}
+          submitId={this.state.hash.prefix === SUBMITS_HASH_PREFIX && !isNaN(this.state.hash.value) ?
+            parseInt(this.state.hash.value, 10) : undefined}
         />
       </Paper>
     );

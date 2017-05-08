@@ -96,8 +96,11 @@ function contestsPageReducer(state = initialState, action) {
       return state.mergeDeepIn(
         ['contests', action.contestId, 'problems', action.problemId, 'submits', action.submitId], submit)
         .mergeIn(['testsResults'], mapFromList(submit.get('tests')))
+        .mergeIn(['submitFiles'], mapFromList(submit.get('files')))
         .setIn(['contests', action.contestId, 'problems', action.problemId, 'submits', action.submitId, 'tests'],
-          submit.get('tests').map((t) => t.get('id')));
+          submit.get('tests').map((t) => t.get('id')))
+        .setIn(['contests', action.contestId, 'problems', action.problemId, 'submits', action.submitId, 'files'],
+          submit.get('files').map((t) => t.get('id')));
     }
     case GET_QUESTIONS_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'questions'],

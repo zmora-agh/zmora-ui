@@ -18,6 +18,9 @@ const makeSelectLocationState = () => {
 };
 
 const selectAppDomain = () => (state) => state.get('app');
+const selectContestDomain = (contestId) => (state) => state.getIn(['app', 'contests', contestId]);
+const selectProblemsDomain = () => (state) => state.getIn(['app', 'problems']);
+const selectProblemDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId]);
 const selectSubmitsDomain = () => (state) => state.get('app').get('submits');
 const selectSubmitDomain = (submitId) => (state) => state.getIn(['app', 'submits', submitId]);
 const selectTestsResultsDomain = () => (state) => state.get('app').get('testsResults');
@@ -58,18 +61,20 @@ const makeSelectTime = () => createSelector(
 );
 
 const makeSelectProblems = (contestId) => createSelector(
-  selectAppDomain(),
-  (substate) => substate.getIn(['contests', contestId, 'fetched']) ?
-    substate.getIn(['contests', contestId, 'problems']).toJS() :
-    undefined
+  selectContestDomain(contestId),
+  selectProblemsDomain(),
+  (contest, problems) => {
+    if (problems && contest && contest.has('problems')) {
+      return contest.get('problems').map((id) => problems.get(id)).toJS();
+    }
+
+    return undefined;
+  }
 );
 
-const makeSelectProblem = (contestId, problemId) => createSelector(
-  selectAppDomain(),
-  (substate) => {
-    const problem = substate.getIn(['contests', contestId, 'problems', problemId]);
-    return problem ? problem.toJS() : undefined;
-  }
+const makeSelectProblem = (problemId) => createSelector(
+  selectProblemDomain(problemId),
+  (problem) => problem ? problem.toJS() : undefined
 );
 
 const makeSelectProblemExamples = (contestId, problemId) => createSelector(
@@ -81,12 +86,11 @@ const makeSelectProblemExamples = (contestId, problemId) => createSelector(
 );
 
 const makeSelectProblemSubmits = (contestId, problemId) => createSelector(
-  selectAppDomain(),
+  selectProblemDomain(problemId),
   selectSubmitsDomain(),
-  (substate, submits) => {
-    const problemSubmits = substate.getIn(['contests', contestId, 'problems', problemId, 'submits']);
-    if (problemSubmits && submits) {
-      return problemSubmits.map((s) => submits.get(s)).toJS();
+  (problem, submits) => {
+    if (problem && problem.has('submits') && submits) {
+      return problem.get('submits').map((s) => submits.get(s)).toJS();
     }
     return undefined;
   }

@@ -133,7 +133,7 @@ ProblemPage.propTypes = {
 const mapStateToProps = (state, props) => {
   const ids = getIds(props);
   return createStructuredSelector({
-    problem: makeSelectProblem(ids.contestId, ids.problemId),
+    problem: makeSelectProblem(ids.problemId),
   });
 };
 

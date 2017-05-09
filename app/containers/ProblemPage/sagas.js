@@ -15,7 +15,7 @@ function fetchProblem(contestId, problemId) {
 }
 
 function* getProblem({ contestId, problemId }) {
-  const cachedProblem = yield select(makeSelectProblem(contestId, problemId));
+  const cachedProblem = yield select(makeSelectProblem(problemId));
   if (cachedProblem) return;
 
   const problem = yield call(fetchProblem, contestId, problemId);

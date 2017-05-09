@@ -31,6 +31,7 @@ const initialState = fromJS({
     offset: 0,
   },
   contests: {},
+  problems: {},
   contestsFetched: false,
 });
 
@@ -48,10 +49,7 @@ const createSubmit = ({ date, ...rest }) => ({
   ...rest,
 });
 
-const mapFromList = (list) => Map(list.map((el) => {
-  const { id, ...other } = el.toJS();
-  return [id, { id, ...other }];
-}));
+const mapFromList = (list) => Map(list.map((el) => [el.get('id'), el]));
 
 function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
@@ -68,31 +66,26 @@ function contestsPageReducer(state = initialState, action) {
       });
     }
     case GET_PROBLEMS_SUCCESS:
-      /* Merging empty Map with state.mergeDeepIn() does not create empty Map inside tree, so we have to handle this
-       * special case manually: */
-      return (action.problems.length === 0 ?
-        // case 1) – explicitly emplace empty Map inside
-        state.setIn(['contests', action.contestId, 'problems'], fromJS({})) :
-        // case 2) – just merge, as there is something to merge
-        state.mergeDeepIn(['contests', action.contestId, 'problems'],
-          Map(action.problems.map((problem) => [problem.id, fromJS(flattenProblem(problem))]))))
-      // ...after all, set fetched flag
-        .setIn(['contests', action.contestId, 'fetched'], true);
+      if (action.problems.length === 0) {
+        return state.set('problems', Map());
+      }
+
+      return state.mergeIn(['problems'], mapFromList(fromJS(action.problems.map(flattenProblem))))
+        .setIn(['contests', action.contestId, 'problems'], fromJS(action.problems.map((problem) => problem.id)));
+
     case GET_PROBLEM_SUCCESS:
-      return state.mergeIn(['contests', action.contestId, 'problems'],
-        Map([[action.problemId, fromJS(flattenProblem(action.problem))]]));
+      return state.setIn(['problems', action.problemId], fromJS(flattenProblem(action.problem)));
+
     case GET_PROBLEM_EXAMPLES_SUCCESS:
       return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'examples'],
         fromJS(action.examples));
     case GET_PROBLEM_SUBMITS_SUCCESS: {
       if (action.submits.length === 0) {
-        return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'submits'], fromJS({}));
+        return state.setIn(['problems', action.problemId, 'submits'], fromJS({}));
       }
 
-      return state.mergeDeepIn(['submits'],
-        Map(action.submits.map((submit) => [submit.id, fromJS(createSubmit(submit))])))
-        .setIn(['contests', action.contestId, 'problems', action.problemId, 'submits'],
-          List(action.submits.map((submit) => submit.id)));
+      return state.mergeDeepIn(['submits'], mapFromList(fromJS(action.submits.map(createSubmit))))
+        .setIn(['problems', action.problemId, 'submits'], List(action.submits.map((submit) => submit.id)));
     }
     case GET_SUBMIT_DETAILS_SUCCESS: {
       const submit = fromJS(createSubmit(action.submit));

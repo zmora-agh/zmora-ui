@@ -41,28 +41,24 @@ function ProblemsTable(props) {
       </TableHead>
 
       <TableBody>
-        {Object.keys(props.problems).map((problemId) => {
-          const problem = props.problems[problemId];
-          const numProblemId = parseInt(problemId, 10);
-          return (<TableRow
-            key={props.problems[problemId].shortcode}
-            onClick={() => props.onRowClick(problemId)}
-            style={{ cursor: 'pointer' }}
-          >
-            <TableCell>{problem.shortcode}</TableCell>
-            <TableCell>{problem.name}</TableCell>
-            <TableCell>{problem.basePoints}</TableCell>
-            <TableCell>{moment(problem.softDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-            <TableCell>{moment(problem.hardDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-            <TableCell>{!problem.optional && <Done />}</TableCell>
-            <TableCell>
-              <SubmitButton contestId={props.contestId} problemId={numProblemId} />
-              <IconButton onClick={(e) => { e.stopPropagation(); props.onPdfClick(numProblemId); }}>
-                <Pdf />
-              </IconButton>
-            </TableCell>
-          </TableRow>);
-        })}
+        {props.problems.map((problem) => (<TableRow
+          key={problem.shortcode}
+          onClick={() => props.onRowClick(problem.id)}
+          style={{ cursor: 'pointer' }}
+        >
+          <TableCell>{problem.shortcode}</TableCell>
+          <TableCell>{problem.name}</TableCell>
+          <TableCell>{problem.basePoints}</TableCell>
+          <TableCell>{moment(problem.softDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+          <TableCell>{moment(problem.hardDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+          <TableCell>{!problem.optional && <Done />}</TableCell>
+          <TableCell>
+            <SubmitButton contestId={props.contestId} problemId={problem.id} />
+            <IconButton onClick={(e) => { e.stopPropagation(); props.onPdfClick(problem.id); }}>
+              <Pdf />
+            </IconButton>
+          </TableCell>
+        </TableRow>))}
       </TableBody>
     </Table>
   );
@@ -70,7 +66,7 @@ function ProblemsTable(props) {
 
 ProblemsTable.propTypes = {
   contestId: React.PropTypes.number.isRequired,
-  problems: React.PropTypes.objectOf(React.PropTypes.shape(problemRowPropType)).isRequired,
+  problems: React.PropTypes.arrayOf(React.PropTypes.shape(problemRowPropType)).isRequired,
 };
 
 export default ProblemsTable;

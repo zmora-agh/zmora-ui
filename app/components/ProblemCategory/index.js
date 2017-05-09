@@ -28,7 +28,7 @@ ProblemCategory.propTypes = {
   contestId: React.PropTypes.number.isRequired,
   onProblemClick: React.PropTypes.func.isRequired,
   onPdfClick: React.PropTypes.func.isRequired,
-  problems: React.PropTypes.objectOf(React.PropTypes.shape(problemContentPropTypes)),
+  problems: React.PropTypes.arrayOf(React.PropTypes.shape(problemContentPropTypes)),
 };
 
 export default ProblemCategory;

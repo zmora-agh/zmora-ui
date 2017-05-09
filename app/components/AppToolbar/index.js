@@ -5,6 +5,7 @@
 */
 
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import AppBar from 'material-ui/AppBar';
 import Breadcrumbs from 'react-breadcrumbs';
@@ -20,6 +21,7 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import '!style-loader!css-loader!../../fonts/index.css';
 
+import messages from './messages';
 import Search from '../Search';
 import ServerTime from '../../containers/ServerTime';
 import SubmitButton from '../../containers/Submit/Button';
@@ -108,7 +110,7 @@ class AppToolbar extends React.Component {
           onClick={() => this.context.router.push('/auth')}
           style={{ display: this.state.inSearch ? 'none' : 'block' }}
         >
-          Zaloguj się
+          <FormattedMessage {...messages.loginButtonText} />
         </Button>
       );
     } else {
@@ -133,7 +135,7 @@ class AppToolbar extends React.Component {
         <Toolbar className={toolbarClass} >
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
           <Layout item xs={2}>
-            <Text colorInherit className={classes.titleLetter}>Zmora</Text>
+            <Text colorInherit className={classes.titleLetter}><FormattedMessage {...messages.title} /></Text>
           </Layout>
           {!this.state.inSearch ? <Layout item xs={7}>
             <Breadcrumbs

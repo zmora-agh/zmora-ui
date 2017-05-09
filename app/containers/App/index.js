@@ -59,7 +59,7 @@ class App extends React.PureComponent {
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
     user: React.PropTypes.object,
-    logged: React.PropTypes.object,
+    logged: React.PropTypes.bool,
   };
 
   static contextTypes = {
@@ -76,21 +76,24 @@ class App extends React.PureComponent {
     this.setState({ rightMenuOpen: !this.state.rightMenuOpen });
   }
 
+  isRightMenuOpened() {
+    return this.state.rightMenuOpen && this.props.logged;
+  }
+
   render() {
     const classes = this.context.styleManager.render(styleSheet);
-    const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
+    const rightMenuTranslation = this.isRightMenuOpened() ? 0 : 100;
     return (
       <div className={classes.root}>
         <AppToolbar
           routes={this.props.routes}
           params={this.props.params}
           username={this.props.user.nick}
-          logged={this.props.logged}
           onToggleMenu={this.toggleMenu}
         />
         <Layout container gutter={0} style={{ marginTop: 64 }}>
           <Layout item xs={2}><Navigation style={{ padding: 10 }} /></Layout>
-          <Layout item xs={this.state.rightMenuOpen ? 8 : 10} className={classes.contentContainer}>
+          <Layout item xs={this.isRightMenuOpened() ? 8 : 10} className={classes.contentContainer}>
             {React.Children.toArray(this.props.children)}
           </Layout>
           <Layout
@@ -98,7 +101,7 @@ class App extends React.PureComponent {
             className={classes.rightMenu}
             style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
           >
-            <RightMenu logged={this.props.logged} />
+            <RightMenu />
           </Layout>
         </Layout>
         <Submit />

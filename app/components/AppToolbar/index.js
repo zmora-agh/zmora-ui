@@ -11,7 +11,7 @@ import Breadcrumbs from 'react-breadcrumbs';
 import Toolbar from 'material-ui/Toolbar';
 import Layout from 'material-ui/Layout';
 import Text from 'material-ui/Text';
-import IconButton from 'material-ui/IconButton'
+import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 
 import classNames from 'classnames';
@@ -59,6 +59,8 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
       backgroundColor: '#7767C7',
     },
     backgroundColor: '#6652B7',
+    marginLeft: '10px',
+    color: 'inherit',
   },
 }));
 
@@ -104,7 +106,7 @@ class AppToolbar extends React.Component {
           raised
           className={classes.loginButton}
           onClick={() => this.context.router.push('/auth')}
-          style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }}
+          style={{ display: this.state.inSearch ? 'none' : 'block' }}
         >
           Zaloguj się
         </Button>

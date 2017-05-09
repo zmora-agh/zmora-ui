@@ -27,12 +27,12 @@ const initialState = fromJS({
     email: '',
     avatar: '',
   },
-  logged: false,
   time: {
     offset: 0,
   },
   contests: {},
   contestsFetched: false,
+  logged: false,
 });
 
 const stripIdProperty = (entity) => pickBy(entity, (value, key) => key !== 'id');
@@ -60,7 +60,6 @@ function contestsPageReducer(state = initialState, action) {
       return state.mergeDeep({
         user: initialState.get('user'),
         logged: initialState.get('logged'),
-        rightMenuOpen: false,
       });
     case GET_CONTEST_SUCCESS:
       return state.mergeIn(['contests', action.contestId], fromJS(createContest(action.contest)));

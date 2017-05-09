@@ -59,6 +59,7 @@ class App extends React.PureComponent {
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
     user: React.PropTypes.object,
+    logged: React.PropTypes.object,
   };
 
   static contextTypes = {
@@ -84,6 +85,7 @@ class App extends React.PureComponent {
           routes={this.props.routes}
           params={this.props.params}
           username={this.props.user.nick}
+          logged={this.props.logged}
           onToggleMenu={this.toggleMenu}
         />
         <Layout container gutter={0} style={{ marginTop: 64 }}>
@@ -96,7 +98,7 @@ class App extends React.PureComponent {
             className={classes.rightMenu}
             style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
           >
-            <RightMenu />
+            <RightMenu logged={this.props.logged} />
           </Layout>
         </Layout>
         <Submit />

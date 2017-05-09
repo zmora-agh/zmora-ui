@@ -88,6 +88,7 @@ RightMenu.propTypes = {
     avatar: React.PropTypes.string,
   }).isRequired,
   dispatch: React.PropTypes.func.isRequired,
+  logged: React.PropTypes.object.isRequired,
 };
 
 RightMenu.contextTypes = {

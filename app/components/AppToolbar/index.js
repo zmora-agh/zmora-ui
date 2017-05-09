@@ -11,7 +11,8 @@ import Breadcrumbs from 'react-breadcrumbs';
 import Toolbar from 'material-ui/Toolbar';
 import Layout from 'material-ui/Layout';
 import Text from 'material-ui/Text';
-import IconButton from 'material-ui/IconButton';
+import IconButton from 'material-ui/IconButton'
+import Button from 'material-ui/Button';
 
 import classNames from 'classnames';
 import { createStyleSheet } from 'jss-theme-reactor';
@@ -53,6 +54,12 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
     marginLeft: '32px',
     marginBottom: '20px',
   },
+  loginButton: {
+    '&:hover': {
+      backgroundColor: '#7767C7',
+    },
+    backgroundColor: '#6652B7',
+  },
 }));
 
 class AppToolbar extends React.Component {
@@ -60,10 +67,12 @@ class AppToolbar extends React.Component {
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
     onToggleMenu: React.PropTypes.func.isRequired,
+    username: React.PropTypes.string.isRequired,
   };
 
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
+    router: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -84,6 +93,31 @@ class AppToolbar extends React.Component {
     if (!this.state.inSearch) {
       this.setState({ rippleX: e.pageX - (window.innerWidth / 2) });
     }
+  }
+
+  generateIconPanel() {
+    const classes = this.context.styleManager.render(styleSheet);
+    let result;
+    if (this.props.username === '') {
+      result = (
+        <Button
+          raised
+          className={classes.loginButton}
+          onClick={() => this.context.router.push('/auth')}
+          style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }}
+        >
+          Zaloguj się
+        </Button>
+      );
+    } else {
+      result = (
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />
+          <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
+        </div>
+      );
+    }
+    return result;
   }
 
   render() {
@@ -117,8 +151,7 @@ class AppToolbar extends React.Component {
               onMouseMove={this.moveRipple}
             />
             <ServerTime style={this.state.inSearch ? { display: 'none' } : {}} />
-            <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />
-            <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
+            {this.generateIconPanel()}
           </Layout>
         </Toolbar>
       </AppBar>

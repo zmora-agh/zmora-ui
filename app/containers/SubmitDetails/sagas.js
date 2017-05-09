@@ -15,7 +15,7 @@ function fetchSubmitDetails(contestId, problemId, submitId) {
 }
 
 function* getSubmitDetails({ contestId, problemId, submitId }) {
-  const cachedDetails = yield select(makeSelectSubmitDetails(contestId, problemId, submitId));
+  const cachedDetails = yield select(makeSelectSubmitDetails(submitId));
   if (cachedDetails && cachedDetails.files && cachedDetails.tests) return;
 
   const details = yield call(fetchSubmitDetails, contestId, problemId, submitId);

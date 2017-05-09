@@ -47,7 +47,7 @@ ProblemExamplesPage.propTypes = {
 };
 
 const mapStateToProps = (state, props) => createStructuredSelector({
-  examples: makeSelectProblemExamples(props.contestId, props.problemId),
+  examples: makeSelectProblemExamples(props.problemId),
 });
 
 function mapDispatchToProps(dispatch) {

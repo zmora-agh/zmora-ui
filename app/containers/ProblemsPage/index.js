@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
-import { transform } from 'lodash';
+import { groupBy } from 'lodash';
 
 import Text from 'material-ui/Text';
 
@@ -26,22 +26,17 @@ import messages from './messages';
 
 const getContestId = (props) => parseInt(props.params.contest_id, 10);
 
-const groupBy = (collection, property) => transform(collection, (result, item, name) => {
-  result[item[property]] = result[item[property]] || {}; // eslint-disable-line no-param-reassign
-  result[item[property]][name] = item; // eslint-disable-line no-param-reassign
-});
-
 export class ProblemsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     this.props.dispatch(getProblems(getContestId(this.props)));
   }
 
-  contestId = getContestId(this.props);
-
   render() {
+    const contestId = getContestId(this.props);
+
     if (this.props.children) return this.props.children;
 
-    if (this.props.problems && Object.keys(this.props.problems).length === 0) {
+    if (this.props.problems && this.props.problems.length === 0) {
       return <Text><FormattedMessage {...messages.empty} /></Text>;
     }
 
@@ -53,9 +48,9 @@ export class ProblemsPage extends React.PureComponent { // eslint-disable-line r
         {Object.keys(categories).map((category) => <ProblemCategory
           key={category}
           name={category}
-          contestId={this.contestId}
+          contestId={contestId}
           problems={categories[category]}
-          onProblemClick={(problemId) => this.props.dispatch(push(problemPage(this.contestId, problemId)))}
+          onProblemClick={(problemId) => this.props.dispatch(push(problemPage(contestId, problemId)))}
           onPdfClick={(problemId) => console.log(problemId)}
         />)}
       </ExpandableTable>}
@@ -64,7 +59,7 @@ export class ProblemsPage extends React.PureComponent { // eslint-disable-line r
 }
 
 ProblemsPage.propTypes = {
-  problems: PropTypes.objectOf(PropTypes.shape(problemRowPropType)),
+  problems: PropTypes.arrayOf(PropTypes.shape(problemRowPropType)),
   children: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
 };

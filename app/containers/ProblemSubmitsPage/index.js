@@ -36,7 +36,7 @@ export class ProblemSubmitsPage extends React.PureComponent { // eslint-disable-
   }
 
   render() {
-    if (this.props.submits && Object.keys(this.props.submits).length === 0) {
+    if (this.props.submits && this.props.submits.length === 0) {
       return <Text><FormattedMessage {...messages.empty} /></Text>;
     }
 
@@ -53,7 +53,7 @@ ProblemSubmitsPage.propTypes = {
 };
 
 const mapStateToProps = (state, props) => createStructuredSelector({
-  submits: makeSelectProblemSubmits(props.contestId, props.problemId),
+  submits: makeSelectProblemSubmits(props.problemId),
 });
 function mapDispatchToProps(dispatch) {
   return {

@@ -66,7 +66,7 @@ SubmitDetails.propTypes = {
 };
 
 const mapStateToProps = (state, props) => createStructuredSelector({
-  submit: makeSelectSubmitDetails(props.contestId, props.problemId, props.submitId),
+  submit: makeSelectSubmitDetails(props.submitId),
 });
 
 function mapDispatchToProps(dispatch) {

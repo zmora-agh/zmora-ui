@@ -53,7 +53,7 @@ ProblemSubmitsPage.propTypes = {
 };
 
 const mapStateToProps = (state, props) => createStructuredSelector({
-  submits: makeSelectProblemSubmits(props.contestId, props.problemId),
+  submits: makeSelectProblemSubmits(props.problemId),
 });
 function mapDispatchToProps(dispatch) {
   return {

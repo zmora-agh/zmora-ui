@@ -21,6 +21,8 @@ const selectAppDomain = () => (state) => state.get('app');
 const selectContestDomain = (contestId) => (state) => state.getIn(['app', 'contests', contestId]);
 const selectProblemsDomain = () => (state) => state.getIn(['app', 'problems']);
 const selectProblemDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId]);
+const selectProblemExamplesDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId, 'examples']);
+const selectProblemQuestionsDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId, 'questions']);
 const selectSubmitsDomain = () => (state) => state.get('app').get('submits');
 const selectSubmitDomain = (submitId) => (state) => state.getIn(['app', 'submits', submitId]);
 const selectTestsResultsDomain = () => (state) => state.get('app').get('testsResults');
@@ -77,26 +79,26 @@ const makeSelectProblem = (problemId) => createSelector(
   (problem) => problem ? problem.toJS() : undefined
 );
 
-const makeSelectProblemExamples = (contestId, problemId) => createSelector(
-  selectAppDomain(),
-  (substate) => {
-    const examples = substate.getIn(['contests', contestId, 'problems', problemId, 'examples']);
-    return examples ? examples.toJS() : undefined;
-  }
+const makeSelectProblemExamples = (problemId) => createSelector(
+  selectProblemExamplesDomain(problemId),
+  (examples) => examples ? examples.toJS() : undefined
 );
 
-const makeSelectProblemSubmits = (contestId, problemId) => createSelector(
+const makeSelectProblemSubmits = (problemId) => createSelector(
   selectProblemDomain(problemId),
   selectSubmitsDomain(),
   (problem, submits) => {
+    console.log(problem);
+    console.warn(submits);
     if (problem && problem.has('submits') && submits) {
+      console.log(problem.get('submits'));
       return problem.get('submits').map((s) => submits.get(s)).toJS();
     }
     return undefined;
   }
 );
 
-const makeSelectSubmitDetails = (contestId, problemId, submitId) => createSelector(
+const makeSelectSubmitDetails = (submitId) => createSelector(
   selectSubmitDomain(submitId),
   selectTestsResultsDomain(),
   selectSubmitFilesDomain(),
@@ -109,12 +111,9 @@ const makeSelectSubmitDetails = (contestId, problemId, submitId) => createSelect
   }
 );
 
-const makeSelectProblemQuestions = (contestId, problemId) => createSelector(
-  selectAppDomain(),
-  (substate) => {
-    const questions = substate.getIn(['contests', contestId, 'problems', problemId, 'questions']);
-    return questions ? questions.toJS() : undefined;
-  }
+const makeSelectProblemQuestions = (problemId) => createSelector(
+  selectProblemQuestionsDomain(problemId),
+  (questions) => questions ? questions.toJS() : undefined
 );
 
 export {

@@ -32,6 +32,7 @@ const initialState = fromJS({
   },
   contests: {},
   problems: {},
+  submits: {},
   contestsFetched: false,
 });
 
@@ -77,16 +78,12 @@ function contestsPageReducer(state = initialState, action) {
       return state.setIn(['problems', action.problemId], fromJS(flattenProblem(action.problem)));
 
     case GET_PROBLEM_EXAMPLES_SUCCESS:
-      return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'examples'],
+      return state.setIn(['problems', action.problemId, 'examples'],
         fromJS(action.examples));
-    case GET_PROBLEM_SUBMITS_SUCCESS: {
-      if (action.submits.length === 0) {
-        return state.setIn(['problems', action.problemId, 'submits'], fromJS({}));
-      }
-
+    case GET_PROBLEM_SUBMITS_SUCCESS:
       return state.mergeDeepIn(['submits'], mapFromList(fromJS(action.submits.map(createSubmit))))
         .setIn(['problems', action.problemId, 'submits'], List(action.submits.map((submit) => submit.id)));
-    }
+
     case GET_SUBMIT_DETAILS_SUCCESS: {
       const submit = fromJS(createSubmit(action.submit));
 
@@ -97,8 +94,7 @@ function contestsPageReducer(state = initialState, action) {
         .setIn(['submits', action.submitId, 'files'], submit.get('files').map((t) => t.get('id')));
     }
     case GET_QUESTIONS_SUCCESS:
-      return state.setIn(['contests', action.contestId, 'problems', action.problemId, 'questions'],
-        fromJS(action.questions));
+      return state.setIn(['problems', action.problemId, 'questions'], fromJS(action.questions));
     case GET_CURRENT_TIME_SUCCESS: {
       const offset = action.time.diff(moment(), 'seconds');
 

@@ -60,7 +60,7 @@ class StatusInfoList extends React.Component {
 
       i += 1;
       rows.push(
-        <TableRow className={rowClass}>
+        <TableRow className={rowClass} key={i}>
           <TableCell>
             <Text className={this.classes.textTitle}>{status.title}</Text>
           </TableCell>
@@ -90,11 +90,11 @@ class StatusInfoList extends React.Component {
         </TableHead>
         <TableBody>
           {rows}
+          <TableRow className={classes.header}>
+            <TableCell />
+            <TableCell />
+          </TableRow>
         </TableBody>
-        <TableRow className={classes.header}>
-          <TableCell />
-          <TableCell />
-        </TableRow>
       </Table>
     );
   }

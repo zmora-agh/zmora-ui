@@ -42,7 +42,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = (state, props) => createStructuredSelector({
-  questions: makeSelectProblemQuestions(props.contestId, props.problemId),
+  questions: makeSelectProblemQuestions(props.problemId),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsPage);

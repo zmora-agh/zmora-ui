@@ -117,14 +117,21 @@ export default function createRoutes(store) {
                       import('containers/QuestionsPage/sagas'),
                       import('containers/ProblemExamplesPage/sagas'),
                       import('containers/ProblemSubmitsPage/sagas'),
+                      import('containers/SubmitDetails/sagas'),
                       import('containers/ProblemPage/sagas'),
                       import('containers/ProblemPage'),
                     ]);
 
-                    importModules.then(([questionSagas, examplesSagas, submitsSagas, sagas, component]) => {
+                    importModules.then(([questionSagas,
+                                          examplesSagas,
+                                          submitsSagas,
+                                          submitDetailsSagas,
+                                          sagas,
+                                          component]) => {
                       injectSagas(questionSagas.default);
                       injectSagas(examplesSagas.default);
                       injectSagas(submitsSagas.default);
+                      injectSagas(submitDetailsSagas.default);
                       injectSagas(sagas.default);
                       cb(null, withProps(() => ({ tab: 'content' }))(component.default));
                     });

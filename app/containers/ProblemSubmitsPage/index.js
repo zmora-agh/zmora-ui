@@ -7,13 +7,15 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
+import { FormattedMessage } from 'react-intl';
+import { Typography } from 'material-ui/Typography';
 import { makeSelectProblemSubmits } from '../App/selectors';
 import { getProblemSubmits } from './actions';
 
 import FetchView from '../../components/FetchView';
 import ProblemSubmits from '../../components/ProblemSubmits';
 import { submitsPropType } from '../../components/ProblemSubmits/constants';
+import messages from './messages';
 
 export class ProblemSubmitsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -34,6 +36,10 @@ export class ProblemSubmitsPage extends React.PureComponent { // eslint-disable-
   }
 
   render() {
+    if (this.props.submits && this.props.submits.length === 0) {
+      return <Typography><FormattedMessage {...messages.empty} /></Typography>;
+    }
+
     return <FetchView>{this.props.submits && <ProblemSubmits submits={this.props.submits} />}</FetchView>;
   }
 }
@@ -47,7 +53,7 @@ ProblemSubmitsPage.propTypes = {
 };
 
 const mapStateToProps = (state, props) => createStructuredSelector({
-  submits: makeSelectProblemSubmits(props.contestId, props.problemId),
+  submits: makeSelectProblemSubmits(props.problemId),
 });
 function mapDispatchToProps(dispatch) {
   return {

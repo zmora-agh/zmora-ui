@@ -27,6 +27,8 @@ import QuestionsPage from '../QuestionsPage';
 
 import { getProblem } from './actions';
 import messages from './messages';
+import { HASH_PREFIXES, SUBMITS_HASH_PREFIX } from './constants';
+import SubmitDetails from '../SubmitDetails/index';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   appBar: {
@@ -39,6 +41,15 @@ const getIds = (props) => ({
   problemId: parseInt(props.params.problem_id, 10),
 });
 
+const parseHash = (hash) => ({
+  prefix: hash.split('=')[0].replace('#', ''),
+  value: hash.split('=')[1],
+});
+
+function getSwipeableViewIndex(hashPrefix) {
+  return HASH_PREFIXES.includes(hashPrefix) ? HASH_PREFIXES.indexOf(hashPrefix) : 0;
+}
+
 export class ProblemPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
@@ -46,8 +57,10 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 
   constructor(props) {
     super(props);
+    const hash = parseHash(this.props.location.hash);
     this.state = {
-      index: 0,
+      hash,
+      index: getSwipeableViewIndex(hash.prefix),
     };
   }
 
@@ -62,13 +75,15 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 
   handleChange = (event, index) => {
     this.setState({ index });
+    window.location.hash = HASH_PREFIXES[index];
   };
 
   handleChangeIndex = (index) => {
     this.setState({ index });
+    window.location.hash = HASH_PREFIXES[index];
   };
 
-  ids = getIds(this.props);
+  ids=getIds(this.props);
 
   render() {
     if (this.props.children) return this.props.children;
@@ -96,12 +111,18 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           <ProblemSubmitsPage {...this.ids} defer={this.state.index !== 2} />
           <QuestionsPage {...this.ids} />
         </SwipeableViews>
+        <SubmitDetails
+          {...this.ids}
+          submitId={this.state.hash.prefix === SUBMITS_HASH_PREFIX && !isNaN(this.state.hash.value) ?
+            parseInt(this.state.hash.value, 10) : undefined}
+        />
       </Paper>
     );
   }
 }
 
 ProblemPage.propTypes = {
+  location: PropTypes.object,
   problem: PropTypes.shape(problemContentPropTypes),
   children: PropTypes.node,
   dispatch: PropTypes.func.isRequired,
@@ -110,7 +131,7 @@ ProblemPage.propTypes = {
 const mapStateToProps = (state, props) => {
   const ids = getIds(props);
   return createStructuredSelector({
-    problem: makeSelectProblem(ids.contestId, ids.problemId),
+    problem: makeSelectProblem(ids.problemId),
   });
 };
 

@@ -66,7 +66,7 @@ function StatusInfoPanel(props, context) {
           <FormattedMessage {...messages.header} />
         </Typography>
 
-        <Text component="div" className={classes.textStyle}>
+        <Typography component="div" className={classes.textStyle}>
           <StatusElement
             icon={<Laptop className={classes.iconStyle} />}
             title={<FormattedMessage {...messages.active} />} data="3"
@@ -86,7 +86,7 @@ function StatusInfoPanel(props, context) {
             data="255"
           />
           <StatusElement title={<FormattedMessage {...messages.lastLogged} />} data={<b>nologin</b>} />
-        </Text>
+        </Typography>
         <Button compact primary className={classes.showMoreButtonStyle}>
           <FormattedMessage {...messages.showMoreButton} />
         </Button>

@@ -23,6 +23,7 @@ const selectProblemsDomain = () => (state) => state.getIn(['app', 'problems']);
 const selectProblemDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId]);
 const selectProblemExamplesDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId, 'examples']);
 const selectProblemQuestionsDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId, 'questions']);
+const selectExamplesDomain = () => (state) => state.getIn(['app', 'examples']);
 const selectSubmitsDomain = () => (state) => state.get('app').get('submits');
 const selectSubmitDomain = (submitId) => (state) => state.getIn(['app', 'submits', submitId]);
 const selectTestsResultsDomain = () => (state) => state.get('app').get('testsResults');
@@ -81,17 +82,20 @@ const makeSelectProblem = (problemId) => createSelector(
 
 const makeSelectProblemExamples = (problemId) => createSelector(
   selectProblemExamplesDomain(problemId),
-  (examples) => examples ? examples.toJS() : undefined
+  selectExamplesDomain(),
+  (problemExamples, examples) => {
+    if (problemExamples && examples) {
+      return problemExamples.map((id) => examples.get(id)).toJS();
+    }
+    return undefined;
+  }
 );
 
 const makeSelectProblemSubmits = (problemId) => createSelector(
   selectProblemDomain(problemId),
   selectSubmitsDomain(),
   (problem, submits) => {
-    console.log(problem);
-    console.warn(submits);
     if (problem && problem.has('submits') && submits) {
-      console.log(problem.get('submits'));
       return problem.get('submits').map((s) => submits.get(s)).toJS();
     }
     return undefined;

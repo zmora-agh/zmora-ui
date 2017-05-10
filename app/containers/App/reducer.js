@@ -33,6 +33,7 @@ const initialState = fromJS({
   contests: {},
   problems: {},
   submits: {},
+  examples: {},
   contestsFetched: false,
 });
 
@@ -78,8 +79,8 @@ function contestsPageReducer(state = initialState, action) {
       return state.setIn(['problems', action.problemId], fromJS(flattenProblem(action.problem)));
 
     case GET_PROBLEM_EXAMPLES_SUCCESS:
-      return state.setIn(['problems', action.problemId, 'examples'],
-        fromJS(action.examples));
+      return state.mergeIn(['examples'], mapFromList(fromJS(action.examples)))
+        .setIn(['problems', action.problemId, 'examples'], List(action.examples.map((e) => e.id)));
     case GET_PROBLEM_SUBMITS_SUCCESS:
       return state.mergeDeepIn(['submits'], mapFromList(fromJS(action.submits.map(createSubmit))))
         .setIn(['problems', action.problemId, 'submits'], List(action.submits.map((submit) => submit.id)));

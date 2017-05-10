@@ -18,6 +18,8 @@ const makeSelectLocationState = () => {
 };
 
 const selectAppDomain = () => (state) => state.get('app');
+const selectUsersDomain = () => (state) => state.getIn(['app', 'users']);
+const selectContestsDomain = () => (state) => state.getIn(['app', 'contests']);
 const selectContestDomain = (contestId) => (state) => state.getIn(['app', 'contests', contestId]);
 const selectProblemsDomain = () => (state) => state.getIn(['app', 'problems']);
 const selectProblemDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId]);
@@ -53,9 +55,17 @@ const makeSelectContest = (contestId) => createSelector(
   }
 );
 
+const populateEntitiesFromIds = (ids, field, entities) => ids.set(field, ids.get(field).map((id) => entities.get(id)));
+
 const makeSelectContests = () => createSelector(
-  selectAppDomain(),
-  (substate) => substate.get('contestsFetched') ? substate.get('contests').toJS() : undefined
+  selectContestsDomain(),
+  selectUsersDomain(),
+  (contests, users) => {
+    if (contests && users) {
+      return contests.map((c) => populateEntitiesFromIds(c, 'owners', users)).toJS();
+    }
+    return undefined;
+  },
 );
 
 const makeSelectTime = () => createSelector(

@@ -72,12 +72,18 @@ class App extends React.PureComponent {
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.logged) {
+      this.setState({ rightMenuOpen: false });
+    }
+  }
+
   toggleMenu() {
     this.setState({ rightMenuOpen: !this.state.rightMenuOpen });
   }
 
   isRightMenuOpened() {
-    return this.state.rightMenuOpen && this.props.logged;
+    return this.props.logged && this.state.rightMenuOpen;
   }
 
   render() {

@@ -35,6 +35,9 @@ const styleSheet = createStyleSheet('SimpleCard', {
   inl: {
     display: 'inline-block',
   },
+  grow: {
+    flexGrow: 1,
+  },
 });
 
 
@@ -57,10 +60,8 @@ function QuestionCard(props, context) {
       yy: '%d years',
     },
   });
-  const abc = `
-  aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa
+  const abc = ` aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa
     aaaaaa  aaaaaaaa aaaaaaaa aaaaaaaaaaa aaaaaaa  `;
-
   return (
     <Card className={classes.list}>
       <CardHeader
@@ -73,9 +74,9 @@ function QuestionCard(props, context) {
         <Divider />
         <List >
           {props.question.answers.map((a) =>
-            <ListItem key={a.answer}>
+            <ListItem key={a.answer} >
               <Avatar className={classes.avatar}>A</Avatar>
-              <div>
+              <div className={classes.grow}>
                 <div>
                   <Typography className={classes.inl} type="body2" >{a.author.name}</Typography>
                   <Typography className={classes.date} type="body1" secondary >

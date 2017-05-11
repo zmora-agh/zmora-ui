@@ -9,7 +9,7 @@ import Avatar from 'material-ui/Avatar';
 import Card, { CardContent, CardHeader } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import List, { ListItem } from 'material-ui/List';
-import { blue } from 'material-ui/styles/colors';
+import { grey } from 'material-ui/styles/colors';
 import Typography from 'material-ui/Typography';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import moment from 'moment';
@@ -19,18 +19,19 @@ import Markdown from '../Markdown';
 
 const styleSheet = createStyleSheet('SimpleCard', {
   avatar: {
-    backgroundColor: blue[500],
     marginRight: 16,
+    flexShrink: 0,
   },
   lItem: {
-    paddingLeft: 0,
+    alignItems: 'flex-start',
   },
   date: {
     float: 'right',
     display: 'inline-block',
   },
-  list: {
-    marginBottom: 40,
+  card: {
+    backgroundColor: grey[100],
+    margin: 24,
   },
   inl: {
     display: 'inline-block',
@@ -38,8 +39,14 @@ const styleSheet = createStyleSheet('SimpleCard', {
   grow: {
     flexGrow: 1,
   },
+  content: {
+    // '&:last-child': {
+    //   paddingBottom: 0,
+    // },
+  },
 });
 
+const image = require('./korri.jpg');
 
 function QuestionCard(props, context) {
   const classes = context.styleManager.render(styleSheet);
@@ -54,39 +61,39 @@ function QuestionCard(props, context) {
       hh: '%dh',
       d: '1d',
       dd: '%dd',
-      M: 'a month',
-      MM: '%d months',
-      y: 'a year',
-      yy: '%d years',
+      M: '1mon',
+      MM: '%dmon',
+      y: '1y',
+      yy: '%dy',
     },
   });
-  const abc = ` aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa
-    aaaaaa  aaaaaaaa aaaaaaaa aaaaaaaaaaa aaaaaaa  `;
   return (
-    <Card className={classes.list}>
+    <Card className={classes.card}>
       <CardHeader
-        avatar={<Avatar className={classes.avatar}>R</Avatar>}
+        avatar={<Avatar src={image} />}
         title={props.question.author.name}
         subheader={moment(props.question.asked).fromNow()}
       />
-      <CardContent>
+      <CardContent className={classes.content}>
         <Markdown text={props.question.question} />
-        <Divider />
-        <List >
+        <List disablePadding >
           {props.question.answers.map((a) =>
-            <ListItem key={a.answer} >
-              <Avatar className={classes.avatar}>A</Avatar>
-              <div className={classes.grow}>
-                <div>
-                  <Typography className={classes.inl} type="body2" >{a.author.name}</Typography>
-                  <Typography className={classes.date} type="body1" secondary >
-                    {moment(a.answered).fromNow()}
-                  </Typography>
-
+            <div>
+              <Divider />
+              <ListItem disableGutters key={a.answer} className={classes.lItem} >
+                <Avatar src={image} className={classes.avatar} />
+                <div className={classes.grow}>
+                  <div>
+                    <Typography className={classes.inl} type="body2" >{a.author.name}</Typography>
+                    <Typography className={classes.date} type="body1" secondary >
+                      {moment(a.answered).fromNow()}
+                    </Typography>
+                  </div>
+                  <Markdown text={a.answer} />
                 </div>
-                <Markdown text={abc} />
-              </div>
-            </ListItem>
+              </ListItem>
+            </div>
+
           )}
         </List>
       </CardContent>

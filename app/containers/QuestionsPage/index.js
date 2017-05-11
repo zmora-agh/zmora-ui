@@ -23,7 +23,6 @@ export class QuestionsPage extends React.PureComponent { // eslint-disable-line 
     this.props.dispatch(getQuestions(this.props.contestId, this.props.problemId));
   }
 
-
   render() {
     return (
       <div key={this.props.contestId}>

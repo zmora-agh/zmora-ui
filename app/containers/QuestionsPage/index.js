@@ -19,11 +19,22 @@ export class QuestionsPage extends React.PureComponent { // eslint-disable-line 
     dispatch: PropTypes.func.isRequired,
   };
 
+  // static contextTypes = {
+  //   styleManager: customPropTypes.muiRequired,
+  // };
+
   componentDidMount() {
     this.props.dispatch(getQuestions(this.props.contestId, this.props.problemId));
   }
 
   render() {
+    // const styleSheet = createStyleSheet('QuestionPage', {
+    //   paper: {
+    //     paddingBottom: 12,
+    //   },
+    // });
+    // const classes = this.context.styleManager.render(styleSheet);
+
     return (
       <div key={this.props.contestId}>
         {this.props.questions && this.props.questions.map((q) =>

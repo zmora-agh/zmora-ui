@@ -6,7 +6,7 @@
 
 import { createStyleSheet } from 'jss-theme-reactor';
 import Avatar from 'material-ui/Avatar';
-import Card, { CardContent, CardHeader } from 'material-ui/Card';
+import Card, { CardContent } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import List, { ListItem } from 'material-ui/List';
 import { grey } from 'material-ui/styles/colors';
@@ -22,16 +22,40 @@ const styleSheet = createStyleSheet('SimpleCard', {
     marginRight: 16,
     flexShrink: 0,
   },
+  avatarH: {
+    marginRight: 16,
+    marginTop: 8,
+    // padding:8,
+    flexShrink: 0,
+    transform: 'scale(1.5)',
+  },
   lItem: {
     alignItems: 'flex-start',
+    paddingTop: 12,
+    paddingRight: 16,
+    paddingBottom: 12,
+    paddingLeft: 16,
+    backgroundColor: grey[50],
+
+  },
+  lItemH: {
+    alignItems: 'flex-start',
+    paddingTop: 12,
+    paddingRight: 16,
+    paddingBottom: 12,
+    paddingLeft: 16,
+    backgroundColor: grey[200],
   },
   date: {
     float: 'right',
     display: 'inline-block',
   },
   card: {
-    backgroundColor: grey[100],
+    // backgroundColor: grey[100],
     margin: 24,
+  },
+  header: {
+    backgroundColor: grey[200],
   },
   inl: {
     display: 'inline-block',
@@ -40,9 +64,11 @@ const styleSheet = createStyleSheet('SimpleCard', {
     flexGrow: 1,
   },
   content: {
-    // '&:last-child': {
-    //   paddingBottom: 0,
-    // },
+    // backgroundColor: grey[500],
+    padding: 0,
+    '&:last-child': {
+      paddingBottom: 0,
+    },
   },
 });
 
@@ -69,31 +95,42 @@ function QuestionCard(props, context) {
   });
   return (
     <Card className={classes.card}>
-      <CardHeader
-        avatar={<Avatar src={image} />}
-        title={props.question.author.name}
-        subheader={moment(props.question.asked).fromNow()}
-      />
-      <CardContent className={classes.content}>
-        <Markdown text={props.question.question} />
-        <List disablePadding >
+      <CardContent className={classes.content} >
+        <List disablePadding className={classes.header} >
+          <ListItem disableGutters className={classes.lItemH}>
+
+            <Avatar src={image} className={classes.avatarH} />
+            <div className={classes.grow}>
+              <div>
+                <Typography className={classes.inl} type="body2">{props.question.author.name}</Typography>
+                <Typography className={classes.date} type="body1" secondary>
+                  {moment(props.question.asked).fromNow()}
+                </Typography>
+              </div>
+              <Markdown text={props.question.question} />
+            </div>
+          </ListItem>
+
+        </List>
+
+
+        <List disablePadding>
           {props.question.answers.map((a) =>
             <div>
               <Divider />
-              <ListItem disableGutters key={a.answer} className={classes.lItem} >
+              <ListItem disableGutters key={a.answer} className={classes.lItem}>
                 <Avatar src={image} className={classes.avatar} />
                 <div className={classes.grow}>
                   <div>
-                    <Typography className={classes.inl} type="body2" >{a.author.name}</Typography>
-                    <Typography className={classes.date} type="body1" secondary >
+                    <Typography className={classes.inl} type="body2">{a.author.name}</Typography>
+                    <Typography className={classes.date} type="body1" secondary>
                       {moment(a.answered).fromNow()}
                     </Typography>
                   </div>
                   <Markdown text={a.answer} />
                 </div>
               </ListItem>
-            </div>
-
+            </div>,
           )}
         </List>
       </CardContent>
@@ -108,3 +145,17 @@ QuestionCard.propTypes = {
 QuestionCard.contextTypes = {
   styleManager: customPropTypes.muiRequired,
 };
+
+
+// {/*<div className={classes.content} >*/}
+// {/*</div>*/}
+
+
+// {/*<CardHeader*/}
+  // className={classes.header}
+  // avatar={<Avatar src={image} />}
+  // title={props.question.author.name}
+  // subheader={moment(props.question.asked).fromNow()}
+// >
+//   {/*<Markdown text={props.question.question} />*/}
+// </CardHeader>

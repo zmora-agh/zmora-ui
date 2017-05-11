@@ -9,8 +9,7 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import { FormattedMessage } from 'react-intl';
-import {
-  Table,
+import Table, {
   TableHead,
   TableBody,
   TableRow,

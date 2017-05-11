@@ -7,7 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Typography } from 'material-ui/Typography';
+import Typography from 'material-ui/Typography';
 import FetchView from '../../components/FetchView';
 import { ContestsTable } from '../../components/ContestsTable';
 

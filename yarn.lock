@@ -5141,9 +5141,9 @@ marked@0.3.6, marked@^0.3.6:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
 
-material-ui@1.0.0-alpha.12:
-  version "1.0.0-alpha.12"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-alpha.12.tgz#957db9a25028d2742d1f2f336d30b606f7cf6176"
+material-ui@1.0.0-alpha.13:
+  version "1.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-alpha.13.tgz#d7d01295124e752c72cba9840028cacaa86c0fff"
   dependencies:
     babel-runtime "^6.23.0"
     classnames "^2.2.5"

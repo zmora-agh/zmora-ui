@@ -3,9 +3,9 @@
  */
 import React, { PropTypes, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Table, TableRow, TableCell, TableBody } from 'material-ui/Table';
-import { IconButton } from 'material-ui/IconButton';
-import { Typography } from 'material-ui/Typography';
+import Table, { TableRow, TableCell, TableBody } from 'material-ui/Table';
+import IconButton from 'material-ui/IconButton';
+import Typography from 'material-ui/Typography';
 import { SUBMIT_FILE_PROP_TYPE } from '../../../containers/SubmitDetails/constants';
 import EnhancedTableHead from '../../EnhancedTableHead';
 import messages from './messages';

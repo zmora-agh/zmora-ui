@@ -1,10 +1,10 @@
 import React from 'react';
 import { ListItem } from 'material-ui/List';
-import { Typography } from 'material-ui/Typography';
+import Typography from 'material-ui/Typography';
 import Collapse from 'material-ui/transitions/Collapse';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import { createStyleSheet } from 'jss-theme-reactor';
-import { Card, CardContent } from 'material-ui/Card';
+import Card, { CardContent } from 'material-ui/Card';
 import KeyboardArrowUp from '../../../svg-icons/keyboard-arrow-up';
 import KeyboardArrowDown from '../../../svg-icons/keyboard-arrow-down';
 

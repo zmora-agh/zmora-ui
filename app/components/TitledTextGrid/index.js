@@ -1,31 +1,31 @@
 /**
 *
-* TitledTextLayout
+* TitledTextGrid
 *
 */
 
 import React from 'react';
-import { Layout } from 'material-ui/Layout';
-import { Typography } from 'material-ui/Typography';
+import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
 // import styled from 'styled-components';
 
 
-function TitledTextLayout(props) {
+function TitledTextGrid(props) {
   return (
-    <Layout item xs={props.xs}>
+    <Grid item xs={props.xs}>
       <Typography type="title" component="h2" gutterBottom>
         {props.desc}
       </Typography>
       <Typography style={{ padding: '8x 16px' }}>
         {props.children}</Typography>
-    </Layout>
+    </Grid>
   );
 }
 
-TitledTextLayout.propTypes = {
+TitledTextGrid.propTypes = {
   xs: React.PropTypes.number.isRequired,
   desc: React.PropTypes.node.isRequired,
   children: React.PropTypes.node.isRequired,
 };
 
-export default TitledTextLayout;
+export default TitledTextGrid;

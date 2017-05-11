@@ -6,9 +6,9 @@
 
 import { createStyleSheet } from 'jss-theme-reactor';
 import Avatar from 'material-ui/Avatar';
-import { Card, CardContent, CardHeader } from 'material-ui/Card';
+import Card, { CardContent, CardHeader } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
-import { List, ListItem, ListItemSecondaryAction } from 'material-ui/List';
+import List, { ListItem, ListItemSecondaryAction } from 'material-ui/List';
 import { blue } from 'material-ui/styles/colors';
 import Typography from 'material-ui/Typography';
 import customPropTypes from 'material-ui/utils/customPropTypes';

@@ -1,12 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
-import { Typography } from 'material-ui/Typography';
-import { Layout } from 'material-ui/Layout';
+import Typography from 'material-ui/Typography';
+import Grid from 'material-ui/Grid';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import { createStyleSheet } from 'jss-theme-reactor';
 import ContestStatus from '../Status';
-import TitledTextLayout from '../../TitledTextLayout';
+import TitledTextGrid from '../../TitledTextGrid';
 import ContestButton from '../Button';
 import messages from './messages';
 
@@ -48,26 +48,26 @@ const ContestRow = (props, context) => {
 
   return (
     <ExpandableTableRow header={header}>
-      <Layout container style={{ padding: 10 }}>
-        <TitledTextLayout xs={12} desc={<FormattedMessage {...messages.name} />} >
+      <Grid container style={{ padding: 10 }}>
+        <TitledTextGrid xs={12} desc={<FormattedMessage {...messages.name} />} >
           {contest.name}
-        </TitledTextLayout>
-        <TitledTextLayout xs={12} desc={<FormattedMessage {...messages.description} />}>
+        </TitledTextGrid>
+        <TitledTextGrid xs={12} desc={<FormattedMessage {...messages.description} />}>
           {contest.description}
-        </TitledTextLayout>
-        <TitledTextLayout xs={6} desc={<FormattedMessage {...messages.owners} />}>
+        </TitledTextGrid>
+        <TitledTextGrid xs={6} desc={<FormattedMessage {...messages.owners} />}>
           {ownersNames}
-        </TitledTextLayout>
-        <TitledTextLayout xs={3} desc={<FormattedMessage {...messages.startDate} />}>
+        </TitledTextGrid>
+        <TitledTextGrid xs={3} desc={<FormattedMessage {...messages.startDate} />}>
           {moment(contest.start).add(contest.signupDuration, 'seconds').format('YYYY-MM-DD HH:mm')}
-        </TitledTextLayout>
-        <TitledTextLayout xs={3} desc={<FormattedMessage {...messages.endDate} />}>
+        </TitledTextGrid>
+        <TitledTextGrid xs={3} desc={<FormattedMessage {...messages.endDate} />}>
           {moment(contest.start).add(contest.signupDuration + contest.duration, 'seconds').format('YYYY-MM-DD HH:mm')}
-        </TitledTextLayout>
-        <Layout item xs={1}>
+        </TitledTextGrid>
+        <Grid item xs={1}>
           <ContestButton contest={contest} time={props.serverTime} onClick={() => props.onJoinClick(contest.id)} />
-        </Layout>
-      </Layout>
+        </Grid>
+      </Grid>
     </ExpandableTableRow>
   );
 };

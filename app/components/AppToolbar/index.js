@@ -9,7 +9,7 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Breadcrumbs from 'react-breadcrumbs';
 import Toolbar from 'material-ui/Toolbar';
-import Layout from 'material-ui/Layout';
+import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 
@@ -96,10 +96,10 @@ class AppToolbar extends React.Component {
       <AppBar>
         <Toolbar className={toolbarClass} >
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
-          <Layout item xs={2}>
+          <Grid item xs={2}>
             <Typography colorInherit className={classes.titleLetter}>Zmora</Typography>
-          </Layout>
-          {!this.state.inSearch ? <Layout item xs={7}>
+          </Grid>
+          {!this.state.inSearch ? <Grid item xs={7}>
             <Breadcrumbs
               routes={this.props.routes}
               params={this.props.params}
@@ -108,8 +108,8 @@ class AppToolbar extends React.Component {
               separator={<ArrowIcon />}
               excludes={['Home']}
             />
-          </Layout> : undefined}
-          <Layout container item gutter={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">
+          </Grid> : undefined}
+          <Grid container item gutter={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">
             <Search
               expanded={this.state.inSearch}
               onFocus={this.toggleSearch}
@@ -119,7 +119,7 @@ class AppToolbar extends React.Component {
             <ServerTime style={this.state.inSearch ? { display: 'none' } : {}} />
             <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />
             <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
-          </Layout>
+          </Grid>
         </Toolbar>
       </AppBar>
     );

@@ -12,7 +12,7 @@ import { createStructuredSelector } from 'reselect';
 import SwipeableViews from 'react-swipeable-views';
 
 import Paper from 'material-ui/Paper';
-import { Tabs, Tab } from 'material-ui/Tabs';
+import Tabs, { Tab } from 'material-ui/Tabs';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import { makeSelectProblem } from '../App/selectors';

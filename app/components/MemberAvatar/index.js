@@ -9,7 +9,7 @@ import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
-import { Card } from 'material-ui/Card';
+import Card from 'material-ui/Card';
 
 const styleSheet = createStyleSheet('zmoraMemberAvatar', () => ({
   root: {

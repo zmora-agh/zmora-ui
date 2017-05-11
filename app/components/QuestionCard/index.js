@@ -8,13 +8,14 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import Avatar from 'material-ui/Avatar';
 import Card, { CardContent, CardHeader } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
-import List, { ListItem, ListItemSecondaryAction } from 'material-ui/List';
+import List, { ListItem } from 'material-ui/List';
 import { blue } from 'material-ui/styles/colors';
 import Typography from 'material-ui/Typography';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import moment from 'moment';
 import React, { PropTypes } from 'react';
 import Markdown from '../Markdown';
+
 
 const styleSheet = createStyleSheet('SimpleCard', {
   avatar: {
@@ -25,18 +26,42 @@ const styleSheet = createStyleSheet('SimpleCard', {
     paddingLeft: 0,
   },
   date: {
-    top: '35%',
+    float: 'right',
+    display: 'inline-block',
   },
   list: {
     marginBottom: 40,
+  },
+  inl: {
+    display: 'inline-block',
   },
 });
 
 
 function QuestionCard(props, context) {
   const classes = context.styleManager.render(styleSheet);
-  return (
+  moment.updateLocale('en', {
+    relativeTime: {
+      future: 'in %s',
+      past: '%s',
+      s: 's',
+      m: '1m',
+      mm: '%dm',
+      h: '1h',
+      hh: '%dh',
+      d: '1d',
+      dd: '%dd',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years',
+    },
+  });
+  const abc = `
+  aaaaaaaaaaaaaaaa aaaaaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa
+    aaaaaa  aaaaaaaa aaaaaaaa aaaaaaaaaaa aaaaaaa  `;
 
+  return (
     <Card className={classes.list}>
       <CardHeader
         avatar={<Avatar className={classes.avatar}>R</Avatar>}
@@ -48,17 +73,18 @@ function QuestionCard(props, context) {
         <Divider />
         <List >
           {props.question.answers.map((a) =>
-            <ListItem key={a.answer} className={classes.lItem} disableGutters >
+            <ListItem key={a.answer}>
               <Avatar className={classes.avatar}>A</Avatar>
               <div>
                 <div>
-                  <Typography type="body2" >{a.author.name}</Typography>
+                  <Typography className={classes.inl} type="body2" >{a.author.name}</Typography>
+                  <Typography className={classes.date} type="body1" secondary >
+                    {moment(a.answered).fromNow()}
+                  </Typography>
+
                 </div>
-                <Markdown text={a.answer} />
+                <Markdown text={abc} />
               </div>
-              <ListItemSecondaryAction className={classes.date} >
-                <Typography type="body1" secondary >{moment(a.answered).fromNow()}</Typography>
-              </ListItemSecondaryAction>
             </ListItem>
           )}
         </List>
@@ -74,4 +100,3 @@ QuestionCard.propTypes = {
 QuestionCard.contextTypes = {
   styleManager: customPropTypes.muiRequired,
 };
-

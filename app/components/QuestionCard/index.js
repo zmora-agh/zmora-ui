@@ -39,19 +39,6 @@ const styleSheet = createStyleSheet('SimpleCard', {
     extend: 'lItem',
     backgroundColor: grey[200],
   },
-  date: {
-    float: 'right',
-    display: 'inline-block',
-  },
-  card: {
-    margin: 24,
-  },
-  inl: {
-    display: 'inline-block',
-  },
-  grow: {
-    flexGrow: 1,
-  },
   content: {
     padding: 0,
     '&:last-child': {
@@ -83,40 +70,18 @@ function QuestionCard(props, context) {
   const classes = context.styleManager.render(styleSheet);
   moment.updateLocale('en', localeSpec);
   return (
-    <Card className={classes.card}>
+    <Card style={{ margin: 24 }}>
       <CardContent className={classes.content} >
         <List disablePadding >
 
-          <ListItem disableGutters className={classes.lItemH}>
-
-            <Avatar src={image} className={classes.avatarH} />
-            <div className={classes.grow}>
-              <div>
-                <Typography className={classes.inl} type="body2">{props.question.author.name}</Typography>
-                <Typography className={classes.date} type="body1" secondary>
-                  {moment(props.question.asked).fromNow()}
-                </Typography>
-              </div>
-              <Markdown text={props.question.question} />
-            </div>
-          </ListItem>
+          {row(classes.lItemH, classes.avatarH, props.question.author.name,
+            props.question.asked, props.question.question)}
 
 
           {props.question.answers.map((a) =>
-            <div>
+            <div key={a.answer} >
               <Divider />
-              <ListItem disableGutters key={a.answer} className={classes.lItem}>
-                <Avatar src={image} className={classes.avatar} />
-                <div className={classes.grow}>
-                  <div>
-                    <Typography className={classes.inl} type="body2">{a.author.name}</Typography>
-                    <Typography className={classes.date} type="body1" secondary>
-                      {moment(a.answered).fromNow()}
-                    </Typography>
-                  </div>
-                  <Markdown text={a.answer} />
-                </div>
-              </ListItem>
+              {row(classes.lItem, classes.avatar, a.author.name, a.answered, a.answer)}
             </div>,
           )}
         </List>
@@ -124,6 +89,24 @@ function QuestionCard(props, context) {
     </Card>);
 }
 
+function row(itemStyle, avatarStyle, author, date, content) {
+  return (
+    <ListItem key={content} disableGutters className={itemStyle}>
+
+      <Avatar src={image} className={avatarStyle} />
+      <div style={{ flexGrow: 1 }}>
+        <div>
+          <Typography style={{ display: 'inline-block' }} type="body2">{author}</Typography>
+          <Typography style={{ float: 'right', display: 'inline-block' }} type="body1" secondary>
+            {moment(date).fromNow()}
+          </Typography>
+        </div>
+        <Markdown text={content} />
+      </div>
+    </ListItem>
+
+  );
+}
 export default QuestionCard;
 QuestionCard.propTypes = {
   question: PropTypes.object,

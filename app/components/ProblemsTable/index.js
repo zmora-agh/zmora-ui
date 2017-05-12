@@ -51,7 +51,7 @@ function ProblemsTable(props) {
           <TableCell>{problem.basePoints}</TableCell>
           <TableCell>{moment(problem.softDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
           <TableCell>{moment(problem.hardDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-          <TableCell>{!problem.optional && <Done />}</TableCell>
+          <TableCell>{!problem.required && <Done />}</TableCell>
           <TableCell>
             <SubmitButton contestId={props.contestId} problemId={problem.id} />
             <IconButton onClick={(e) => { e.stopPropagation(); props.onPdfClick(problem.id); }}>

@@ -4,7 +4,7 @@
 import React, { PropTypes, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import Typography from 'material-ui/Typography';
-import { Table, TableRow, TableCell, TableBody } from 'material-ui/Table';
+import Table, { TableRow, TableCell, TableBody } from 'material-ui/Table';
 import { SUBMIT_TEST_PROP_TYPE } from '../../../containers/SubmitDetails/constants';
 import EnhancedTableHead from '../../EnhancedTableHead';
 import messages from './messages';

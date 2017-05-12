@@ -10,10 +10,7 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import { FormattedMessage } from 'react-intl';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Button from 'material-ui/Button';
-import {
-  Card,
-  CardContent,
-} from 'material-ui/Card';
+import Card, { CardContent } from 'material-ui/Card';
 import Person from '../../svg-icons/person';
 import Laptop from '../../svg-icons/laptop';
 import Solved from '../../svg-icons/action-done';

@@ -11,19 +11,19 @@ function ContestButton(props) {
   const enrolEndTime = moment(start).add(signupDuration, 'seconds');
   const enterActive = props.time.isAfter(enrolEndTime);
   const enterButton = (
-    <Link to={`/contests/${id}`}>
-      <Button raised primary disabled={!enterActive}>
-        <FormattedMessage {...messages.enter} />
-      </Button>
-    </Link>
+    <Button raised primary disabled={!enterActive}>
+      <FormattedMessage {...messages.enter} />
+    </Button>
   );
+  const activeEnterButton = !enterActive ? enterButton : <Link to={`/contests/${id}`}>{enterButton}</Link>;
+
   const joinButton = (
     <Button onClick={props.onClick} raised primary>
       <FormattedMessage {...messages.join} />
     </Button>
   );
 
-  return ((props.time.isAfter(enrolEndTime) || props.contest.joined) ? enterButton : joinButton);
+  return ((props.time.isAfter(enrolEndTime) || props.contest.joined) ? activeEnterButton : joinButton);
 }
 
 ContestButton.propTypes = {

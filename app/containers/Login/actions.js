@@ -10,13 +10,14 @@ import {
   LOGIN_ERROR,
 } from './constants';
 
-export function login(nick, password) {
+export function login(nick, password, from) {
   return {
     type: LOGIN,
     credentials: {
       nick,
       password,
     },
+    from,
   };
 }
 

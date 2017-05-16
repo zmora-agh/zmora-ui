@@ -33,6 +33,8 @@ const initialState = fromJS({
   contests: {},
   problems: {},
   submits: {},
+  examples: {},
+  users: {},
   contestsFetched: false,
 });
 
@@ -59,11 +61,15 @@ function contestsPageReducer(state = initialState, action) {
     case GET_CONTEST_SUCCESS:
       return state.mergeIn(['contests', action.contestId], fromJS(createContest(action.contest)));
     case GET_CONTESTS_SUCCESS: {
-      const contestsMap = fromJS(action.contests)
+      let contestsMap = fromJS(action.contests)
         .reduce((result, contest) => result.set(contest.get('id'), createContest(contest)), Map());
+      const users = mapFromList(contestsMap.valueSeq().map((e) => e.get('owners')).flatten(true));
+      contestsMap = contestsMap.map((v) => v.set('owners', v.get('owners').map((e) => e.get('id'))));
+
       return state.mergeDeep({
         contests: contestsMap,
         contestsFetched: true,
+        users,
       });
     }
     case GET_PROBLEMS_SUCCESS:
@@ -78,8 +84,8 @@ function contestsPageReducer(state = initialState, action) {
       return state.setIn(['problems', action.problemId], fromJS(flattenProblem(action.problem)));
 
     case GET_PROBLEM_EXAMPLES_SUCCESS:
-      return state.setIn(['problems', action.problemId, 'examples'],
-        fromJS(action.examples));
+      return state.mergeIn(['examples'], mapFromList(fromJS(action.examples)))
+        .setIn(['problems', action.problemId, 'examples'], List(action.examples.map((e) => e.id)));
     case GET_PROBLEM_SUBMITS_SUCCESS:
       return state.mergeDeepIn(['submits'], mapFromList(fromJS(action.submits.map(createSubmit))))
         .setIn(['problems', action.problemId, 'submits'], List(action.submits.map((submit) => submit.id)));

@@ -6,6 +6,7 @@ import { bootstrap, checkedFetch } from '../../utils/sagas';
 import { setJwtToken } from '../../utils/auth';
 import { loginError, loginSuccess } from './actions';
 import { LOGIN } from './constants';
+import { homePage } from '../../local-urls';
 
 function sendLogin(credentials) {
   return checkedFetch(loginURL(), {
@@ -18,13 +19,13 @@ function sendLogin(credentials) {
   }).then((response) => response.json());
 }
 
-function* login({ credentials }) {
+function* login({ credentials, from = homePage() }) {
   try {
     const response = yield call(sendLogin, credentials);
     const userInfo = jwtDecode(response.token).dat;
     setJwtToken(response.token);
     yield put(loginSuccess(userInfo));
-    yield put(push('/'));
+    yield put(push(from));
   } catch (e) {
     yield put(loginError());
   }

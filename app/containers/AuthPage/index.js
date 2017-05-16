@@ -11,13 +11,21 @@ import RegisterForm from '../Register';
 import Login from '../Login';
 
 
-function AuthPage() {
+function AuthPage(props) {
   return (
     <Layout container>
-      <Layout item xs={12} md={6}><Login /></Layout>
+      <Layout item xs={12} md={6}><Login from={props.location.query.from} /></Layout>
       <Layout item xs={12} md={6}><RegisterForm /></Layout>
     </Layout>
   );
 }
+
+AuthPage.propTypes = {
+  location: React.PropTypes.shape({
+    query: React.PropTypes.shape({
+      from: React.PropTypes.string,
+    }),
+  }),
+};
 
 export default AuthPage;

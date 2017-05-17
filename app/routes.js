@@ -72,14 +72,12 @@ export default function createRoutes(store) {
           prettifyParam: fetchName(store, ['app', 'contests', ':contest_id', 'name']),
           getComponent(location, cb) {
             const importModules = Promise.all([
-              import('containers/ContestPage/sagas'),
               import('containers/ContestPage'),
             ]);
 
             const renderRoute = loadModule(cb);
 
-            importModules.then(([sagas, component]) => {
-              injectSagas(sagas.default);
+            importModules.then(([component]) => {
               renderRoute(component);
             });
 
@@ -92,14 +90,12 @@ export default function createRoutes(store) {
               onEnter: requireAuth,
               getComponent(location, cb) {
                 const importModules = Promise.all([
-                  import('containers/ProblemsPage/sagas'),
                   import('containers/ProblemsPage'),
                 ]);
 
                 const renderRoute = loadExactModule(cb);
 
-                importModules.then(([sagas, component]) => {
-                  injectSagas(sagas.default);
+                importModules.then(([component]) => {
                   renderRoute(component);
                 });
 

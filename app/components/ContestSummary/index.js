@@ -7,8 +7,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { CONTEST_TYPE } from '../../containers/ContestPage/constants';
-
 import messages from './messages';
 
 function ContestSummary(props) {
@@ -26,6 +24,11 @@ function ContestSummary(props) {
   );
 }
 
-ContestSummary.propTypes = CONTEST_TYPE.isRequired;
+ContestSummary.propTypes = React.PropTypes.shape({
+  name: React.PropTypes.string,
+  description: React.PropTypes.string,
+  date: React.PropTypes.string,
+  owner: React.PropTypes.string,
+});
 
 export default ContestSummary;

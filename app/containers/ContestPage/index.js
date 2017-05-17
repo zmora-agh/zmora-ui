@@ -7,6 +7,7 @@
 import React, { PropTypes } from 'react';
 import { push } from 'react-router-redux';
 import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 
 import { submitSetContext } from '../Submit/actions';
 
@@ -28,6 +29,7 @@ const ContestListForLayout = gql`
   }
 `;
 
+@connect(null, (dispatch) => ({ dispatch }))
 @graphql(ContestListForLayout, { options: (props) => ({ variables: { contestId: getContestId(props) } }) })
 export default class ContestPage extends React.PureComponent {
   componentDidMount() {
@@ -55,5 +57,5 @@ ContestPage.propTypes = {
   children: PropTypes.object,
   params: PropTypes.shape({ contest_id: PropTypes.string }),
   data: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
 };

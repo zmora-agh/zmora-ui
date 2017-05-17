@@ -8,42 +8,62 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { push } from 'react-router-redux';
-import { createStructuredSelector } from 'reselect';
+import { gql, graphql } from 'react-apollo';
 import { groupBy } from 'lodash';
 
 import Text from 'material-ui/Text';
 
 import { problemPage } from '../../local-urls';
-import { makeSelectProblems } from '../App/selectors';
-import { problemRowPropType } from '../../components/ProblemsTable/constants';
 
 import FetchView from '../../components/FetchView';
 import ProblemCategory from '../../components/ProblemCategory';
 import ExpandableTable from '../../components/ExpandableTable';
 
-import { getProblems } from './actions';
 import messages from './messages';
 
 const getContestId = (props) => parseInt(props.params.contest_id, 10);
 
-export class ProblemsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  componentDidMount() {
-    this.props.dispatch(getProblems(getContestId(this.props)));
+const ProblemsListForLayout = gql`
+  query ProblemsListForLayout($contestId: Int!) { 
+    contest(id: $contestId) {
+      id
+      problems{
+        name
+        description
+        required
+        basePoints
+        id
+        softDeadline
+        hardDeadline
+        shortcode
+      }
+    }
+  }
+`;
+
+@connect(null, (dispatch) => ({ dispatch }))
+@graphql(ProblemsListForLayout, { options: (props) => ({ variables: { contestId: getContestId(props) } }) })
+export default class ProblemsPage extends React.PureComponent {
+  static propTypes = {
+    data: PropTypes.object,
+    children: PropTypes.object,
+    dispatch: PropTypes.func,
   }
 
   render() {
-    const contestId = getContestId(this.props);
-
     if (this.props.children) return this.props.children;
+    const contestId = getContestId(this.props);
+    const problems = this.props.data.loading ? undefined : this.props.data.contest.problems;
 
-    if (this.props.problems && this.props.problems.length === 0) {
+
+    if (problems && problems.length === 0) {
       return <Text><FormattedMessage {...messages.empty} /></Text>;
     }
 
-    const categories = groupBy(this.props.problems, 'category');
+    const categories = groupBy(problems, 'category');
 
     return (<FetchView>
-      {this.props.problems &&
+      {this.props.data.loading ? undefined :
       <ExpandableTable>
         {Object.keys(categories).map((category) => <ProblemCategory
           key={category}
@@ -57,22 +77,3 @@ export class ProblemsPage extends React.PureComponent { // eslint-disable-line r
     </FetchView>);
   }
 }
-
-ProblemsPage.propTypes = {
-  problems: PropTypes.arrayOf(PropTypes.shape(problemRowPropType)),
-  children: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
-};
-
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-const mapStateToProps = (state, props) => createStructuredSelector({
-  problems: makeSelectProblems(getContestId(props)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProblemsPage);

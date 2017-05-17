@@ -9,7 +9,6 @@ import moment from 'moment';
 
 import { GET_CURRENT_TIME_SUCCESS } from './constants';
 import { JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
-import { GET_PROBLEMS_SUCCESS } from '../ProblemsPage/constants';
 import { GET_PROBLEM_SUCCESS } from '../ProblemPage/constants';
 import { GET_PROBLEM_EXAMPLES_SUCCESS } from '../ProblemExamplesPage/constants';
 import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
@@ -52,14 +51,6 @@ function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return state.set('user', fromJS(action.user));
-    case GET_PROBLEMS_SUCCESS:
-      if (action.problems.length === 0) {
-        return state.set('problems', Map());
-      }
-
-      return state.mergeIn(['problems'], mapFromList(fromJS(action.problems.map(flattenProblem))))
-        .setIn(['contests', action.contestId, 'problems'], fromJS(action.problems.map((problem) => problem.id)));
-
     case GET_PROBLEM_SUCCESS:
       return state.setIn(['problems', action.problemId], fromJS(flattenProblem(action.problem)));
 

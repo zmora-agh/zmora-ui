@@ -59,6 +59,7 @@ class App extends React.PureComponent {
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
     user: React.PropTypes.object,
+    logged: React.PropTypes.bool,
   };
 
   static contextTypes = {
@@ -71,13 +72,23 @@ class App extends React.PureComponent {
     this.toggleMenu = this.toggleMenu.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.logged) {
+      this.setState({ rightMenuOpen: false });
+    }
+  }
+
   toggleMenu() {
     this.setState({ rightMenuOpen: !this.state.rightMenuOpen });
   }
 
+  isRightMenuOpened() {
+    return this.props.logged && this.state.rightMenuOpen;
+  }
+
   render() {
     const classes = this.context.styleManager.render(styleSheet);
-    const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
+    const rightMenuTranslation = this.isRightMenuOpened() ? 0 : 100;
     return (
       <div className={classes.root}>
         <AppToolbar
@@ -88,7 +99,7 @@ class App extends React.PureComponent {
         />
         <Layout container gutter={0} style={{ marginTop: 64 }}>
           <Layout item xs={2}><Navigation style={{ padding: 10 }} /></Layout>
-          <Layout item xs={this.state.rightMenuOpen ? 8 : 10} className={classes.contentContainer}>
+          <Layout item xs={this.isRightMenuOpened() ? 8 : 10} className={classes.contentContainer}>
             {React.Children.toArray(this.props.children)}
           </Layout>
           <Layout

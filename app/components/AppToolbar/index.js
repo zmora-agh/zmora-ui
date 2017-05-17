@@ -5,6 +5,7 @@
 */
 
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import AppBar from 'material-ui/AppBar';
 import Breadcrumbs from 'react-breadcrumbs';
@@ -12,6 +13,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Layout from 'material-ui/Layout';
 import Text from 'material-ui/Text';
 import IconButton from 'material-ui/IconButton';
+import Button from 'material-ui/Button';
 
 import classNames from 'classnames';
 import { createStyleSheet } from 'jss-theme-reactor';
@@ -19,6 +21,7 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import '!style-loader!css-loader!../../fonts/index.css';
 
+import messages from './messages';
 import Search from '../Search';
 import ServerTime from '../../containers/ServerTime';
 import SubmitButton from '../../containers/Submit/Button';
@@ -53,6 +56,14 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
     marginLeft: '32px',
     marginBottom: '20px',
   },
+  loginButton: {
+    '&:hover': {
+      backgroundColor: '#7767C7',
+    },
+    backgroundColor: '#6652B7',
+    marginLeft: '10px',
+    color: 'inherit',
+  },
 }));
 
 class AppToolbar extends React.Component {
@@ -60,10 +71,12 @@ class AppToolbar extends React.Component {
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
     onToggleMenu: React.PropTypes.func.isRequired,
+    username: React.PropTypes.string.isRequired,
   };
 
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
+    router: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -86,6 +99,31 @@ class AppToolbar extends React.Component {
     }
   }
 
+  generateIconPanel() {
+    const classes = this.context.styleManager.render(styleSheet);
+    let result;
+    if (this.props.username === '') {
+      result = (
+        <Button
+          raised
+          className={classes.loginButton}
+          onClick={() => this.context.router.push('/auth')}
+          style={{ display: this.state.inSearch ? 'none' : 'block' }}
+        >
+          <FormattedMessage {...messages.loginButtonText} />
+        </Button>
+      );
+    } else {
+      result = (
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />
+          <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
+        </div>
+      );
+    }
+    return result;
+  }
+
   render() {
     const classes = this.context.styleManager.render(styleSheet);
     const toolbarClass = classNames({
@@ -97,7 +135,7 @@ class AppToolbar extends React.Component {
         <Toolbar className={toolbarClass} >
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
           <Layout item xs={2}>
-            <Text colorInherit className={classes.titleLetter}>Zmora</Text>
+            <Text colorInherit className={classes.titleLetter}><FormattedMessage {...messages.title} /></Text>
           </Layout>
           {!this.state.inSearch ? <Layout item xs={7}>
             <Breadcrumbs
@@ -117,8 +155,7 @@ class AppToolbar extends React.Component {
               onMouseMove={this.moveRipple}
             />
             <ServerTime style={this.state.inSearch ? { display: 'none' } : {}} />
-            <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />
-            <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
+            {this.generateIconPanel()}
           </Layout>
         </Toolbar>
       </AppBar>

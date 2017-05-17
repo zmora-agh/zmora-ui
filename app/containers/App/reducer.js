@@ -8,7 +8,7 @@ import { fromJS, Map, List } from 'immutable';
 import moment from 'moment';
 import { pickBy } from 'lodash';
 
-import { GET_CURRENT_TIME_SUCCESS } from './constants';
+import { GET_CURRENT_TIME_SUCCESS, LOGOUT } from './constants';
 import { GET_CONTEST_SUCCESS } from '../ContestPage/constants';
 import { GET_CONTESTS_SUCCESS, JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
 import { GET_PROBLEMS_SUCCESS } from '../ProblemsPage/constants';
@@ -36,6 +36,7 @@ const initialState = fromJS({
   examples: {},
   users: {},
   contestsFetched: false,
+  logged: false,
 });
 
 const stripIdProperty = (entity) => pickBy(entity, (value, key) => key !== 'id');
@@ -57,7 +58,15 @@ const mapFromList = (list) => Map(list.map((el) => [el.get('id'), el]));
 function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return state.set('user', fromJS(action.user));
+      return state.mergeDeep({
+        user: fromJS(action.user),
+        logged: true,
+      });
+    case LOGOUT:
+      return state.mergeDeep({
+        user: initialState.get('user'),
+        logged: initialState.get('logged'),
+      });
     case GET_CONTEST_SUCCESS:
       return state.mergeIn(['contests', action.contestId], fromJS(createContest(action.contest)));
     case GET_CONTESTS_SUCCESS: {

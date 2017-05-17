@@ -1,18 +1,11 @@
-/**
-*
-* {{ properCase name }}
-*
-*/
-
 import React from 'react';
-// import styled from 'styled-components';
 
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 {{/if}}
 
-class {{ properCase name }} extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class {{ properCase name }} extends React.PureComponent {
   render() {
     return (
       <div>
@@ -27,5 +20,3 @@ class {{ properCase name }} extends React.PureComponent { // eslint-disable-line
 {{ properCase name }}.propTypes = {
 
 };
-
-export default {{ properCase name }};

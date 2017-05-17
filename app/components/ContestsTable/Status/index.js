@@ -3,7 +3,7 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
-function ContestStatus(props) {
+export default function ContestStatus(props) {
   const { signupDuration, duration, start } = props.contest;
   const enrolEndTime = moment(start).add(signupDuration, 'seconds');
   const activeEndTime = moment(start).add(signupDuration + duration, 'seconds');
@@ -26,5 +26,3 @@ ContestStatus.propTypes = {
   contest: React.PropTypes.object.isRequired,
   time: React.PropTypes.object.isRequired,
 };
-
-export default ContestStatus;

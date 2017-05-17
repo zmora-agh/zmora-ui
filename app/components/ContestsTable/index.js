@@ -8,17 +8,12 @@ import { DIALOG_TYPE } from '../../containers/ContestsPage/constants';
 export class ContestsTable extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
     offset: React.PropTypes.number.isRequired,
-    contests: React.PropTypes.object.isRequired,
+    contests: React.PropTypes.array.isRequired,
     dialog: DIALOG_TYPE,
     onJoinModalOpen: React.PropTypes.func.isRequired,
     onJoinModalClose: React.PropTypes.func.isRequired,
     onJoinContest: React.PropTypes.func.isRequired,
   };
-
-  constructor(props) {
-    super(props);
-    this.isVisible = this.isVisible.bind(this);
-  }
 
   isVisible(contest, serverTime) {
     const enrolEndTime = moment(contest.start).add(contest.signupDuration, 'seconds');
@@ -27,12 +22,12 @@ export class ContestsTable extends React.PureComponent { // eslint-disable-line 
 
   render() {
     const serverTime = moment().add(this.props.offset, 'seconds');
-    const rows = Object.keys(this.props.contests)
-      .filter((key) => this.isVisible(this.props.contests[key], serverTime))
-      .map((key) => (
+    const rows = this.props.contests
+      .filter((c) => this.isVisible(c, serverTime))
+      .map((c) => (
         <ContestRow
-          key={key}
-          contest={this.props.contests[key]}
+          key={c.id}
+          contest={c}
           serverTime={serverTime}
           onJoinClick={this.props.onJoinModalOpen}
         />

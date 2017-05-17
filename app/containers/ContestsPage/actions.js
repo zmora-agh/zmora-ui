@@ -5,27 +5,12 @@
  */
 
 import {
-  GET_CONTESTS,
-  GET_CONTESTS_SUCCESS,
   OPEN_JOIN_CONTEST_MODAL,
   CLOSE_JOIN_CONTEST_MODAL,
   JOIN_CONTEST,
   JOIN_CONTEST_SUCCESS,
   JOIN_CONTEST_ERROR,
 } from './constants';
-
-export function getContests() {
-  return {
-    type: GET_CONTESTS,
-  };
-}
-
-export function getContestsSuccess(contests) {
-  return {
-    type: GET_CONTESTS_SUCCESS,
-    contests,
-  };
-}
 
 export function openJoinContestModal(contestName, contestId) {
   return {

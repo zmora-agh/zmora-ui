@@ -10,7 +10,7 @@ import { pickBy } from 'lodash';
 
 import { GET_CURRENT_TIME_SUCCESS } from './constants';
 import { GET_CONTEST_SUCCESS } from '../ContestPage/constants';
-import { GET_CONTESTS_SUCCESS, JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
+import { JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
 import { GET_PROBLEMS_SUCCESS } from '../ProblemsPage/constants';
 import { GET_PROBLEM_SUCCESS } from '../ProblemPage/constants';
 import { GET_PROBLEM_EXAMPLES_SUCCESS } from '../ProblemExamplesPage/constants';
@@ -60,18 +60,6 @@ function contestsPageReducer(state = initialState, action) {
       return state.set('user', fromJS(action.user));
     case GET_CONTEST_SUCCESS:
       return state.mergeIn(['contests', action.contestId], fromJS(createContest(action.contest)));
-    case GET_CONTESTS_SUCCESS: {
-      let contestsMap = fromJS(action.contests)
-        .reduce((result, contest) => result.set(contest.get('id'), createContest(contest)), Map());
-      const users = mapFromList(contestsMap.valueSeq().map((e) => e.get('owners')).flatten(true));
-      contestsMap = contestsMap.map((v) => v.set('owners', v.get('owners').map((e) => e.get('id'))));
-
-      return state.mergeDeep({
-        contests: contestsMap,
-        contestsFetched: true,
-        users,
-      });
-    }
     case GET_PROBLEMS_SUCCESS:
       if (action.problems.length === 0) {
         return state.set('problems', Map());

@@ -6,10 +6,8 @@
 
 import { fromJS, Map, List } from 'immutable';
 import moment from 'moment';
-import { pickBy } from 'lodash';
 
 import { GET_CURRENT_TIME_SUCCESS } from './constants';
-import { GET_CONTEST_SUCCESS } from '../ContestPage/constants';
 import { JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
 import { GET_PROBLEMS_SUCCESS } from '../ProblemsPage/constants';
 import { GET_PROBLEM_SUCCESS } from '../ProblemPage/constants';
@@ -38,14 +36,10 @@ const initialState = fromJS({
   contestsFetched: false,
 });
 
-const stripIdProperty = (entity) => pickBy(entity, (value, key) => key !== 'id');
-
 const flattenProblem = ({ problem, ...meta }) => ({
   ...meta,
   ...problem,
 });
-
-const createContest = (contest) => stripIdProperty(contest);
 
 const createSubmit = ({ date, ...rest }) => ({
   date: moment(date),
@@ -58,8 +52,6 @@ function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return state.set('user', fromJS(action.user));
-    case GET_CONTEST_SUCCESS:
-      return state.mergeIn(['contests', action.contestId], fromJS(createContest(action.contest)));
     case GET_PROBLEMS_SUCCESS:
       if (action.problems.length === 0) {
         return state.set('problems', Map());

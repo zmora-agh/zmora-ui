@@ -5,27 +5,36 @@
  */
 
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { createStructuredSelector } from 'reselect';
+import { gql, graphql } from 'react-apollo';
 
-import { makeSelectContest } from '../App/selectors';
 import { submitSetContext } from '../Submit/actions';
-
-import { CONTEST_TYPE } from './constants';
-import { getContest } from './actions';
 
 import FetchView from '../../components/FetchView';
 import ContestSummary from '../../components/ContestSummary';
 
 const getContestId = (props) => parseInt(props.params.contest_id, 10);
 
-export class ContestPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+const ContestListForLayout = gql`
+  query ContestListForLayout($contestId: Int!) { 
+    contest(id: $contestId) {
+      id
+      start
+      name
+      description
+      signupDuration
+      duration
+    }
+  }
+`;
+
+@graphql(ContestListForLayout, { options: (props) => ({ variables: { contestId: getContestId(props) } }) })
+export default class ContestPage extends React.PureComponent {
   componentDidMount() {
-    this.props.dispatch(getContest(getContestId(this.props)));
-    this.props.dispatch(submitSetContext({ contestId: this.contestId }));
+    const contestId = parseInt(this.props.params.contest_id, 10);
+    this.props.dispatch(submitSetContext({ contestId }));
     if (!this.props.children) {
-      this.props.dispatch(push(`/contests/${this.contestId}/problems`));
+      this.props.dispatch(push(`/contests/${contestId}/problems`));
     }
   }
 
@@ -33,30 +42,18 @@ export class ContestPage extends React.PureComponent { // eslint-disable-line re
     this.props.dispatch(submitSetContext({ contestId: undefined }));
   }
 
-  contestId = parseInt(this.props.params.contest_id, 10);
 
   render() {
     if (this.props.children) return this.props.children;
 
-    return <FetchView>{this.props.contest && <ContestSummary {...this.props.contest} />}</FetchView>;
+    return (<FetchView>{this.props.data.loading ? undefined :
+    <ContestSummary {...this.props.data.contest} />}</FetchView>);
   }
 }
 
 ContestPage.propTypes = {
   children: PropTypes.object,
   params: PropTypes.shape({ contest_id: PropTypes.string }),
-  contest: CONTEST_TYPE,
+  data: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = (state, props) => createStructuredSelector({
-  contest: makeSelectContest(getContestId(props)),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContestPage);

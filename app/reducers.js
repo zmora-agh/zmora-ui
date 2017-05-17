@@ -11,6 +11,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import appReducer from 'containers/App/reducer';
 import rightMenuReducer from 'containers/RightMenu/reducer';
 import submitReducer from 'containers/Submit/reducer';
+import { client } from './graphql';
 
 /*
  * routeReducer
@@ -52,6 +53,7 @@ export default function createReducer(asyncReducers) {
     ui: combineReducers({
       submit: submitReducer,
     }),
+    apollo: client.reducer(),
     ...asyncReducers,
   });
 }

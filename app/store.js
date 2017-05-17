@@ -9,6 +9,7 @@ import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 
 import appSaga from './containers/App/sagas';
+import { client } from './graphql';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -17,6 +18,7 @@ export default function configureStore(initialState = {}, history) {
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
   const middlewares = [
+    client.middleware(),
     sagaMiddleware,
     routerMiddleware(history),
   ];

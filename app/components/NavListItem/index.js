@@ -5,14 +5,17 @@
 */
 
 import React from 'react';
+import { Link } from 'react-router';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 
-function NavListItem(props, context) {
+function NavListItem(props) {
   return (
-    <ListItem button style={{ borderRadius: 2 }} onClick={() => context.router.push(props.to)}>
-      <ListItemIcon>{props.icon}</ListItemIcon>
-      <ListItemText primary={props.title} />
-    </ListItem>
+    <Link to={props.to}>
+      <ListItem button style={{ borderRadius: 2 }}>
+        <ListItemIcon>{props.icon}</ListItemIcon>
+        <ListItemText primary={props.title} />
+      </ListItem>
+    </Link>
   );
 }
 

@@ -1,18 +1,11 @@
-/**
-*
-* {{ properCase name }}
-*
-*/
-
 import React from 'react';
-// import styled from 'styled-components';
 
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 {{/if}}
 
-function {{ properCase name }}() {
+export default function {{ properCase name }}() {
   return (
     <div>
     {{#if wantMessages}}
@@ -25,5 +18,3 @@ function {{ properCase name }}() {
 {{ properCase name }}.propTypes = {
 
 };
-
-export default {{ properCase name }};

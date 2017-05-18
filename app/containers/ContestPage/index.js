@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import { submitSetContext } from '../Submit/actions';
 
 import FetchView from '../../components/FetchView';
-import ContestSummary from '../../components/ContestSummary';
 
 const getContestId = (props) => parseInt(props.params.contest_id, 10);
 
@@ -48,14 +47,12 @@ export default class ContestPage extends React.PureComponent {
   render() {
     if (this.props.children) return this.props.children;
 
-    return (<FetchView>{this.props.data.loading ? undefined :
-    <ContestSummary {...this.props.data.contest} />}</FetchView>);
+    return (<FetchView />);
   }
 }
 
 ContestPage.propTypes = {
   children: PropTypes.object,
   params: PropTypes.shape({ contest_id: PropTypes.string }),
-  data: PropTypes.object,
   dispatch: PropTypes.func,
 };

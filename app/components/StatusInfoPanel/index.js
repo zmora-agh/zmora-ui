@@ -5,15 +5,12 @@
  */
 
 import React from 'react';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import { createStyleSheet } from 'jss-theme-reactor';
 import { FormattedMessage } from 'react-intl';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Button from 'material-ui/Button';
-import {
-  Card,
-  CardContent,
-} from 'material-ui/Card';
+import Card, { CardContent } from 'material-ui/Card';
 import Person from '../../svg-icons/person';
 import Laptop from '../../svg-icons/laptop';
 import Solved from '../../svg-icons/action-done';
@@ -62,11 +59,11 @@ function StatusInfoPanel(props, context) {
         height: props.height }}
     >
       <CardContent>
-        <Text type="headline" component="h2" className={classes.header}>
+        <Typography type="headline" component="h2" className={classes.header}>
           <FormattedMessage {...messages.header} />
-        </Text>
+        </Typography>
 
-        <Text component="div" className={classes.textStyle}>
+        <Typography component="div" className={classes.textStyle}>
           <StatusElement
             icon={<Laptop className={classes.iconStyle} />}
             title={<FormattedMessage {...messages.active} />} data="3"
@@ -86,7 +83,7 @@ function StatusInfoPanel(props, context) {
             data="255"
           />
           <StatusElement title={<FormattedMessage {...messages.lastLogged} />} data={<b>nologin</b>} />
-        </Text>
+        </Typography>
         <Button compact primary className={classes.showMoreButtonStyle}>
           <FormattedMessage {...messages.showMoreButton} />
         </Button>

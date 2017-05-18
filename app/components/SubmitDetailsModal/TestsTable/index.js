@@ -3,8 +3,8 @@
  */
 import React, { PropTypes, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Table, TableRow, TableCell, TableBody } from 'material-ui/Table';
-import { Text } from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
+import Table, { TableRow, TableCell, TableBody } from 'material-ui/Table';
 import { SUBMIT_TEST_PROP_TYPE } from '../../../containers/SubmitDetails/constants';
 import EnhancedTableHead from '../../EnhancedTableHead';
 import messages from './messages';
@@ -47,7 +47,7 @@ class TestsTable extends Component { // eslint-disable-line react/prefer-statele
       .sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
     return (
       <div style={{ padding: 10 }}>
-        <Text type="title"><FormattedMessage {...messages.tests} /></Text>
+        <Typography type="title"><FormattedMessage {...messages.tests} /></Typography>
         <Table>
           <EnhancedTableHead
             columns={columnData}

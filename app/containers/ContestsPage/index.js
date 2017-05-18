@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Text } from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import { gql, graphql } from 'react-apollo';
 import autobind from 'autobind-decorator';
 import FetchView from '../../components/FetchView';
@@ -60,7 +60,7 @@ export default class ContestsPage extends React.PureComponent {
     if (this.props.children) return this.props.children;
 
     if (this.props.data.contests && this.props.data.contests.length === 0) {
-      return <Text><FormattedMessage {...messages.empty} /></Text>;
+      return <Typography><FormattedMessage {...messages.empty} /></Typography>;
     }
 
     return (<FetchView>

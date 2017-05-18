@@ -14,8 +14,8 @@ import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
-import Text from 'material-ui/Text';
-import Layout from 'material-ui/Layout';
+import Typography from 'material-ui/Typography';
+import Grid from 'material-ui/Grid';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import makeSelectRightMenu from './selectors';
@@ -50,13 +50,13 @@ const RightMenu = (props, context) => {
   return (
     <Paper {...other} className={classes.root}>
       <div style={{ flex: 1 }}>
-        <Layout container align="center">
+        <Grid container align="center">
           <Avatar src={user.avatar} className={classes.avatar} />
-          <Layout container direction="column" className={classes.avatarText}>
-            <Text>{user.name}</Text>
-            <Text>Points: 15</Text>
-          </Layout>
-        </Layout>
+          <Grid container direction="column" className={classes.avatarText}>
+            <Typography>{user.name}</Typography>
+            <Typography>Points: 15</Typography>
+          </Grid>
+        </Grid>
         <Divider />
         <div style={{ padding: 15 }}>
           {rightMenu.events.map((event) => (<p key={event.id}>{event.text}</p>))}
@@ -64,12 +64,12 @@ const RightMenu = (props, context) => {
       </div>
       <div style={{ marginBottom: 64 }}>
         <Divider />
-        <Layout container direction="row">
-          <Layout item xs={6}><IconButton className={classes.button}><Settings /></IconButton></Layout>
-          <Layout item xs={6}><IconButton className={classes.button} onClick={() => dispatch(logout())}>
+        <Grid container direction="row">
+          <Grid item xs={6}><IconButton className={classes.button}><Settings /></IconButton></Grid>
+          <Grid item xs={6}><IconButton className={classes.button} onClick={() => dispatch(logout())}>
             <ExitToApp />
-          </IconButton></Layout>
-        </Layout>
+          </IconButton></Grid>
+        </Grid>
       </div>
     </Paper>);
 };

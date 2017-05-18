@@ -11,7 +11,7 @@ import { push } from 'react-router-redux';
 import { gql, graphql } from 'react-apollo';
 import { groupBy } from 'lodash';
 
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 
 import { problemPage } from '../../local-urls';
 
@@ -57,7 +57,7 @@ export default class ProblemsPage extends React.PureComponent {
 
 
     if (problems && problems.length === 0) {
-      return <Text><FormattedMessage {...messages.empty} /></Text>;
+      return <Typography><FormattedMessage {...messages.empty} /></Typography>;
     }
 
     const categories = groupBy(problems, 'category');

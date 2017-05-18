@@ -8,7 +8,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import { Dialog, DialogTitle, DialogContent } from 'material-ui/Dialog';
+import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
 import Slide from 'material-ui/transitions/Slide';
 import FetchView from '../../components/FetchView';
 import SubmitDetailsModal from '../../components/SubmitDetailsModal';

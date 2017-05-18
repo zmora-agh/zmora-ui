@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Button } from 'material-ui/Button';
+import Button from 'material-ui/Button';
 import { Link } from 'react-router';
 
 import { FormattedMessage } from 'react-intl';

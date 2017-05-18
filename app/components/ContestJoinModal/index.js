@@ -5,9 +5,9 @@
 */
 
 import React from 'react';
-import { Dialog, DialogContent, DialogTitle, DialogActions, DialogContentText } from 'material-ui/Dialog';
+import Dialog, { DialogContent, DialogTitle, DialogActions, DialogContentText } from 'material-ui/Dialog';
 import Slide from 'material-ui/transitions/Slide';
-import { Button } from 'material-ui/Button';
+import Button from 'material-ui/Button';
 
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';

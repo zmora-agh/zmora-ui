@@ -6,10 +6,10 @@
 
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
-import { Card } from 'material-ui/Card';
+import Card from 'material-ui/Card';
 
 const styleSheet = createStyleSheet('zmoraMemberAvatar', () => ({
   root: {
@@ -36,8 +36,8 @@ function MemberAvatar(props, context) {
           style={{ margin: '0 auto', width: 120, height: 120, border: 5, borderStyle: 'solid', borderColor: 'white' }}
         />
         <div style={{ margin: '0 auto', textAlign: 'center' }}>
-          <Text type="display2" style={{ color: 'white', fontSize: 34 }}>{props.name}</Text>
-          <Text type="display1" style={{ color: 'white', fontSize: 22 }}>{props.description}</Text>
+          <Typography type="display2" style={{ color: 'white', fontSize: 34 }}>{props.name}</Typography>
+          <Typography type="display1" style={{ color: 'white', fontSize: 22 }}>{props.description}</Typography>
         </div>
       </div>
     </Card>

@@ -4,12 +4,11 @@
  *
  */
 
-import { fromJS, Map, List } from 'immutable';
+import { fromJS, Map } from 'immutable';
 import moment from 'moment';
 
 import { GET_CURRENT_TIME_SUCCESS } from './constants';
 import { JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
-import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
 import { LOGIN_SUCCESS } from '../Login/constants';
 import { GET_SUBMIT_DETAILS_SUCCESS } from '../SubmitDetails/constants';
 
@@ -43,10 +42,6 @@ function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return state.set('user', fromJS(action.user));
-    case GET_PROBLEM_SUBMITS_SUCCESS:
-      return state.mergeDeepIn(['submits'], mapFromList(fromJS(action.submits.map(createSubmit))))
-        .setIn(['problems', action.problemId, 'submits'], List(action.submits.map((submit) => submit.id)));
-
     case GET_SUBMIT_DETAILS_SUCCESS: {
       const submit = fromJS(createSubmit(action.submit));
 

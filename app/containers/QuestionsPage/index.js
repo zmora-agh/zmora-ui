@@ -9,8 +9,8 @@ import { gql, graphql } from 'react-apollo';
 
 import QuestionCard from '../../components/QuestionCard';
 
-const ProblemExamplesForLayout = gql`
-  query ProblemExamplesForLayout($problemId: Int!) { 
+const ProblemQuestionsForLayout = gql`
+  query ProblemQuestionsForLayout($problemId: Int!) { 
     problem(id: $problemId) {
       id
       questions {
@@ -35,7 +35,7 @@ const ProblemExamplesForLayout = gql`
   }
 `;
 
-@graphql(ProblemExamplesForLayout, {
+@graphql(ProblemQuestionsForLayout, {
   options: ({ problemId }) => ({ variables: { problemId } }),
   skip: ({ defer }) => defer,
 })

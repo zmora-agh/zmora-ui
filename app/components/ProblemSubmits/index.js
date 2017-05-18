@@ -14,6 +14,7 @@ import Table,
 
 import { FormattedMessage } from 'react-intl';
 import Button from 'material-ui/Button';
+import moment from 'moment';
 import { submitsPropType } from './constants';
 import messages from './messages';
 import EnhancedTableHead from '../EnhancedTableHead';
@@ -68,7 +69,7 @@ export default class ProblemSubmits extends Component { // eslint-disable-line r
           {data.map((submit) =>
             <TableRow key={submit.id}>
               <TableCell>{submit.id}</TableCell>
-              <TableCell>{submit.date.format('DD-MM-YYYY HH:mm:ss')}</TableCell>
+              <TableCell>{moment(submit.date).format('DD-MM-YYYY HH:mm:ss')}</TableCell>
               <TableCell>{submit.status}</TableCell>
               <TableCell>
                 <a href={`#${SUBMITS_HASH_PREFIX}=${submit.id}`}>

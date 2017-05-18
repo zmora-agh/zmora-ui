@@ -3,9 +3,9 @@
  */
 import React, { PropTypes, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Table, TableRow, TableCell, TableBody } from 'material-ui/Table';
-import { IconButton } from 'material-ui/IconButton';
-import { Text } from 'material-ui/Text';
+import Table, { TableRow, TableCell, TableBody } from 'material-ui/Table';
+import IconButton from 'material-ui/IconButton';
+import Typography from 'material-ui/Typography';
 import { SUBMIT_FILE_PROP_TYPE } from '../../../containers/SubmitDetails/constants';
 import EnhancedTableHead from '../../EnhancedTableHead';
 import messages from './messages';
@@ -50,7 +50,7 @@ class FilesTable extends Component { // eslint-disable-line react/prefer-statele
       .sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
     return (
       <div style={{ padding: 10 }}>
-        <Text type="title"><FormattedMessage {...messages.files} /></Text>
+        <Typography type="title"><FormattedMessage {...messages.files} /></Typography>
         <Table>
           <EnhancedTableHead
             columns={columnData}

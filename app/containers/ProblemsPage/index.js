@@ -11,7 +11,7 @@ import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 import { groupBy } from 'lodash';
 
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 
 import { problemPage } from '../../local-urls';
 import { makeSelectProblems } from '../App/selectors';
@@ -37,7 +37,7 @@ export class ProblemsPage extends React.PureComponent { // eslint-disable-line r
     if (this.props.children) return this.props.children;
 
     if (this.props.problems && this.props.problems.length === 0) {
-      return <Text><FormattedMessage {...messages.empty} /></Text>;
+      return <Typography><FormattedMessage {...messages.empty} /></Typography>;
     }
 
     const categories = groupBy(this.props.problems, 'category');

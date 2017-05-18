@@ -7,9 +7,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import QuestionCard from '../../components/QuestionCard';
 import { makeSelectProblemQuestions } from '../App/selectors';
 import { getQuestions } from './actions';
-
 
 export class QuestionsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static propTypes = {
@@ -23,19 +23,16 @@ export class QuestionsPage extends React.PureComponent { // eslint-disable-line 
     this.props.dispatch(getQuestions(this.props.contestId, this.props.problemId));
   }
 
-
   render() {
     return (
-      <div>
-        {String(this.props.questions && this.props.questions
-            .map((question) => `q: ${question.question} a:${question.answers.map((answer) => answer.answer)} `))}
+      <div key={this.props.contestId}>
+        {this.props.questions && this.props.questions.map((q) =>
+          <QuestionCard key={q.question} question={q} />
+        )}
       </div>
     );
   }
-
-
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {

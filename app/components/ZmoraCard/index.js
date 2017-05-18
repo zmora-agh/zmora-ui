@@ -6,10 +6,7 @@
 */
 
 import React from 'react';
-import {
-  Card,
-  CardContent,
-} from 'material-ui/Card';
+import Card, { CardContent } from 'material-ui/Card';
 
 function ZmoraCard(props) {
   return (

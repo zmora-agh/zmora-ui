@@ -6,17 +6,17 @@
 
 import React from 'react';
 
-import Layout from 'material-ui/Layout';
+import Grid from 'material-ui/Grid';
 import RegisterForm from '../Register';
 import Login from '../Login';
 
 
 function AuthPage(props) {
   return (
-    <Layout container>
-      <Layout item xs={12} md={6}><Login from={props.location.query.from} /></Layout>
-      <Layout item xs={12} md={6}><RegisterForm /></Layout>
-    </Layout>
+    <Grid container>
+      <Grid item xs={12} md={6}><Login from={props.location.query.from} /></Grid>
+      <Grid item xs={12} md={6}><RegisterForm /></Grid>
+    </Grid>
   );
 }
 

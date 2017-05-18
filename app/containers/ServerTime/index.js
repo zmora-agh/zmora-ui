@@ -8,7 +8,7 @@ import { createStyleSheet } from 'jss-theme-reactor';
 
 import Chip from 'material-ui/Chip';
 import IconButton from 'material-ui/IconButton';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import moment from 'moment';
@@ -77,9 +77,9 @@ class ServerTime extends React.Component {
           style={Object.assign({}, chipStyle, this.props.style)}
           avatar={<TimeIcon />}
           label={
-            <Text colorInherit style={{ marginRight: 8 }} type="body2">
+            <Typography colorInherit style={{ marginRight: 8 }} type="body2">
               {time.format('HH:mm:ss')}
-            </Text>
+            </Typography>
           }
         />
       );

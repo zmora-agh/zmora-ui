@@ -8,7 +8,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import { Text } from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import { makeSelectProblemSubmits } from '../App/selectors';
 import { getProblemSubmits } from './actions';
 
@@ -37,7 +37,7 @@ export class ProblemSubmitsPage extends React.PureComponent { // eslint-disable-
 
   render() {
     if (this.props.submits && this.props.submits.length === 0) {
-      return <Text><FormattedMessage {...messages.empty} /></Text>;
+      return <Typography><FormattedMessage {...messages.empty} /></Typography>;
     }
 
     return <FetchView>{this.props.submits && <ProblemSubmits submits={this.props.submits} />}</FetchView>;

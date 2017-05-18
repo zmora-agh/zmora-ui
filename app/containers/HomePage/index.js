@@ -12,13 +12,13 @@
 import React from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
-import Layout from 'material-ui/Layout';
-import Text from 'material-ui/Text';
+import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
 import StatusCard from '../../components/StatusPanel';
 import ZmoraCard from '../../components/ZmoraCard';
 import StatusInfoList from '../../components/StatusInfoList';
 
-const styleSheet = createStyleSheet('zmoraAppHomePageLayout', () => ({
+const styleSheet = createStyleSheet('zmoraAppHomePageGrid', () => ({
   paper: {
     padding: '0em 1em',
     textAlign: 'justify',
@@ -55,40 +55,40 @@ function HomePage(props, context) {
   const classes = context.styleManager.render(styleSheet);
 
   return (
-    <Layout container className={classes.root} gutter={verticalGutter}>
-      <Layout container item xs={12} gutter={horizontalGutter}>
-        <Layout item xs={8}>
+    <Grid container className={classes.root} gutter={verticalGutter}>
+      <Grid container item xs={12} gutter={horizontalGutter}>
+        <Grid item xs={8}>
           <ZmoraCard color={descriptionColor} height={cardHeight} padding={cardPadding}>
-            <Text className={classes.lightTextStyle}>
+            <Typography className={classes.lightTextStyle}>
               <strong>Zmora</strong> to zautomatyzowana platforma edukacyjna, kierowana do studentów
               kierunków informatycznych <strong>AGH</strong>. W przystępny sposób sprawdza poprawność i
               wydajność rozwiązań na specjalnie przystosowanych do tego zadaniach. System ocenia sprawiedliwie
-              wkład pracy oraz postępy każdego z uczestników.</Text>
+              wkład pracy oraz postępy każdego z uczestników.</Typography>
           </ZmoraCard>
-        </Layout>
-        <Layout item xs={4}>
+        </Grid>
+        <Grid item xs={4}>
           <StatusCard color={statusPaneColor} height={cardHeight} />
-        </Layout>
-      </Layout>
-      <Layout container item xs={12} gutter={horizontalGutter}>
-        <Layout item xs={4} style={{ textAlign: 'center' }}>
+        </Grid>
+      </Grid>
+      <Grid container item xs={12} gutter={horizontalGutter}>
+        <Grid item xs={4} style={{ textAlign: 'center' }}>
           <ZmoraCard color={logoPaneColor} height={cardHeight + 35} padding={cardPadding}>
             <img src={logo} className={classes.logoStyle} alt="logo" />
           </ZmoraCard>
-        </Layout>
-        <Layout item xs={8}>
+        </Grid>
+        <Grid item xs={8}>
           <ZmoraCard color={namePaneColor} height={cardHeight + 35} padding={cardPadding}>
-            <Text className={classes.darkTextStyle}>
+            <Typography className={classes.darkTextStyle}>
               Nazwa została wybrana nieprzypadkowo - w mitologii słowiańskiej zmora to istota pół demoniczna,
               która nocą męczy śpiących i wysysa z nich krew. Taki scenariusz również jest możliwy - wystarczy
               nie rozwiązywać zadań w terminie lub próbować zaliczać je podstępem.<br /><br />
               Tak czy inaczej - <strong>powodzenia!</strong>
-            </Text>
+            </Typography>
           </ZmoraCard>
-        </Layout>
-      </Layout>
-      <Layout container item xs={12} gutter={horizontalGutter}>
-        <Layout item xs={12}>
+        </Grid>
+      </Grid>
+      <Grid container item xs={12} gutter={horizontalGutter}>
+        <Grid item xs={12}>
           <ZmoraCard padding={0}>
             <StatusInfoList
               statuses={[{ title: 'Zaliczone', info: 'Zadanie zaliczone bez uwag.' },
@@ -99,9 +99,9 @@ function HomePage(props, context) {
               ]}
             />
           </ZmoraCard>
-        </Layout>
-      </Layout>
-    </Layout>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
 

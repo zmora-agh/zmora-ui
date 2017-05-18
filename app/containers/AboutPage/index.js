@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
-import Layout from 'material-ui/Layout';
+import Grid from 'material-ui/Grid';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 import MemberAvatar from '../../components/MemberAvatar';
@@ -50,11 +50,11 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
     return (
       <div>
         <div className={classes.root}>
-          <Layout container gutter={24}>
-            <Layout item xs={12}>
+          <Grid container gutter={24}>
+            <Grid item xs={12}>
               <div className={classes.headerMessage}><FormattedMessage {...messages.title} /></div>
-            </Layout>
-            <Layout item xs={2}>
+            </Grid>
+            <Grid item xs={2}>
               <a href="https://github.com/zmora-agh">
                 <Chip
                   avatar={<Avatar src={require('../../img/GitHub-Mark-64px.png')} />}
@@ -63,11 +63,11 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                   className={classes.chip}
                 />
               </a>
-            </Layout>
-            <Layout item xs={12}>
+            </Grid>
+            <Grid item xs={12}>
               <FormattedMessage {...messages.aboutText} />
-            </Layout>
-            <Layout style={{ padding: 20 }} item xs={4}>
+            </Grid>
+            <Grid style={{ padding: 20 }} item xs={4}>
               <MemberAvatar
                 name="Janusz"
                 description="Człowiek sukcesu"
@@ -75,8 +75,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 bgUrl="https://cdn.dribbble.com/users/58267/screenshots/1779481/attachments/291187/Perkse-Pattern.png"
                 bgColor="#2196f3"
               />
-            </Layout>
-            <Layout style={{ padding: 20 }} item xs={4}>
+            </Grid>
+            <Grid style={{ padding: 20 }} item xs={4}>
               <MemberAvatar
                 name="Andrzej"
                 description="Najlepszy developer"
@@ -84,8 +84,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 bgUrl="http://www.bestpsdfreebies.com/wp-content/uploads/2014/05/shards_pattern.jpg"
                 bgColor="#4caf50"
               />
-            </Layout>
-            <Layout style={{ padding: 20 }} item xs={4}>
+            </Grid>
+            <Grid style={{ padding: 20 }} item xs={4}>
               <MemberAvatar
                 name="Mirosław"
                 description="Tylko mirko"
@@ -93,8 +93,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 bgUrl="https://goo.gl/32xGr3"
                 bgColor="#ff5722"
               />
-            </Layout>
-            <Layout style={{ padding: 20 }} item xs={4}>
+            </Grid>
+            <Grid style={{ padding: 20 }} item xs={4}>
               <MemberAvatar
                 name="Przemysław"
                 description="Rekin przemysłu"
@@ -102,8 +102,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 bgUrl="https://goo.gl/CaKbO2"
                 bgColor="#fb8c00"
               />
-            </Layout>
-            <Layout style={{ padding: 20 }} item xs={4}>
+            </Grid>
+            <Grid style={{ padding: 20 }} item xs={4}>
               <MemberAvatar
                 name="Zbigniew"
                 description="Prawdziwy patriota"
@@ -111,8 +111,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 bgUrl="https://goo.gl/lZGpvu"
                 bgColor="#673ab7"
               />
-            </Layout>
-            <Layout style={{ padding: 20 }} item xs={4}>
+            </Grid>
+            <Grid style={{ padding: 20 }} item xs={4}>
               <MemberAvatar
                 name="Van"
                 description="Artysta wykonawczy"
@@ -120,9 +120,9 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 bgUrl="https://goo.gl/Kum3q4"
                 bgColor="#607d8b"
               />
-            </Layout>
+            </Grid>
 
-            <Layout style={{ padding: 20 }} item xs={4}>
+            <Grid style={{ padding: 20 }} item xs={4}>
               <MemberAvatar
                 name="Jan"
                 description="member"
@@ -130,8 +130,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 bgUrl="https://s-media-cache-ak0.pinimg.com/originals/88/eb/a5/88eba554eb141ad1bc126daaab018594.jpg"
                 bgColor="#039BE5"
               />
-            </Layout>
-            <Layout style={{ padding: 20 }} item xs={4}>
+            </Grid>
+            <Grid style={{ padding: 20 }} item xs={4}>
               <MemberAvatar
                 name="Jan"
                 description="member"
@@ -139,8 +139,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 bgUrl="http://ultrawidewallpapers.com/wp-content/uploads/2015/09/fog-of-war-3440x1440.jpg"
                 bgColor="#00796B"
               />
-            </Layout>
-            <Layout style={{ padding: 20 }} item xs={4}>
+            </Grid>
+            <Grid style={{ padding: 20 }} item xs={4}>
               <MemberAvatar
                 name="Jan"
                 description="member"
@@ -148,11 +148,11 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
                 bgUrl="https://cdn-images-1.medium.com/max/1400/1*278tqw9zNPe2WCAz29Wzdw.jpeg"
                 bgColor="#9C27B0"
               />
-            </Layout>
-            <Layout item xs={12}>
+            </Grid>
+            <Grid item xs={12}>
               <FormattedMessage {...messages.aboutUs} />
-            </Layout>
-          </Layout>
+            </Grid>
+          </Grid>
         </div>
       </div>
     );

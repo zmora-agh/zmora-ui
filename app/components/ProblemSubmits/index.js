@@ -6,15 +6,14 @@
 
 import React, { Component } from 'react';
 
-import {
-  Table,
-  TableBody,
+import Table,
+{ TableBody,
   TableRow,
   TableCell,
 } from 'material-ui/Table';
 
 import { FormattedMessage } from 'react-intl';
-import { Button } from 'material-ui/Button';
+import Button from 'material-ui/Button';
 import { submitsPropType } from './constants';
 import messages from './messages';
 import EnhancedTableHead from '../EnhancedTableHead';

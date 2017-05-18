@@ -13,7 +13,7 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 import moment from 'moment';
 import React, { PropTypes } from 'react';
 
-import Markdown from '../Markdown';
+import Markdown from '../../Markdown';
 
 const styleSheet = createStyleSheet('QuestionRow', {
   avatar: {

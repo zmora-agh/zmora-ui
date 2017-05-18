@@ -11,7 +11,7 @@ import Divider from 'material-ui/Divider';
 import List from 'material-ui/List';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import React, { PropTypes } from 'react';
-import QuestionRow from '../QuestionRow';
+import QuestionRow from './QuestionRow';
 
 const styleSheet = createStyleSheet('QuestionCard', {
   content: {

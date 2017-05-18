@@ -17,8 +17,8 @@ class SubmitDetailsModal extends React.Component { // eslint-disable-line react/
   render() {
     return (
       <div style={{ padding: 10 }}>
-        <FilesTable files={this.props.submit.files} />
-        <TestsTable tests={this.props.submit.tests} />
+        <FilesTable files={this.props.submit.submitFiles} />
+        <TestsTable tests={this.props.submit.testResults} />
         <Button onClick={this.props.onClose} raised primary>
           <FormattedMessage {...messages.close} />
         </Button>

@@ -4,14 +4,12 @@
  *
  */
 
-import { fromJS, Map } from 'immutable';
+import { fromJS } from 'immutable';
 import moment from 'moment';
 
 import { GET_CURRENT_TIME_SUCCESS } from './constants';
 import { JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
 import { LOGIN_SUCCESS } from '../Login/constants';
-import { GET_SUBMIT_DETAILS_SUCCESS } from '../SubmitDetails/constants';
-
 
 const initialState = fromJS({
   user: {
@@ -31,26 +29,10 @@ const initialState = fromJS({
   contestsFetched: false,
 });
 
-const createSubmit = ({ date, ...rest }) => ({
-  date: moment(date),
-  ...rest,
-});
-
-const mapFromList = (list) => Map(list.map((el) => [el.get('id'), el]));
-
 function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return state.set('user', fromJS(action.user));
-    case GET_SUBMIT_DETAILS_SUCCESS: {
-      const submit = fromJS(createSubmit(action.submit));
-
-      return state.setIn(['submits', action.submitId], submit)
-        .mergeIn(['testsResults'], mapFromList(submit.get('tests')))
-        .mergeIn(['submitFiles'], mapFromList(submit.get('files')))
-        .setIn(['submits', action.submitId, 'tests'], submit.get('tests').map((t) => t.get('id')))
-        .setIn(['submits', action.submitId, 'files'], submit.get('files').map((t) => t.get('id')));
-    }
     case GET_CURRENT_TIME_SUCCESS: {
       const offset = action.time.diff(moment(), 'seconds');
 

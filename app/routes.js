@@ -110,13 +110,10 @@ export default function createRoutes(store) {
                   onEnter: requireAuth,
                   getComponent(location, cb) {
                     const importModules = Promise.all([
-                      import('containers/SubmitDetails/sagas'),
                       import('containers/ProblemPage'),
                     ]);
 
-                    importModules.then(([submitDetailsSagas,
-                                          component]) => {
-                      injectSagas(submitDetailsSagas.default);
+                    importModules.then(([component]) => {
                       cb(null, withProps(() => ({ tab: 'content' }))(component.default));
                     });
 
@@ -132,17 +129,6 @@ export default function createRoutes(store) {
                           .then((component) => cb(null, withProps(() => ({ tab: 'submits' }))(component.default)))
                           .catch(errorLoading);
                       },
-                      childRoutes: [
-                        {
-                          path: ':submit_id',
-                          name: 'Submit',
-                          getComponent(location, cb) {
-                            import('containers/SubmitDetailsPage')
-                              .then(loadModule(cb))
-                              .catch(errorLoading);
-                          },
-                        },
-                      ],
                     },
                   ],
                 },

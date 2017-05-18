@@ -10,7 +10,6 @@ import moment from 'moment';
 import { GET_CURRENT_TIME_SUCCESS } from './constants';
 import { JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
 import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
-import { GET_QUESTIONS_SUCCESS } from '../QuestionsPage/constants';
 import { LOGIN_SUCCESS } from '../Login/constants';
 import { GET_SUBMIT_DETAILS_SUCCESS } from '../SubmitDetails/constants';
 
@@ -57,8 +56,6 @@ function contestsPageReducer(state = initialState, action) {
         .setIn(['submits', action.submitId, 'tests'], submit.get('tests').map((t) => t.get('id')))
         .setIn(['submits', action.submitId, 'files'], submit.get('files').map((t) => t.get('id')));
     }
-    case GET_QUESTIONS_SUCCESS:
-      return state.setIn(['problems', action.problemId, 'questions'], fromJS(action.questions));
     case GET_CURRENT_TIME_SUCCESS: {
       const offset = action.time.diff(moment(), 'seconds');
 

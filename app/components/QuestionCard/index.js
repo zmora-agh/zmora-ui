@@ -23,7 +23,7 @@ const styleSheet = createStyleSheet('QuestionCard', {
 });
 
 
-function QuestionCard(props, context) {
+export default function QuestionCard(props, context) {
   const classes = context.styleManager.render(styleSheet);
   return (
     <Card style={{ margin: 24 }}>
@@ -46,7 +46,6 @@ function QuestionCard(props, context) {
     </Card>);
 }
 
-export default QuestionCard;
 QuestionCard.propTypes = {
   question: PropTypes.object,
 };

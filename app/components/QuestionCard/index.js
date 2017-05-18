@@ -10,7 +10,6 @@ import Card, { CardContent } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import List from 'material-ui/List';
 import customPropTypes from 'material-ui/utils/customPropTypes';
-import moment from 'moment';
 import React, { PropTypes } from 'react';
 import QuestionRow from '../QuestionRow';
 
@@ -23,27 +22,9 @@ const styleSheet = createStyleSheet('QuestionCard', {
   },
 });
 
-const localeSpec = {
-  relativeTime: {
-    future: 'in %s',
-    past: '%s',
-    s: 's',
-    m: '1m',
-    mm: '%dm',
-    h: '1h',
-    hh: '%dh',
-    d: '1d',
-    dd: '%dd',
-    M: '1mon',
-    MM: '%dmon',
-    y: '1y',
-    yy: '%dy',
-  },
-};
 
 function QuestionCard(props, context) {
   const classes = context.styleManager.render(styleSheet);
-  moment.updateLocale('en', localeSpec);
   return (
     <Card style={{ margin: 24 }}>
       <CardContent className={classes.content} >

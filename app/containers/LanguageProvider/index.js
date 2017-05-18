@@ -10,10 +10,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { IntlProvider } from 'react-intl';
-
+import moment from 'moment';
+import { defultLocaleSpec, DEFAULT_LOCALE } from './constants';
 import { makeSelectLocale } from './selectors';
 
 export class LanguageProvider extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  componentDidMount() {
+    moment.updateLocale(DEFAULT_LOCALE, defultLocaleSpec);
+  }
+
   render() {
     return (
       <IntlProvider

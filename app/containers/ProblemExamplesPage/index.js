@@ -5,55 +5,39 @@
  */
 
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-
-import { getProblemExamples } from './actions';
-import { makeSelectProblemExamples } from '../App/selectors';
+import { gql, graphql } from 'react-apollo';
 
 import FetchView from '../../components/FetchView';
 import ProblemExamples from '../../components/ProblemExamples';
-import { examplesPropType } from '../../components/ProblemExamples/constants';
 
-export class ProblemExamplesPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  constructor(props) {
-    super(props);
-    this.requestData = this.requestData.bind(this);
+const ProblemExamplesForLayout = gql`
+  query ProblemExamplesForLayout($problemId: Int!) { 
+    problem(id: $problemId) {
+      id
+      examples {
+        id
+        number
+        input
+        result
+        explanation
+      }
+    }
   }
+`;
 
-  componentDidMount() {
-    if (!this.props.defer) this.requestData();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.defer && !nextProps.defer) this.requestData();
-  }
-
-  requestData() {
-    this.props.dispatch(getProblemExamples(this.props.contestId, this.props.problemId));
-  }
-
+@graphql(ProblemExamplesForLayout, {
+  options: ({ problemId }) => ({ variables: { problemId } }),
+  skip: ({ defer }) => defer,
+})
+// eslint-disable-next-line react/prefer-stateless-function
+export default class ProblemExamplesPage extends React.PureComponent {
   render() {
-    return <FetchView>{this.props.examples && <ProblemExamples examples={this.props.examples} />}</FetchView>;
+    return (<FetchView>{!this.props.data || this.props.data.loading ? undefined :
+    <ProblemExamples examples={this.props.data.problem.examples} />}
+    </FetchView>);
   }
 }
 
 ProblemExamplesPage.propTypes = {
-  contestId: PropTypes.number.isRequired,
-  problemId: PropTypes.number.isRequired,
-  examples: examplesPropType,
-  defer: PropTypes.bool,
-  dispatch: PropTypes.func.isRequired,
+  data: PropTypes.object,
 };
-
-const mapStateToProps = (state, props) => createStructuredSelector({
-  examples: makeSelectProblemExamples(props.problemId),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProblemExamplesPage);

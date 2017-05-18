@@ -8,14 +8,13 @@ import React, { PropTypes } from 'react';
 import { createStyleSheet } from 'jss-theme-reactor';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import SwipeableViews from 'react-swipeable-views';
+import { gql, graphql } from 'react-apollo';
 
 import Paper from 'material-ui/Paper';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
-import { makeSelectProblem } from '../App/selectors';
 import { problemContentPropTypes } from '../../components/ProblemView/constants';
 import { submitSetContext } from '../Submit/actions';
 
@@ -25,7 +24,6 @@ import ProblemExamplesPage from '../ProblemExamplesPage';
 import ProblemSubmitsPage from '../ProblemSubmitsPage';
 import QuestionsPage from '../QuestionsPage';
 
-import { getProblem } from './actions';
 import messages from './messages';
 import { HASH_PREFIXES, SUBMITS_HASH_PREFIX } from './constants';
 import SubmitDetails from '../SubmitDetails/index';
@@ -50,40 +48,61 @@ function getSwipeableViewIndex(hashPrefix) {
   return HASH_PREFIXES.includes(hashPrefix) ? HASH_PREFIXES.indexOf(hashPrefix) : 0;
 }
 
-export class ProblemPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+const ProblemForLayout = gql`
+  query ProblemForLayout($problemId: Int!) { 
+    problem(id: $problemId) {
+      id
+      name
+      description
+    }
+  }
+`;
+
+@connect(null, (dispatch) => ({ dispatch }))
+@graphql(ProblemForLayout, { options: (props) => ({ variables: { problemId: getIds(props).problemId } }) })
+export default class ProblemPage extends React.Component {
   static contextTypes = {
     styleManager: customPropTypes.muiRequired,
   };
 
   constructor(props) {
     super(props);
-    const hash = parseHash(this.props.location.hash);
-    this.state = {
-      hash,
-      index: getSwipeableViewIndex(hash.prefix),
-    };
+    this.parseProps(props);
   }
 
   componentDidMount() {
-    this.props.dispatch(getProblem(this.ids.contestId, this.ids.problemId));
     this.props.dispatch(submitSetContext({ problemId: this.ids.problemId }));
+  }
+
+  componentWillUpdate(nextProps) {
+    this.parseProps(nextProps);
   }
 
   componentWillUnmount() {
     this.props.dispatch(submitSetContext({ problemId: undefined }));
   }
 
+  ids = {};
+
   handleChange = (event, index) => {
     this.setState({ index });
     window.location.hash = HASH_PREFIXES[index];
   };
 
+  parseProps(props) {
+    const hash = parseHash(props.location.hash);
+    this.state = {
+      hash,
+      index: getSwipeableViewIndex(hash.prefix),
+    };
+
+    this.ids = getIds(props);
+  }
+
   handleChangeIndex = (index) => {
     this.setState({ index });
     window.location.hash = HASH_PREFIXES[index];
   };
-
-  ids=getIds(this.props);
 
   render() {
     if (this.props.children) return this.props.children;
@@ -106,7 +125,7 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
           </Tabs>
         </div>
         <SwipeableViews index={this.state.index} onChangeIndex={this.handleChangeIndex}>
-          <FetchView>{this.props.problem && <ProblemView {...this.props.problem} />}</FetchView>
+          <FetchView>{this.props.data.loading ? undefined : <ProblemView {...this.props.data.problem} />}</FetchView>
           <ProblemExamplesPage {...this.ids} defer={this.state.index !== 1} />
           <ProblemSubmitsPage {...this.ids} defer={this.state.index !== 2} />
           <QuestionsPage {...this.ids} />
@@ -122,23 +141,10 @@ export class ProblemPage extends React.Component { // eslint-disable-line react/
 }
 
 ProblemPage.propTypes = {
-  location: PropTypes.object,
-  problem: PropTypes.shape(problemContentPropTypes),
+  data: PropTypes.objectOf(PropTypes.shape({
+    loading: PropTypes.bool,
+    problem: PropTypes.shape(problemContentPropTypes),
+  })),
   children: PropTypes.node,
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
 };
-
-const mapStateToProps = (state, props) => {
-  const ids = getIds(props);
-  return createStructuredSelector({
-    problem: makeSelectProblem(ids.problemId),
-  });
-};
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProblemPage);

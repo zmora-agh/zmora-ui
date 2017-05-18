@@ -9,7 +9,6 @@ import moment from 'moment';
 
 import { GET_CURRENT_TIME_SUCCESS } from './constants';
 import { JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
-import { GET_PROBLEM_SUCCESS } from '../ProblemPage/constants';
 import { GET_PROBLEM_EXAMPLES_SUCCESS } from '../ProblemExamplesPage/constants';
 import { GET_PROBLEM_SUBMITS_SUCCESS } from '../ProblemSubmitsPage/constants';
 import { GET_QUESTIONS_SUCCESS } from '../QuestionsPage/constants';
@@ -35,11 +34,6 @@ const initialState = fromJS({
   contestsFetched: false,
 });
 
-const flattenProblem = ({ problem, ...meta }) => ({
-  ...meta,
-  ...problem,
-});
-
 const createSubmit = ({ date, ...rest }) => ({
   date: moment(date),
   ...rest,
@@ -51,9 +45,6 @@ function contestsPageReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return state.set('user', fromJS(action.user));
-    case GET_PROBLEM_SUCCESS:
-      return state.setIn(['problems', action.problemId], fromJS(flattenProblem(action.problem)));
-
     case GET_PROBLEM_EXAMPLES_SUCCESS:
       return state.mergeIn(['examples'], mapFromList(fromJS(action.examples)))
         .setIn(['problems', action.problemId, 'examples'], List(action.examples.map((e) => e.id)));

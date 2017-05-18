@@ -5,7 +5,7 @@
 import withProps from 'recompose/withProps';
 
 import { getAsyncInjectors } from 'utils/asyncInjectors';
-import { exactOnly, fetchName } from 'utils/routing';
+import { exactOnly, fetchProblemName, fetchContestName } from './utils/routing';
 import { loginPage } from './local-urls';
 import { requireAuth } from './utils/auth';
 
@@ -69,7 +69,7 @@ export default function createRoutes(store) {
           path: ':contest_id',
           name: 'contestPage',
           onEnter: requireAuth,
-          prettifyParam: fetchName(store, ['app', 'contests', ':contest_id', 'name']),
+          prettifyParam: fetchContestName,
           getComponent(location, cb) {
             const importModules = Promise.all([
               import('containers/ContestPage'),
@@ -105,8 +105,7 @@ export default function createRoutes(store) {
                 {
                   path: ':problem_id',
                   name: 'Problem',
-                  prettifyParam: fetchName(store,
-                    ['app', 'contests', ':contest_id', 'problems', ':problem_id', 'shortcode']),
+                  prettifyParam: fetchProblemName,
                   onEnter: requireAuth,
                   getComponent(location, cb) {
                     const importModules = Promise.all([

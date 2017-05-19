@@ -41,9 +41,7 @@ const ContestRow = (props, context) => {
     <Typography key={1} className={classes.columnText}> {contest.name}</Typography>,
     <Typography key={2} className={classes.columnText}>{contest.description}</Typography>,
     <Typography key={3} className={classes.columnText}>{ownersNames}</Typography>,
-    <Typography key={4} className={classes.columnText}>
-      <ContestStatus contest={contest} time={props.serverTime} />
-    </Typography>,
+    <ContestStatus key={4} styling={classes.columnText} contest={contest} time={props.serverTime} />,
   ];
 
   return (

@@ -39,7 +39,7 @@ class SubmitDetails extends React.Component { // eslint-disable-line react/prefe
     const open = this.props.submitId !== undefined;
     return (
       <Dialog maxWidth="md" open={open} transition={Slide} onBackdropClick={this.onModalClose}>
-        <DialogTitle>
+        <DialogTitle disableTypography>
           <h1>
             <FormattedMessage {...messages.submitDetails} values={{ submitId: this.props.submitId }} />
           </h1>

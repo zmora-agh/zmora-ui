@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
+import Typography from 'material-ui/Typography';
 import messages from './messages';
 
 function ContestStatus(props) {
@@ -16,15 +17,16 @@ function ContestStatus(props) {
   const timeFormat = endTime.isSame(props.time, 'days') ? endTime.format('HH:mm') : endTime.format('YYYY-MM-DD');
 
   return (
-    <div>
+    <Typography className={props.styling} >
       {text}: {timeFormat}
-    </div>
+    </Typography>
   );
 }
 
 ContestStatus.propTypes = {
   contest: React.PropTypes.object.isRequired,
   time: React.PropTypes.object.isRequired,
+  styling: React.PropTypes.any,
 };
 
 export default ContestStatus;

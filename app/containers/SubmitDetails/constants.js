@@ -5,9 +5,6 @@
  */
 import React from 'react';
 
-export const GET_SUBMIT_DETAILS = 'app/SubmitDetails/GET_SUBMIT_DETAILS';
-export const GET_SUBMIT_DETAILS_SUCCESS = 'app/SubmitDetails/GET_SUBMIT_DETAILS_SUCCESS';
-
 export const SUBMIT_TEST_PROP_TYPE = React.PropTypes.shape({
   status: React.PropTypes.node.isRequired,
   executionTime: React.PropTypes.number.isRequired,
@@ -23,7 +20,7 @@ export const SUBMIT_FILE_PROP_TYPE = React.PropTypes.shape({
 
 export const SUBMIT_DETAILS_PROP_TYPE = React.PropTypes.shape({
   id: React.PropTypes.number.isRequired,
-  date: React.PropTypes.object.isRequired,
+  date: React.PropTypes.string.isRequired,
   tests: React.PropTypes.arrayOf(SUBMIT_TEST_PROP_TYPE),
   files: React.PropTypes.arrayOf(SUBMIT_FILE_PROP_TYPE),
 });

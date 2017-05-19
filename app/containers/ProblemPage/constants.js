@@ -4,9 +4,6 @@
  *
  */
 
-export const GET_PROBLEM = 'app/ProblemPage/GET_PROBLEM';
-export const GET_PROBLEM_SUCCESS = 'app/ProblemPage/GET_PROBLEM_SUCCESS';
-
 export const CONTENT_HASH_PREFIX = 'content';
 export const EXAMPLES_HASH_PREFIX = 'examples';
 export const SUBMITS_HASH_PREFIX = 'submits';

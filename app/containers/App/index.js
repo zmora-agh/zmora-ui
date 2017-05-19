@@ -21,6 +21,7 @@ import Grid from 'material-ui/Grid';
 import AppToolbar from '../../components/AppToolbar';
 import Navigation from '../../components/Navigation';
 import RightMenu from '../RightMenu';
+import TimeProvider from '../TimeProvider';
 import Submit from '../Submit';
 
 import { makeSelectApp } from './selectors';
@@ -80,6 +81,7 @@ class App extends React.PureComponent {
     const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
     return (
       <div className={classes.root}>
+        <TimeProvider />
         <AppToolbar
           routes={this.props.routes}
           params={this.props.params}

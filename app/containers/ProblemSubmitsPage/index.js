@@ -5,60 +5,53 @@
  */
 
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import Typography from 'material-ui/Typography';
-import { makeSelectProblemSubmits } from '../App/selectors';
-import { getProblemSubmits } from './actions';
+import { gql, graphql } from 'react-apollo';
 
 import FetchView from '../../components/FetchView';
 import ProblemSubmits from '../../components/ProblemSubmits';
-import { submitsPropType } from '../../components/ProblemSubmits/constants';
 import messages from './messages';
 
-export class ProblemSubmitsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  constructor(props) {
-    super(props);
-    this.requestData = this.requestData.bind(this);
+const ProblemSubmitsForLayout = gql`
+  query ProblemSubmitsForLayout($problemId: Int!) { 
+    problem(id: $problemId) {
+      id
+      submits {
+        id
+        date
+        status
+        author {
+          id
+          name
+        }
+      }
+    }
   }
+`;
 
-  componentDidMount() {
-    if (!this.props.defer) this.requestData();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.defer && !nextProps.defer) this.requestData();
-  }
-
-  requestData() {
-    this.props.dispatch(getProblemSubmits(this.props.contestId, this.props.problemId));
+@graphql(ProblemSubmitsForLayout, {
+  options: ({ problemId }) => ({ variables: { problemId } }),
+  skip: ({ defer }) => defer,
+})
+// eslint-disable-next-line react/prefer-stateless-function
+export default class ProblemSubmitsPage extends React.PureComponent {
+  haveNoSubmits() {
+    return this.props.data && this.props.data.problem && this.props.data.problem.submits
+      && this.props.data.problem.submits.length === 0;
   }
 
   render() {
-    if (this.props.submits && this.props.submits.length === 0) {
+    if (this.haveNoSubmits()) {
       return <Typography><FormattedMessage {...messages.empty} /></Typography>;
     }
 
-    return <FetchView>{this.props.submits && <ProblemSubmits submits={this.props.submits} />}</FetchView>;
+    return (<FetchView>{!this.props.data || this.props.data.loading ? undefined :
+    <ProblemSubmits submits={this.props.data.problem.submits} />}</FetchView>);
   }
 }
 
 ProblemSubmitsPage.propTypes = {
-  contestId: PropTypes.number.isRequired,
-  problemId: PropTypes.number.isRequired,
-  submits: submitsPropType,
-  defer: PropTypes.bool,
-  dispatch: PropTypes.func.isRequired,
+  data: PropTypes.object,
 };
 
-const mapStateToProps = (state, props) => createStructuredSelector({
-  submits: makeSelectProblemSubmits(props.problemId),
-});
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProblemSubmitsPage);

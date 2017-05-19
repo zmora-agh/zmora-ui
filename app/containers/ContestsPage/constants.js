@@ -6,8 +6,6 @@
 
 import React from 'react';
 
-export const GET_CONTESTS = 'app/ContestsPage/GET_CONTESTS';
-export const GET_CONTESTS_SUCCESS = 'app/ContestsPage/GET_CONTESTS_SUCCESS';
 export const OPEN_JOIN_CONTEST_MODAL = 'app/ContestsPage/OPEN_JOIN_CONTEST_MODAL';
 export const CLOSE_JOIN_CONTEST_MODAL = 'app/ContestsPage/CLOSE_JOIN_CONTEST_MODAL';
 export const JOIN_CONTEST = 'app/ContestsPage/JOIN_CONTEST';

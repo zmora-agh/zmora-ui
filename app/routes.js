@@ -5,7 +5,7 @@
 import withProps from 'recompose/withProps';
 
 import { getAsyncInjectors } from 'utils/asyncInjectors';
-import { exactOnly, fetchName } from 'utils/routing';
+import { exactOnly, fetchProblemName, fetchContestName } from './utils/routing';
 import { loginPage } from './local-urls';
 import { requireAuth } from './utils/auth';
 
@@ -69,17 +69,15 @@ export default function createRoutes(store) {
           path: ':contest_id',
           name: 'contestPage',
           onEnter: requireAuth,
-          prettifyParam: fetchName(store, ['app', 'contests', ':contest_id', 'name']),
+          prettifyParam: fetchContestName,
           getComponent(location, cb) {
             const importModules = Promise.all([
-              import('containers/ContestPage/sagas'),
               import('containers/ContestPage'),
             ]);
 
             const renderRoute = loadModule(cb);
 
-            importModules.then(([sagas, component]) => {
-              injectSagas(sagas.default);
+            importModules.then(([component]) => {
               renderRoute(component);
             });
 
@@ -92,14 +90,12 @@ export default function createRoutes(store) {
               onEnter: requireAuth,
               getComponent(location, cb) {
                 const importModules = Promise.all([
-                  import('containers/ProblemsPage/sagas'),
                   import('containers/ProblemsPage'),
                 ]);
 
                 const renderRoute = loadExactModule(cb);
 
-                importModules.then(([sagas, component]) => {
-                  injectSagas(sagas.default);
+                importModules.then(([component]) => {
                   renderRoute(component);
                 });
 
@@ -109,30 +105,14 @@ export default function createRoutes(store) {
                 {
                   path: ':problem_id',
                   name: 'Problem',
-                  prettifyParam: fetchName(store,
-                    ['app', 'contests', ':contest_id', 'problems', ':problem_id', 'shortcode']),
+                  prettifyParam: fetchProblemName,
                   onEnter: requireAuth,
                   getComponent(location, cb) {
                     const importModules = Promise.all([
-                      import('containers/QuestionsPage/sagas'),
-                      import('containers/ProblemExamplesPage/sagas'),
-                      import('containers/ProblemSubmitsPage/sagas'),
-                      import('containers/SubmitDetails/sagas'),
-                      import('containers/ProblemPage/sagas'),
                       import('containers/ProblemPage'),
                     ]);
 
-                    importModules.then(([questionSagas,
-                                          examplesSagas,
-                                          submitsSagas,
-                                          submitDetailsSagas,
-                                          sagas,
-                                          component]) => {
-                      injectSagas(questionSagas.default);
-                      injectSagas(examplesSagas.default);
-                      injectSagas(submitsSagas.default);
-                      injectSagas(submitDetailsSagas.default);
-                      injectSagas(sagas.default);
+                    importModules.then(([component]) => {
                       cb(null, withProps(() => ({ tab: 'content' }))(component.default));
                     });
 
@@ -148,17 +128,6 @@ export default function createRoutes(store) {
                           .then((component) => cb(null, withProps(() => ({ tab: 'submits' }))(component.default)))
                           .catch(errorLoading);
                       },
-                      childRoutes: [
-                        {
-                          path: ':submit_id',
-                          name: 'Submit',
-                          getComponent(location, cb) {
-                            import('containers/SubmitDetailsPage')
-                              .then(loadModule(cb))
-                              .catch(errorLoading);
-                          },
-                        },
-                      ],
                     },
                   ],
                 },

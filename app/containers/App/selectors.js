@@ -18,18 +18,6 @@ const makeSelectLocationState = () => {
 };
 
 const selectAppDomain = () => (state) => state.get('app');
-const selectUsersDomain = () => (state) => state.getIn(['app', 'users']);
-const selectContestsDomain = () => (state) => state.getIn(['app', 'contests']);
-const selectContestDomain = (contestId) => (state) => state.getIn(['app', 'contests', contestId]);
-const selectProblemsDomain = () => (state) => state.getIn(['app', 'problems']);
-const selectProblemDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId]);
-const selectProblemExamplesDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId, 'examples']);
-const selectProblemQuestionsDomain = (problemId) => (state) => state.getIn(['app', 'problems', problemId, 'questions']);
-const selectExamplesDomain = () => (state) => state.getIn(['app', 'examples']);
-const selectSubmitsDomain = () => (state) => state.get('app').get('submits');
-const selectSubmitDomain = (submitId) => (state) => state.getIn(['app', 'submits', submitId]);
-const selectTestsResultsDomain = () => (state) => state.get('app').get('testsResults');
-const selectSubmitFilesDomain = () => (state) => state.get('app').get('submitFiles');
 const selectUiDomain = () => (state) => state.get('ui');
 
 const makeSelectApp = () => createSelector(
@@ -47,87 +35,9 @@ const makeSelectUser = () => createSelector(
   (substate) => substate.get('user').toJS()
 );
 
-const makeSelectContest = (contestId) => createSelector(
-  selectAppDomain(),
-  (substate) => {
-    const contest = substate.getIn(['contests', contestId]);
-    return contest ? contest.toJS() : undefined;
-  }
-);
-
-const populateEntitiesFromIds = (ids, field, entities) => ids.set(field, ids.get(field).map((id) => entities.get(id)));
-
-const makeSelectContests = () => createSelector(
-  selectContestsDomain(),
-  selectUsersDomain(),
-  (contests, users) => {
-    if (contests && users) {
-      return contests.map((c) => populateEntitiesFromIds(c, 'owners', users)).toJS();
-    }
-    return undefined;
-  },
-);
-
 const makeSelectTime = () => createSelector(
   selectAppDomain(),
   (substate) => substate.get('time').toJS()
-);
-
-const makeSelectProblems = (contestId) => createSelector(
-  selectContestDomain(contestId),
-  selectProblemsDomain(),
-  (contest, problems) => {
-    if (problems && contest && contest.has('problems')) {
-      return contest.get('problems').map((id) => problems.get(id)).toJS();
-    }
-
-    return undefined;
-  }
-);
-
-const makeSelectProblem = (problemId) => createSelector(
-  selectProblemDomain(problemId),
-  (problem) => problem ? problem.toJS() : undefined
-);
-
-const makeSelectProblemExamples = (problemId) => createSelector(
-  selectProblemExamplesDomain(problemId),
-  selectExamplesDomain(),
-  (problemExamples, examples) => {
-    if (problemExamples && examples) {
-      return problemExamples.map((id) => examples.get(id)).toJS();
-    }
-    return undefined;
-  }
-);
-
-const makeSelectProblemSubmits = (problemId) => createSelector(
-  selectProblemDomain(problemId),
-  selectSubmitsDomain(),
-  (problem, submits) => {
-    if (problem && problem.has('submits') && submits) {
-      return problem.get('submits').map((s) => submits.get(s)).toJS();
-    }
-    return undefined;
-  }
-);
-
-const makeSelectSubmitDetails = (submitId) => createSelector(
-  selectSubmitDomain(submitId),
-  selectTestsResultsDomain(),
-  selectSubmitFilesDomain(),
-  (submit, testsResults, submitFiles) => {
-    if (submit && submit.has('tests') && submit.has('files') && submitFiles && testsResults) {
-      return submit.set('tests', submit.get('tests').map((id) => testsResults.get(id)))
-        .set('files', submit.get('files').map((id) => submitFiles.get(id))).toJS();
-    }
-    return undefined;
-  }
-);
-
-const makeSelectProblemQuestions = (problemId) => createSelector(
-  selectProblemQuestionsDomain(problemId),
-  (questions) => questions ? questions.toJS() : undefined
 );
 
 export {
@@ -135,13 +45,5 @@ export {
   makeSelectUi,
   makeSelectUser,
   makeSelectLocationState,
-  makeSelectContest,
-  makeSelectContests,
   makeSelectTime,
-  makeSelectProblems,
-  makeSelectProblem,
-  makeSelectProblemExamples,
-  makeSelectProblemSubmits,
-  makeSelectSubmitDetails,
-  makeSelectProblemQuestions,
 };

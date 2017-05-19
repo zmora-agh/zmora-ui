@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Typography from 'material-ui/Typography';
 import messages from './messages';
 
-function ContestStatus(props) {
+export default function ContestStatus(props) {
   const { signupDuration, duration, start } = props.contest;
   const enrolEndTime = moment(start).add(signupDuration, 'seconds');
   const activeEndTime = moment(start).add(signupDuration + duration, 'seconds');
@@ -28,5 +28,3 @@ ContestStatus.propTypes = {
   time: React.PropTypes.object.isRequired,
   styling: React.PropTypes.any,
 };
-
-export default ContestStatus;

@@ -11,7 +11,6 @@ import 'babel-polyfill';
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
@@ -37,6 +36,7 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
+import { ApolloProvider, client } from './graphql';
 import configureStore from './store';
 
 // Import i18n messages
@@ -75,7 +75,7 @@ injectTapEventPlugin();
 const render = (messages) => {
   ReactDOM.render(
     <MuiThemeProvider>
-      <Provider store={store}>
+      <ApolloProvider store={store} client={client}>
         <LanguageProvider messages={messages}>
           <Router
             history={history}
@@ -87,7 +87,7 @@ const render = (messages) => {
             }
           />
         </LanguageProvider>
-      </Provider>
+      </ApolloProvider>
     </MuiThemeProvider>,
     document.getElementById('app')
   );

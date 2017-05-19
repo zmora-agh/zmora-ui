@@ -11,7 +11,6 @@ import 'babel-polyfill';
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { useScroll } from 'react-router-scroll';
@@ -76,21 +75,19 @@ injectTapEventPlugin();
 const render = (messages) => {
   ReactDOM.render(
     <MuiThemeProvider>
-      <Provider store={store}>
-        <ApolloProvider store={store} client={client}>
-          <LanguageProvider messages={messages}>
-            <Router
-              history={history}
-              routes={rootRoute}
-              render={
-                // Scroll to top when going to a new page, imitating default browser
-                // behaviour
-                applyRouterMiddleware(useScroll())
-              }
-            />
-          </LanguageProvider>
-        </ApolloProvider>
-      </Provider>
+      <ApolloProvider store={store} client={client}>
+        <LanguageProvider messages={messages}>
+          <Router
+            history={history}
+            routes={rootRoute}
+            render={
+              // Scroll to top when going to a new page, imitating default browser
+              // behaviour
+              applyRouterMiddleware(useScroll())
+            }
+          />
+        </LanguageProvider>
+      </ApolloProvider>
     </MuiThemeProvider>,
     document.getElementById('app')
   );

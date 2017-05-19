@@ -29,7 +29,7 @@ const initialState = fromJS({
   contestsFetched: false,
 });
 
-function contestsPageReducer(state = initialState, action) {
+function appReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return state.set('user', fromJS(action.user));
@@ -45,4 +45,4 @@ function contestsPageReducer(state = initialState, action) {
   }
 }
 
-export default contestsPageReducer;
+export default appReducer;

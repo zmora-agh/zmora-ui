@@ -24,10 +24,10 @@ import messages from './messages';
 const getContestId = (props) => parseInt(props.params.contest_id, 10);
 
 const ProblemsListForLayout = gql`
-  query ProblemsListForLayout($contestId: Int!) { 
+  query ProblemsListForLayout($contestId: ID!) {
     contest(id: $contestId) {
       id
-      problems{
+      problems {
         name
         description
         required
@@ -36,6 +36,7 @@ const ProblemsListForLayout = gql`
         softDeadline
         hardDeadline
         shortcode
+        category
       }
     }
   }

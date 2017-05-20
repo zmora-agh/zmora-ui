@@ -11,7 +11,7 @@ import FetchView from '../../components/FetchView';
 import ProblemExamples from '../../components/ProblemExamples';
 
 const ProblemExamplesForLayout = gql`
-  query ProblemExamplesForLayout($problemId: Int!) { 
+  query ProblemExamplesForLayout($problemId: ID!) {
     problem(id: $problemId) {
       id
       examples {

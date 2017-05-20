@@ -14,7 +14,7 @@ import ProblemSubmits from '../../components/ProblemSubmits';
 import messages from './messages';
 
 const ProblemSubmitsForLayout = gql`
-  query ProblemSubmitsForLayout($problemId: Int!) { 
+  query ProblemSubmitsForLayout($problemId: ID!) {
     problem(id: $problemId) {
       id
       submits {

@@ -16,7 +16,7 @@ import FetchView from '../../components/FetchView';
 const getContestId = (props) => parseInt(props.params.contest_id, 10);
 
 const ContestListForLayout = gql`
-  query ContestListForLayout($contestId: Int!) { 
+  query ContestListForLayout($contestId: ID!) {
     contest(id: $contestId) {
       id
       start

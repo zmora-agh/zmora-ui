@@ -10,7 +10,7 @@ import { gql, graphql } from 'react-apollo';
 import QuestionCard from '../../components/QuestionCard';
 
 const ProblemQuestionsForLayout = gql`
-  query ProblemQuestionsForLayout($problemId: Int!) { 
+  query ProblemQuestionsForLayout($problemId: ID!) {
     problem(id: $problemId) {
       id
       questions {

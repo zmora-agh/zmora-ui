@@ -23,6 +23,7 @@ import makeSelectRightMenu from './selectors';
 import Settings from '../../svg-icons/settings';
 import ExitToApp from '../../svg-icons/exit-to-app';
 import { logout } from '../App/actions';
+import { profilePage } from '../../local-urls';
 
 const styleSheet = createStyleSheet('RightMenu', () => ({
   root: {
@@ -65,7 +66,11 @@ const RightMenu = (props, context) => {
       <div style={{ marginBottom: 64 }}>
         <Divider />
         <Layout container direction="row">
-          <Layout item xs={6}><IconButton className={classes.button}><Settings /></IconButton></Layout>
+          <Layout item xs={6}>
+            <IconButton className={classes.button} onClick={() => context.router.push(profilePage())}>
+              <Settings />
+            </IconButton>
+          </Layout>
           <Layout item xs={6}><IconButton className={classes.button} onClick={() => dispatch(logout())}>
             <ExitToApp />
           </IconButton></Layout>
@@ -92,6 +97,7 @@ RightMenu.propTypes = {
 
 RightMenu.contextTypes = {
   styleManager: customPropTypes.muiRequired,
+  router: React.PropTypes.object.isRequired,
 };
 
 const mapStateToProps = makeSelectRightMenu;

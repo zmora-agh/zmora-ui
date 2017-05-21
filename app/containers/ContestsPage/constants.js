@@ -16,6 +16,6 @@ export const DIALOG_TYPE = React.PropTypes.shape({
   open: React.PropTypes.bool,
   error: React.PropTypes.bool,
   loading: React.PropTypes.bool,
-  contestId: React.PropTypes.number,
+  contestId: React.PropTypes.string,
   contestName: React.PropTypes.string,
 });

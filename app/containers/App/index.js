@@ -16,11 +16,12 @@ import { connect } from 'react-redux';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
-import Layout from 'material-ui/Layout';
+import Grid from 'material-ui/Grid';
 
 import AppToolbar from '../../components/AppToolbar';
 import Navigation from '../../components/Navigation';
 import RightMenu from '../RightMenu';
+import TimeProvider from '../TimeProvider';
 import Submit from '../Submit';
 
 import { makeSelectApp } from './selectors';
@@ -80,25 +81,26 @@ class App extends React.PureComponent {
     const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
     return (
       <div className={classes.root}>
+        <TimeProvider />
         <AppToolbar
           routes={this.props.routes}
           params={this.props.params}
           username={this.props.user.nick}
           onToggleMenu={this.toggleMenu}
         />
-        <Layout container gutter={0} style={{ marginTop: 64 }}>
-          <Layout item xs={2}><Navigation style={{ padding: 10 }} /></Layout>
-          <Layout item xs={this.state.rightMenuOpen ? 8 : 10} className={classes.contentContainer}>
+        <Grid container gutter={0} style={{ marginTop: 64 }}>
+          <Grid item xs={2}><Navigation style={{ padding: 10 }} /></Grid>
+          <Grid item xs={this.state.rightMenuOpen ? 8 : 10} className={classes.contentContainer}>
             {React.Children.toArray(this.props.children)}
-          </Layout>
-          <Layout
+          </Grid>
+          <Grid
             item xs={2}
             className={classes.rightMenu}
             style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
           >
             <RightMenu />
-          </Layout>
-        </Layout>
+          </Grid>
+        </Grid>
         <Submit />
       </div>
     );

@@ -6,8 +6,8 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button } from 'material-ui/Button';
-import { Card, CardHeader, CardContent, CardActions } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';
 import { LinearProgress } from 'material-ui/Progress';
 import { InputLabel } from 'material-ui/Input';
 import ErrorTextField from '../ErrorTextField';

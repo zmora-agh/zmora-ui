@@ -6,20 +6,17 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import autobind from 'autobind-decorator';
 
 import RegisterForm from '../../components/RegisterForm';
 
 import { makeSelectRegister } from '../AuthPage/selectors';
 import { register } from './actions';
 
-class Register extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+@connect(makeSelectRegister, (dispatch) => ({ dispatch }))
+export default class Register extends React.PureComponent {
 
-  constructor(props) {
-    super(props);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
+  @autobind
   onSubmit(nick, name, about, email, password) {
     this.props.dispatch(register(nick, name, about, email, password));
   }
@@ -27,30 +24,16 @@ class Register extends React.PureComponent { // eslint-disable-line react/prefer
   render() {
     return (
       <RegisterForm
-        error={this.props.register.error}
+        error={this.props.error}
         onSubmit={this.onSubmit}
-        loading={this.props.register.loading}
+        loading={this.props.loading}
       />
     );
   }
 }
 
 Register.propTypes = {
-  register: PropTypes.shape({
-    error: PropTypes.bool,
-    loading: PropTypes.bool,
-  }),
-  dispatch: PropTypes.func.isRequired,
+  error: PropTypes.bool,
+  loading: PropTypes.bool,
+  dispatch: PropTypes.func,
 };
-
-const mapStateToProps = createStructuredSelector({
-  register: makeSelectRegister(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -8,9 +8,9 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
-import {
+import
   Table,
-  TableHead,
+{ TableHead,
   TableBody,
   TableRow,
   TableCell,
@@ -41,24 +41,28 @@ function ProblemsTable(props) {
       </TableHead>
 
       <TableBody>
-        {props.problems.map((problem) => (<TableRow
-          key={problem.shortcode}
-          onClick={() => props.onRowClick(problem.id)}
-          style={{ cursor: 'pointer' }}
-        >
-          <TableCell>{problem.shortcode}</TableCell>
-          <TableCell>{problem.name}</TableCell>
-          <TableCell>{problem.basePoints}</TableCell>
-          <TableCell>{moment(problem.softDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-          <TableCell>{moment(problem.hardDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
-          <TableCell>{!problem.required && <Done />}</TableCell>
-          <TableCell>
-            <SubmitButton contestId={props.contestId} problemId={problem.id} />
-            <IconButton onClick={(e) => { e.stopPropagation(); props.onPdfClick(problem.id); }}>
-              <Pdf />
-            </IconButton>
-          </TableCell>
-        </TableRow>))}
+        {props.problems.map((problem) => {
+          // FIXME Keeping problem ID as string probably gives us nothing, so what's the point? (consider contests too)
+          const problemId = parseInt(problem.id, 10);
+          return (<TableRow
+            key={problem.shortcode}
+            onClick={() => props.onRowClick(problem.id)}
+            style={{ cursor: 'pointer' }}
+          >
+            <TableCell>{problem.shortcode}</TableCell>
+            <TableCell>{problem.name}</TableCell>
+            <TableCell>{problem.basePoints}</TableCell>
+            <TableCell>{moment(problem.softDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+            <TableCell>{moment(problem.hardDeadline).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+            <TableCell>{!problem.required && <Done />}</TableCell>
+            <TableCell>
+              <SubmitButton contestId={props.contestId} problemId={problemId} />
+              <IconButton onClick={(e) => { e.stopPropagation(); props.onPdfClick(problemId); }}>
+                <Pdf />
+              </IconButton>
+            </TableCell>
+          </TableRow>);
+        })}
       </TableBody>
     </Table>
   );

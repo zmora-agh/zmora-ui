@@ -6,7 +6,7 @@
 
 import React from 'react';
 // import styled from 'styled-components';
-import { Button } from 'material-ui/Button';
+import Button from 'material-ui/Button';
 import { FormattedMessage } from 'react-intl';
 import FilesTable from './FilesTable';
 import { SUBMIT_DETAILS_PROP_TYPE } from '../../containers/SubmitDetails/constants';
@@ -17,8 +17,8 @@ class SubmitDetailsModal extends React.Component { // eslint-disable-line react/
   render() {
     return (
       <div style={{ padding: 10 }}>
-        <FilesTable files={this.props.submit.files} />
-        <TestsTable tests={this.props.submit.tests} />
+        <FilesTable files={this.props.submit.submitFiles} />
+        <TestsTable tests={this.props.submit.testResults} />
         <Button onClick={this.props.onClose} raised primary>
           <FormattedMessage {...messages.close} />
         </Button>

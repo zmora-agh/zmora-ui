@@ -5,47 +5,53 @@
  */
 
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { makeSelectProblemQuestions } from '../App/selectors';
-import { getQuestions } from './actions';
+import { gql, graphql } from 'react-apollo';
 
+import QuestionCard from '../../components/QuestionCard';
 
-export class QuestionsPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  static propTypes = {
-    contestId: PropTypes.number.isRequired,
-    problemId: PropTypes.number.isRequired,
-    questions: PropTypes.array,
-    dispatch: PropTypes.func.isRequired,
-  };
-
-  componentDidMount() {
-    this.props.dispatch(getQuestions(this.props.contestId, this.props.problemId));
+const ProblemQuestionsForLayout = gql`
+  query ProblemQuestionsForLayout($problemId: ID!) {
+    problem(id: $problemId) {
+      id
+      questions {
+        id
+        answers{
+          id
+          answer
+          author {
+            id
+            name
+          }
+          answered
+        }
+        author {
+          id
+          name
+        }
+        asked
+        question
+      }
+    }
   }
+`;
 
+@graphql(ProblemQuestionsForLayout, {
+  options: ({ problemId }) => ({ variables: { problemId } }),
+  skip: ({ defer }) => defer,
+})
+// eslint-disable-next-line react/prefer-stateless-function
+export default class QuestionsPage extends React.PureComponent {
+  static propTypes = {
+    data: PropTypes.object,
+  };
 
   render() {
     return (
       <div>
-        {String(this.props.questions && this.props.questions
-            .map((question) => `q: ${question.question} a:${question.answers.map((answer) => answer.answer)} `))}
+        {this.props.data.problem && this.props.data.problem.questions.map((q) =>
+          <QuestionCard key={q.id} question={q} />
+        )}
       </div>
     );
   }
-
-
 }
-
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-const mapStateToProps = (state, props) => createStructuredSelector({
-  questions: makeSelectProblemQuestions(props.problemId),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionsPage);
-

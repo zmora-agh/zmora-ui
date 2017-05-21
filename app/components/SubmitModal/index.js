@@ -8,7 +8,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Dialog from 'material-ui/Dialog';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 
 import messages from './messages';
@@ -16,7 +16,7 @@ import messages from './messages';
 function SubmitModal(props) {
   return (
     <Dialog open={props.open}>
-      <Text type="title"><FormattedMessage {...messages.header} /></Text>
+      <Typography type="title"><FormattedMessage {...messages.header} /></Typography>
       <form onSubmit={props.onSubmit}>
         <input type="file" name="file0" onChange={props.onInputChange} />
         <input type="file" name="file1" onChange={props.onInputChange} />

@@ -5,11 +5,11 @@
 */
 
 import React from 'react';
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 import { createStyleSheet } from 'jss-theme-reactor';
 import { FormattedMessage } from 'react-intl';
 import customPropTypes from 'material-ui/utils/customPropTypes';
-import Layout from 'material-ui/Layout';
+import Grid from 'material-ui/Grid';
 import ZmoraCard from '../ZmoraCard';
 import messages from './messages';
 
@@ -50,30 +50,30 @@ function StatusPanel(props, context) {
 
   return (
     <ZmoraCard padding={0} height={props.height} color={props.color}>
-      <Layout container>
-        <Layout container item xs={12} className={classes.headerContainer}>
-          <Text type="headline" className={classes.header}><FormattedMessage {...messages.header} /></Text>
-        </Layout>
-        <Layout container item xs={12}>
-          <Layout item xs={12} className={classes.chart}>
+      <Grid container>
+        <Grid container item xs={12} className={classes.headerContainer}>
+          <Typography type="headline" className={classes.header}><FormattedMessage {...messages.header} /></Typography>
+        </Grid>
+        <Grid container item xs={12}>
+          <Grid item xs={12} className={classes.chart}>
             <img src={statusChart} className={classes.logo} alt="logo" />
-          </Layout>
-        </Layout>
-        <Layout
+          </Grid>
+        </Grid>
+        <Grid
           container
           item xs={12}
           className={classes.clusterInfoContainer}
           style={{ height: props.height, paddingLeft: 30 }}
         >
-          <Layout item xs={12} className={classes.clusterInfoItem}>
-            <Text className={classes.clusterInfoTitle}><FormattedMessage {...messages.details} /></Text>
+          <Grid item xs={12} className={classes.clusterInfoItem}>
+            <Typography className={classes.clusterInfoTitle}><FormattedMessage {...messages.details} /></Typography>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <Text style={{ fontSize: '47px' }}>60.0</Text>
-              <Text style={{ marginLeft: '12px' }}>zadań / godzine</Text>
+              <Typography style={{ fontSize: '47px' }}>60.0</Typography>
+              <Typography style={{ marginLeft: '12px' }}>zadań / godzine</Typography>
             </div>
-          </Layout>
-        </Layout>
-      </Layout>
+          </Grid>
+        </Grid>
+      </Grid>
     </ZmoraCard>
   );
 }

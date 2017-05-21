@@ -19,7 +19,7 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
     return (
       <div>
         <LoginForm
-          onSubmit={(username, password) => this.props.dispatch(login(username, password))}
+          onSubmit={(username, password) => this.props.dispatch(login(username, password, this.props.from))}
           {...this.props.login}
         />
       </div>
@@ -29,6 +29,7 @@ export class Login extends React.PureComponent { // eslint-disable-line react/pr
 
 Login.propTypes = {
   login: PropTypes.shape(loginPropType),
+  from: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
 };
 

@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-import Text from 'material-ui/Text';
+import Typography from 'material-ui/Typography';
 
 import { problemContentPropTypes } from './constants';
 
@@ -17,7 +17,7 @@ function ProblemView(props) {
   const { name, description } = props;
   return (
     <div style={{ padding: 24 }}>
-      <Text type="display1" component="h1" gutterBottom>{name}</Text>
+      <Typography type="display1" component="h1" gutterBottom>{name}</Typography>
       <Markdown text={description} />
     </div>
   );

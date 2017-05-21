@@ -19,7 +19,7 @@ function* logoutSaga() {
 
 function* decodeJWT() {
   if (!haveJwtToken()) return;
-  yield put(loginSuccess(jwtDecode(getJwtToken()).dat));
+  yield put(loginSuccess(jwtDecode(getJwtToken())));
 }
 
 // All sagas to be loaded

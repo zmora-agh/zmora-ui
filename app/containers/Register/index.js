@@ -35,5 +35,5 @@ export default class Register extends React.PureComponent {
 Register.propTypes = {
   error: PropTypes.bool,
   loading: PropTypes.bool,
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
 };

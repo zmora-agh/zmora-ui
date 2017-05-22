@@ -48,7 +48,7 @@ export default class QuestionsPage extends React.PureComponent {
   render() {
     return (
       <div>
-        {this.props.data.problem && this.props.data.problem.questions.map((q) =>
+        {this.props.data && this.props.data.problem && this.props.data.problem.questions.map((q) =>
           <QuestionCard key={q.id} question={q} />
         )}
       </div>

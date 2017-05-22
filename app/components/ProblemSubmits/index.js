@@ -54,7 +54,7 @@ export default class ProblemSubmits extends Component { // eslint-disable-line r
   render() {
     const { order, orderBy } = this.state;
 
-    const data = this.props.submits
+    const data = [...this.props.submits]
       .sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
 
     return (

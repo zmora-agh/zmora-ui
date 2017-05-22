@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { createStyleSheet } from 'jss-theme-reactor';
 
@@ -67,9 +68,9 @@ const RightMenu = (props, context) => {
         <Divider />
         <Grid container direction="row">
           <Grid item xs={6}>
-            <IconButton className={classes.button} onClick={() => context.router.push(profilePage())}>
-              <Settings />
-            </IconButton>
+            <Link to={profilePage()}>
+              <IconButton className={classes.button} ><Settings /></IconButton>
+            </Link>
           </Grid>
           <Grid item xs={6}><IconButton className={classes.button} onClick={() => dispatch(logout())}>
             <ExitToApp />

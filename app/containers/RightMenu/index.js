@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { createStyleSheet } from 'jss-theme-reactor';
 
@@ -23,6 +24,7 @@ import makeSelectRightMenu from './selectors';
 import Settings from '../../svg-icons/settings';
 import ExitToApp from '../../svg-icons/exit-to-app';
 import { logout } from '../App/actions';
+import { profilePage } from '../../local-urls';
 
 const styleSheet = createStyleSheet('RightMenu', () => ({
   root: {
@@ -65,7 +67,11 @@ const RightMenu = (props, context) => {
       <div style={{ marginBottom: 64 }}>
         <Divider />
         <Grid container direction="row">
-          <Grid item xs={6}><IconButton className={classes.button}><Settings /></IconButton></Grid>
+          <Grid item xs={6}>
+            <Link to={profilePage()}>
+              <IconButton className={classes.button} ><Settings /></IconButton>
+            </Link>
+          </Grid>
           <Grid item xs={6}><IconButton className={classes.button} onClick={() => dispatch(logout())}>
             <ExitToApp />
           </IconButton></Grid>
@@ -92,6 +98,7 @@ RightMenu.propTypes = {
 
 RightMenu.contextTypes = {
   styleManager: customPropTypes.muiRequired,
+  router: React.PropTypes.object.isRequired,
 };
 
 const mapStateToProps = makeSelectRightMenu;

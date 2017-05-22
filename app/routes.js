@@ -6,7 +6,7 @@ import withProps from 'recompose/withProps';
 
 import { getAsyncInjectors } from 'utils/asyncInjectors';
 import { exactOnly, fetchProblemName, fetchContestName } from './utils/routing';
-import { loginPage } from './local-urls';
+import { loginPage, profilePage } from './local-urls';
 import { requireAuth } from './utils/auth';
 
 
@@ -179,6 +179,22 @@ export default function createRoutes(store) {
           injectSagas(loginSagas.default);
           injectSagas(registerSagas.default);
           injectReducer('auth', authPageReducer.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: profilePage(),
+      name: 'Profile',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/ProfilePage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([component]) => {
           renderRoute(component);
         });
 

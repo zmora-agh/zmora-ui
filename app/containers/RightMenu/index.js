@@ -98,7 +98,7 @@ RightMenu.propTypes = {
 RightMenu.contextTypes = {
   styleManager: customPropTypes.muiRequired,
   router: React.PropTypes.object.isRequired,
-};
+}
 
 const mapStateToProps = makeSelectRightMenu;
 

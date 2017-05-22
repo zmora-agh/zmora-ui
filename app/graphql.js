@@ -1,6 +1,9 @@
 import { ApolloClient, createNetworkInterface, ApolloProvider } from 'react-apollo';
+import { browserHistory } from 'react-router';
+
 import { GRAPHQL_API_URL } from './constants';
-import { getJwtToken, haveJwtToken } from './utils/auth';
+import { getJwtToken, haveJwtToken, deleteJwtToken } from './utils/auth';
+import { loginPage } from './local-urls';
 
 
 /* eslint-disable no-param-reassign */
@@ -15,6 +18,16 @@ const authMiddleware = {
     req.options.headers.authorization = `Bearer ${getJwtToken()}`;
     next();
   },
+  applyAfterware({ response }, next) {
+    response.clone().json().then((body) => {
+      if (body.errors && body.errors.some((e) => e.status === 401 || e.status === 403)) {
+        deleteJwtToken();
+        browserHistory.replace(loginPage(browserHistory.getCurrentLocation().pathname));
+      } else {
+        next();
+      }
+    });
+  },
 };
 /* eslint-enable no-param-reassign */
 
@@ -24,6 +37,7 @@ const createApolloClient = () => {
     queryDeduplication: true,
   });
   networkInterface.use([authMiddleware]);
+  networkInterface.useAfter([authMiddleware]);
 
   return new ApolloClient({
     networkInterface,

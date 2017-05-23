@@ -15,6 +15,7 @@ import Table,
 import { FormattedMessage } from 'react-intl';
 import Button from 'material-ui/Button';
 import moment from 'moment';
+import { sortBy } from '../../utils/render';
 import { submitsPropType } from './constants';
 import messages from './messages';
 import EnhancedTableHead from '../EnhancedTableHead';
@@ -26,7 +27,6 @@ const columnData = [
   { id: 'status', label: <FormattedMessage {...messages.status} /> },
 ];
 
-
 export default class ProblemSubmits extends Component { // eslint-disable-line react/no-multi-comp
   static propTypes = {
     submits: submitsPropType,
@@ -35,38 +35,32 @@ export default class ProblemSubmits extends Component { // eslint-disable-line r
   constructor(props) {
     super(props);
     this.state = {
-      order: 'desc',
+      desc: false,
       orderBy: 'date',
     };
   }
 
-  handleRequestSort = (event, property) => {
-    const orderBy = property;
-    let order = 'desc';
-
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
-    }
-
-    this.setState({ order, orderBy });
+  handleRequestSort = (event, orderBy) => {
+    this.setState({
+      desc: this.state.orderBy === orderBy ? !this.state.desc : false,
+      orderBy,
+    });
   };
 
   render() {
-    const { order, orderBy } = this.state;
-
-    const data = [...this.props.submits]
-      .sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
+    const { desc, orderBy } = this.state;
+    const sortedSubmits = sortBy(this.props.submits, (submit) => submit[orderBy], desc);
 
     return (
       <Table>
         <EnhancedTableHead
           columns={columnData}
-          order={order}
+          order={desc ? 'desc' : 'asc'}
           orderBy={orderBy}
           onRequestSort={this.handleRequestSort}
         />
         <TableBody>
-          {data.map((submit) =>
+          {sortedSubmits.map((submit) =>
             <TableRow key={submit.id}>
               <TableCell>{submit.id}</TableCell>
               <TableCell>{moment(submit.date).format('DD-MM-YYYY HH:mm:ss')}</TableCell>

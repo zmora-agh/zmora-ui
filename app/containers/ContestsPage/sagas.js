@@ -6,7 +6,7 @@ import { joinContestSuccess, joinContestError } from './actions';
 import { JOIN_CONTEST } from './constants';
 
 const JoinContestMutation = gql`
-  mutation JoinContestMutation($id: ID!, $password: String!) {
+  mutation JoinContestMutation($id: Int!, $password: String!) {
     joinContest(id: $id, password: $password) {
       id
       joined

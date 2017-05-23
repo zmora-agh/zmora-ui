@@ -10,7 +10,7 @@ import List from 'material-ui/List';
 
 function ExpandableTable(props) {
   return (
-    <List style={{ width: '100%', backgroundColor: '#fafafa' }}>
+    <List style={{ width: '100%' }}>
       {props.children}
     </List>
   );

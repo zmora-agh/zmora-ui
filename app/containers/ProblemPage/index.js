@@ -49,7 +49,7 @@ function getSwipeableViewIndex(hashPrefix) {
 }
 
 const ProblemForLayout = gql`
-  query ProblemForLayout($problemId: ID!) {
+  query ProblemForLayout($problemId: Int!) { 
     problem(id: $problemId) {
       id
       name

@@ -19,7 +19,7 @@ import { SUBMITS_HASH_PREFIX } from '../ProblemPage/constants';
 
 
 const SubmitDetailsForLayout = gql`
-  query SubmitDetailsForLayout($submitId: ID!) {
+  query SubmitDetailsForLayout($submitId: Int!) {
     submit(id: $submitId) {
       id
       date

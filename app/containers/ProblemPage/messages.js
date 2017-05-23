@@ -26,4 +26,8 @@ export default defineMessages({
     id: 'app.containers.ProblemPage.questions',
     defaultMessage: 'Questions',
   },
+  results: {
+    id: 'app.containers.ProblemPage.results',
+    defaultMessage: 'Results',
+  },
 });

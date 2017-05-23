@@ -22,7 +22,7 @@ const ShowName = (getter) => (d) => <span>{d.data.loading ? undefined : getter(d
 
 export const fetchContestName = (name, params) => {
   const query = gql`
-  query ContestName($contestId: ID!) {
+  query ContestName($contestId: Int!) {
     contest(id: $contestId) {
       id
       name
@@ -38,7 +38,7 @@ export const fetchContestName = (name, params) => {
 
 export const fetchProblemName = (name, params) => {
   const query = gql`
-  query ProblemName($problemId: ID!) {
+  query ProblemName($problemId: Int!) {
     problem(id: $problemId) {
       id
       shortcode

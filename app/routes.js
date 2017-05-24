@@ -133,11 +133,11 @@ export default function createRoutes(store) {
                 },
               ],
             }, {
-              path: 'ranking',
-              name: 'Ranking',
+              path: 'results',
+              name: 'Results',
               onEnter: requireAuth,
               getComponent(location, cb) {
-                import('containers/RankingPage')
+                import('containers/ContestResultsPage')
                   .then(loadModule(cb))
                   .catch(errorLoading);
               },

@@ -13,7 +13,7 @@ import FetchView from '../../components/FetchView';
 import ProblemSubmits from '../../components/ProblemSubmits';
 import messages from './messages';
 
-const ProblemSubmitsForLayout = gql`
+export const ProblemSubmitsForLayout = gql`
   query ProblemSubmitsForLayout($problemId: Int!) { 
     problem(id: $problemId) {
       id

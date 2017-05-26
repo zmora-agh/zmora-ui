@@ -15,7 +15,7 @@ function sendSubmit({ files, contestId, problemId }) {
   return fetchWithCredentials(getProblemSubmitsURL(contestId, problemId), {
     method: 'POST',
     body: formData,
-  }, false).then((response) => response.json());
+  }, false);
 }
 
 function* submit({ data }) {

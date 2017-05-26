@@ -36,7 +36,7 @@ const ProblemsListForLayout = gql`
       owners {
         id
       }
-      problems{
+      problems {
         name
         description
         required
@@ -45,6 +45,7 @@ const ProblemsListForLayout = gql`
         softDeadline
         hardDeadline
         shortcode
+        category
       }
     }
   }

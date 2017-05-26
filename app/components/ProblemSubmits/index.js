@@ -35,7 +35,7 @@ export default class ProblemSubmits extends Component { // eslint-disable-line r
   constructor(props) {
     super(props);
     this.state = {
-      desc: false,
+      desc: true,
       orderBy: 'date',
     };
   }

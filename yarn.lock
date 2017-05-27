@@ -6479,9 +6479,9 @@ react-apollo@^1.2.0:
   optionalDependencies:
     react-dom "0.14.x || 15.* || ^15.0.0 || ^16.0.0-alpha"
 
-"react-breadcrumbs@git+https://github.com/zmora-agh/react-breadcrumbs.git#e3fe175f1658d3e5d8a5e3eb346685f31b384330":
-  version "1.5.2"
-  resolved "git+https://github.com/zmora-agh/react-breadcrumbs.git#e3fe175f1658d3e5d8a5e3eb346685f31b384330"
+react-breadcrumbs@1.6.6:
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/react-breadcrumbs/-/react-breadcrumbs-1.6.6.tgz#ae40617a4cfa12cbb78301847c65234d8bfa81f0"
   dependencies:
     exenv "^1.2.0"
 

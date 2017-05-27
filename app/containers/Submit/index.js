@@ -20,6 +20,7 @@ export const ContestsListForLayout = gql`
       id
       name
       description
+      joined
     }
   }
 `;
@@ -86,7 +87,8 @@ class Submit extends React.Component {
   }
 
   render() {
-    const contests = this.props.contests && !this.props.contests.loading && this.props.contests.data.contests;
+    const contests = this.props.contests && !this.props.contests.loading &&
+      this.props.contests.data.contests.filter((contest) => contest.joined);
     const problems = this.props.problems && !this.props.problems.loading && this.props.problems.data.contest.problems;
     const hasFiles = Object.values(this.state.inputs).some((input) => input);
     const submittable = this.state.contestId !== undefined && this.state.problemId !== undefined && hasFiles;

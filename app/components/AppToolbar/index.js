@@ -60,6 +60,7 @@ class AppToolbar extends React.Component {
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
     onToggleMenu: React.PropTypes.func.isRequired,
+    loggedIn: React.PropTypes.bool.isRequired,
   };
 
   static contextTypes = {
@@ -117,7 +118,8 @@ class AppToolbar extends React.Component {
               onMouseMove={this.moveRipple}
             />
             <ServerTime style={this.state.inSearch ? { display: 'none' } : {}} />
-            <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />
+            {this.props.loggedIn &&
+              <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />}
             <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
           </Grid>
         </Toolbar>

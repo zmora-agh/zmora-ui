@@ -101,6 +101,7 @@ export default function SubmitModal(props) {
 export const ContestsPropType = PropTypes.arrayOf(PropTypes.shape({
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  joined: PropTypes.bool.isRequired,
 }));
 
 export const ProblemsPropType = PropTypes.arrayOf(PropTypes.shape({

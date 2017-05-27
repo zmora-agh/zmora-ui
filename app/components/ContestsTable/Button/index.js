@@ -9,7 +9,7 @@ import messages from './messages';
 function ContestButton(props) {
   const { signupDuration, start, id } = props.contest;
   const enrolEndTime = moment(start).add(signupDuration, 'seconds');
-  const enterActive = props.time.isAfter(enrolEndTime);
+  const enterActive = props.time.isAfter(enrolEndTime) || props.isOwner;
   const enterButton = (
     <Button raised primary disabled={!enterActive}>
       <FormattedMessage {...messages.enter} />
@@ -23,13 +23,14 @@ function ContestButton(props) {
     </Button>
   );
 
-  return ((props.time.isAfter(enrolEndTime) || props.contest.joined) ? activeEnterButton : joinButton);
+  return ((props.time.isAfter(enrolEndTime) || props.contest.joined || props.isOwner) ? activeEnterButton : joinButton);
 }
 
 ContestButton.propTypes = {
   contest: React.PropTypes.object.isRequired,
   time: React.PropTypes.object.isRequired,
   onClick: React.PropTypes.func,
+  isOwner: React.PropTypes.bool.isRequired,
 };
 
 export default ContestButton;

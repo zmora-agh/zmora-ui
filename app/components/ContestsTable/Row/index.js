@@ -63,7 +63,12 @@ const ContestRow = (props, context) => {
           {moment(contest.start).add(contest.signupDuration + contest.duration, 'seconds').format('YYYY-MM-DD HH:mm')}
         </TitledTextGrid>
         <Grid item xs={1}>
-          <ContestButton contest={contest} time={props.serverTime} onClick={() => props.onJoinClick(contest.id)} />
+          <ContestButton
+            contest={contest}
+            time={props.serverTime}
+            onClick={() => props.onJoinClick(contest.id)}
+            isOwner={props.isOwner}
+          />
         </Grid>
       </Grid>
     </ExpandableTableRow>
@@ -73,6 +78,7 @@ const ContestRow = (props, context) => {
 ContestRow.propTypes = {
   serverTime: React.PropTypes.object.isRequired,
   contest: React.PropTypes.object.isRequired,
+  isOwner: React.PropTypes.bool.isRequired,
   onJoinClick: React.PropTypes.func,
 };
 

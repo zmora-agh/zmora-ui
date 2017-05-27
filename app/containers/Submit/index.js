@@ -113,11 +113,17 @@ class Submit extends React.Component {
 Submit.propTypes = {
   contests: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
-    data: ContestsPropType.isRequired,
+    data: PropTypes.shape({
+      contests: ContestsPropType.isRequired,
+    }),
   }),
   problems: PropTypes.shape({
     loading: PropTypes.bool.isRequired,
-    data: ProblemsPropType.isRequired,
+    data: PropTypes.shape({
+      contest: PropTypes.shape({
+        problems: ProblemsPropType.isRequired,
+      }),
+    }),
   }),
   open: PropTypes.bool,
   contestId: PropTypes.number,

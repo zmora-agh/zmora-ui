@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { makeSelectTime } from '../App/selectors';
+import { makeSelectTime, makeSelectUser } from '../App/selectors';
 
 /**
  * Direct selector to the contestsPage state domain
@@ -23,9 +23,11 @@ const makeSelectDialog = () => createSelector(
 const makeSelectContestsPage = () => createSelector(
   makeSelectDialog(),
   makeSelectTime(),
-  (dialog, time) => ({
+  makeSelectUser(),
+  (dialog, time, user) => ({
     dialog,
     offset: time.offset,
+    userId: user.id,
   })
 );
 

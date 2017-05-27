@@ -13,11 +13,16 @@ export class ContestsTable extends React.PureComponent { // eslint-disable-line 
     onJoinModalOpen: React.PropTypes.func.isRequired,
     onJoinModalClose: React.PropTypes.func.isRequired,
     onJoinContest: React.PropTypes.func.isRequired,
+    userId: React.PropTypes.number.isRequired,
   };
+
+  isOwner(contest) {
+    return contest.owners.some((owner) => owner.id === this.props.userId);
+  }
 
   isVisible(contest, serverTime) {
     const enrolEndTime = moment(contest.start).add(contest.signupDuration, 'seconds');
-    return serverTime.isBefore(enrolEndTime) || contest.joined;
+    return serverTime.isBefore(enrolEndTime) || contest.joined || this.isOwner(contest);
   }
 
   render() {
@@ -30,6 +35,7 @@ export class ContestsTable extends React.PureComponent { // eslint-disable-line 
           contest={c}
           serverTime={serverTime}
           onJoinClick={this.props.onJoinModalOpen}
+          isOwner={this.isOwner(c)}
         />
       ));
     const dialog = this.props.dialog.contestId ? (

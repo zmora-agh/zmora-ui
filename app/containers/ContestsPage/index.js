@@ -39,6 +39,7 @@ export default class ContestsPage extends React.PureComponent {
     offset: React.PropTypes.number.isRequired,
     children: React.PropTypes.object,
     dispatch: React.PropTypes.func.isRequired,
+    userId: React.PropTypes.number.isRequired,
   };
 
   @autobind
@@ -72,6 +73,7 @@ export default class ContestsPage extends React.PureComponent {
         dialog={this.props.dialog}
         contests={this.props.data.contests}
         offset={this.props.offset}
+        userId={this.props.userId}
       />
       }
     </FetchView>);

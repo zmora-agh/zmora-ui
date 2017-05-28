@@ -33,7 +33,7 @@ export default class ProblemResultsPage extends React.Component {
     return this.props.data
       && this.props.data.problem
       && this.props.data.problem.results
-      && this.props.data.problems.results.length === 0;
+      && this.props.data.problem.results.length === 0;
   }
   render() {
     if (this.haveNoResults()) {

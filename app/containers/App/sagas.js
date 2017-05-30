@@ -1,5 +1,5 @@
 import { put, takeLatest } from 'redux-saga/effects';
-import { push } from 'react-router-redux';
+import { replace } from 'react-router-redux';
 import jwtDecode from 'jwt-decode';
 
 import { homePage } from '../../local-urls';
@@ -7,10 +7,12 @@ import { deleteJwtToken, getJwtToken, haveJwtToken } from '../../utils/auth';
 import { submitSaga } from '../Submit/sagas';
 import { loginSuccess } from '../Login/actions';
 import { LOGOUT } from './constants';
+import { client } from '../../graphql';
 
 function* logout() {
   deleteJwtToken();
-  yield put(push(homePage()));
+  yield put(replace(homePage()));
+  client.resetStore();
 }
 
 function* logoutSaga() {

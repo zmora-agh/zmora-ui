@@ -23,8 +23,7 @@ import makeSelectRightMenu from './selectors';
 
 import Settings from '../../svg-icons/settings';
 import ExitToApp from '../../svg-icons/exit-to-app';
-import { logout } from '../App/actions';
-import { profilePage } from '../../local-urls';
+import { profilePage, logoutPage } from '../../local-urls';
 
 const styleSheet = createStyleSheet('RightMenu', () => ({
   root: {
@@ -48,7 +47,7 @@ const styleSheet = createStyleSheet('RightMenu', () => ({
 const RightMenu = (props, context) => {
   const classes = context.styleManager.render(styleSheet);
 
-  const { rightMenu, user, dispatch, ...other } = props;
+  const { rightMenu, user, ...other } = props;
   return (
     <Paper {...other} className={classes.root}>
       <div style={{ flex: 1 }}>
@@ -72,9 +71,9 @@ const RightMenu = (props, context) => {
               <IconButton className={classes.button} ><Settings /></IconButton>
             </Link>
           </Grid>
-          <Grid item xs={6}><IconButton className={classes.button} onClick={() => dispatch(logout())}>
+          <Grid item xs={6}><Link to={logoutPage()}><IconButton className={classes.button}>
             <ExitToApp />
-          </IconButton></Grid>
+          </IconButton></Link></Grid>
         </Grid>
       </div>
     </Paper>);

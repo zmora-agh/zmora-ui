@@ -153,6 +153,14 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
+      path: '/logout',
+      name: 'Logout',
+      getComponent(location, cb) {
+        import('containers/LogoutPage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
       path: loginPage(),
       name: 'Authentication',
       getComponent(nextState, cb) {

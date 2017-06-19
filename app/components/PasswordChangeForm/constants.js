@@ -1,6 +1,6 @@
 /*
  *
- * LoginForm constants
+ * PasswordChangeForm constants
  *
  */
 

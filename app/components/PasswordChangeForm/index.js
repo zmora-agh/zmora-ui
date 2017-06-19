@@ -59,7 +59,6 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
     return (
       <Card>
         <CardHeader title={<FormattedMessage {...messages.header} />} />
-        {/*        {this.props.loading && <LinearProgress mode="indeterminate" />}*/}
         <form onSubmit={this.onSubmit}>
           <CardContent>
             <ErrorTextField
@@ -67,6 +66,7 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
               error={!valid.oldPassword}
               errorText={<FormattedMessage {...messages.validOldPassword} />}
               required
+              type="password"
               onChange={this.onOldPasswordChange}
             />
             <ErrorTextField
@@ -85,9 +85,6 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
               errorText={<FormattedMessage {...messages.passwordsNotMatch} />}
               onChange={this.onRepeatPasswordChange}
             />
-            {/*
-            {this.props.error && <InputLabel error><FormattedMessage {...messages.error} /></InputLabel>}
-*/}
           </CardContent>
           <CardActions>
             <Button

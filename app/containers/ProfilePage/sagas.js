@@ -1,13 +1,10 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { push } from 'react-router-redux';
 import { gql } from 'react-apollo';
 
 import { bootstrap } from '../../utils/sagas';
 import { CHANGE_PASSWORD } from './constants';
-import { profilePage } from '../../local-urls';
 import { changePasswordError, changePasswordSuccess } from './actions';
 import { client } from '../../graphql';
-
 
 const ChangePasswordMutation = gql`
   mutation ChangePasswordMutation($oldPassword: String!, $newPassword: String!){
@@ -19,11 +16,10 @@ function sendPasswordChange(oldPassword, newPassword) {
   return client.mutate({ mutation: ChangePasswordMutation, variables: { oldPassword, newPassword } });
 }
 
-function* changePassword({ oldPassword, newPassword, from = profilePage() }) {
+function* changePassword({ oldPassword, newPassword }) {
   try {
     const response = yield call(sendPasswordChange, oldPassword, newPassword);
     yield put(response.data.changePassword.changed === true ? changePasswordSuccess() : changePasswordError());
-    yield put(push(from));
   } catch (e) {
     yield put(changePasswordError());
   }

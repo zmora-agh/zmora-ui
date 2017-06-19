@@ -1,5 +1,5 @@
 /*
- * RegistrationView Messages
+ * PasswordChangeForm Messages
  *
  * This contains all the text for the RegistrationView component.
  */

@@ -10,9 +10,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Button from 'material-ui/Button';
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
-import Slide from 'material-ui/transitions/Slide';
 
-import { SUBMIT_DETAILS_PROP_TYPE } from './constants';
 import messages from './messages';
 
 import FetchView from '../FetchView';
@@ -32,7 +30,7 @@ function SubmitDetailsModal(props) {
   if (!props.data) return null;
 
   return (
-    <Dialog maxWidth="md" open={props.open} onBackdropClick={props.onModalClose}>
+    <Dialog maxWidth="md" open={props.open} onBackdropClick={props.onClose}>
       <DialogTitle>
         <FormattedMessage {...messages.submitDetails} values={{ submitId: props.submitId }} />
       </DialogTitle>
@@ -54,12 +52,14 @@ function SubmitDetailsModal(props) {
 }
 
 SubmitDetailsModal.propTypes = {
-  onClose: React.PropTypes.func.isRequired,
-  // data: PropTypes.objectOf(PropTypes.shape({
-  //   loading: PropTypes.bool.isRequired,
-  //   submit: SUBMIT_DETAILS_PROP_TYPE,
-  // })).isRequired,
+  onClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
   submitId: PropTypes.number,
+  data: PropTypes.shape({
+    submitFiles: FilesTable.propTypes.files,
+    testResults: TestsTable.propTypes.tests,
+  }),
 };
 
 export default SubmitDetailsModal;

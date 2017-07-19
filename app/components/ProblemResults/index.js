@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { gql } from 'react-apollo';
 import { FormattedMessage } from 'react-intl';
 import moment from 'moment';
@@ -36,6 +36,7 @@ export const ResultFragment = gql`
 export default class ProblemResults extends React.Component {
   static propTypes = {
     results: problemResultsPropType,
+    generateHash: PropTypes.func.isRequired,
   };
 
   constructor(props) {

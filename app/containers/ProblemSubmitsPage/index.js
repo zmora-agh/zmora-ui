@@ -52,5 +52,8 @@ export default class ProblemSubmitsPage extends React.PureComponent {
 
 ProblemSubmitsPage.propTypes = {
   data: PropTypes.object,
+  submitId: PropTypes.number,
+  onSubmitSelect: PropTypes.func.isRequired,
+  onSubmitDeselect: PropTypes.func.isRequired,
 };
 

@@ -34,7 +34,6 @@ import {
 } from './constants';
 
 import { makeSelectUser } from '../App/selectors';
-import SubmitDetailsModal from '../../components/SubmitDetailsModal/index';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   appBar: {
@@ -185,7 +184,7 @@ export default class ProblemPage extends React.Component {
 }
 
 ProblemPage.propTypes = {
-  data: PropTypes.object.isRequired, // eslint-disable-line react/no-unused-prop-types
+  data: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
   location: PropTypes.object.isRequired,
   children: PropTypes.node,
   dispatch: PropTypes.func,

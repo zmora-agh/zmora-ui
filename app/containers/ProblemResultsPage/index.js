@@ -55,4 +55,7 @@ export default class ProblemResultsPage extends React.Component {
 
 ProblemResultsPage.propTypes = {
   data: PropTypes.object,
+  userId: PropTypes.number.isRequired,
+  problemId: PropTypes.number.isRequired,
+  generateHash: PropTypes.func.isRequired,
 };

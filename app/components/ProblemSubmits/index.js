@@ -4,7 +4,7 @@
 *
 */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { gql } from 'react-apollo';
 
 import Table,
@@ -40,6 +40,9 @@ const columnData = [
 export default class ProblemSubmits extends Component {
   static propTypes = {
     submits: submitsPropType,
+    submitId: PropTypes.number,
+    onSubmitSelect: PropTypes.func.isRequired,
+    onSubmitDeselect: PropTypes.func.isRequired,
   };
 
   constructor(props) {

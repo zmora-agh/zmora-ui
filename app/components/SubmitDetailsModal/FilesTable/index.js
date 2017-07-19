@@ -1,13 +1,12 @@
 /**
  * Created by oszust on 08.05.17.
  */
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import { gql } from 'react-apollo';
 import { FormattedMessage } from 'react-intl';
 import Table, { TableRow, TableCell, TableBody } from 'material-ui/Table';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
-import { SUBMIT_FILE_PROP_TYPE } from '../constants';
 import EnhancedTableHead from '../../EnhancedTableHead';
 import messages from './messages';
 import FileFileDownload from '../../../svg-icons/file-download';
@@ -30,9 +29,15 @@ const columnData = [
   { id: 'actions' },
 ];
 
-class FilesTable extends Component { // eslint-disable-line react/prefer-stateless-function
+class FilesTable extends React.Component {
   static propTypes = {
-    files: PropTypes.arrayOf(SUBMIT_FILE_PROP_TYPE),
+    files: PropTypes.arrayOf(
+      React.PropTypes.shape({
+        filename: React.PropTypes.node.isRequired,
+        checksum: React.PropTypes.node.isRequired,
+        id: React.PropTypes.number.isRequired,
+      })
+    ).isRequired,
   };
 
   constructor(props) {

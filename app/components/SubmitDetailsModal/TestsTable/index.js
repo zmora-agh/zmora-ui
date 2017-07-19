@@ -6,7 +6,6 @@ import { gql } from 'react-apollo';
 import { FormattedMessage } from 'react-intl';
 import Typography from 'material-ui/Typography';
 import Table, { TableRow, TableCell, TableBody } from 'material-ui/Table';
-import { SUBMIT_TEST_PROP_TYPE } from '../constants';
 import EnhancedTableHead from '../../EnhancedTableHead';
 import messages from './messages';
 
@@ -31,7 +30,14 @@ const columnData = [
 
 class TestsTable extends Component {
   static propTypes = {
-    tests: PropTypes.arrayOf(SUBMIT_TEST_PROP_TYPE),
+    tests: PropTypes.arrayOf(
+      React.PropTypes.shape({
+        status: React.PropTypes.node.isRequired,
+        executionTime: React.PropTypes.number.isRequired,
+        ramUsage: React.PropTypes.number.isRequired,
+        test: React.PropTypes.number.isRequired,
+      })
+    ).isRequired,
   };
 
   constructor(props) {

@@ -25,6 +25,14 @@ function SubmitDetails(props) {
     onClose={props.onClose}
   />);
 }
+SubmitDetails.propTypes = {
+  submitId: PropTypes.number,
+  onClose: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    submit: SubmitDetailsModal.propTypes.data,
+  }),
+};
 
 export default graphql(SubmitDetailsQuery, {
   options: (props) => ({ variables: { submitId: props.submitId } }),

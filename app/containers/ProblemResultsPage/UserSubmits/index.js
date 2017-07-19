@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { graphql, gql } from 'react-apollo';
 
 import FetchView from '../../../components/FetchView';
@@ -22,7 +22,17 @@ export const UserSubmitsQuery = gql`
     userId: props.userId,
   },
 }) })
-class UserSubmits extends React.PureComponent {
+export default class UserSubmits extends React.PureComponent {
+  static propTypes = {
+    data: PropTypes.shape({
+      problem: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        submits: ProblemSubmits.propTypes.isRequired,
+      }),
+      loading: PropTypes.bool.isRequired,
+    }).isRequired,
+  };
+
   render() {
     return (
       <FetchView>
@@ -36,4 +46,3 @@ class UserSubmits extends React.PureComponent {
     );
   }
 }
-export default (UserSubmits);

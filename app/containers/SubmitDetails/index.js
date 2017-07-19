@@ -5,79 +5,37 @@
  */
 
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
-import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
-import Slide from 'material-ui/transitions/Slide';
-import autobind from 'autobind-decorator';
-import { gql, graphql } from 'react-apollo';
+import { graphql, gql } from 'react-apollo';
+import SubmitDetailsModal, { SubmitDetailsFragment } from '../../components/SubmitDetailsModal';
 
-import FetchView from '../../components/FetchView';
-import SubmitDetailsModal from '../../components/SubmitDetailsModal';
-import messages from './messages';
-import { SUBMIT_DETAILS_PROP_TYPE } from './constants';
-import { SUBMITS_HASH_PREFIX } from '../ProblemPage/constants';
-
-
-const SubmitDetailsForLayout = gql`
-  query SubmitDetailsForLayout($submitId: Int!) {
+const SubmitDetailsQuery = gql`
+  query SubmitDetailsQuery($submitId: Int!) {
     submit(id: $submitId) {
-      id
-      date
-      status
-      testResults {
-        id
-        test
-        status
-        ramUsage
-        executionTime
-      }
-      submitFiles {
-        id
-        checksum
-        filename
-      }
+      ...SubmitDetails
     }
   }
+  ${SubmitDetailsFragment}
 `;
 
-@graphql(SubmitDetailsForLayout, {
-  options: ({ submitId }) => ({ variables: { submitId } }),
-  skip: ({ submitId }) => submitId === undefined,
-})
-export default class SubmitDetails extends React.Component {
-
-  @autobind
-  onModalClose() {
-    window.location.hash = SUBMITS_HASH_PREFIX;
-  }
-
-  render() {
-    const open = this.props.submitId !== undefined;
-    return (
-      <Dialog maxWidth="md" open={open} transition={Slide} onBackdropClick={this.onModalClose}>
-        <DialogTitle disableTypography>
-          <h1>
-            <FormattedMessage {...messages.submitDetails} values={{ submitId: this.props.submitId }} />
-          </h1>
-        </DialogTitle>
-        <DialogContent>
-          <FetchView>
-            {!this.props.data || this.props.data.loading ? undefined :
-            <SubmitDetailsModal
-              onClose={this.onModalClose}
-              submit={this.props.data.submit}
-            />}
-          </FetchView>
-        </DialogContent>
-      </Dialog>
-    );
-  }
+function SubmitDetails(props) {
+  return (<SubmitDetailsModal
+    open={props.submitId !== undefined}
+    loading={props.submitId && (!props.data || props.data.loading)}
+    data={props.data && props.data.submit}
+    onClose={props.onClose}
+  />);
 }
-
 SubmitDetails.propTypes = {
-  data: PropTypes.objectOf(PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-    submit: SUBMIT_DETAILS_PROP_TYPE,
-  })),
   submitId: PropTypes.number,
+  onClose: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    submit: SubmitDetailsModal.propTypes.data,
+  }),
 };
+
+export default graphql(SubmitDetailsQuery, {
+  options: (props) => ({ variables: { submitId: props.submitId } }),
+  skip: (props) => !props.submitId,
+})(SubmitDetails);
+

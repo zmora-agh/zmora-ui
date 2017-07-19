@@ -5,3 +5,8 @@ export function sortBy(array, property, desc = false) {
   if (desc) sorted.reverse();
   return sorted;
 }
+
+export function getByPath(obj, path) {
+  return path.split('.').reduce((prev, curr) => prev ? prev[curr] : undefined, obj || self);
+}
+

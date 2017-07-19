@@ -37,7 +37,6 @@ export default class EnhancedTableHead extends Component {
                 </TableSortLabel>
               </TableCell>
             , this)}
-          <TableCell />
         </TableRow>
       </TableHead>
     );

@@ -6,5 +6,5 @@ import { PropTypes } from 'react';
 
 export const COLUMN_PROP_TYPE = PropTypes.shape({
   id: PropTypes.node.isRequired,
-  label: PropTypes.node.isRequired,
+  label: PropTypes.node,
 });

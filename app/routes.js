@@ -110,11 +110,9 @@ export default function createRoutes(store) {
                   getComponent(location, cb) {
                     const importModules = Promise.all([
                       import('containers/ProblemPage'),
-                      import('containers/ProblemSubmitsPage/sagas'),
                     ]);
 
-                    importModules.then(([component, sagas]) => {
-                      injectSagas(sagas.default);
+                    importModules.then(([component]) => {
                       cb(null, withProps(() => ({ tab: 'content' }))(component.default));
                     });
 

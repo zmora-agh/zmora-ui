@@ -2,12 +2,25 @@
  * Created by oszust on 08.05.17.
  */
 import React, { PropTypes, Component } from 'react';
+import { gql } from 'react-apollo';
 import { FormattedMessage } from 'react-intl';
 import Typography from 'material-ui/Typography';
 import Table, { TableRow, TableCell, TableBody } from 'material-ui/Table';
-import { SUBMIT_TEST_PROP_TYPE } from '../../../containers/SubmitDetails/constants';
+import { SUBMIT_TEST_PROP_TYPE } from '../constants';
 import EnhancedTableHead from '../../EnhancedTableHead';
 import messages from './messages';
+
+export const TestResultsFragment = gql`
+  fragment TestResults on Submit {
+    testResults {
+      id
+      test
+      status
+      ramUsage
+      executionTime
+    }
+  }
+`;
 
 const columnData = [
   { id: 'test', label: <FormattedMessage {...messages.test} /> },
@@ -16,7 +29,7 @@ const columnData = [
   { id: 'ramUsage', label: <FormattedMessage {...messages.ramUsage} /> },
 ];
 
-class TestsTable extends Component { // eslint-disable-line react/prefer-stateless-function
+class TestsTable extends Component {
   static propTypes = {
     tests: PropTypes.arrayOf(SUBMIT_TEST_PROP_TYPE),
   };

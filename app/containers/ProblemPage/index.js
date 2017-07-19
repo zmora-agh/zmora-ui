@@ -33,8 +33,8 @@ import {
   RESULTS_HASH_PREFIX,
 } from './constants';
 
-import SubmitDetails from '../SubmitDetails/index';
 import { makeSelectUser } from '../App/selectors';
+import SubmitDetailsModal from '../../components/SubmitDetailsModal/index';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   appBar: {
@@ -52,8 +52,8 @@ const parseHash = (hash) => ({
   value: hash.split('=')[1],
 });
 
-const ContestOwners = gql`
-  query ProblemQuestionsForLayout($contestId: Int!) {
+const ContestOwnersQuery = gql`
+  query ContestOwnersQuery($contestId: Int!) {
     contest(id: $contestId) {
       id
       owners {
@@ -63,7 +63,7 @@ const ContestOwners = gql`
   }
 `;
 
-@graphql(ContestOwners, { options: (props) => ({ variables: { contestId: getIds(props).contestId } }) })
+@graphql(ContestOwnersQuery, { options: (props) => ({ variables: { contestId: getIds(props).contestId } }) })
 @connect(createStructuredSelector({ user: makeSelectUser() }), (dispatch) => ({ dispatch }))
 export default class ProblemPage extends React.Component {
   static contextTypes = {
@@ -98,6 +98,7 @@ export default class ProblemPage extends React.Component {
 
   registerTabs(props) {
     const { loading, contest } = props.data;
+    const hash = parseHash(props.location.hash);
     this.tabs = [];
     // if (loading) return;
 
@@ -114,7 +115,10 @@ export default class ProblemPage extends React.Component {
     this.registerTab(
       SUBMITS_HASH_PREFIX,
       () => <FormattedMessage {...messages.submits} />,
-      ProblemSubmitsPage
+      ProblemSubmitsPage,
+      { submitId: hash.value ? parseInt(hash.value, 10) : undefined,
+        onSubmitSelect: (submitId) => { window.location.hash = `#${SUBMITS_HASH_PREFIX}=${submitId}`; },
+        onSubmitDeselect: () => { window.location.hash = `#${SUBMITS_HASH_PREFIX}`; } }
     );
     this.registerTab(
       QUESTIONS_HASH_PREFIX,
@@ -126,13 +130,15 @@ export default class ProblemPage extends React.Component {
       this.registerTab(
         RESULTS_HASH_PREFIX,
         () => <FormattedMessage {...messages.results} />,
-        ProblemResultsPage
+        ProblemResultsPage,
+        { userId: parseInt(parseHash(props.location.hash).value, 10),
+          generateHash: (userId) => `#${RESULTS_HASH_PREFIX}=${userId}` }
       );
     }
   }
 
-  registerTab(hash, header, body) {
-    this.tabs.push({ hash, header, body });
+  registerTab(hash, header, body, props) {
+    this.tabs.push({ hash, header, body, props });
   }
 
 
@@ -166,13 +172,13 @@ export default class ProblemPage extends React.Component {
           </Tabs>
         </div>
         <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
-          {this.tabs.map((TabEl, i) => <TabEl.body key={TabEl.hash} {...this.ids} defer={index !== i} />) }
+          {this.tabs.map((TabEl, i) => <TabEl.body
+            key={TabEl.hash}
+            {...this.ids}
+            defer={index !== i}
+            {...TabEl.props}
+          />) }
         </SwipeableViews>
-        <SubmitDetails
-          {...this.ids}
-          submitId={hash.prefix === SUBMITS_HASH_PREFIX && !isNaN(hash.value) ?
-            parseInt(hash.value, 10) : undefined}
-        />
       </Paper>
     );
   }

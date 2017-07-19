@@ -1,16 +1,19 @@
 import React from 'react';
-
+import { gql } from 'react-apollo';
 import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
+
 import Table,
 { TableBody,
   TableRow,
   TableCell,
 } from 'material-ui/Table';
-import moment from 'moment';
+
 import messages from './messages';
 import { problemResultsPropType } from './constants';
-import EnhancedTableHead from '../../components/EnhancedTableHead';
 import { getByPath, sortBy } from '../../utils/render';
+
+import EnhancedTableHead from '../EnhancedTableHead';
 
 const columnData = [
   { id: 'author.name', label: <FormattedMessage {...messages.authorName} /> },
@@ -18,7 +21,18 @@ const columnData = [
   { id: 'status', label: <FormattedMessage {...messages.status} /> },
 ];
 
-// eslint-disable-next-line react/prefer-stateless-function
+export const ResultFragment = gql`
+  fragment Result on Submit {
+    id
+    author {
+      id
+      name
+    }
+    date
+    status
+  }
+`;
+
 export default class ProblemResults extends React.Component {
   static propTypes = {
     results: problemResultsPropType,
@@ -54,7 +68,9 @@ export default class ProblemResults extends React.Component {
         <TableBody>
           {sortedResults.map((result) =>
             <TableRow key={result.id}>
-              <TableCell>{result.author.name}</TableCell>
+              <TableCell>
+                <a href={this.props.generateHash(result.author.id)}>{result.author.name}</a>
+              </TableCell>
               <TableCell>{moment(result.date).format('DD-MM-YYYY HH:mm:ss')}</TableCell>
               <TableCell>{result.status}</TableCell>
             </TableRow>

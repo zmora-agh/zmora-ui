@@ -5,6 +5,7 @@
 */
 
 import React, { Component } from 'react';
+import { gql } from 'react-apollo';
 
 import Table,
 { TableBody,
@@ -19,15 +20,24 @@ import { sortBy } from '../../utils/render';
 import { submitsPropType } from './constants';
 import messages from './messages';
 import EnhancedTableHead from '../EnhancedTableHead';
-import { SUBMITS_HASH_PREFIX } from '../../containers/ProblemPage/constants';
+import SubmitDetails from '../../containers/SubmitDetails/index';
+
+export const SubmitMetaFragment = gql`
+  fragment SubmitMeta on Submit {
+    id
+    date
+    status
+  }
+`;
 
 const columnData = [
   { id: 'id', label: <FormattedMessage {...messages.id} /> },
   { id: 'date', label: <FormattedMessage {...messages.time} /> },
   { id: 'status', label: <FormattedMessage {...messages.status} /> },
+  { id: 'actions' },
 ];
 
-export default class ProblemSubmits extends Component { // eslint-disable-line react/no-multi-comp
+export default class ProblemSubmits extends Component {
   static propTypes = {
     submits: submitsPropType,
   };
@@ -52,28 +62,35 @@ export default class ProblemSubmits extends Component { // eslint-disable-line r
     const sortedSubmits = sortBy(this.props.submits, (submit) => submit[orderBy], desc);
 
     return (
-      <Table>
-        <EnhancedTableHead
-          columns={columnData}
-          order={desc ? 'desc' : 'asc'}
-          orderBy={orderBy}
-          onRequestSort={this.handleRequestSort}
+      <div>
+        <Table>
+          <EnhancedTableHead
+            columns={columnData}
+            order={desc ? 'desc' : 'asc'}
+            orderBy={orderBy}
+            onRequestSort={this.handleRequestSort}
+          />
+          <TableBody>
+            {sortedSubmits.map((submit) =>
+              <TableRow key={submit.id}>
+                <TableCell>{submit.id}</TableCell>
+                <TableCell>{moment(submit.date).format('DD-MM-YYYY HH:mm:ss')}</TableCell>
+                <TableCell>{submit.status}</TableCell>
+                <TableCell>
+                  <Button primary onClick={() => this.props.onSubmitSelect(submit.id)}>
+                    <FormattedMessage {...messages.seeDetails} />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+        <SubmitDetails
+          open={this.props.submitId}
+          submitId={this.props.submitId}
+          onClose={this.props.onSubmitDeselect}
         />
-        <TableBody>
-          {sortedSubmits.map((submit) =>
-            <TableRow key={submit.id}>
-              <TableCell>{submit.id}</TableCell>
-              <TableCell>{moment(submit.date).format('DD-MM-YYYY HH:mm:ss')}</TableCell>
-              <TableCell>{submit.status}</TableCell>
-              <TableCell>
-                <a href={`#${SUBMITS_HASH_PREFIX}=${submit.id}`}>
-                  <Button raised primary><FormattedMessage {...messages.seeDetails} /></Button>
-                </a>
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+      </div>
     );
   }
 }

@@ -6,9 +6,9 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.SubmitDetailsModal.header',
-    defaultMessage: 'This is the SubmitDetailsModal component !',
+  submitDetails: {
+    id: 'app.components.SubmitDetailsModal.submitDetails',
+    defaultMessage: 'Details of submit {submitId}',
   },
   close: {
     id: 'app.components.SubmitDetailsModal.close',

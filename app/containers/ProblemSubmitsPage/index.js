@@ -10,7 +10,7 @@ import Typography from 'material-ui/Typography';
 import { gql, graphql } from 'react-apollo';
 
 import FetchView from '../../components/FetchView';
-import ProblemSubmits from '../../components/ProblemSubmits';
+import ProblemSubmits, { SubmitMetaFragment } from '../../components/ProblemSubmits';
 import messages from './messages';
 
 export const ProblemSubmitsForLayout = gql`
@@ -18,23 +18,17 @@ export const ProblemSubmitsForLayout = gql`
     problem(id: $problemId) {
       id
       submits {
-        id
-        date
-        status
-        author {
-          id
-          name
-        }
+        ...SubmitMeta
       }
     }
   }
+  ${SubmitMetaFragment}
 `;
 
 @graphql(ProblemSubmitsForLayout, {
   options: ({ problemId }) => ({ variables: { problemId } }),
   skip: ({ defer }) => defer,
 })
-// eslint-disable-next-line react/prefer-stateless-function
 export default class ProblemSubmitsPage extends React.PureComponent {
   haveNoSubmits() {
     return this.props.data && this.props.data.problem && this.props.data.problem.submits
@@ -47,7 +41,12 @@ export default class ProblemSubmitsPage extends React.PureComponent {
     }
 
     return (<FetchView>{!this.props.data || this.props.data.loading ? undefined :
-    <ProblemSubmits submits={this.props.data.problem.submits} />}</FetchView>);
+    <ProblemSubmits
+      submits={this.props.data.problem.submits}
+      submitId={this.props.submitId}
+      onSubmitSelect={this.props.onSubmitSelect}
+      onSubmitDeselect={this.props.onSubmitDeselect}
+    />}</FetchView>);
   }
 }
 

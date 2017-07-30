@@ -5,7 +5,7 @@
  */
 
 import React, { PropTypes } from 'react';
-import { push } from 'react-router-redux';
+import { replace } from 'react-router-redux';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 
@@ -35,7 +35,7 @@ export default class ContestPage extends React.PureComponent {
     const contestId = parseInt(this.props.params.contest_id, 10);
     this.props.dispatch(submitSetContext({ contestId }));
     if (!this.props.children) {
-      this.props.dispatch(push(`/contests/${contestId}/problems`));
+      this.props.dispatch(replace(`/contests/${contestId}/problems`));
     }
   }
 

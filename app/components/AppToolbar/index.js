@@ -107,7 +107,7 @@ class AppToolbar extends React.Component {
               itemClass={classes.breadcrumbItem}
               activeItemClass={classes.activeBreadcrumbItem}
               separator={<ArrowIcon />}
-              excludes={['Home']}
+              excludes={['Home', 'Problems']}
             />
           </Grid> : undefined}
           <Grid container item gutter={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">

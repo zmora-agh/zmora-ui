@@ -9,7 +9,6 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import appReducer from 'containers/App/reducer';
-import rightMenuReducer from 'containers/RightMenu/reducer';
 import submitReducer from 'containers/Submit/reducer';
 import { client } from './graphql';
 
@@ -49,7 +48,6 @@ export default function createReducer(asyncReducers) {
     route: routeReducer,
     language: languageProviderReducer,
     app: appReducer,
-    rightMenu: rightMenuReducer,
     ui: combineReducers({
       submit: submitReducer,
     }),

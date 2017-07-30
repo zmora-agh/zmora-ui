@@ -47,7 +47,7 @@ const styleSheet = createStyleSheet('RightMenu', () => ({
 const RightMenu = (props, context) => {
   const classes = context.styleManager.render(styleSheet);
 
-  const { rightMenu, user, ...other } = props;
+  const { user, ...other } = props;
   return (
     <Paper {...other} className={classes.root}>
       <div style={{ flex: 1 }}>
@@ -59,9 +59,6 @@ const RightMenu = (props, context) => {
           </Grid>
         </Grid>
         <Divider />
-        <div style={{ padding: 15 }}>
-          {rightMenu.events.map((event) => (<p key={event.id}>{event.text}</p>))}
-        </div>
       </div>
       <div style={{ marginBottom: 64 }}>
         <Divider />
@@ -80,12 +77,6 @@ const RightMenu = (props, context) => {
 };
 
 RightMenu.propTypes = {
-  rightMenu: React.PropTypes.shape({
-    events: React.PropTypes.arrayOf(React.PropTypes.shape({
-      id: React.PropTypes.number,
-      text: React.PropTypes.string,
-    })),
-  }).isRequired,
   user: React.PropTypes.shape({
     name: React.PropTypes.string,
     nick: React.PropTypes.string,
@@ -100,12 +91,10 @@ RightMenu.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };
 
-const mapStateToProps = makeSelectRightMenu;
-
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RightMenu);
+export default connect(makeSelectRightMenu, mapDispatchToProps)(RightMenu);

@@ -22,14 +22,14 @@ import ProblemResultsPage from '../ProblemResultsPage';
 import ProblemContentPage from '../ProblemContentPage';
 import ProblemExamplesPage from '../ProblemExamplesPage';
 import ProblemSubmitsPage from '../ProblemSubmitsPage';
-import QuestionsPage from '../QuestionsPage';
+// import QuestionsPage from '../QuestionsPage';
 
 import messages from './messages';
 import {
   SUBMITS_HASH_PREFIX,
   CONTENT_HASH_PREFIX,
   EXAMPLES_HASH_PREFIX,
-  QUESTIONS_HASH_PREFIX,
+  // QUESTIONS_HASH_PREFIX,
   RESULTS_HASH_PREFIX,
 } from './constants';
 
@@ -119,11 +119,12 @@ export default class ProblemPage extends React.Component {
         onSubmitSelect: (submitId) => { window.location.hash = `#${SUBMITS_HASH_PREFIX}=${submitId}`; },
         onSubmitDeselect: () => { window.location.hash = `#${SUBMITS_HASH_PREFIX}`; } }
     );
-    this.registerTab(
-      QUESTIONS_HASH_PREFIX,
-      () => <FormattedMessage {...messages.questions} />,
-      QuestionsPage
-    );
+    // We are missing questions feature so far
+    // this.registerTab(
+    //   QUESTIONS_HASH_PREFIX,
+    //   () => <FormattedMessage {...messages.questions} />,
+    //   QuestionsPage
+    // );
 
     if (!loading && contest.owners.map((o) => o.id).includes(props.user.id)) {
       this.registerTab(

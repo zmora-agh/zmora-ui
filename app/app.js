@@ -36,7 +36,7 @@ import '!file-loader?name=[name].[ext]!./manifest.json';
 import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
-import { ApolloProvider, client } from './graphql';
+import { ApolloProvider, client, initializeApolloLogging } from './graphql';
 import configureStore from './store';
 
 // Import i18n messages
@@ -54,6 +54,8 @@ import createRoutes from './routes';
 // e.g. `const browserHistory = useRouterHistory(createBrowserHistory)();`
 const initialState = {};
 const store = configureStore(initialState, browserHistory);
+
+initializeApolloLogging(store);
 
 // Sync history and store, as the react-router-redux reducer
 // is under the non-default key ("routing"), selectLocationState

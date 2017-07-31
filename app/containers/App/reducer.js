@@ -7,7 +7,7 @@
 import { fromJS } from 'immutable';
 import moment from 'moment';
 
-import { GET_CURRENT_TIME_SUCCESS } from './constants';
+import { CLEAR_FATAL_ERROR, GET_CURRENT_TIME_SUCCESS, SET_FATAL_ERROR } from './constants';
 import { JOIN_CONTEST_SUCCESS } from '../ContestsPage/constants';
 import { LOGIN_SUCCESS } from '../Login/constants';
 
@@ -27,6 +27,7 @@ const initialState = fromJS({
   examples: {},
   users: {},
   contestsFetched: false,
+  fatalError: false,
 });
 
 function appReducer(state = initialState, action) {
@@ -40,6 +41,10 @@ function appReducer(state = initialState, action) {
     }
     case JOIN_CONTEST_SUCCESS:
       return state.setIn(['contests', action.contestId, 'joined'], true);
+    case SET_FATAL_ERROR:
+      return state.set('fatalError', true);
+    case CLEAR_FATAL_ERROR:
+      return state.set('fatalError', false);
     default:
       return state;
   }

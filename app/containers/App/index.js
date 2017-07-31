@@ -13,10 +13,12 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import Grid from 'material-ui/Grid';
+import Dialog, { DialogContent, DialogContentText, DialogTitle } from 'material-ui/Dialog';
 
 import { haveJwtToken } from '../../utils/auth';
 
@@ -27,6 +29,8 @@ import TimeProvider from '../TimeProvider';
 import Submit from '../Submit';
 
 import { makeSelectApp } from './selectors';
+import { clearFatalError } from './actions';
+import messages from './messages';
 
 const styleSheet = createStyleSheet('App', () => ({
   root: {
@@ -62,6 +66,8 @@ class App extends React.PureComponent {
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
     user: React.PropTypes.object,
+    fatalError: React.PropTypes.bool,
+    dispatch: React.PropTypes.func,
   };
 
   static contextTypes = {
@@ -105,6 +111,12 @@ class App extends React.PureComponent {
           </Grid>
         </Grid>
         {haveJwtToken() && <Submit />}
+        <Dialog open={this.props.fatalError} onRequestClose={() => this.props.dispatch(clearFatalError())}>
+          <DialogTitle><FormattedMessage {...messages.fatalErrorTitle} /></DialogTitle>
+          <DialogContent>
+            <DialogContentText><FormattedMessage {...messages.fatalErrorBody} /></DialogContentText>
+          </DialogContent>
+        </Dialog>
       </div>
     );
   }

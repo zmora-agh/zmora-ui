@@ -55,7 +55,7 @@ const RightMenu = (props, context) => {
           <Avatar src={user.avatar} className={classes.avatar} />
           <Grid container direction="column" className={classes.avatarText}>
             <Typography>{user.name}</Typography>
-            <Typography>Points: 15</Typography>
+            {/* <Typography>Points: 15</Typography> */}
           </Grid>
         </Grid>
         <Divider />

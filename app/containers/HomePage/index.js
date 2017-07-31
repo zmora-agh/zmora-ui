@@ -14,7 +14,6 @@ import { createStyleSheet } from 'jss-theme-reactor';
 import customPropTypes from 'material-ui/utils/customPropTypes';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import StatusCard from '../../components/StatusPanel';
 import ZmoraCard from '../../components/ZmoraCard';
 import StatusInfoList from '../../components/StatusInfoList';
 
@@ -42,12 +41,10 @@ const styleSheet = createStyleSheet('zmoraAppHomePageGrid', () => ({
 }));
 
 const logo = require('../../resources/logo.jpg');
-const cardHeight = 340;
 const cardPadding = 30;
 const verticalGutter = 16;
 const horizontalGutter = 16;
 const descriptionColor = '#2196F3';
-const statusPaneColor = '#FE5722';
 const logoPaneColor = '#4CB050';
 const namePaneColor = '#FEC106';
 
@@ -57,8 +54,8 @@ function HomePage(props, context) {
   return (
     <Grid container className={classes.root} gutter={verticalGutter}>
       <Grid container item xs={12} gutter={horizontalGutter}>
-        <Grid item xs={8}>
-          <ZmoraCard color={descriptionColor} height={cardHeight} padding={cardPadding}>
+        <Grid item xs={12}>
+          <ZmoraCard color={descriptionColor} padding={cardPadding}>
             <Typography className={classes.lightTextStyle}>
               <strong>Zmora</strong> to zautomatyzowana platforma edukacyjna, kierowana do studentów
               kierunków informatycznych <strong>AGH</strong>. W przystępny sposób sprawdza poprawność i
@@ -66,18 +63,15 @@ function HomePage(props, context) {
               wkład pracy oraz postępy każdego z uczestników.</Typography>
           </ZmoraCard>
         </Grid>
-        <Grid item xs={4}>
-          <StatusCard color={statusPaneColor} height={cardHeight} />
-        </Grid>
       </Grid>
       <Grid container item xs={12} gutter={horizontalGutter}>
         <Grid item xs={4} style={{ textAlign: 'center' }}>
-          <ZmoraCard color={logoPaneColor} height={cardHeight + 35} padding={cardPadding}>
+          <ZmoraCard color={logoPaneColor} padding={cardPadding}>
             <img src={logo} className={classes.logoStyle} alt="logo" />
           </ZmoraCard>
         </Grid>
         <Grid item xs={8}>
-          <ZmoraCard color={namePaneColor} height={cardHeight + 35} padding={cardPadding}>
+          <ZmoraCard color={namePaneColor} padding={cardPadding}>
             <Typography className={classes.darkTextStyle}>
               Nazwa została wybrana nieprzypadkowo - w mitologii słowiańskiej zmora to istota pół demoniczna,
               która nocą męczy śpiących i wysysa z nich krew. Taki scenariusz również jest możliwy - wystarczy

@@ -15,7 +15,7 @@ import
   TableRow,
   TableCell,
 } from 'material-ui/Table';
-import IconButton from 'material-ui/IconButton';
+// import IconButton from 'material-ui/IconButton';
 
 import SubmitButton from '../../containers/Submit/Button';
 
@@ -23,7 +23,7 @@ import { problemRowPropType } from './constants';
 import messages from './messages';
 
 import Done from '../../svg-icons/action-done';
-import Pdf from '../../svg-icons/picture-as-pdf';
+// import Pdf from '../../svg-icons/picture-as-pdf';
 
 function ProblemsTable(props) {
   return (
@@ -54,9 +54,10 @@ function ProblemsTable(props) {
           <TableCell>{!problem.required && <Done />}</TableCell>
           <TableCell>
             <SubmitButton contestId={props.contestId} problemId={problem.id} />
-            <IconButton onClick={(e) => { e.stopPropagation(); props.onPdfClick(problem.id); }}>
-              <Pdf />
-            </IconButton>
+            {/* Missing download as PDF feature so far */}
+            {/* <IconButton onClick={(e) => { e.stopPropagation(); props.onPdfClick(problem.id); }}> */}
+            {/* <Pdf /> */}
+            {/* </IconButton> */}
           </TableCell>
         </TableRow>))}
       </TableBody>

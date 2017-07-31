@@ -25,11 +25,11 @@ const styleSheet = createStyleSheet('zmoraAppStatusInfoList', () => ({
   headerText: {
     fontSize: 26,
   },
-  odd: {
+  row: {
     backgroundColor: '#6E7CC7',
-  },
-  even: {
-    backgroundColor: '#9CA6D7',
+    '&:nth-child(even)': {
+      backgroundColor: '#9CA6D7',
+    },
   },
   textTitle: {
     fontSize: 22,
@@ -48,18 +48,9 @@ class StatusInfoList extends React.Component {
 
   renderRows() {
     const rows = [];
-    let i = 1;
-    let rowClass = null;
-    this.props.statuses.forEach((status) => {
-      if (i % 2 === 1) {
-        rowClass = this.classes.odd;
-      } else {
-        rowClass = this.classes.even;
-      }
-
-      i += 1;
+    this.props.statuses.forEach((status, i) => {
       rows.push(
-        <TableRow className={rowClass} key={i}>
+        <TableRow className={this.classes.row} key={i}>
           <TableCell>
             <Typography className={this.classes.textTitle}>{status.title}</Typography>
           </TableCell>

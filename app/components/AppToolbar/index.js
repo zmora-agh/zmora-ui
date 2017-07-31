@@ -19,7 +19,7 @@ import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import '!style-loader!css-loader!../../fonts/index.css';
 
-import Search from '../Search';
+// import Search from '../Search';
 import ServerTime from '../../containers/ServerTime';
 import SubmitButton from '../../containers/Submit/Button';
 import Ripple from '../../components/Ripple';
@@ -107,16 +107,17 @@ class AppToolbar extends React.Component {
               itemClass={classes.breadcrumbItem}
               activeItemClass={classes.activeBreadcrumbItem}
               separator={<ArrowIcon />}
-              excludes={['Home']}
+              excludes={['Home', 'Problems']}
             />
           </Grid> : undefined}
           <Grid container item gutter={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">
-            <Search
-              expanded={this.state.inSearch}
-              onFocus={this.toggleSearch}
-              onBlur={this.toggleSearch}
-              onMouseMove={this.moveRipple}
-            />
+            {/* Remove search button since there is not search feature atm. */}
+            {/* <Search */}
+            {/* expanded={this.state.inSearch} */}
+            {/* onFocus={this.toggleSearch} */}
+            {/* onBlur={this.toggleSearch} */}
+            {/* onMouseMove={this.moveRipple} */}
+            {/* /> */}
             <ServerTime style={this.state.inSearch ? { display: 'none' } : {}} />
             {this.props.loggedIn &&
               <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />}

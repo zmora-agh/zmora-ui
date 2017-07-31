@@ -6,10 +6,12 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
+import createSentryMiddleware from 'redux-sentry';
 import createReducer from './reducers';
 
 import appSaga from './containers/App/sagas';
 import { client } from './graphql';
+import { SENTRY_DSN } from './constants';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -21,6 +23,12 @@ export default function configureStore(initialState = {}, history) {
     client.middleware(),
     sagaMiddleware,
     routerMiddleware(history),
+    createSentryMiddleware({
+      dsn: SENTRY_DSN,
+      configuration: {
+        collectWindowErrors: true,
+      },
+    }),
   ];
 
   const enhancers = [

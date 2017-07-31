@@ -233,6 +233,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "material-ui": "1.0.0-beta.4",
+    "material-ui-icons": "^1.0.0-alpha.19",
     "mathjax": "^2.7.0",
     "minimist": "1.2.0",
     "moment": "^2.18.1",

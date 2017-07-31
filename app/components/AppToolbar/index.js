@@ -12,6 +12,8 @@ import Toolbar from 'material-ui/Toolbar';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
+import LoginIcon from 'material-ui-icons/AccountCircle';
+import { Link } from 'react-router';
 
 import classNames from 'classnames';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
@@ -23,6 +25,8 @@ import Ripple from '../../components/Ripple';
 
 import ArrowIcon from '../../svg-icons/keyboard-arrow-right';
 import MoreIcon from '../../svg-icons/more-vert';
+
+import { loginPage } from '../../local-urls';
 
 const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   toolbar: {
@@ -114,7 +118,9 @@ class AppToolbar extends React.Component {
             <ServerTime style={this.state.inSearch ? { display: 'none' } : {}} />
             {this.props.loggedIn &&
               <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />}
-            <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton>
+            {this.props.loggedIn ?
+              <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton> :
+              <Link to={loginPage()}><IconButton style={{ color: 'inherit' }}><LoginIcon /></IconButton> </Link> }
           </Grid>
         </Toolbar>
       </AppBar>

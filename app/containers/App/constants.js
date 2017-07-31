@@ -13,4 +13,6 @@ export const DEFAULT_LOCALE = 'en';
 
 export const GET_CURRENT_TIME_SUCCESS = 'app/GET_CURRENT_TIME_SUCCESS';
 export const LOGOUT = 'app/Login/LOGOUT';
+export const CLEAR_FATAL_ERROR = 'app/CLEAR_FATAL_ERROR';
+export const SET_FATAL_ERROR = 'app/SET_FATAL_ERROR';
 

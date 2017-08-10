@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
+import { Loadable } from './render';
 
 export function exactOnly(Component) {
   const parent = (props) => {
@@ -18,7 +19,7 @@ export function exactOnly(Component) {
   return parent;
 }
 
-const ShowName = (getter) => (d) => <span>{d.data.loading ? undefined : getter(d)}</span>;
+const ShowName = (getter) => (d) => <span>{getter(d)}</span>;
 
 export const fetchContestName = (name, params) => {
   const query = gql`
@@ -31,8 +32,8 @@ export const fetchContestName = (name, params) => {
 
   const Name = graphql(query, {
     options: { variables: { contestId: parseInt(params.contest_id, 10) } },
-  })(ShowName((x) => x.data.contest.name));
-
+  })(Loadable(ShowName((x) => x.data.contest.name), 20,
+    (x) => !!(x.data && x.data.contest && x.data.contest.name)));
   return <Name />;
 };
 
@@ -47,7 +48,9 @@ export const fetchProblemName = (name, params) => {
 
   const Name = graphql(query, {
     options: { variables: { problemId: parseInt(params.problem_id, 10) } },
-  })(ShowName((x) => x.data.problem.shortcode));
+  })(Loadable(ShowName((x) => x.data.problem.shortcode), 20,
+    (x) => !!(x.data && x.data.problem && x.data.problem.shortcode)
+  ));
 
   return <Name />;
 };

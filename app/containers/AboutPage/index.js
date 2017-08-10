@@ -5,11 +5,9 @@
  *
  */
 
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
@@ -40,17 +38,13 @@ const styleSheet = createStyleSheet('zmoraAboutPage', (theme) => ({
   },
 }));
 
-export class AboutPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
-  };
-
+class AboutPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const classes = this.context.styleManager.render(styleSheet);
+    const classes = this.props.classes;
     return (
       <div>
         <div className={classes.root}>
-          <Grid container gutter={24}>
+          <Grid container spacing={24}>
             <Grid item xs={12}>
               <div className={classes.headerMessage}><FormattedMessage {...messages.title} /></div>
             </Grid>
@@ -160,14 +154,8 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
 }
 
 AboutPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  classes: React.PropTypes.object.isRequired,
 };
 
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-export default connect(null, mapDispatchToProps)(AboutPage);
+export default withStyles(styleSheet)(AboutPage);

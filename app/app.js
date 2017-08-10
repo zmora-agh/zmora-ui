@@ -17,7 +17,6 @@ import { useScroll } from 'react-router-scroll';
 import 'sanitize.css/sanitize.css';
 
 // Material-UI with dependencies
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Import root app
@@ -76,21 +75,19 @@ injectTapEventPlugin();
 
 const render = (messages) => {
   ReactDOM.render(
-    <MuiThemeProvider>
-      <ApolloProvider store={store} client={client}>
-        <LanguageProvider messages={messages}>
-          <Router
-            history={history}
-            routes={rootRoute}
-            render={
-              // Scroll to top when going to a new page, imitating default browser
-              // behaviour
-              applyRouterMiddleware(useScroll())
-            }
-          />
-        </LanguageProvider>
-      </ApolloProvider>
-    </MuiThemeProvider>,
+    <ApolloProvider store={store} client={client}>
+      <LanguageProvider messages={messages}>
+        <Router
+          history={history}
+          routes={rootRoute}
+          render={
+            // Scroll to top when going to a new page, imitating default browser
+            // behaviour
+            applyRouterMiddleware(useScroll())
+          }
+        />
+      </LanguageProvider>
+    </ApolloProvider>,
     document.getElementById('app')
   );
 };

@@ -80,7 +80,7 @@ export default class ProblemSubmits extends Component {
                 <TableCell>{moment(submit.date).format('DD-MM-YYYY HH:mm:ss')}</TableCell>
                 <TableCell>{submit.status}</TableCell>
                 <TableCell>
-                  <Button primary onClick={() => this.props.onSubmitSelect(submit.id)}>
+                  <Button color="primary" onClick={() => this.props.onSubmitSelect(submit.id)}>
                     <FormattedMessage {...messages.seeDetails} />
                   </Button>
                 </TableCell>

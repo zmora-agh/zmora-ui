@@ -6,9 +6,7 @@
 
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import customPropTypes from 'material-ui/utils/customPropTypes';
-import { createStyleSheet } from 'jss-theme-reactor';
-
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 const styleSheet = createStyleSheet('zmoraErrorTextField', () => ({
   errorText: {
     position: 'relative',
@@ -20,23 +18,18 @@ const styleSheet = createStyleSheet('zmoraErrorTextField', () => ({
   },
 }));
 
-function ErrorTextField(props, context) {
-  const classes = context.styleManager.render(styleSheet);
-  const errorText = (
+function ErrorTextField(props) {
+  const classes = props.classes;
+  const { errorText, ...others } = props;
+  const error = (
     <div className={classes.errorText}>
-      {props.errorText}
+      {errorText}
     </div>
   );
   return (
     <div>
-      <TextField
-        required={props.required}
-        error={props.error}
-        type={props.type}
-        label={props.label}
-        onChange={props.onChange}
-      />
-      {props.error ? errorText : null}
+      <TextField {...others} />
+      {props.error ? error : null}
     </div>
   );
 }
@@ -48,10 +41,7 @@ ErrorTextField.propTypes = {
   label: React.PropTypes.node,
   type: React.PropTypes.string,
   required: React.PropTypes.bool,
+  classes: React.PropTypes.object.isRequired,
 };
 
-ErrorTextField.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
-
-export default ErrorTextField;
+export default withStyles(styleSheet)(ErrorTextField);

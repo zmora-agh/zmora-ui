@@ -4,12 +4,10 @@
  *
  */
 
-import { createStyleSheet } from 'jss-theme-reactor';
-
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Card, { CardContent } from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import List from 'material-ui/List';
-import customPropTypes from 'material-ui/utils/customPropTypes';
 import React, { PropTypes } from 'react';
 import QuestionRow from './QuestionRow';
 
@@ -22,9 +20,8 @@ const styleSheet = createStyleSheet('QuestionCard', {
   },
 });
 
-
-export default function QuestionCard(props, context) {
-  const classes = context.styleManager.render(styleSheet);
+function QuestionCard(props) {
+  const classes = props.classes;
   return (
     <Card style={{ margin: 24 }}>
       <CardContent className={classes.content} >
@@ -48,9 +45,7 @@ export default function QuestionCard(props, context) {
 
 QuestionCard.propTypes = {
   question: PropTypes.object,
+  classes: React.PropTypes.object.isRequired,
 };
 
-QuestionCard.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
-
+export default withStyles(styleSheet)(QuestionCard);

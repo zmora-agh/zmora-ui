@@ -5,6 +5,7 @@
 */
 
 import React from 'react';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Dialog, { DialogContent, DialogTitle, DialogActions, DialogContentText } from 'material-ui/Dialog';
 import Slide from 'material-ui/transitions/Slide';
 import Button from 'material-ui/Button';
@@ -14,6 +15,14 @@ import messages from './messages';
 import ErrorTextField from '../ErrorTextField';
 import { DIALOG_TYPE } from '../../containers/ContestsPage/constants';
 
+
+const styleSheet = createStyleSheet('zmoraContestJoinDialog', () => ({
+  paper: {
+    width: '75vw',
+  },
+}));
+
+@withStyles(styleSheet)
 class ContestJoinModal extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -35,7 +44,12 @@ class ContestJoinModal extends React.PureComponent { // eslint-disable-line reac
   render() {
     const backDropClick = this.props.dialog.loading ? null : this.props.onClose;
     return (
-      <Dialog open={this.props.dialog.open} onBackdropClick={backDropClick} transition={Slide}>
+      <Dialog
+        open={this.props.dialog.open}
+        onRequestClose={backDropClick}
+        transition={Slide}
+        classes={this.props.classes}
+      >
         <DialogTitle>
           <FormattedMessage {...messages.enterPassword} />
         </DialogTitle>
@@ -47,21 +61,22 @@ class ContestJoinModal extends React.PureComponent { // eslint-disable-line reac
             />
           </DialogContentText>
         </DialogContent>
-        <DialogContent>
+        <DialogContent >
           <ErrorTextField
             onChange={this.onPasswordChange}
             error={this.props.dialog.error}
             errorText={<FormattedMessage {...messages.invalidPassword} />}
             required
+            fullWidth
             label={<FormattedMessage {...messages.password} />}
           />
         </DialogContent>
         <DialogActions>
-          <Button primary raised disabled={this.props.dialog.loading} onClick={this.onJoin}>
-            <FormattedMessage {...messages.join} />
-          </Button>
-          <Button primary raised disabled={this.props.dialog.loading} onClick={this.props.onClose}>
+          <Button disabled={this.props.dialog.loading} onClick={this.props.onClose}>
             <FormattedMessage {...messages.cancel} />
+          </Button>
+          <Button color="primary" disabled={this.props.dialog.loading} onClick={this.onJoin}>
+            <FormattedMessage {...messages.join} />
           </Button>
         </DialogActions>
       </Dialog>
@@ -73,6 +88,7 @@ ContestJoinModal.propTypes = {
   dialog: DIALOG_TYPE,
   onClose: React.PropTypes.func.isRequired,
   onJoin: React.PropTypes.func.isRequired,
+  classes: React.PropTypes.object.isRequired,
 };
 
 export default ContestJoinModal;

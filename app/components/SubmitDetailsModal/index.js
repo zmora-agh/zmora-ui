@@ -45,7 +45,7 @@ function SubmitDetailsModal(props) {
         </FetchView>
       </DialogContent>
       <DialogActions>
-        <Button onClick={props.onClose} primary><FormattedMessage {...messages.close} /></Button>
+        <Button onClick={props.onClose} color="primary"><FormattedMessage {...messages.close} /></Button>
       </DialogActions>
     </Dialog>
   );

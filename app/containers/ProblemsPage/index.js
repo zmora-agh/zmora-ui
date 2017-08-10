@@ -80,7 +80,7 @@ export default class ProblemsPage extends React.PureComponent {
       {loading ? undefined :
       <div>
         {isAdmin && <Paper style={{ margin: 16, padding: '6px 10px 6px 0' }}>
-          <Grid container align="center" gutter={0} justify="space-between">
+          <Grid container align="center" spacing={0} justify="space-between">
             <Link to={contestResults(contestId)}><Button><FormattedMessage {...messages.results} /></Button></Link>
             <Typography type="body1"><FormattedMessage {...messages.submited} values={{ number: 100 }} /></Typography>
             <Typography type="body1"><FormattedMessage {...messages.valid} values={{ number: 50 }} /></Typography>
@@ -94,7 +94,7 @@ export default class ProblemsPage extends React.PureComponent {
             contestId={contestId}
             problems={categories[category]}
             onProblemClick={(problemId) => this.props.dispatch(push(problemPage(contestId, problemId)))}
-            onPdfClick={(problemId) => console.log(problemId)}
+            onPdfClick={(problemId) => console.log(problemId)} // eslint-disable-line no-console
           />)}
         </ExpandableTable>
       </div>}

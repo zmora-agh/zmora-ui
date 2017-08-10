@@ -3,9 +3,7 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
-import customPropTypes from 'material-ui/utils/customPropTypes';
-import { createStyleSheet } from 'jss-theme-reactor';
-import ContestStatus from '../Status';
+import { withStyles, createStyleSheet } from 'material-ui/styles';import ContestStatus from '../Status';
 import TitledTextGrid from '../../TitledTextGrid';
 import ContestButton from '../Button';
 import messages from './messages';
@@ -30,9 +28,8 @@ const styleSheet = createStyleSheet('zmoraContestsTableRow', () => ({
   },
 }));
 
-const ContestRow = (props, context) => {
-  const classes = context.styleManager.render(styleSheet);
-
+const ContestRow = (props) => {
+  const classes = props.classes;
   const contest = props.contest;
 
   const ownersNames = contest.owners.map((owner) => owner.name).join(', ');
@@ -80,10 +77,7 @@ ContestRow.propTypes = {
   contest: React.PropTypes.object.isRequired,
   isOwner: React.PropTypes.bool.isRequired,
   onJoinClick: React.PropTypes.func,
+  classes: React.PropTypes.object.isRequired,
 };
 
-ContestRow.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
-
-export default ContestRow;
+export default withStyles(styleSheet)(ContestRow);

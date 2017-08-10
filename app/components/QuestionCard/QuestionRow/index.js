@@ -4,12 +4,10 @@
  *
  */
 
-import { createStyleSheet } from 'jss-theme-reactor';
-import Avatar from 'material-ui/Avatar';
+import { withStyles, createStyleSheet } from 'material-ui/styles';import Avatar from 'material-ui/Avatar';
 import { ListItem } from 'material-ui/List';
-import { grey } from 'material-ui/styles/colors';
+import grey from 'material-ui/colors/grey';
 import Typography from 'material-ui/Typography';
-import customPropTypes from 'material-ui/utils/customPropTypes';
 import moment from 'moment';
 import React, { PropTypes } from 'react';
 
@@ -42,8 +40,8 @@ const styleSheet = createStyleSheet('QuestionRow', {
 
 const defaultImg = require('./korri.jpg');
 
-function QuestionRow(props, context) {
-  const classes = context.styleManager.render(styleSheet);
+function QuestionRow(props) {
+  const classes = props.classes;
   const itemStyle = props.headerRow ? classes.lItemH : classes.lItem;
   const avatarStyle = props.headerRow ? classes.avatarH : classes.avatar;
   return (
@@ -71,6 +69,7 @@ QuestionRow.propTypes = {
   author: PropTypes.string.isRequired,
   date: PropTypes.any.isRequired,
   content: PropTypes.string.isRequired,
+  classes: React.PropTypes.object.isRequired,
 };
 
 QuestionRow.defaultProps = {
@@ -78,9 +77,4 @@ QuestionRow.defaultProps = {
   headerRow: false,
 };
 
-QuestionRow.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
-
-
-export default QuestionRow;
+export default withStyles(styleSheet)(QuestionRow);

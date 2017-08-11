@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { gql, graphql } from 'react-apollo';
+import { loadable } from '../../utils/render';
 
-import FetchView from '../../components/FetchView';
 import ProblemView from '../../components/ProblemView';
 
 const ProblemForLayout = gql`
@@ -18,15 +18,11 @@ const ProblemForLayout = gql`
   options: (props) => ({ variables: { problemId: props.problemId } }),
   skip: ({ defer }) => defer,
 })
+@loadable({ found: (props) => props.data.problem !== null, display: 'block' })
 // eslint-disable-next-line react/prefer-stateless-function
 export default class ProblemContentPage extends React.PureComponent {
   render() {
-    return (
-      <FetchView>{!this.props.data || this.props.data.loading ?
-        undefined :
-        <ProblemView {...this.props.data.problem} />}
-      </FetchView>
-    );
+    return <ProblemView {...this.props.data.problem} />;
   }
 }
 

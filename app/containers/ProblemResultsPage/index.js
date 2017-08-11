@@ -3,10 +3,10 @@ import Typography from 'material-ui/Typography';
 import { graphql, gql } from 'react-apollo';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import FetchView from '../../components/FetchView';
 import ProblemResults, { ResultFragment } from '../../components/ProblemResults';
 
 import UserSubmits from './UserSubmits';
+import { loadable } from '../../utils/render';
 
 const ProblemResultsLayout = gql`
   query ProblemResultsLayout($problemId: Int!) {
@@ -24,6 +24,7 @@ const ProblemResultsLayout = gql`
   options: ({ problemId }) => ({ variables: { problemId } }),
   skip: ({ defer }) => defer,
 })
+@loadable({ found: (props) => props.data.problem !== null, display: 'block' })
 export default class ProblemResultsPage extends React.Component {
   haveNoResults() {
     return this.props.data
@@ -42,14 +43,10 @@ export default class ProblemResultsPage extends React.Component {
     }
 
     return (
-      <FetchView>
-        {!this.props.data || this.props.data.loading ? undefined
-          : <ProblemResults
-            results={this.props.data.problem.results}
-            generateHash={this.props.generateHash}
-          />}
-      </FetchView>
-    );
+      <ProblemResults
+        results={this.props.data.problem.results}
+        generateHash={this.props.generateHash}
+      />);
   }
 }
 

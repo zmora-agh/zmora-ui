@@ -9,9 +9,9 @@ import { FormattedMessage } from 'react-intl';
 import Typography from 'material-ui/Typography';
 import { gql, graphql } from 'react-apollo';
 
-import FetchView from '../../components/FetchView';
 import ProblemSubmits, { SubmitMetaFragment } from '../../components/ProblemSubmits';
 import messages from './messages';
+import { loadable } from '../../utils/render';
 
 export const ProblemSubmitsForLayout = gql`
   query ProblemSubmitsForLayout($problemId: Int!) { 
@@ -29,6 +29,7 @@ export const ProblemSubmitsForLayout = gql`
   options: ({ problemId }) => ({ variables: { problemId } }),
   skip: ({ defer }) => defer,
 })
+@loadable({ found: (props) => props.data.problem !== null, display: 'block' })
 export default class ProblemSubmitsPage extends React.PureComponent {
   haveNoSubmits() {
     return this.props.data && this.props.data.problem && this.props.data.problem.submits
@@ -40,13 +41,13 @@ export default class ProblemSubmitsPage extends React.PureComponent {
       return <Typography><FormattedMessage {...messages.empty} /></Typography>;
     }
 
-    return (<FetchView>{!this.props.data || this.props.data.loading ? undefined :
-    <ProblemSubmits
-      submits={this.props.data.problem.submits}
-      submitId={this.props.submitId}
-      onSubmitSelect={this.props.onSubmitSelect}
-      onSubmitDeselect={this.props.onSubmitDeselect}
-    />}</FetchView>);
+    return (
+      <ProblemSubmits
+        submits={this.props.data.problem.submits}
+        submitId={this.props.submitId}
+        onSubmitSelect={this.props.onSubmitSelect}
+        onSubmitDeselect={this.props.onSubmitDeselect}
+      />);
   }
 }
 

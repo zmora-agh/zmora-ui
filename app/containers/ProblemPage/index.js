@@ -5,7 +5,8 @@
  */
 
 import React, { PropTypes } from 'react';
-import { withStyles, createStyleSheet } from 'material-ui/styles';import { FormattedMessage } from 'react-intl';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import SwipeableViews from 'react-swipeable-views';

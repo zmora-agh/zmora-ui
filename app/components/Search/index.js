@@ -8,8 +8,7 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 
 import classNames from 'classnames';
-import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { easing } from 'material-ui/styles/transitions';
 
 
@@ -33,17 +32,15 @@ const styleSheet = createStyleSheet('zmoraSearch', () => ({
   },
 }));
 
-class Search extends React.PureComponent {
+@withStyles(styleSheet)
+export default class Search extends React.PureComponent {
   static propTypes = {
     style: React.PropTypes.object,
     expanded: React.PropTypes.bool,
     onFocus: React.PropTypes.func.isRequired,
     onBlur: React.PropTypes.func.isRequired,
     onMouseMove: React.PropTypes.func,
-  };
-
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
+    classes: React.PropTypes.object.isRequired,
   };
 
   componentDidUpdate(prevProps) {
@@ -53,7 +50,7 @@ class Search extends React.PureComponent {
   }
 
   render() {
-    const classes = this.context.styleManager.render(styleSheet);
+    const classes = this.props.classes;
     const rootClass = classNames({
       [classes.root]: this.props.expanded,
     });
@@ -72,5 +69,3 @@ class Search extends React.PureComponent {
     );
   }
 }
-
-export default Search;

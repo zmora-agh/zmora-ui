@@ -7,9 +7,7 @@
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
-import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
-import Card from 'material-ui/Card';
+import { withStyles, createStyleSheet } from 'material-ui/styles';import Card from 'material-ui/Card';
 
 const styleSheet = createStyleSheet('zmoraMemberAvatar', () => ({
   root: {
@@ -20,8 +18,8 @@ const styleSheet = createStyleSheet('zmoraMemberAvatar', () => ({
   },
 }));
 
-function MemberAvatar(props, context) {
-  const classes = context.styleManager.render(styleSheet);
+function MemberAvatar(props) {
+  const classes = props.classes;
   const variantStyle = {
     backgroundImage: `url(${props.bgUrl})`,
     backgroundColor: props.bgColor,
@@ -50,10 +48,7 @@ MemberAvatar.propTypes = {
   bgUrl: React.PropTypes.string.isRequired,
   name: React.PropTypes.string.isRequired,
   description: React.PropTypes.string.isRequired,
+  classes: React.PropTypes.object.isRequired,
 };
 
-MemberAvatar.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
-
-export default MemberAvatar;
+export default withStyles(styleSheet)(MemberAvatar);

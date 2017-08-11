@@ -6,9 +6,8 @@
 
 import React from 'react';
 import Typography from 'material-ui/Typography';
-import { createStyleSheet } from 'jss-theme-reactor';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { FormattedMessage } from 'react-intl';
-import customPropTypes from 'material-ui/utils/customPropTypes';
 import Button from 'material-ui/Button';
 import Card, { CardContent } from 'material-ui/Card';
 import Person from '../../svg-icons/person';
@@ -44,12 +43,8 @@ StatusElement.propTypes = {
   data: React.PropTypes.any,
 };
 
-StatusElement.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
-
-function StatusInfoPanel(props, context) {
-  const classes = context.styleManager.render(styleSheet);
+function StatusInfoPanel(props) {
+  const classes = props.classes;
 
   return (
     <Card
@@ -84,7 +79,7 @@ function StatusInfoPanel(props, context) {
           />
           <StatusElement title={<FormattedMessage {...messages.lastLogged} />} data={<b>nologin</b>} />
         </Typography>
-        <Button compact primary className={classes.showMoreButtonStyle}>
+        <Button compact color="primary" className={classes.showMoreButtonStyle}>
           <FormattedMessage {...messages.showMoreButton} />
         </Button>
       </CardContent>
@@ -94,10 +89,7 @@ function StatusInfoPanel(props, context) {
 
 StatusInfoPanel.propTypes = {
   height: React.PropTypes.number.isRequired,
+  classes: React.PropTypes.object.isRequired,
 };
 
-StatusInfoPanel.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
-
-export default StatusInfoPanel;
+export default withStyles(styleSheet)(StatusInfoPanel);

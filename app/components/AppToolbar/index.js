@@ -14,10 +14,7 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 
 import classNames from 'classnames';
-import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
-
-import '!style-loader!css-loader!../../fonts/index.css';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 // import Search from '../Search';
 import ServerTime from '../../containers/ServerTime';
@@ -46,25 +43,21 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   },
   titleLetter: {
     '&:first-letter': {
-      font: '56pt Sanctuary',
+      font: '40pt Roboto',
     },
     textShadow: '1px 1px 1px rgba(0, 0, 0, 1)',
-    font: '38pt Sanctuary',
-    marginLeft: '32px',
-    marginBottom: '20px',
+    font: '30pt Roboto',
   },
 }));
 
+@withStyles(styleSheet)
 class AppToolbar extends React.Component {
   static propTypes = {
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
     onToggleMenu: React.PropTypes.func.isRequired,
     loggedIn: React.PropTypes.bool.isRequired,
-  };
-
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
+    classes: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -88,7 +81,7 @@ class AppToolbar extends React.Component {
   }
 
   render() {
-    const classes = this.context.styleManager.render(styleSheet);
+    const classes = this.props.classes;
     const toolbarClass = classNames({
       [classes.toolbarInSearch]: this.state.inSearch,
     }, classes.toolbar);
@@ -98,7 +91,7 @@ class AppToolbar extends React.Component {
         <Toolbar className={toolbarClass} >
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
           <Grid item xs={2}>
-            <Typography colorInherit className={classes.titleLetter}>Zmora</Typography>
+            <Typography color="inherit" className={classes.titleLetter}>Zmora</Typography>
           </Grid>
           {!this.state.inSearch ? <Grid item xs={7}>
             <Breadcrumbs
@@ -110,7 +103,7 @@ class AppToolbar extends React.Component {
               excludes={['Home', 'Problems']}
             />
           </Grid> : undefined}
-          <Grid container item gutter={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">
+          <Grid container item spacing={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">
             {/* Remove search button since there is not search feature atm. */}
             {/* <Search */}
             {/* expanded={this.state.inSearch} */}

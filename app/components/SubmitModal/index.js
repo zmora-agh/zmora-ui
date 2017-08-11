@@ -47,7 +47,7 @@ export default function SubmitModal(props) {
             <DialogContentText><FormattedMessage {...contestMessages.empty} /></DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={props.onCancel} primary><FormattedMessage {...messages.close} /></Button>
+            <Button onClick={props.onCancel} color="primary"><FormattedMessage {...messages.close} /></Button>
           </DialogActions>
         </div>
       </Layout>
@@ -86,7 +86,7 @@ export default function SubmitModal(props) {
         <DialogActions>
           <Button
             type="submit"
-            primary
+            color="primary"
             disabled={!props.submittable || props.uploading}
           >
             <FormattedMessage {...messages.submit} />

@@ -1,8 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { easing } from 'material-ui/styles/transitions';
 
 
@@ -52,8 +51,8 @@ export const styleSheet = createStyleSheet('zmoraRipple', (theme) => ({
   },
 }));
 
-const Ripple = (props, context) => {
-  const classes = context.styleManager.render(styleSheet);
+const Ripple = (props) => {
+  const classes = props.classes;
 
   const rippleClassName = classNames(classes.ripple, {
     [classes.rippleOff]: !props.on,
@@ -64,13 +63,10 @@ const Ripple = (props, context) => {
   );
 };
 
-Ripple.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
-
 Ripple.propTypes = {
   on: React.PropTypes.bool,
   centerX: React.PropTypes.number.isRequired,
+  classes: React.PropTypes.object.isRequired,
 };
 
-export default Ripple;
+export default withStyles(styleSheet)(Ripple);

@@ -6,9 +6,8 @@
 
 import React from 'react';
 import Typography from 'material-ui/Typography';
-import { createStyleSheet } from 'jss-theme-reactor';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { FormattedMessage } from 'react-intl';
-import customPropTypes from 'material-ui/utils/customPropTypes';
 import Grid from 'material-ui/Grid';
 import ZmoraCard from '../ZmoraCard';
 import messages from './messages';
@@ -45,8 +44,8 @@ const styleSheet = createStyleSheet('zmoraAppStatusStyleSheet', () => ({
 
 const statusChart = require('../../resources/statusChart.png');
 
-function StatusPanel(props, context) {
-  const classes = context.styleManager.render(styleSheet);
+function StatusPanel(props) {
+  const classes = props.classes;
 
   return (
     <ZmoraCard padding={0} height={props.height} color={props.color}>
@@ -81,10 +80,7 @@ function StatusPanel(props, context) {
 StatusPanel.propTypes = {
   height: React.PropTypes.number.isRequired,
   color: React.PropTypes.any,
+  classes: React.PropTypes.object.isRequired,
 };
 
-StatusPanel.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-};
-
-export default StatusPanel;
+export default withStyles(styleSheet)(StatusPanel);

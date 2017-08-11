@@ -14,9 +14,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
-
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Dialog, { DialogContent, DialogContentText, DialogTitle } from 'material-ui/Dialog';
 
@@ -68,10 +66,7 @@ class App extends React.PureComponent {
     user: React.PropTypes.object,
     fatalError: React.PropTypes.bool,
     dispatch: React.PropTypes.func,
-  };
-
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
+    classes: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -85,7 +80,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const classes = this.context.styleManager.render(styleSheet);
+    const classes = this.props.classes;
     const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
     return (
       <div className={classes.root}>
@@ -97,7 +92,7 @@ class App extends React.PureComponent {
           onToggleMenu={this.toggleMenu}
           loggedIn={haveJwtToken()}
         />
-        <Grid container gutter={0} style={{ marginTop: 64 }}>
+        <Grid container spacing={0} style={{ marginTop: 64 }}>
           <Grid item xs={2}><Navigation style={{ padding: 10 }} /></Grid>
           <Grid item xs={this.state.rightMenuOpen ? 8 : 10} className={classes.contentContainer}>
             {React.Children.toArray(this.props.children)}
@@ -128,4 +123,4 @@ function mapDispatchToProps(dispatch) {
   return { dispatch };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withStyles(styleSheet)(connect(mapStateToProps, mapDispatchToProps)(App));

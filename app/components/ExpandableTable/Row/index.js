@@ -2,9 +2,7 @@ import React from 'react';
 import { ListItem } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import Collapse from 'material-ui/transitions/Collapse';
-import customPropTypes from 'material-ui/utils/customPropTypes';
-import { createStyleSheet } from 'jss-theme-reactor';
-import Card, { CardContent } from 'material-ui/Card';
+import { withStyles, createStyleSheet } from 'material-ui/styles';import Card, { CardContent } from 'material-ui/Card';
 import KeyboardArrowUp from '../../../svg-icons/keyboard-arrow-up';
 import KeyboardArrowDown from '../../../svg-icons/keyboard-arrow-down';
 
@@ -44,15 +42,13 @@ const styleSheet = createStyleSheet('zmoraExpandableTableRow', () => ({
   },
 }));
 
+@withStyles(styleSheet)
 export class ExpandableTableRow extends React.PureComponent {
   static propTypes = {
     children: React.PropTypes.node,
     header: React.PropTypes.node,
     startExpanded: React.PropTypes.bool,
-  };
-
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
+    classes: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -65,7 +61,7 @@ export class ExpandableTableRow extends React.PureComponent {
   }
 
   render() {
-    const classes = this.context.styleManager.render(styleSheet);
+    const classes = this.props.classes;
 
     const isExpanded = this.state.expanded;
     const onClick = () => this.toggleExpanded();

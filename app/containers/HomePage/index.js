@@ -10,9 +10,7 @@
  */
 
 import React from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
-import Grid from 'material-ui/Grid';
+import { withStyles, createStyleSheet } from 'material-ui/styles';import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import ZmoraCard from '../../components/ZmoraCard';
 import StatusInfoList from '../../components/StatusInfoList';
@@ -48,12 +46,12 @@ const descriptionColor = '#2196F3';
 const logoPaneColor = '#4CB050';
 const namePaneColor = '#FEC106';
 
-function HomePage(props, context) {
-  const classes = context.styleManager.render(styleSheet);
+function HomePage(props) {
+  const classes = props.classes;
 
   return (
-    <Grid container className={classes.root} gutter={verticalGutter}>
-      <Grid container item xs={12} gutter={horizontalGutter}>
+    <Grid container className={classes.root} spacing={verticalGutter}>
+      <Grid container item xs={12} spacing={horizontalGutter}>
         <Grid item xs={12}>
           <ZmoraCard color={descriptionColor} padding={cardPadding}>
             <Typography className={classes.lightTextStyle}>
@@ -64,7 +62,7 @@ function HomePage(props, context) {
           </ZmoraCard>
         </Grid>
       </Grid>
-      <Grid container item xs={12} gutter={horizontalGutter}>
+      <Grid container item xs={12} spacing={horizontalGutter}>
         <Grid item xs={4} style={{ textAlign: 'center' }}>
           <ZmoraCard color={logoPaneColor} padding={cardPadding}>
             <img src={logo} className={classes.logoStyle} alt="logo" />
@@ -81,7 +79,7 @@ function HomePage(props, context) {
           </ZmoraCard>
         </Grid>
       </Grid>
-      <Grid container item xs={12} gutter={horizontalGutter}>
+      <Grid container item xs={12} spacing={horizontalGutter}>
         <Grid item xs={12}>
           <ZmoraCard padding={0}>
             <StatusInfoList
@@ -99,8 +97,8 @@ function HomePage(props, context) {
   );
 }
 
-HomePage.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
+HomePage.propTypes = {
+  classes: React.PropTypes.object.isRequired,
 };
 
-export default HomePage;
+export default withStyles(styleSheet)(HomePage);

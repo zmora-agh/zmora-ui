@@ -11,14 +11,14 @@ function ContestButton(props) {
   const enrolEndTime = moment(start).add(signupDuration, 'seconds');
   const enterActive = props.time.isAfter(enrolEndTime) || props.isOwner;
   const enterButton = (
-    <Button raised primary disabled={!enterActive}>
+    <Button raised color="primary" disabled={!enterActive}>
       <FormattedMessage {...messages.enter} />
     </Button>
   );
   const activeEnterButton = !enterActive ? enterButton : <Link to={`/contests/${id}`}>{enterButton}</Link>;
 
   const joinButton = (
-    <Button onClick={props.onClick} raised primary>
+    <Button onClick={props.onClick} raised color="primary">
       <FormattedMessage {...messages.join} />
     </Button>
   );

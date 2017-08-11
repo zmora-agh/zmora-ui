@@ -5,15 +5,13 @@
  */
 
 import React, { PropTypes } from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
-import { FormattedMessage } from 'react-intl';
+import { withStyles, createStyleSheet } from 'material-ui/styles';import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import SwipeableViews from 'react-swipeable-views';
 
 import Paper from 'material-ui/Paper';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import customPropTypes from 'material-ui/utils/customPropTypes';
 import { createStructuredSelector } from 'reselect';
 
 import { submitSetContext } from '../Submit/actions';
@@ -62,11 +60,16 @@ const ContestOwnersQuery = gql`
   }
 `;
 
+@withStyles(styleSheet)
 @graphql(ContestOwnersQuery, { options: (props) => ({ variables: { contestId: getIds(props).contestId } }) })
 @connect(createStructuredSelector({ user: makeSelectUser() }), (dispatch) => ({ dispatch }))
 export default class ProblemPage extends React.Component {
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
+  static propTypes = {
+    data: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
+    location: PropTypes.object.isRequired,
+    children: PropTypes.node,
+    dispatch: PropTypes.func,
+    classes: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -157,7 +160,7 @@ export default class ProblemPage extends React.Component {
     const hash = parseHash(this.props.location.hash);
     const index = this.getSwipeableViewIndex(hash.prefix);
 
-    const classes = this.context.styleManager.render(styleSheet);
+    const classes = this.props.classes;
 
     return (
       <Paper>
@@ -183,10 +186,3 @@ export default class ProblemPage extends React.Component {
     );
   }
 }
-
-ProblemPage.propTypes = {
-  data: PropTypes.object, // eslint-disable-line react/no-unused-prop-types
-  location: PropTypes.object.isRequired,
-  children: PropTypes.node,
-  dispatch: PropTypes.func,
-};

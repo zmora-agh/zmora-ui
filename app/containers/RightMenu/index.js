@@ -8,8 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { createStyleSheet } from 'jss-theme-reactor';
-
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
@@ -17,7 +16,6 @@ import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
-import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import makeSelectRightMenu from './selectors';
 
@@ -44,10 +42,8 @@ const styleSheet = createStyleSheet('RightMenu', () => ({
   },
 }));
 
-const RightMenu = (props, context) => {
-  const classes = context.styleManager.render(styleSheet);
-
-  const { user, ...other } = props;
+const RightMenu = (props) => {
+  const { user, classes, ...other } = props;
   return (
     <Paper {...other} className={classes.root}>
       <div style={{ flex: 1 }}>
@@ -84,11 +80,7 @@ RightMenu.propTypes = {
     avatar: React.PropTypes.string,
   }).isRequired,
   dispatch: React.PropTypes.func.isRequired,
-};
-
-RightMenu.contextTypes = {
-  styleManager: customPropTypes.muiRequired,
-  router: React.PropTypes.object.isRequired,
+  classes: React.PropTypes.object.isRequired,
 };
 
 function mapDispatchToProps(dispatch) {
@@ -97,4 +89,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(makeSelectRightMenu, mapDispatchToProps)(RightMenu);
+export default withStyles(styleSheet)(connect(makeSelectRightMenu, mapDispatchToProps)(RightMenu));

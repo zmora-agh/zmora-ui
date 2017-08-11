@@ -4,12 +4,10 @@
 *
 */
 
-import { createStyleSheet } from 'jss-theme-reactor';
-
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Chip from 'material-ui/Chip';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
-import customPropTypes from 'material-ui/utils/customPropTypes';
 
 import moment from 'moment';
 import React from 'react';
@@ -25,14 +23,12 @@ const styleSheet = createStyleSheet('zmoraServerTime', () => ({
   },
 }));
 
+@withStyles(styleSheet)
 class ServerTime extends React.Component {
   static propTypes = {
     style: React.PropTypes.object,
     offset: React.PropTypes.number.isRequired,
-  };
-
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
+    classes: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -59,7 +55,7 @@ class ServerTime extends React.Component {
   }
 
   render() {
-    const classes = this.context.styleManager.render(styleSheet);
+    const classes = this.props.classes;
 
     const chipStyle = {
       color: 'inherit',
@@ -77,7 +73,7 @@ class ServerTime extends React.Component {
           style={Object.assign({}, chipStyle, this.props.style)}
           avatar={<TimeIcon />}
           label={
-            <Typography colorInherit style={{ marginRight: 8 }} type="body2">
+            <Typography color="inherit" style={{ marginRight: 8 }} type="body2">
               {time.format('HH:mm:ss')}
             </Typography>
           }

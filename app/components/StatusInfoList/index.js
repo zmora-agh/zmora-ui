@@ -5,9 +5,7 @@
 */
 
 import React from 'react';
-import { createStyleSheet } from 'jss-theme-reactor';
-import customPropTypes from 'material-ui/utils/customPropTypes';
-
+import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { FormattedMessage } from 'react-intl';
 import Table, {
   TableHead,
@@ -39,23 +37,23 @@ const styleSheet = createStyleSheet('zmoraAppStatusInfoList', () => ({
   },
 }));
 
+@withStyles(styleSheet)
 class StatusInfoList extends React.Component {
-  static contextTypes = {
-    styleManager: customPropTypes.muiRequired,
+  static propTypes = {
+    statuses: React.PropTypes.array.isRequired,
+    classes: React.PropTypes.object.isRequired,
   };
-
-  classes = this.context.styleManager.render(styleSheet);
 
   renderRows() {
     const rows = [];
     this.props.statuses.forEach((status, i) => {
       rows.push(
-        <TableRow className={this.classes.row} key={i}>
+        <TableRow className={this.props.classes.row} key={i}>
           <TableCell>
-            <Typography className={this.classes.textTitle}>{status.title}</Typography>
+            <Typography className={this.props.classes.textTitle}>{status.title}</Typography>
           </TableCell>
           <TableCell>
-            <Typography className={this.classes.textInfo}>{status.info}</Typography>
+            <Typography className={this.props.classes.textInfo}>{status.info}</Typography>
           </TableCell>
         </TableRow>
       );
@@ -65,7 +63,7 @@ class StatusInfoList extends React.Component {
   }
 
   render() {
-    const classes = this.context.styleManager.render(styleSheet);
+    const classes = this.props.classes;
     const rows = this.renderRows();
 
     return (
@@ -89,9 +87,5 @@ class StatusInfoList extends React.Component {
     );
   }
 }
-
-StatusInfoList.propTypes = {
-  statuses: React.PropTypes.array.isRequired,
-};
 
 export default StatusInfoList;

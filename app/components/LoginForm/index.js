@@ -52,6 +52,7 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
             <TextField
               label={<FormattedMessage {...messages.username} />}
               required
+              fullWidth
               value={this.state.username}
               error={this.props.error}
               disabled={this.props.loading}
@@ -61,6 +62,7 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
               type="password"
               label={<FormattedMessage {...messages.password} />}
               required
+              fullWidth
               value={this.state.password}
               error={this.props.error}
               disabled={this.props.loading}
@@ -71,7 +73,7 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
           <CardActions>
             <Button
               type="submit"
-              primary
+              color="primary"
               raised
               disabled={!this.state.username || !this.state.password || this.props.loading}
               style={{ width: '100%' }}

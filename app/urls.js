@@ -1,3 +1,3 @@
 import { API_URL } from './constants';
 
-export const getProblemSubmitsURL = (contestId, problemId) => `${API_URL}problem/${problemId}/submit`;
+export const getProblemSubmitsURL = (contestId, problemId) => `${API_URL}/problem/${problemId}/submit`;

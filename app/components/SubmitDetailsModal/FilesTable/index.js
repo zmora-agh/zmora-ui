@@ -10,12 +10,13 @@ import Typography from 'material-ui/Typography';
 import EnhancedTableHead from '../../EnhancedTableHead';
 import messages from './messages';
 import FileFileDownload from '../../../svg-icons/file-download';
-import EditorModeEdit from '../../../svg-icons/mode-edit';
+import { API_URL } from '../../../constants';
 
 export const FilesFragment = gql`
   fragment Files on Submit {
     submitFiles {
       id
+      url
       checksum
       filename
     }
@@ -36,6 +37,7 @@ class FilesTable extends React.Component {
         filename: React.PropTypes.node.isRequired,
         checksum: React.PropTypes.node.isRequired,
         id: React.PropTypes.number.isRequired,
+        url: React.PropTypes.string.isRequired,
       })
     ).isRequired,
   };
@@ -81,8 +83,9 @@ class FilesTable extends React.Component {
                 <TableCell>{file.filename}</TableCell>
                 <TableCell>{file.checksum}</TableCell>
                 <TableCell>
-                  <IconButton><EditorModeEdit /></IconButton>
-                  <IconButton><FileFileDownload /></IconButton>
+                  <a href={API_URL + file.url} target="_blank" rel="noopener">
+                    <IconButton><FileFileDownload /></IconButton>
+                  </a>
                 </TableCell>
               </TableRow>
             )}

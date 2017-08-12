@@ -1,3 +1,4 @@
+import React from 'react';
 import { browserHistory } from 'react-router';
 import { loginPage } from '../local-urls';
 
@@ -13,3 +14,23 @@ export function requireAuth(nextState, replace, callback) {
 
   callback();
 }
+
+export const componentRequireAuth = (Elem) => (
+  class extends React.PureComponent {
+    componentWillMount() {
+      this.perform();
+    }
+    componentWillUpdate() {
+      this.perform();
+    }
+    render() {
+      return <Elem {...this.props} />;
+    }
+
+    perform() {
+      if (!haveJwtToken()) {
+        browserHistory.replace(loginPage(browserHistory.getCurrentLocation().pathname));
+      }
+    }
+
+  });

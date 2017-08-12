@@ -37,8 +37,9 @@ class ContestJoinModal extends React.PureComponent { // eslint-disable-line reac
     this.setState({ password: e.target.value });
   }
 
-  onJoin() {
+  onJoin(event) {
     this.props.onJoin(this.props.dialog.contestId, this.state.password);
+    event.preventDefault();
   }
 
   render() {
@@ -53,32 +54,34 @@ class ContestJoinModal extends React.PureComponent { // eslint-disable-line reac
         <DialogTitle>
           <FormattedMessage {...messages.enterPassword} />
         </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <FormattedMessage
-              {...messages.contestJoinMessage}
-              values={{ contestName: this.props.dialog.contestName }}
+        <form onSubmit={this.onJoin}>
+          <DialogContent>
+            <DialogContentText>
+              <FormattedMessage
+                {...messages.contestJoinMessage}
+                values={{ contestName: this.props.dialog.contestName }}
+              />
+            </DialogContentText>
+          </DialogContent>
+          <DialogContent >
+            <ErrorTextField
+              onChange={this.onPasswordChange}
+              error={this.props.dialog.error}
+              errorText={<FormattedMessage {...messages.invalidPassword} />}
+              required
+              fullWidth
+              label={<FormattedMessage {...messages.password} />}
             />
-          </DialogContentText>
-        </DialogContent>
-        <DialogContent >
-          <ErrorTextField
-            onChange={this.onPasswordChange}
-            error={this.props.dialog.error}
-            errorText={<FormattedMessage {...messages.invalidPassword} />}
-            required
-            fullWidth
-            label={<FormattedMessage {...messages.password} />}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button disabled={this.props.dialog.loading} onClick={this.props.onClose}>
-            <FormattedMessage {...messages.cancel} />
-          </Button>
-          <Button color="primary" disabled={this.props.dialog.loading} onClick={this.onJoin}>
-            <FormattedMessage {...messages.join} />
-          </Button>
-        </DialogActions>
+          </DialogContent>
+          <DialogActions>
+            <Button disabled={this.props.dialog.loading} onClick={this.props.onClose}>
+              <FormattedMessage {...messages.cancel} />
+            </Button>
+            <Button type="submit" color="primary" disabled={this.props.dialog.loading}>
+              <FormattedMessage {...messages.join} />
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     );
   }

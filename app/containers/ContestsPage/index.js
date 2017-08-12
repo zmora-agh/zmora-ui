@@ -4,13 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import Typography from 'material-ui/Typography';
 import { gql, graphql } from 'react-apollo';
 import autobind from 'autobind-decorator';
-import FetchView from '../../components/FetchView';
 import { ContestsTable } from '../../components/ContestsTable';
 
 import makeSelectContestsPage from './selectors';
 import { DIALOG_TYPE } from './constants';
 import { openJoinContestModal, closeJoinContestModal, joinContest } from './actions';
 import messages from './messages';
+import { loadable } from '../../utils/render';
 
 const ContestsListForLayout = gql`
   query ContestsListForLayout { 
@@ -32,6 +32,7 @@ const ContestsListForLayout = gql`
 
 @graphql(ContestsListForLayout)
 @connect(makeSelectContestsPage, (dispatch) => ({ dispatch }))
+@loadable({ display: 'block' })
 export default class ContestsPage extends React.PureComponent {
   static propTypes = {
     dialog: DIALOG_TYPE,
@@ -64,18 +65,14 @@ export default class ContestsPage extends React.PureComponent {
       return <Typography><FormattedMessage {...messages.empty} /></Typography>;
     }
 
-    return (<FetchView>
-      {this.props.data.loading ? undefined :
-      <ContestsTable
-        onJoinModalOpen={this.onJoinModalOpen}
-        onJoinModalClose={this.onJoinModalClose}
-        onJoinContest={this.onJoinContest}
-        dialog={this.props.dialog}
-        contests={this.props.data.contests}
-        offset={this.props.offset}
-        userId={this.props.userId}
-      />
-      }
-    </FetchView>);
+    return (<ContestsTable
+      onJoinModalOpen={this.onJoinModalOpen}
+      onJoinModalClose={this.onJoinModalClose}
+      onJoinContest={this.onJoinContest}
+      dialog={this.props.dialog}
+      contests={this.props.data.contests}
+      offset={this.props.offset}
+      userId={this.props.userId}
+    />);
   }
 }

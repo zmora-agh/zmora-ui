@@ -22,7 +22,7 @@ import { haveJwtToken } from '../../utils/auth';
 
 import AppToolbar from '../../components/AppToolbar';
 import Navigation from '../../components/Navigation';
-import RightMenu from '../RightMenu';
+// import RightMenu from '../RightMenu';
 import TimeProvider from '../TimeProvider';
 import Submit from '../Submit';
 
@@ -98,7 +98,7 @@ class App extends React.PureComponent {
             className={classes.rightMenu}
             style={{ transform: `translate(${rightMenuTranslation}%, 0)` }}
           >
-            <RightMenu />
+            {/* <RightMenu /> */}
           </Grid>
         </Grid>
         {haveJwtToken() && <Submit />}

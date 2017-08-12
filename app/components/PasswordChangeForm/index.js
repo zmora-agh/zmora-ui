@@ -12,7 +12,9 @@ import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';
 import ErrorTextField from '../ErrorTextField';
 import messages from './messages';
 import { PASSWORD_PATTERN } from '../RegisterForm/constants';
+import { componentRequireAuth } from '../../utils/auth';
 
+@componentRequireAuth
 class PasswordChangeForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);

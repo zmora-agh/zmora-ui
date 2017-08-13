@@ -92,12 +92,12 @@ class AppToolbar extends React.Component {
 
     return (
       <AppBar>
-        <Toolbar className={toolbarClass} >
+        <Toolbar className={toolbarClass} ><Grid container align="center" justify="space-between">
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
-          <Grid item xs={2}>
+          <Grid item sm={3} md={2}>
             <Typography color="inherit" className={classes.titleLetter}>Zmora</Typography>
           </Grid>
-          {!this.state.inSearch ? <Grid item xs={7}>
+          {!this.state.inSearch ? <Grid item sm={6} md={7} hidden={{ smDown: true }}>
             <Breadcrumbs
               routes={this.props.routes}
               params={this.props.params}
@@ -107,7 +107,7 @@ class AppToolbar extends React.Component {
               excludes={['Home', 'Problems']}
             />
           </Grid> : undefined}
-          <Grid container item spacing={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">
+          <Grid container item spacing={0} xs justify="flex-end" align="center">
             {/* Remove search button since there is not search feature atm. */}
             {/* <Search */}
             {/* expanded={this.state.inSearch} */}
@@ -122,7 +122,7 @@ class AppToolbar extends React.Component {
               <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton> :
               <Link to={loginPage()}><IconButton style={{ color: 'inherit' }}><LoginIcon /></IconButton> </Link> }
           </Grid>
-        </Toolbar>
+        </Grid></Toolbar>
       </AppBar>
     );
   }

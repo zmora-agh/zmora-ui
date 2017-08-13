@@ -36,11 +36,7 @@ const styleSheet = createStyleSheet('App', () => ({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-  },
-  contentWrapper: {
-    marginTop: 16,
-    marginBottom: 16,
-    marginLeft: 8,
+    padding: 16,
   },
   rightMenu: {
     position: 'fixed',
@@ -53,7 +49,6 @@ const styleSheet = createStyleSheet('App', () => ({
     transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
   },
   contentContainer: {
-    padding: 10,
     transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms',
   },
 }));
@@ -82,6 +77,7 @@ class App extends React.PureComponent {
   render() {
     const classes = this.props.classes;
     const rightMenuTranslation = this.state.rightMenuOpen ? 0 : 100;
+    const rightMenuSize = this.state.rightMenuOpen ? 2 : 0;
     return (
       <div className={classes.root}>
         <TimeProvider />
@@ -93,8 +89,8 @@ class App extends React.PureComponent {
           loggedIn={haveJwtToken()}
         />
         <Grid container spacing={0} style={{ marginTop: 64 }}>
-          <Grid item xs={2}><Navigation style={{ padding: 10 }} /></Grid>
-          <Grid item xs={this.state.rightMenuOpen ? 8 : 10} className={classes.contentContainer}>
+          <Grid item xs={12 - rightMenuSize} md={3}><Navigation style={{ padding: 10 }} /></Grid>
+          <Grid item xs={12 - rightMenuSize} md={9 - rightMenuSize} className={classes.contentContainer}>
             {React.Children.toArray(this.props.children)}
           </Grid>
           <Grid

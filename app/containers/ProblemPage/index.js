@@ -33,6 +33,7 @@ import {
 } from './constants';
 
 import { makeSelectUser } from '../App/selectors';
+import { loadable } from '../../utils/render';
 
 const styleSheet = createStyleSheet('ProblemPage', (theme) => ({
   appBar: {
@@ -64,6 +65,7 @@ const ContestOwnersQuery = gql`
 @withStyles(styleSheet)
 @graphql(ContestOwnersQuery, { options: (props) => ({ variables: { contestId: getIds(props).contestId } }) })
 @connect(createStructuredSelector({ user: makeSelectUser() }), (dispatch) => ({ dispatch }))
+@loadable({ display: 'block', found: (p) => p.data.contest !== null })
 export default class ProblemPage extends React.Component {
   static propTypes = {
     data: PropTypes.object, // eslint-disable-line react/no-unused-prop-types

@@ -35,7 +35,9 @@ export default class ProblemResultsPage extends React.Component {
 
   render() {
     if (this.haveNoResults()) {
-      return <Typography><FormattedMessage {...messages.empty} /></Typography>;
+      return (<div style={{ padding: 32, textAlign: 'center' }}>
+        <Typography type="headline" style={{ opacity: 0.6 }}><FormattedMessage {...messages.empty} /></Typography>
+      </div>);
     }
 
     if (this.props.userId) {

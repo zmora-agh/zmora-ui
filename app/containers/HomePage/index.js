@@ -14,7 +14,6 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import ZmoraCard from '../../components/ZmoraCard';
-import StatusInfoList from '../../components/StatusInfoList';
 
 const styleSheet = createStyleSheet('zmoraAppHomePageGrid', () => ({
   paper: {
@@ -33,8 +32,8 @@ const styleSheet = createStyleSheet('zmoraAppHomePageGrid', () => ({
     fontSize: 30,
   },
   logoStyle: {
-    height: 325,
-    width: 230,
+    height: '100%',
+    width: '100%',
     margin: '0 auto',
   },
 }));
@@ -59,12 +58,12 @@ function HomePage(props) {
             wkład pracy oraz postępy każdego z uczestników.</Typography>
         </ZmoraCard>
       </Grid>
-      <Grid item xs={4} style={{ textAlign: 'center' }}>
+      <Grid item xs={12} sm={4} style={{ textAlign: 'center' }}>
         <ZmoraCard color={logoPaneColor} padding={cardPadding}>
           <img src={logo} className={classes.logoStyle} alt="logo" />
         </ZmoraCard>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={12} sm={8}>
         <ZmoraCard color={namePaneColor} padding={cardPadding}>
           <Typography className={classes.darkTextStyle}>
             Nazwa została wybrana nieprzypadkowo - w mitologii słowiańskiej zmora to istota pół demoniczna,
@@ -72,18 +71,6 @@ function HomePage(props) {
             nie rozwiązywać zadań w terminie lub próbować zaliczać je podstępem.<br /><br />
             Tak czy inaczej - <strong>powodzenia!</strong>
           </Typography>
-        </ZmoraCard>
-      </Grid>
-      <Grid item xs={12}>
-        <ZmoraCard padding={0}>
-          <StatusInfoList
-            statuses={[{ title: 'Zaliczone', info: 'Zadanie zaliczone bez uwag.' },
-            { title: 'Zaliczone*', info: 'Zadanie zaliczone. Sprawdź uwagi prowadzącego.' },
-            { title: 'Po Terminie', info: 'Nadal możesz wykonać zadanie z karnymi punktami.' },
-            { title: 'Niezaliczone', info: 'Źle wykonane zadanie, lub zbyt długa zwłoka.' },
-            { title: 'Ulane', info: 'Absolutne dno bez cienia nadziei na zaliczenie.' },
-            ]}
-          />
         </ZmoraCard>
       </Grid>
     </Grid>

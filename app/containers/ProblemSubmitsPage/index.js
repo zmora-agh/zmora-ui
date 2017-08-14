@@ -38,7 +38,9 @@ export default class ProblemSubmitsPage extends React.PureComponent {
 
   render() {
     if (this.haveNoSubmits()) {
-      return <Typography><FormattedMessage {...messages.empty} /></Typography>;
+      return (<div style={{ padding: 32, textAlign: 'center' }}>
+        <Typography type="headline" style={{ opacity: 0.6 }}><FormattedMessage {...messages.empty} /></Typography>
+      </div>);
     }
 
     return (

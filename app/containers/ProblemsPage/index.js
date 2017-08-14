@@ -69,7 +69,9 @@ export default class ProblemsPage extends React.PureComponent {
 
 
     if (problems && problems.length === 0) {
-      return <Typography><FormattedMessage {...messages.empty} /></Typography>;
+      return (<div style={{ padding: 32, textAlign: 'center' }}>
+        <Typography type="headline" style={{ opacity: 0.6 }}><FormattedMessage {...messages.empty} /></Typography>
+      </div>);
     }
 
     const categories = groupBy(problems, 'category');

@@ -15,7 +15,7 @@ export function getByPath(obj, path) {
   return path.split('.').reduce((prev, curr) => prev ? prev[curr] : undefined, obj || self);
 }
 
-export const loadable = (params) => (Elem) => (props) => {
+export const loadable = (params) => (Elem) => {
   const { size, loaded, found, display } =
     Object.assign({
       size: 50,
@@ -23,16 +23,35 @@ export const loadable = (params) => (Elem) => (props) => {
       found: () => true,
       display: 'inline',
     }, params);
-  if (!loaded(props)) {
-    return (<span style={{ textAlign: 'center', margin: '50px auto', display }}>
-      <CircularProgress color="accent" size={size} />
-    </span>);
-  }
 
-  if (!found(props)) {
-    browserHistory.replace(notFoundPage());
-    return <div />;
-  }
-  return <Elem {...props} />;
+  return class extends React.PureComponent {
+    componentDidMount() {
+      this.perform();
+    }
+
+    componentDidUpdate() {
+      this.perform();
+    }
+
+    render() {
+      if (!loaded(this.props)) {
+        return (<span style={{ textAlign: 'center', margin: '50px auto', display }}>
+          <CircularProgress color="accent" size={size} />
+        </span>);
+      }
+
+      if (!found(this.props)) {
+        return <div />;
+      }
+
+      return <Elem {...this.props} />;
+    }
+
+    perform() {
+      if (loaded(this.props) && !found(this.props)) {
+        browserHistory.replace(notFoundPage());
+      }
+    }
+  };
 };
 

@@ -12,7 +12,8 @@ import Toolbar from 'material-ui/Toolbar';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
-import LoginIcon from 'material-ui-icons/AccountCircle';
+import ProfileIcon from 'material-ui-icons/AccountCircle';
+import LogoutIcon from 'material-ui-icons/ExitToApp';
 import { Link } from 'react-router';
 
 import classNames from 'classnames';
@@ -24,9 +25,8 @@ import SubmitButton from '../../containers/Submit/Button';
 import Ripple from '../../components/Ripple';
 
 import ArrowIcon from '../../svg-icons/keyboard-arrow-right';
-import MoreIcon from '../../svg-icons/more-vert';
 
-import { loginPage } from '../../local-urls';
+import { logoutPage, profilePage } from '../../local-urls';
 
 const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   toolbar: {
@@ -59,7 +59,7 @@ class AppToolbar extends React.Component {
   static propTypes = {
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
-    onToggleMenu: React.PropTypes.func.isRequired,
+    // onToggleMenu: React.PropTypes.func.isRequired,
     loggedIn: React.PropTypes.bool.isRequired,
     classes: React.PropTypes.object.isRequired,
   };
@@ -92,12 +92,12 @@ class AppToolbar extends React.Component {
 
     return (
       <AppBar>
-        <Toolbar className={toolbarClass} >
+        <Toolbar className={toolbarClass} ><Grid container align="center" justify="space-between">
           <Ripple on={this.state.inSearch} centerX={this.state.rippleX} />
-          <Grid item xs={2}>
+          <Grid item sm={3} md={2}>
             <Typography color="inherit" className={classes.titleLetter}>Zmora</Typography>
           </Grid>
-          {!this.state.inSearch ? <Grid item xs={7}>
+          {!this.state.inSearch ? <Grid item md={6} hidden={{ smDown: true }}>
             <Breadcrumbs
               routes={this.props.routes}
               params={this.props.params}
@@ -107,7 +107,7 @@ class AppToolbar extends React.Component {
               excludes={['Home', 'Problems']}
             />
           </Grid> : undefined}
-          <Grid container item spacing={0} xs={this.state.inSearch ? 10 : 3} justify="flex-end" align="center">
+          <Grid container item spacing={0} xs justify="flex-end" align="center">
             {/* Remove search button since there is not search feature atm. */}
             {/* <Search */}
             {/* expanded={this.state.inSearch} */}
@@ -118,11 +118,11 @@ class AppToolbar extends React.Component {
             <ServerTime style={this.state.inSearch ? { display: 'none' } : {}} />
             {this.props.loggedIn &&
               <SubmitButton style={{ color: 'inherit', display: this.state.inSearch ? 'none' : 'block' }} />}
-            {this.props.loggedIn ?
-              <IconButton style={{ color: 'inherit' }} onClick={this.props.onToggleMenu}><MoreIcon /></IconButton> :
-              <Link to={loginPage()}><IconButton style={{ color: 'inherit' }}><LoginIcon /></IconButton> </Link> }
+            <Link to={profilePage()}><IconButton style={{ color: 'inherit' }}><ProfileIcon /></IconButton> </Link>
+            {this.props.loggedIn &&
+            <Link to={logoutPage()}><IconButton style={{ color: 'inherit' }}><LogoutIcon /></IconButton></Link>}
           </Grid>
-        </Toolbar>
+        </Grid></Toolbar>
       </AppBar>
     );
   }

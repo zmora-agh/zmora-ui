@@ -53,7 +53,7 @@ const ProblemsListForLayout = gql`
 
 @connect(createStructuredSelector({ user: makeSelectUser() }), (dispatch) => ({ dispatch }))
 @graphql(ProblemsListForLayout, { options: (props) => ({ variables: { contestId: getContestId(props) } }) })
-@loadable({ display: 'block', found: (p) => p.data.contest !== null })
+@loadable({ found: (p) => p.data.contest !== null })
 export default class ProblemsPage extends React.PureComponent {
   static propTypes = {
     user: PropTypes.object,

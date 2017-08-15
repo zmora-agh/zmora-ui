@@ -16,12 +16,15 @@ export function getByPath(obj, path) {
 }
 
 export const loadable = (params) => (Elem) => {
-  const { size, loaded, found, display } =
+  const defaultLoading = () => (<div style={{ textAlign: 'center', margin: '50px auto' }}>
+    <CircularProgress color="accent" size={50} />
+  </div>);
+
+  const { Loading, loaded, found } =
     Object.assign({
-      size: 50,
+      Loading: defaultLoading,
       loaded: (p) => p.data && !p.data.loading,
       found: () => true,
-      display: 'inline',
     }, params);
 
   return class extends React.PureComponent {
@@ -35,9 +38,7 @@ export const loadable = (params) => (Elem) => {
 
     render() {
       if (!loaded(this.props)) {
-        return (<span style={{ textAlign: 'center', margin: '50px auto', display }}>
-          <CircularProgress color="accent" size={size} />
-        </span>);
+        return <Loading />;
       }
 
       if (!found(this.props)) {

@@ -29,7 +29,7 @@ export const ProblemSubmitsForLayout = gql`
   options: ({ problemId }) => ({ variables: { problemId } }),
   skip: ({ defer }) => defer,
 })
-@loadable({ found: (props) => props.data.problem !== null, display: 'block' })
+@loadable({ found: (props) => props.data.problem !== null })
 export default class ProblemSubmitsPage extends React.PureComponent {
   haveNoSubmits() {
     return this.props.data && this.props.data.problem && this.props.data.problem.submits

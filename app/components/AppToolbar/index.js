@@ -40,9 +40,6 @@ const styleSheet = createStyleSheet('zmoraAppToolbar', (theme) => ({
   breadcrumbItem: {
     textDecoration: 'none',
     fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.7)',
-  },
-  activeBreadcrumbItem: {
     color: theme.palette.getContrastText(theme.palette.primary[500]),
   },
   titleLetter: {
@@ -102,9 +99,8 @@ class AppToolbar extends React.Component {
               routes={this.props.routes}
               params={this.props.params}
               itemClass={classes.breadcrumbItem}
-              activeItemClass={classes.activeBreadcrumbItem}
               separator={<ArrowIcon />}
-              excludes={['Home', 'Problems']}
+              excludes={['Home', 'Problems', 'notfound']}
             />
           </Grid> : undefined}
           <Grid container item spacing={0} xs justify="flex-end" align="center">

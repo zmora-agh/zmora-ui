@@ -11,6 +11,7 @@ import { push } from 'react-router-redux';
 import { gql, graphql } from 'react-apollo';
 import { groupBy } from 'lodash';
 import { createStructuredSelector } from 'reselect';
+import { Map } from 'immutable';
 
 import { Link } from 'react-router';
 import Paper from 'material-ui/Paper';
@@ -24,6 +25,7 @@ import { makeSelectUser } from '../App/selectors';
 import ProblemCategory from '../../components/ProblemCategory';
 import ExpandableTable from '../../components/ExpandableTable';
 
+import { STATUS_ERR, STATUS_OK } from './constants';
 import messages from './messages';
 import { loadable } from '../../utils/render';
 
@@ -35,6 +37,10 @@ const ProblemsListForLayout = gql`
       id
       owners {
         id
+      }
+      submitMetrics {
+        status
+        submits
       }
       problems {
         name
@@ -79,13 +85,22 @@ export default class ProblemsPage extends React.PureComponent {
 
     const isAdmin = contest && contest.owners.map((o) => o.id).includes(this.props.user.id);
 
+    const submitMetrics = contest.submitMetrics ?
+      Map(contest.submitMetrics.map((metric) => [metric.status, metric.submits])) : Map();
+
     return (<div>
       {isAdmin && <Paper style={{ margin: 16, padding: '6px 10px 6px 0' }}>
         <Grid container align="center" spacing={0} justify="space-between">
           <Link to={contestResults(contestId)}><Button><FormattedMessage {...messages.results} /></Button></Link>
-          <Typography type="body1"><FormattedMessage {...messages.submited} values={{ number: 100 }} /></Typography>
-          <Typography type="body1"><FormattedMessage {...messages.valid} values={{ number: 50 }} /></Typography>
-          <Typography type="body1"><FormattedMessage {...messages.timeout} values={{ number: 10 }} /></Typography>
+          <Typography type="body1">
+            <FormattedMessage {...messages.submited} values={{ number: submitMetrics.reduce((s, v) => s + v) }} />
+          </Typography>
+          <Typography type="body1">
+            <FormattedMessage {...messages.valid} values={{ number: submitMetrics.get(STATUS_OK, 0) }} />
+          </Typography>
+          <Typography type="body1">
+            <FormattedMessage {...messages.invalid} values={{ number: submitMetrics.get(STATUS_ERR, 0) }} />
+          </Typography>
         </Grid>
       </Paper>}
       <ExpandableTable>

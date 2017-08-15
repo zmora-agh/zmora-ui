@@ -20,6 +20,7 @@ export function exactOnly(Component) {
 }
 
 const ShowName = (getter) => (d) => <span>{getter(d)}</span>;
+const LoadingPlaceholder = () => <span>…</span>;
 
 export const fetchContestName = (name, params) => {
   const query = gql`
@@ -32,7 +33,7 @@ export const fetchContestName = (name, params) => {
 
   const Name = graphql(query, {
     options: { variables: { contestId: parseInt(params.contest_id, 10) } },
-  })(loadable({ size: 20, loaded: (x) => !!(x.data && x.data.contest && x.data.contest.name) })(
+  })(loadable({ Loading: LoadingPlaceholder, loaded: (x) => !!(x.data && x.data.contest && x.data.contest.name) })(
     ShowName((x) => x.data.contest.name)
   ));
   return <Name />;
@@ -49,7 +50,7 @@ export const fetchProblemName = (name, params) => {
 
   const Name = graphql(query, {
     options: { variables: { problemId: parseInt(params.problem_id, 10) } },
-  })(loadable({ size: 20, loaded: (x) => !!(x.data && x.data.problem && x.data.problem.shortcode) })(
+  })(loadable({ Loading: LoadingPlaceholder, loaded: (x) => !!(x.data && x.data.problem && x.data.problem.shortcode) })(
     ShowName((x) => x.data.problem.shortcode)
   ));
 

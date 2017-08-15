@@ -32,7 +32,7 @@ const ContestsListForLayout = gql`
 
 @graphql(ContestsListForLayout)
 @connect(makeSelectContestsPage, (dispatch) => ({ dispatch }))
-@loadable({ display: 'block' })
+@loadable({ })
 export default class ContestsPage extends React.PureComponent {
   static propTypes = {
     dialog: DIALOG_TYPE,

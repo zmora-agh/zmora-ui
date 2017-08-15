@@ -34,7 +34,7 @@ const q = gql`
 const getContestId = (props) => parseInt(props.params.contest_id, 10);
 
 @graphql(q, { options: (props) => ({ variables: { contestId: getContestId(props) } }) })
-@loadable({ display: 'block', found: (p) => p.data.contest !== null })
+@loadable({ found: (p) => p.data.contest !== null })
 // eslint-disable-next-line react/prefer-stateless-function
 export default class ContestResultsPage extends React.PureComponent {
   render() {

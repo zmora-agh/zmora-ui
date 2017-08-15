@@ -18,7 +18,7 @@ const ProblemForLayout = gql`
   options: (props) => ({ variables: { problemId: props.problemId } }),
   skip: ({ defer }) => defer,
 })
-@loadable({ found: (props) => props.data.problem !== null, display: 'block' })
+@loadable({ found: (props) => props.data.problem !== null })
 // eslint-disable-next-line react/prefer-stateless-function
 export default class ProblemContentPage extends React.PureComponent {
   render() {

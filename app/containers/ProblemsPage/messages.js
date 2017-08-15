@@ -16,14 +16,14 @@ export default defineMessages({
   },
   submited: {
     id: 'app.containers.ProblemsPage.submited',
-    defaultMessage: 'Answers submited: {number, number}',
+    defaultMessage: 'Answers submited: {count, number}',
   },
   valid: {
     id: 'app.containers.ProblemsPage.valid',
-    defaultMessage: 'Valid answers: {number, number}',
+    defaultMessage: 'Valid answers: {count, number}',
   },
   invalid: {
     id: 'app.containers.ProblemsPage.invalid',
-    defaultMessage: 'Invalid answers: {number, number}',
+    defaultMessage: 'Invalid answers: {count, number}',
   },
 });

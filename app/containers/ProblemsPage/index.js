@@ -88,18 +88,20 @@ export default class ProblemsPage extends React.PureComponent {
     const submitMetrics = contest.submitMetrics ?
       Map(contest.submitMetrics.map((metric) => [metric.status, metric.submits])) : Map();
 
+    const allSubmitsCount = submitMetrics.reduce((s, v) => s + v);
+
     return (<div>
       {isAdmin && <Paper style={{ margin: 16, padding: '6px 10px 6px 0' }}>
         <Grid container align="center" spacing={0} justify="space-between">
           <Link to={contestResults(contestId)}><Button><FormattedMessage {...messages.results} /></Button></Link>
           <Typography type="body1">
-            <FormattedMessage {...messages.submited} values={{ number: submitMetrics.reduce((s, v) => s + v) }} />
+            <FormattedMessage {...messages.submited} values={{ count: allSubmitsCount }} />
           </Typography>
           <Typography type="body1">
-            <FormattedMessage {...messages.valid} values={{ number: submitMetrics.get(STATUS_OK, 0) }} />
+            <FormattedMessage {...messages.valid} values={{ count: submitMetrics.get(STATUS_OK, 0) }} />
           </Typography>
           <Typography type="body1">
-            <FormattedMessage {...messages.invalid} values={{ number: submitMetrics.get(STATUS_ERR, 0) }} />
+            <FormattedMessage {...messages.invalid} values={{ count: submitMetrics.get(STATUS_ERR, 0) }} />
           </Typography>
         </Grid>
       </Paper>}

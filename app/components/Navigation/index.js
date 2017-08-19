@@ -12,9 +12,9 @@ import List from 'material-ui/List';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 // Icons
-import Home from '../../svg-icons/home';
-import Assignment from '../../svg-icons/assignment';
-import ActionInfo from '../../svg-icons/info';
+import Home from 'material-ui-icons/Home';
+import Assignment from 'material-ui-icons/Assignment';
+import ActionInfo from 'material-ui-icons/Info';
 
 import NavListItem from '../NavListItem';
 import messagesHomePage from '../../containers/HomePage/messages';

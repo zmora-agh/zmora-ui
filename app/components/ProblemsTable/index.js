@@ -11,13 +11,13 @@ import moment from 'moment';
 import Done from 'material-ui-icons/Done';
 import Clear from 'material-ui-icons/Clear';
 // import IconButton from 'material-ui/IconButton';
+// import PictureAsPdf from 'material-ui-icons/PictureAsPdf';
 
 import SubmitButton from '../../containers/Submit/Button';
 
 import { problemRowPropType } from './constants';
 import messages from './messages';
 
-// import Pdf from '../../svg-icons/picture-as-pdf';
 import {
   ResponsiveTable,
   ResponsiveTableBody,
@@ -66,7 +66,7 @@ function ProblemsTable(props) {
             <SubmitButton contestId={props.contestId} problemId={problem.id} />
             {/* Missing download as PDF feature so far */}
             {/* <IconButton onClick={(e) => { e.stopPropagation(); props.onPdfClick(problem.id); }}> */}
-            {/* <Pdf /> */}
+            {/* <PictureAsPdf /> */}
             {/* </IconButton> */}
           </ResponsiveTableCell>
         </ResponsiveTableRow>))}

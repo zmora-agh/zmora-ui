@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import IconButton from 'material-ui/IconButton';
-import FileUpload from '../../../svg-icons/file-upload';
+import FileUpload from 'material-ui-icons/FileUpload';
 
 import { submitModalOpen } from '../actions';
 

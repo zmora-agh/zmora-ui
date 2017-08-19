@@ -16,11 +16,11 @@ import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
+import Settings from 'material-ui-icons/Settings';
+import ExitToApp from 'material-ui-icons/ExitToApp';
 
 import makeSelectRightMenu from './selectors';
 
-import Settings from '../../svg-icons/settings';
-import ExitToApp from '../../svg-icons/exit-to-app';
 import { profilePage, logoutPage } from '../../local-urls';
 
 const styleSheet = createStyleSheet('RightMenu', () => ({

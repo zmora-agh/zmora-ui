@@ -63,7 +63,7 @@ export default class ContestsPage extends React.PureComponent {
     if (this.props.children) return this.props.children;
 
     if (this.props.data.contests && this.props.data.contests.length === 0) {
-      return <EmptyMessage message={<FormattedMessage {...messages.empty} />} />;
+      return <EmptyMessage><FormattedMessage {...messages.empty} /></EmptyMessage>;
     }
 
     return (<ContestsTable

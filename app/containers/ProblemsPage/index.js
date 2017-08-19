@@ -77,7 +77,7 @@ export default class ProblemsPage extends React.PureComponent {
 
 
     if (problems && problems.length === 0) {
-      return <EmptyMessage message={<FormattedMessage {...messages.empty} />} />;
+      return <EmptyMessage><FormattedMessage {...messages.empty} /></EmptyMessage>;
     }
 
     const categories = groupBy(problems, 'category');

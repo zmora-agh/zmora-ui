@@ -35,7 +35,7 @@ export default class ProblemResultsPage extends React.Component {
 
   render() {
     if (this.haveNoResults()) {
-      return <EmptyMessage message={<FormattedMessage {...messages.empty} />} />;
+      return <EmptyMessage><FormattedMessage {...messages.empty} /></EmptyMessage>;
     }
 
     if (this.props.userId) {

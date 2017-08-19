@@ -41,7 +41,7 @@ export default class ContestResultsPage extends React.PureComponent {
     const ranking = this.props.data.contest.ranking;
 
     if (ranking.length === 0) {
-      return <EmptyMessage message={<FormattedMessage {...messages.empty} />} />;
+      return <EmptyMessage><FormattedMessage {...messages.empty} /></EmptyMessage>;
     }
 
     return <ContestRanking data={ranking} />;

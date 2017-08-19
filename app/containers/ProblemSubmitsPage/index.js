@@ -38,7 +38,7 @@ export default class ProblemSubmitsPage extends React.PureComponent {
 
   render() {
     if (this.haveNoSubmits()) {
-      return <EmptyMessage message={<FormattedMessage {...messages.empty} />} />;
+      return <EmptyMessage><FormattedMessage {...messages.empty} /></EmptyMessage>;
     }
 
     return (

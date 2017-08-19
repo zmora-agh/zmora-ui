@@ -7,9 +7,9 @@ import { FormattedMessage } from 'react-intl';
 import Table, { TableRow, TableCell, TableBody } from 'material-ui/Table';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
+import FileFileDownload from 'material-ui-icons/FileDownload';
 import EnhancedTableHead from '../../EnhancedTableHead';
 import messages from './messages';
-import FileFileDownload from '../../../svg-icons/file-download';
 import { API_URL } from '../../../constants';
 
 export const FilesFragment = gql`

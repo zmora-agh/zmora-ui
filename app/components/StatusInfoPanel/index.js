@@ -10,10 +10,10 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { FormattedMessage } from 'react-intl';
 import Button from 'material-ui/Button';
 import Card, { CardContent } from 'material-ui/Card';
-import Person from '../../svg-icons/person';
-import Laptop from '../../svg-icons/laptop';
-import Solved from '../../svg-icons/action-done';
-import SolvedAll from '../../svg-icons/action-done-all';
+import Person from 'material-ui-icons/Person';
+import Laptop from 'material-ui-icons/Laptop';
+import Solved from 'material-ui-icons/Done';
+import SolvedAll from 'material-ui-icons/DoneAll';
 
 import messages from './messages';
 

@@ -12,7 +12,7 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { easing } from 'material-ui/styles/transitions';
 
 
-import SearchIcon from '../../svg-icons/search';
+import SearchIcon from 'material-ui-icons/Search';
 
 const styleSheet = createStyleSheet('zmoraSearch', () => ({
   root: {

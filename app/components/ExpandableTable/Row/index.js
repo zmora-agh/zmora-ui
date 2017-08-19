@@ -3,8 +3,8 @@ import { ListItem } from 'material-ui/List';
 import Typography from 'material-ui/Typography';
 import Collapse from 'material-ui/transitions/Collapse';
 import { withStyles, createStyleSheet } from 'material-ui/styles';import Card, { CardContent } from 'material-ui/Card';
-import KeyboardArrowUp from '../../../svg-icons/keyboard-arrow-up';
-import KeyboardArrowDown from '../../../svg-icons/keyboard-arrow-down';
+import KeyboardArrowUp from 'material-ui-icons/KeyboardArrowUp';
+import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown';
 
 
 const styleSheet = createStyleSheet('zmoraExpandableTableRow', () => ({

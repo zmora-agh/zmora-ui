@@ -13,6 +13,7 @@ import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import ProfileIcon from 'material-ui-icons/AccountCircle';
+import ArrowIcon from 'material-ui-icons/KeyboardArrowRight';
 import LogoutIcon from 'material-ui-icons/ExitToApp';
 import { Link } from 'react-router';
 
@@ -23,8 +24,6 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import ServerTime from '../../containers/ServerTime';
 import SubmitButton from '../../containers/Submit/Button';
 import Ripple from '../../components/Ripple';
-
-import ArrowIcon from '../../svg-icons/keyboard-arrow-right';
 
 import { logoutPage, profilePage } from '../../local-urls';
 

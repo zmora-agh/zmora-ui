@@ -8,13 +8,13 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Chip from 'material-ui/Chip';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
+import TimeIcon from 'material-ui-icons/AccessTime';
 
 import moment from 'moment';
 import React from 'react';
 import { connect } from 'react-redux';
 
 import { makeSelectTime } from '../App/selectors';
-import TimeIcon from '../../svg-icons/access-time';
 
 
 const styleSheet = createStyleSheet('zmoraServerTime', () => ({

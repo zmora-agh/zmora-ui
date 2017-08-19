@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
-import Typography from 'material-ui/Typography';
 import { graphql, gql } from 'react-apollo';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import ProblemResults, { ResultFragment } from '../../components/ProblemResults';
+import EmptyMessage from '../../components/EmptyMessage';
 
 import UserSubmits from './UserSubmits';
 import { loadable } from '../../utils/render';
@@ -35,9 +35,7 @@ export default class ProblemResultsPage extends React.Component {
 
   render() {
     if (this.haveNoResults()) {
-      return (<div style={{ padding: 32, textAlign: 'center' }}>
-        <Typography type="headline" style={{ opacity: 0.6 }}><FormattedMessage {...messages.empty} /></Typography>
-      </div>);
+      return <EmptyMessage><FormattedMessage {...messages.empty} /></EmptyMessage>;
     }
 
     if (this.props.userId) {

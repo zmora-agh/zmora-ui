@@ -24,6 +24,7 @@ import { makeSelectUser } from '../App/selectors';
 
 import ProblemCategory from '../../components/ProblemCategory';
 import ExpandableTable from '../../components/ExpandableTable';
+import EmptyMessage from '../../components/EmptyMessage';
 
 import { STATUS_ERR, STATUS_OK } from './constants';
 import messages from './messages';
@@ -76,9 +77,7 @@ export default class ProblemsPage extends React.PureComponent {
 
 
     if (problems && problems.length === 0) {
-      return (<div style={{ padding: 32, textAlign: 'center' }}>
-        <Typography type="headline" style={{ opacity: 0.6 }}><FormattedMessage {...messages.empty} /></Typography>
-      </div>);
+      return <EmptyMessage><FormattedMessage {...messages.empty} /></EmptyMessage>;
     }
 
     const categories = groupBy(problems, 'category');

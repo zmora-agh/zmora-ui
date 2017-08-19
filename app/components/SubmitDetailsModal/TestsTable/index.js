@@ -79,8 +79,8 @@ class TestsTable extends Component {
               <TableRow key={test.id}>
                 <TableCell>{test.test}</TableCell>
                 <TableCell>{test.status}</TableCell>
-                <TableCell>{test.executionTime}</TableCell>
-                <TableCell>{test.ramUsage}</TableCell>
+                <TableCell>{test.executionTime} µs</TableCell>
+                <TableCell>{test.ramUsage} B</TableCell>
               </TableRow>
             )}
           </TableBody>

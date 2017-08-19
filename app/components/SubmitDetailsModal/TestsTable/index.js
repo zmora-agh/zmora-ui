@@ -80,7 +80,7 @@ class TestsTable extends Component {
                 <TableCell>{test.test}</TableCell>
                 <TableCell>{test.status}</TableCell>
                 <TableCell>{test.executionTime} µs</TableCell>
-                <TableCell>{test.ramUsage} B</TableCell>
+                <TableCell>{test.ramUsage} kB</TableCell>
               </TableRow>
             )}
           </TableBody>

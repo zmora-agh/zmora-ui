@@ -6,12 +6,12 @@
 
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import Typography from 'material-ui/Typography';
 import { gql, graphql } from 'react-apollo';
 
 import ProblemSubmits, { SubmitMetaFragment } from '../../components/ProblemSubmits';
 import messages from './messages';
 import { loadable } from '../../utils/render';
+import EmptyMessage from '../../components/EmptyMessage';
 
 export const ProblemSubmitsForLayout = gql`
   query ProblemSubmitsForLayout($problemId: Int!) { 
@@ -38,9 +38,7 @@ export default class ProblemSubmitsPage extends React.PureComponent {
 
   render() {
     if (this.haveNoSubmits()) {
-      return (<div style={{ padding: 32, textAlign: 'center' }}>
-        <Typography type="headline" style={{ opacity: 0.6 }}><FormattedMessage {...messages.empty} /></Typography>
-      </div>);
+      return <EmptyMessage message={<FormattedMessage {...messages.empty} />} />;
     }
 
     return (

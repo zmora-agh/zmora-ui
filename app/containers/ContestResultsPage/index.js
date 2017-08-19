@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { gql, graphql } from 'react-apollo';
 
 import { FormattedMessage } from 'react-intl';
-import Typography from 'material-ui/Typography';
 
 import ContestRanking, { ContestRankingPropTypes } from '../../components/ContestRanking';
+import EmptyMessage from '../../components/EmptyMessage';
 import { loadable } from '../../utils/render';
 
 import messages from './messages';
@@ -41,10 +41,7 @@ export default class ContestResultsPage extends React.PureComponent {
     const ranking = this.props.data.contest.ranking;
 
     if (ranking.length === 0) {
-      return (
-        <div style={{ padding: 32, textAlign: 'center' }}>
-          <Typography type="headline" style={{ opacity: 0.6 }}><FormattedMessage {...messages.empty} /></Typography>
-        </div>);
+      return <EmptyMessage message={<FormattedMessage {...messages.empty} />} />;
     }
 
     return <ContestRanking data={ranking} />;

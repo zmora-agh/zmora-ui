@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import Typography from 'material-ui/Typography';
 import { gql, graphql } from 'react-apollo';
 import autobind from 'autobind-decorator';
+
 import { ContestsTable } from '../../components/ContestsTable';
+import EmptyMessage from '../../components/EmptyMessage';
 
 import makeSelectContestsPage from './selectors';
 import { DIALOG_TYPE } from './constants';
@@ -62,7 +63,7 @@ export default class ContestsPage extends React.PureComponent {
     if (this.props.children) return this.props.children;
 
     if (this.props.data.contests && this.props.data.contests.length === 0) {
-      return <Typography><FormattedMessage {...messages.empty} /></Typography>;
+      return <EmptyMessage message={<FormattedMessage {...messages.empty} />} />;
     }
 
     return (<ContestsTable

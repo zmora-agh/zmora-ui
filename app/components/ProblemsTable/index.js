@@ -53,9 +53,10 @@ function ProblemsTable(props) {
           <ResponsiveTableCell data-title={props.intl.formatMessage(messages.title)}>
             {problem.name}
           </ResponsiveTableCell>
-          <ResponsiveTableCell data-title={props.intl.formatMessage(messages.softDeadline)}>
-            {moment(problem.softDeadline).format('llll')}
-          </ResponsiveTableCell>
+          {/* Soft deadline has no implementation so far */}
+          {/* <ResponsiveTableCell data-title={props.intl.formatMessage(messages.softDeadline)}> */}
+          {/* {moment(problem.softDeadline).format('llll')} */}
+          {/* </ResponsiveTableCell> */}
           <ResponsiveTableCell data-title={props.intl.formatMessage(messages.hardDeadline)}>
             {moment(problem.hardDeadline).format('llll')}
           </ResponsiveTableCell>

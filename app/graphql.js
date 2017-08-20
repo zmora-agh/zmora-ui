@@ -22,7 +22,7 @@ const authMiddleware = {
   },
   applyAfterware({ response }, next) {
     response.clone().json().then((body) => {
-      if (body.errors && body.errors.some((e) => e.status === 401 || e.status === 403)) {
+      if (body.errors && body.errors.some((e) => e.status === 401)) {
         deleteJwtToken();
         browserHistory.replace(loginPage(browserHistory.getCurrentLocation().pathname));
       } else {

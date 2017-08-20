@@ -56,7 +56,7 @@ export function fetchWithCredentials(input, init, mergeOpts = true) {
   _.merge(opts, init);
 
   return checkedFetch(input, opts).catch((e) => {
-    if (e instanceof RestError && (e.status === 403 || e.status === 401)) {
+    if (e instanceof RestError && (e.status === 401)) {
       deleteJwtToken();
       browserHistory.replace(loginPage(browserHistory.getCurrentLocation().pathname));
     } else {

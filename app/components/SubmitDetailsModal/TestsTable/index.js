@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import Typography from 'material-ui/Typography';
 import Table, { TableRow, TableCell, TableBody } from 'material-ui/Table';
 import EnhancedTableHead from '../../EnhancedTableHead';
+import { sortBy } from '../../../utils/render';
 import messages from './messages';
 
 export const TestResultsFragment = gql`
@@ -43,34 +44,29 @@ class TestsTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      order: 'asc',
+      desc: true,
       orderBy: 'test',
     };
   }
 
-  handleRequestSort = (event, property) => {
-    const orderBy = property;
-    let order = 'desc';
-
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
-    }
-
-    this.setState({ order, orderBy });
+  handleRequestSort = (event, orderBy) => {
+    this.setState({
+      desc: this.state.orderBy === orderBy ? !this.state.desc : false,
+      orderBy,
+    });
   };
 
   render() {
-    const { order, orderBy } = this.state;
+    const { desc, orderBy } = this.state;
 
-    const tests = Object.values(this.props.tests)
-      .sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
+    const tests = sortBy(this.props.tests, (test) => test[orderBy], desc);
     return (
       <div style={{ padding: 10 }}>
         <Typography type="title"><FormattedMessage {...messages.tests} /></Typography>
         <Table>
           <EnhancedTableHead
             columns={columnData}
-            order={order}
+            order={desc ? 'desc' : 'asc'}
             orderBy={orderBy}
             onRequestSort={this.handleRequestSort}
           />

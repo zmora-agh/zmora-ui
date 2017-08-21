@@ -9,6 +9,7 @@ import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
 import FileFileDownload from 'material-ui-icons/FileDownload';
 import EnhancedTableHead from '../../EnhancedTableHead';
+import { sortBy } from '../../../utils/render';
 import messages from './messages';
 import { API_URL } from '../../../constants';
 
@@ -45,34 +46,29 @@ class FilesTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      order: 'asc',
+      desc: true,
       orderBy: 'filename',
     };
   }
 
-  handleRequestSort = (event, property) => {
-    const orderBy = property;
-    let order = 'desc';
-
-    if (this.state.orderBy === property && this.state.order === 'desc') {
-      order = 'asc';
-    }
-
-    this.setState({ order, orderBy });
+  handleRequestSort = (event, orderBy) => {
+    this.setState({
+      desc: this.state.orderBy === orderBy ? !this.state.desc : false,
+      orderBy,
+    });
   };
 
   render() {
-    const { order, orderBy } = this.state;
+    const { desc, orderBy } = this.state;
 
-    const files = Object.values(this.props.files)
-      .sort((a, b) => (order === 'desc' ? b[orderBy] > a[orderBy] : a[orderBy] > b[orderBy]));
+    const files = sortBy(this.props.files, (file) => file[orderBy], desc);
     return (
       <div style={{ padding: 10 }}>
         <Typography type="title"><FormattedMessage {...messages.files} /></Typography>
         <Table>
           <EnhancedTableHead
             columns={columnData}
-            order={order}
+            order={desc ? 'desc' : 'asc'}
             orderBy={orderBy}
             onRequestSort={this.handleRequestSort}
           />

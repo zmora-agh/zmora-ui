@@ -9,6 +9,11 @@
     <link rel="manifest" href="manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
     <title>Zmora AGH</title>
+    <script type="text/javascript">
+      (function(){
+        window.zmora = { api: 'https://api.zmora-agh.memleak.pl' }
+      })();
+    </script>
   </head>
   <body>
     <!-- Display a message if JS has been disabled on the browser. -->

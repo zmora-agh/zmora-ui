@@ -7,12 +7,12 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 function ContestButton(props) {
-  const { signupDuration, start, id } = props.contest;
+  const { canJoinStarted, signupDuration, start, id } = props.contest;
   const startTime = moment(start).add(signupDuration, 'seconds');
   const started = props.time.isAfter(startTime);
 
   const canEnter = started || props.isOwner;
-  const canJoin = !started && !props.contest.joined && !props.isOwner;
+  const canJoin = (!started || canJoinStarted) && !props.contest.joined && !props.isOwner;
 
   return canJoin ? joinButton(props.onClick) : enterButton(canEnter, id);
 }

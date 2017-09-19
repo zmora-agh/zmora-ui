@@ -22,6 +22,7 @@ const ContestsListForLayout = gql`
       joined
       description
       signupDuration
+      canJoinStarted
       duration
       owners {
         id

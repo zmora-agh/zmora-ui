@@ -7,23 +7,14 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
 function ContestButton(props) {
-  const { signupDuration, start, id } = props.contest;
-  const enrolEndTime = moment(start).add(signupDuration, 'seconds');
-  const enterActive = props.time.isAfter(enrolEndTime) || props.isOwner;
-  const enterButton = (
-    <Button raised color="primary" disabled={!enterActive}>
-      <FormattedMessage {...messages.enter} />
-    </Button>
-  );
-  const activeEnterButton = !enterActive ? enterButton : <Link to={`/contests/${id}`}>{enterButton}</Link>;
+  const { canJoinStarted, signupDuration, start, id } = props.contest;
+  const startTime = moment(start).add(signupDuration, 'seconds');
+  const started = props.time.isAfter(startTime);
 
-  const joinButton = (
-    <Button onClick={props.onClick} raised color="primary">
-      <FormattedMessage {...messages.join} />
-    </Button>
-  );
+  const canEnter = started || props.isOwner;
+  const canJoin = (!started || canJoinStarted) && !props.contest.joined && !props.isOwner;
 
-  return ((props.time.isAfter(enrolEndTime) || props.contest.joined || props.isOwner) ? activeEnterButton : joinButton);
+  return canJoin ? joinButton(props.onClick) : enterButton(canEnter, id);
 }
 
 ContestButton.propTypes = {
@@ -34,3 +25,20 @@ ContestButton.propTypes = {
 };
 
 export default ContestButton;
+
+function enterButton(canEnter, contestId) {
+  const button = (
+    <Button raised color="primary" disabled={!canEnter}>
+      <FormattedMessage {...messages.enter} />
+    </Button>
+  );
+  return canEnter ? <Link to={`/contests/${contestId}`}>{button}</Link> : button;
+}
+
+function joinButton(join) {
+  return (
+    <Button onClick={join} raised color="primary">
+      <FormattedMessage {...messages.join} />
+    </Button>
+  );
+}

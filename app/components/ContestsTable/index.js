@@ -21,8 +21,9 @@ export class ContestsTable extends React.PureComponent { // eslint-disable-line 
   }
 
   isVisible(contest, serverTime) {
-    const enrolEndTime = moment(contest.start).add(contest.signupDuration, 'seconds');
-    return serverTime.isBefore(enrolEndTime) || contest.joined || this.isOwner(contest);
+    const startTime = moment(contest.start).add(contest.signupDuration, 'seconds');
+    const started = serverTime.isAfter(startTime);
+    return !started || contest.canJoinStarted || contest.joined || this.isOwner(contest);
   }
 
   render() {

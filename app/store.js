@@ -6,7 +6,12 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
+import createSentryMiddleware from 'redux-sentry';
 import createReducer from './reducers';
+
+import appSaga from './containers/App/sagas';
+import { client } from './graphql';
+import { SENTRY_DSN } from './constants';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,8 +20,15 @@ export default function configureStore(initialState = {}, history) {
   // 1. sagaMiddleware: Makes redux-sagas work
   // 2. routerMiddleware: Syncs the location/URL path to the state
   const middlewares = [
+    client.middleware(),
     sagaMiddleware,
     routerMiddleware(history),
+    createSentryMiddleware({
+      dsn: SENTRY_DSN,
+      configuration: {
+        collectWindowErrors: true,
+      },
+    }),
   ];
 
   const enhancers = [
@@ -37,6 +49,8 @@ export default function configureStore(initialState = {}, history) {
     fromJS(initialState),
     composeEnhancers(...enhancers)
   );
+
+  appSaga.map(sagaMiddleware.run);
 
   // Extensions
   store.runSaga = sagaMiddleware.run;

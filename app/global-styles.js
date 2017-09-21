@@ -1,4 +1,5 @@
 import { injectGlobal } from 'styled-components';
+import 'roboto-fontface/css/roboto/roboto-fontface.css';
 
 /* eslint no-unused-expressions: 0 */
 injectGlobal`
@@ -6,14 +7,20 @@ injectGlobal`
   body {
     height: 100%;
     width: 100%;
+
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+    line-height: 24px;
   }
 
-  body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  pre, p, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
   }
 
-  body.fontLoaded {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  pre {
+    font-family: 'Roboto Mono', monospace;
+    white-space: pre-wrap;
   }
 
   #app {
@@ -21,10 +28,9 @@ injectGlobal`
     min-height: 100%;
     min-width: 100%;
   }
-
-  p,
-  label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    line-height: 1.5em;
+  
+  a {
+    color: inherit;
+    text-decoration: inherit;
   }
 `;

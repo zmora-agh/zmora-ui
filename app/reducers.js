@@ -8,6 +8,9 @@ import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import appReducer from 'containers/App/reducer';
+import submitReducer from 'containers/Submit/reducer';
+import { client } from './graphql';
 
 /*
  * routeReducer
@@ -44,6 +47,11 @@ export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
     language: languageProviderReducer,
+    app: appReducer,
+    ui: combineReducers({
+      submit: submitReducer,
+    }),
+    apollo: client.reducer(),
     ...asyncReducers,
   });
 }

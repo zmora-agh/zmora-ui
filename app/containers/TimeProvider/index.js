@@ -26,7 +26,7 @@ export default class TimeProvider extends React.PureComponent {
   }
 
   parseProps(props) {
-    if (!props.data.loading) {
+    if (!props.data.loading && !props.data.error) {
       this.props.dispatch(getCurrentTimeSuccess(moment(props.data.time)));
     }
   }

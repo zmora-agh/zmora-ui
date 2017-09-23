@@ -26,7 +26,7 @@ export const ProblemSubmitsForLayout = gql`
 `;
 
 @graphql(ProblemSubmitsForLayout, {
-  options: ({ problemId }) => ({ variables: { problemId } }),
+  options: ({ problemId }) => ({ variables: { problemId }, pollInterval: 2000 }),
   skip: ({ defer }) => defer,
 })
 @loadable({ found: (props) => props.data.problem !== null })

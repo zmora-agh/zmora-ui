@@ -7,10 +7,10 @@ import ContestRanking, { ContestRankingPropTypes } from '../../components/Contes
 import EmptyMessage from '../../components/EmptyMessage';
 import { loadable } from '../../utils/render';
 
-import messages from './messages';
+import messages from '../ContestPage/messages';
 
 const q = gql`
-  query q($contestId: Int!) {
+  query ContestResults($contestId: Int!) {
     contest(id: $contestId) {
       id
       ranking {

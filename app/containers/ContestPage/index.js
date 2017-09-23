@@ -13,7 +13,7 @@ import { submitSetContext } from '../Submit/actions';
 
 import FetchView from '../../components/FetchView';
 
-const getContestId = (props) => parseInt(props.params.contest_id, 10);
+export const getContestId = (props) => parseInt(props.params.contest_id, 10);
 
 const ContestListForLayout = gql`
   query ContestListForLayout($contestId: Int!) { 

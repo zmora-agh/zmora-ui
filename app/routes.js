@@ -129,7 +129,9 @@ export default function createRoutes(store) {
                   .then(loadModule(cb))
                   .catch(errorLoading);
               },
-            }, {
+            },
+            /* Questions page is not fully implemented
+            {
               path: 'questions',
               name: 'Questions',
               onEnter: requireAuth,
@@ -139,6 +141,7 @@ export default function createRoutes(store) {
                   .catch(errorLoading);
               },
             },
+            */
           ],
         },
       ],

@@ -38,6 +38,10 @@ export default class ContestParticipants extends React.PureComponent {
     };
   }
 
+  /*
+   * Participation is converted to flat object (called participant) to simplify sortBy call.
+   * Sorting at different property nest level (here: user.name and joined) seems to be unnecessarily confusing.
+   */
   flattenParticipation = (participation) => ({
     ...participation.user,
     joined: participation.joined,

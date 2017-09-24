@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { gql } from 'react-apollo';
 import moment from 'moment';
 
 import Table, { TableBody, TableRow, TableCell } from 'material-ui/Table';
 
+import { participationsPropTypes } from './constants';
 import { sortBy } from '../../utils/render';
 
 import EnhancedTableHead from '../EnhancedTableHead/index';
@@ -23,14 +24,6 @@ const columns = [
   { id: 'name', label: 'Name' },
   { id: 'joined', label: 'Join date' },
 ];
-
-export const participationsPropTypes =
-  PropTypes.arrayOf(PropTypes.shape({
-    user: PropTypes.shape({
-      name: PropTypes.string.isRequried,
-    }).isRequired,
-    joined: PropTypes.string.isRequired,
-  }).isRequired);
 
 export default class ContestParticipants extends React.PureComponent {
   static propTypes = {

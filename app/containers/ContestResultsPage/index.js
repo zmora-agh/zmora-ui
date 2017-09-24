@@ -3,14 +3,14 @@ import { gql, graphql } from 'react-apollo';
 
 import { FormattedMessage } from 'react-intl';
 
-import ContestRanking, { ContestRankingPropTypes } from '../../components/ContestRanking';
-import EmptyMessage from '../../components/EmptyMessage';
 import { loadable } from '../../utils/render';
-
 import messages from './messages';
 
-const q = gql`
-  query q($contestId: Int!) {
+import ContestRanking, { ContestRankingPropTypes } from '../../components/ContestRanking';
+import EmptyMessage from '../../components/EmptyMessage';
+
+const ContestResultsQuery = gql`
+  query ContestResults($contestId: Int!) {
     contest(id: $contestId) {
       id
       ranking {
@@ -33,7 +33,7 @@ const q = gql`
 
 const getContestId = (props) => parseInt(props.params.contest_id, 10);
 
-@graphql(q, { options: (props) => ({ variables: { contestId: getContestId(props) } }) })
+@graphql(ContestResultsQuery, { options: (props) => ({ variables: { contestId: getContestId(props) } }) })
 @loadable({ found: (p) => p.data.contest !== null })
 // eslint-disable-next-line react/prefer-stateless-function
 export default class ContestResultsPage extends React.PureComponent {

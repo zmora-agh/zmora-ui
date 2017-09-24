@@ -140,6 +140,15 @@ export default function createRoutes(store) {
                   .then(loadModule(cb))
                   .catch(errorLoading);
               },
+            }, {
+              path: 'participants',
+              name: 'Participants',
+              onEnter: requireAuth,
+              getComponent(location, cb) {
+                import('containers/ContestParticipantsPage')
+                  .then(loadModule(cb))
+                  .catch(errorLoading);
+              },
             },
             */
           ],

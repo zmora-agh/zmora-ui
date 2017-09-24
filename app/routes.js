@@ -140,7 +140,9 @@ export default function createRoutes(store) {
                   .then(loadModule(cb))
                   .catch(errorLoading);
               },
-            }, {
+            },
+            */
+            {
               path: 'participants',
               name: 'Participants',
               onEnter: requireAuth,
@@ -150,7 +152,6 @@ export default function createRoutes(store) {
                   .catch(errorLoading);
               },
             },
-            */
           ],
         },
       ],

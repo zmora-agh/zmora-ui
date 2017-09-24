@@ -9,6 +9,7 @@ import messages from './messages';
 
 import { getContestId } from '../ContestPage';
 
+import { loadable } from '../../utils/render';
 import ContestParticipations, { ContestParticipationsFragment, participationsPropTypes }
   from '../../components/ContestParticipants';
 import EmptyMessage from '../../components/EmptyMessage';
@@ -26,8 +27,6 @@ const ContestParticipationsQuery = gql`
 `;
 
 function ContestParticipantsPage(props) {
-  if (props.data.loading || props.data.error) return null;
-
   if (props.data.contest.participations.length === 0) {
     return <EmptyMessage><FormattedMessage {...messages.empty} /></EmptyMessage>;
   }
@@ -47,4 +46,4 @@ ContestParticipantsPage.propTypes = {
 export default graphql(
   ContestParticipationsQuery,
   { options: (props) => ({ variables: { contestId: getContestId(props) } }) },
-)(ContestParticipantsPage);
+)(loadable()(ContestParticipantsPage));

@@ -5,8 +5,9 @@ import { FormattedMessage } from 'react-intl';
 
 import Paper from 'material-ui/Paper';
 
+import messages from './messages';
+
 import { getContestId } from '../ContestPage';
-import contestMessages from '../ContestPage/messages';
 
 import ContestParticipations, { ContestParticipationsFragment, participationsPropTypes }
   from '../../components/ContestParticipants';
@@ -28,7 +29,7 @@ function ContestParticipantsPage(props) {
   if (props.data.loading || props.data.error) return null;
 
   if (props.data.contest.participations.length === 0) {
-    return <EmptyMessage><FormattedMessage {...contestMessages.empty} /></EmptyMessage>;
+    return <EmptyMessage><FormattedMessage {...messages.empty} /></EmptyMessage>;
   }
 
   return <Paper><ContestParticipations participations={props.data.contest.participations} /></Paper>;

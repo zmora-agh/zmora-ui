@@ -3,11 +3,11 @@ import { gql, graphql } from 'react-apollo';
 
 import { FormattedMessage } from 'react-intl';
 
+import { loadable } from '../../utils/render';
+import messages from './messages';
+
 import ContestRanking, { ContestRankingPropTypes } from '../../components/ContestRanking';
 import EmptyMessage from '../../components/EmptyMessage';
-import { loadable } from '../../utils/render';
-
-import messages from '../ContestPage/messages';
 
 const ContestResultsQuery = gql`
   query ContestResults($contestId: Int!) {

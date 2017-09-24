@@ -9,7 +9,7 @@ import { loadable } from '../../utils/render';
 
 import messages from '../ContestPage/messages';
 
-const q = gql`
+const ContestResultsQuery = gql`
   query ContestResults($contestId: Int!) {
     contest(id: $contestId) {
       id
@@ -33,7 +33,7 @@ const q = gql`
 
 const getContestId = (props) => parseInt(props.params.contest_id, 10);
 
-@graphql(q, { options: (props) => ({ variables: { contestId: getContestId(props) } }) })
+@graphql(ContestResultsQuery, { options: (props) => ({ variables: { contestId: getContestId(props) } }) })
 @loadable({ found: (p) => p.data.contest !== null })
 // eslint-disable-next-line react/prefer-stateless-function
 export default class ContestResultsPage extends React.PureComponent {

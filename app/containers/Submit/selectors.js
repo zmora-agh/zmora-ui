@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { makeSelectUi } from '../App/selectors';
+import { makeSelectTime, makeSelectUi } from '../App/selectors';
 
 function mergeIds({ contextContestId, contextProblemId, explicitContestId, explicitProblemId, ...submit }) {
   return {
@@ -11,7 +11,8 @@ function mergeIds({ contextContestId, contextProblemId, explicitContestId, expli
 
 const makeSelectSubmit = () => createSelector(
   makeSelectUi(),
-  (ui) => mergeIds(ui.submit)
+  makeSelectTime(),
+  (ui, time) => ({ ...mergeIds(ui.submit), offset: time.offset })
 );
 
 export default makeSelectSubmit;

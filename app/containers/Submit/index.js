@@ -8,17 +8,22 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { gql } from 'react-apollo';
 import omitBy from 'lodash/omitBy';
+import moment from 'moment';
 
 import makeSelectSubmit from './selectors';
 import { submit, submitModalClose, submitModalChangeContest } from './actions';
 
 import SubmitModal, { ContestsPropType, ProblemsPropType } from '../../components/SubmitModal';
+import { isContestInProgress } from '../../utils/model';
 
 export const ContestsListForLayout = gql`
   query ContestsListForSubmit { 
     contests {
       id
       name
+      start
+      signupDuration
+      duration
       description
       joined
     }
@@ -87,8 +92,10 @@ class Submit extends React.Component {
   }
 
   render() {
+    const serverTime = moment().add(this.props.offset, 'seconds');
     const contests = this.props.contests && !this.props.contests.loading &&
-      this.props.contests.data.contests.filter((contest) => contest.joined);
+      this.props.contests.data.contests.filter((contest) => contest.joined)
+        .filter((contest) => isContestInProgress(contest, serverTime));
     const problems = this.props.problems && !this.props.problems.loading && this.props.problems.data.contest.problems;
     const hasFiles = Object.values(this.state.inputs).some((input) => input);
     const submittable = this.state.contestId !== undefined && this.state.problemId !== undefined && hasFiles;
@@ -130,6 +137,7 @@ Submit.propTypes = {
   open: PropTypes.bool,
   contestId: PropTypes.number,
   problemId: PropTypes.number,
+  offset: PropTypes.number,
   uploading: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
 };

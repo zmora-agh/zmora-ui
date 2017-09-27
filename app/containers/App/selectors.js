@@ -18,11 +18,13 @@ const makeSelectLocationState = () => {
 };
 
 const selectAppDomain = () => (state) => state.get('app');
+const selectNotificationsDomain = () => (state) => state.get('notifications');
 const selectUiDomain = () => (state) => state.get('ui');
 
 const makeSelectApp = () => createSelector(
   selectAppDomain(),
-  (app) => app.toJS()
+  selectNotificationsDomain(),
+  (app, notifications) => ({ ...app.toJS(), notifications })
 );
 
 const makeSelectUi = () => createSelector(

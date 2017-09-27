@@ -6,6 +6,7 @@
 import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { reducer as notifications } from 'react-notification-system-redux';
 
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import appReducer from 'containers/App/reducer';
@@ -52,6 +53,7 @@ export default function createReducer(asyncReducers) {
       submit: submitReducer,
     }),
     apollo: client.reducer(),
+    notifications,
     ...asyncReducers,
   });
 }

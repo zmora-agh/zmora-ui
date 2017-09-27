@@ -1,4 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
+import { error } from 'react-notification-system-redux';
+
 import { client } from '../../graphql';
 import { getProblemSubmitsURL } from '../../urls';
 import { bootstrap, fetchWithCredentials } from '../../utils/sagas';
@@ -28,12 +30,19 @@ function getProblems(contestId) {
   return client.query({ query: ProblemsForSubmitModal, variables: { contestId } });
 }
 
+const notificationOpts = {
+  title: 'Upload failed',
+  message: 'Sorry, something went wrong while uploading your submit',
+  position: 'tr',
+  autoDismiss: 10,
+};
+
 function* submit({ data }) {
   try {
     yield call(sendSubmit, data);
     yield put(submitSuccess(data.contestId, data.problemId));
   } catch (e) {
-    console.warn(e);
+    yield put(error(notificationOpts));
     yield put(submitError());
   }
 }

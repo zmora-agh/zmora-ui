@@ -17,6 +17,8 @@ import { FormattedMessage } from 'react-intl';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Dialog, { DialogContent, DialogContentText, DialogTitle } from 'material-ui/Dialog';
+import Notifications from 'react-notification-system-redux';
+
 
 import { haveJwtToken } from '../../utils/auth';
 
@@ -58,6 +60,7 @@ class App extends React.PureComponent {
     children: React.PropTypes.node.isRequired,
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
+    notifications: React.PropTypes.object.isRequired,
     user: React.PropTypes.object,
     fatalError: React.PropTypes.bool,
     dispatch: React.PropTypes.func,
@@ -108,6 +111,9 @@ class App extends React.PureComponent {
             <DialogContentText><FormattedMessage {...messages.fatalErrorBody} /></DialogContentText>
           </DialogContent>
         </Dialog>
+        <Notifications
+          notifications={this.props.notifications}
+        />
       </div>
     );
   }

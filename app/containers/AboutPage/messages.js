@@ -12,18 +12,28 @@ export default defineMessages({
   },
   aboutText: {
     id: 'app.components.AboutPage.aboutText',
-    defaultMessage: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut ' +
-    'labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
-    'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse ' +
-    'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat ' +
-    'cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    defaultMessage: 'Zmora is a project created on the initiative of Computer Science students from AGH University of' +
+                    ' Science and Technology. It is online judge for creating and solving programming problems.' +
+                    ' Project supervisor is Dr. Piotr Matyasik',
   },
-  aboutUs: {
-    id: 'app.components.AboutPage.aboutUs',
-    defaultMessage: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut ' +
-    'labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
-    'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse ' +
-    'cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat ' +
-    'cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  emailMessage: {
+    id: 'app.components.AboutPage.emailMessage',
+    defaultMessage: 'If you have any problems or advices, please email us ',
+  },
+  frontendDeveloper: {
+    id: 'app.components.AboutPage.frontendDeveloper',
+    defaultMessage: 'Frontend Developer',
+  },
+  backendDeveloper: {
+    id: 'app.components.AboutPage.backendDeveloper',
+    defaultMessage: 'Backend Developer',
+  },
+  fullstackDeveloper: {
+    id: 'app.components.AboutPage.fullstackDeveloper',
+    defaultMessage: 'Fullstack Developer',
+  },
+  graphicDesigner: {
+    id: 'app.components.AboutPage.graphicDesigner',
+    defaultMessage: 'Graphic Designer',
   },
 });

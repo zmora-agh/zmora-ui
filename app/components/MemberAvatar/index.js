@@ -21,7 +21,7 @@ const styleSheet = createStyleSheet('zmoraMemberAvatar', () => ({
 function MemberAvatar(props) {
   const classes = props.classes;
   const variantStyle = {
-    backgroundImage: `url(${props.bgUrl})`,
+    backgroundImage: `url(${props.background})`,
     backgroundColor: props.bgColor,
   };
 
@@ -30,7 +30,7 @@ function MemberAvatar(props) {
       <div className={classes.root} style={variantStyle}>
         <Avatar
           alt="memberPhoto"
-          src={props.avatarUrl}
+          src={props.avatar}
           style={{ margin: '0 auto', width: 120, height: 120, border: 5, borderStyle: 'solid', borderColor: 'white' }}
         />
         <div style={{ margin: '0 auto', textAlign: 'center' }}>
@@ -44,10 +44,10 @@ function MemberAvatar(props) {
 
 MemberAvatar.propTypes = {
   bgColor: React.PropTypes.string.isRequired,
-  avatarUrl: React.PropTypes.string.isRequired,
-  bgUrl: React.PropTypes.string.isRequired,
-  name: React.PropTypes.string.isRequired,
-  description: React.PropTypes.string.isRequired,
+  avatar: React.PropTypes.string.isRequired,
+  background: React.PropTypes.string.isRequired,
+  name: React.PropTypes.object.isRequired,
+  description: React.PropTypes.node.isRequired,
   classes: React.PropTypes.object.isRequired,
 };
 

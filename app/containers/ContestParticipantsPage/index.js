@@ -10,7 +10,8 @@ import messages from './messages';
 import { getContestId } from '../ContestPage';
 
 import { loadable } from '../../utils/render';
-import ContestParticipations, { ContestParticipationsFragment, participationsPropTypes }
+import { participationsPropTypes } from '../../components/ContestParticipants/constants';
+import ContestParticipations, { ContestParticipationsFragment }
   from '../../components/ContestParticipants';
 import EmptyMessage from '../../components/EmptyMessage';
 

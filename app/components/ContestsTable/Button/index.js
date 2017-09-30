@@ -8,13 +8,15 @@ import messages from './messages';
 
 function ContestButton(props) {
   const { canJoinStarted, signupDuration, start, id } = props.contest;
-  const startTime = moment(start).add(signupDuration, 'seconds');
+  const enrolmentStart = moment(start);
+  const startTime = enrolmentStart.add(signupDuration, 'seconds');
   const started = props.time.isAfter(startTime);
 
   const canEnter = started || props.isOwner;
-  const canJoin = (!started || canJoinStarted) && !props.contest.joined && !props.isOwner;
+  const canJoin = props.time.isAfter(enrolmentStart);
+  const showJoinButton = (!started || canJoinStarted) && !props.contest.joined && !props.isOwner;
 
-  return canJoin ? joinButton(props.onClick) : enterButton(canEnter, id);
+  return showJoinButton ? joinButton(canJoin, props.onClick) : enterButton(canEnter, id);
 }
 
 ContestButton.propTypes = {
@@ -35,9 +37,9 @@ function enterButton(canEnter, contestId) {
   return canEnter ? <Link to={`/contests/${contestId}`}>{button}</Link> : button;
 }
 
-function joinButton(join) {
+function joinButton(canJoin, join) {
   return (
-    <Button onClick={join} raised color="primary">
+    <Button onClick={join} raised color="primary" disabled={!canJoin}>
       <FormattedMessage {...messages.join} />
     </Button>
   );

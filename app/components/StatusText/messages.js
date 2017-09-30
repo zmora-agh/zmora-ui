@@ -1,10 +1,6 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.StatusText.header',
-    defaultMessage: 'This is the StatusText component !',
-  },
   err: {
     id: 'app.components.StatusText.err',
     defaultMessage: 'Failed',

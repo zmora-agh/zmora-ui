@@ -85,7 +85,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
           </Grid>
           <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Chrzanowska Kasia"
+              name="Kasia Chrzanowska"
               description={<FormattedMessage {...messages.frontendDeveloper} />}
               avatar={KChAvatar}
               background={FirstBackground}
@@ -94,7 +94,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
           </Grid>
           <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Flis Marcin"
+              name="Marcin Flis"
               description={<FormattedMessage {...messages.backendDeveloper} />}
               avatar={MFAvatar}
               background={SecondBackground}
@@ -103,7 +103,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
           </Grid>
           <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Ginalska Inga"
+              name="Inga Ginalska"
               description={<FormattedMessage {...messages.graphicDesigner} />}
               avatar={IGAvatar}
               background={ThirdBackground}
@@ -112,7 +112,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
           </Grid>
           <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Lewandowski Konrad"
+              name="Konrad Lewandowski"
               description={<FormattedMessage {...messages.backendDeveloper} />}
               avatar={KLAvatar}
               background={FourthBackground}
@@ -121,7 +121,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
           </Grid>
           <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Moskal Marcin"
+              name="Marcin Moskal"
               description={<FormattedMessage {...messages.fullstackDeveloper} />}
               avatar={MMAvatar}
               background={FifthBackground}
@@ -130,7 +130,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
           </Grid>
           <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Nowotyński Mateusz"
+              name="Mateusz Nowotyński"
               description={<FormattedMessage {...messages.fullstackDeveloper} />}
               avatar={MNAvatar}
               background={SixthBackground}
@@ -139,7 +139,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
           </Grid>
           <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Osuch Kamil"
+              name="Kamil Osuch"
               description={<FormattedMessage {...messages.frontendDeveloper} />}
               avatar={KOAvatar}
               background={SeventhBackground}
@@ -148,7 +148,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
           </Grid>
           <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Skowron Marcin"
+              name="Marcin Skowron"
               description={<FormattedMessage {...messages.frontendDeveloper} />}
               avatar={MSAvatar}
               background={EighthBackground}

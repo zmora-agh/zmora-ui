@@ -13,8 +13,7 @@ export default defineMessages({
   aboutText: {
     id: 'app.components.AboutPage.aboutText',
     defaultMessage: 'Zmora is a project created on the initiative of Computer Science students from AGH University of' +
-                    ' Science and Technology. It is online judge for creating and solving programming problems.' +
-                    ' Project supervisor is Dr. Piotr Matyasik',
+                    ' Science and Technology. Project supervisor is Dr. Piotr Matyasik',
   },
   emailMessage: {
     id: 'app.components.AboutPage.emailMessage',

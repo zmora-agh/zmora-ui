@@ -34,6 +34,7 @@ import EighthBackground from '../../img/backgrounds/bg8.png';
 
 
 import messages from './messages';
+import homepageMessages from '../HomePage/messages';
 
 const styleSheet = createStyleSheet('zmoraAboutPage', (theme) => ({
   card: { maxWidth: 345 },
@@ -81,7 +82,15 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
             </a>
           </Grid>
           <Grid item xs={12}>
-            <FormattedMessage {...messages.aboutText} />
+            <p>
+              <FormattedMessage {...messages.aboutText} />
+            </p>
+            <p>
+              <FormattedMessage {...homepageMessages.zmoraDescription} />
+            </p>
+            <p>
+              <FormattedMessage {...homepageMessages.nameOrigin} />
+            </p>
           </Grid>
           <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar

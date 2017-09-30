@@ -21,6 +21,7 @@ import { submitsPropType } from './constants';
 import messages from './messages';
 import EnhancedTableHead from '../EnhancedTableHead';
 import SubmitDetails from '../../containers/SubmitDetails/index';
+import StatusText from '../StatusText/index';
 
 export const SubmitMetaFragment = gql`
   fragment SubmitMeta on Submit {
@@ -78,7 +79,7 @@ export default class ProblemSubmits extends Component {
               <TableRow key={submit.id}>
                 <TableCell>{submit.id}</TableCell>
                 <TableCell>{moment(submit.date).format('DD-MM-YYYY HH:mm:ss')}</TableCell>
-                <TableCell>{submit.status}</TableCell>
+                <TableCell><StatusText status={submit.status} /></TableCell>
                 <TableCell>
                   <Button color="primary" onClick={() => this.props.onSubmitSelect(submit.id)}>
                     <FormattedMessage {...messages.seeDetails} />

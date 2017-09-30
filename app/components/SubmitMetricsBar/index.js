@@ -13,7 +13,7 @@ import ParticipationsIcon from 'material-ui-icons/People';
 import ResultsIcon from 'material-ui-icons/AssignmentTurnedIn';
 
 import messages from './messages';
-import { STATUS_ERR, STATUS_OK } from './constants';
+import { STATUS_ERR, STATUS_OK } from '../StatusText/constants';
 
 import { contestParticipants, contestResults } from '../../local-urls';
 

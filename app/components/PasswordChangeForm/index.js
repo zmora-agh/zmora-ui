@@ -1,10 +1,10 @@
 /**
-*
-* PasswordChangeForm
-*
-*/
+ *
+ * PasswordChangeForm
+ *
+ */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Button from 'material-ui/Button';
 import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';
@@ -13,6 +13,8 @@ import ErrorTextField from '../ErrorTextField';
 import messages from './messages';
 import { PASSWORD_PATTERN } from '../RegisterForm/constants';
 import { componentRequireAuth } from '../../utils/auth';
+import { passwordChangePropType } from './constants';
+
 
 @componentRequireAuth
 class PasswordChangeForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -23,6 +25,7 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
       password: '',
       repeatedPassword: '',
     };
+
     this.onSubmit = this.onSubmit.bind(this);
     this.onOldPasswordChange = this.onOldPasswordChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
@@ -49,26 +52,25 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
   validateForm() {
     return {
       password: PASSWORD_PATTERN.test(this.state.password),
-      oldPassword: this.state.oldPassword.length > 0,
     };
   }
 
   render() {
     const passwordsMatch = this.state.repeatedPassword === this.state.password;
     const valid = this.validateForm();
-    const allValid = valid.password && passwordsMatch && valid.oldPassword;
+    const allValid = valid.password && passwordsMatch;
 
     return (
       <Card>
         <CardHeader title={<FormattedMessage {...messages.header} />} />
+
         <form onSubmit={this.onSubmit}>
-          <CardContent>
+          <CardContent >
             <ErrorTextField
               label={<FormattedMessage {...messages.oldPassword} />}
-              error={!valid.oldPassword}
-              errorText={<FormattedMessage {...messages.validOldPassword} />}
               required
               fullWidth
+              errorText={<FormattedMessage {...messages.validOldPassword} />}
               type="password"
               onChange={this.onOldPasswordChange}
             />
@@ -96,7 +98,7 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
               type="submit"
               color="primary"
               raised
-              disabled={!allValid}
+              disabled={!allValid || this.props.loading}
               style={{ width: '100%' }}
             >
               <FormattedMessage {...messages.submit} />
@@ -108,8 +110,7 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
   }
 }
 
-PasswordChangeForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
+PasswordChangeForm.propTypes = passwordChangePropType;
+
 
 export default PasswordChangeForm;

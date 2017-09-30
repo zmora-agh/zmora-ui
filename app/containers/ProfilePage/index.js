@@ -6,14 +6,21 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { Map } from 'immutable';
+
+
 import PasswordChangeForm from '../../components/PasswordChangeForm';
 import { changePassword } from './actions';
+import { passwordChangePropType } from '../../components/PasswordChangeForm/constants';
+
 
 function ProfilePage(props) {
   return (
     <div>
       <PasswordChangeForm
         onSubmit={(oldPassword, password) => props.dispatch(changePassword(oldPassword, password))}
+        {...props.profile}
       />
     </div>
   );
@@ -21,7 +28,12 @@ function ProfilePage(props) {
 
 ProfilePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  profile: PropTypes.shape(passwordChangePropType),
 };
+
+const mapStateToProps = createStructuredSelector({
+  profile: (state) => state.get('profilePage', Map()),
+});
 
 
 function mapDispatchToProps(dispatch) {
@@ -30,4 +42,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(ProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

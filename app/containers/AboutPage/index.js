@@ -83,16 +83,16 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
           <Grid item xs={12}>
             <FormattedMessage {...messages.aboutText} />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Chrzanowska Katarzyna"
+              name="Chrzanowska Kasia"
               description={<FormattedMessage {...messages.frontendDeveloper} />}
               avatar={KChAvatar}
               background={FirstBackground}
               bgColor="#2196f3"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
               name="Flis Marcin"
               description={<FormattedMessage {...messages.backendDeveloper} />}
@@ -101,7 +101,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
               bgColor="#4caf50"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
               name="Ginalska Inga"
               description={<FormattedMessage {...messages.graphicDesigner} />}
@@ -110,7 +110,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
               bgColor="#4caf50"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
               name="Lewandowski Konrad"
               description={<FormattedMessage {...messages.backendDeveloper} />}
@@ -119,7 +119,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
               bgColor="#ff5722"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
               name="Moskal Marcin"
               description={<FormattedMessage {...messages.fullstackDeveloper} />}
@@ -128,7 +128,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
               bgColor="#fb8c00"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
               name="Nowotyński Mateusz"
               description={<FormattedMessage {...messages.fullstackDeveloper} />}
@@ -137,7 +137,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
               bgColor="#673ab7"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
               name="Osuch Kamil"
               description={<FormattedMessage {...messages.frontendDeveloper} />}
@@ -146,7 +146,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
               bgColor="#607d8b"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
               name="Skowron Marcin"
               description={<FormattedMessage {...messages.frontendDeveloper} />}

@@ -34,7 +34,7 @@ function MemberAvatar(props) {
           style={{ margin: '0 auto', width: 120, height: 120, border: 5, borderStyle: 'solid', borderColor: 'white' }}
         />
         <div style={{ margin: '0 auto', textAlign: 'center' }}>
-          <Typography type="display2" style={{ color: 'white', fontSize: 34 }}>{props.name}</Typography>
+          <Typography type="display2" style={{ color: 'white', fontSize: 28 }}>{props.name}</Typography>
           <Typography type="display1" style={{ color: 'white', fontSize: 22 }}>{props.description}</Typography>
         </div>
       </div>

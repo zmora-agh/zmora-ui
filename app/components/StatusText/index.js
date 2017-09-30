@@ -6,8 +6,8 @@ function StatusText({ status, intl }) {
   const messageDescriptor = statusDescriptions.get(status);
   const statusText = messageDescriptor !== undefined ? intl.formatMessage(messageDescriptor) : status;
   return (
-    <abbr title={statusText.toUpperCase()}>
-      {status}
+    <abbr title={statusText}>
+      {status.toUpperCase()}
     </abbr>
   );
 }

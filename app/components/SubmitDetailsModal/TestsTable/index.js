@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import Typography from 'material-ui/Typography';
 import Table, { TableRow, TableCell, TableBody } from 'material-ui/Table';
 import EnhancedTableHead from '../../EnhancedTableHead';
+import StatusText from '../../StatusText';
 import { sortBy } from '../../../utils/render';
 import messages from './messages';
 
@@ -74,7 +75,7 @@ class TestsTable extends Component {
             {tests.map((test) =>
               <TableRow key={test.id}>
                 <TableCell>{test.test}</TableCell>
-                <TableCell>{test.status}</TableCell>
+                <TableCell><StatusText status={test.status} /></TableCell>
                 <TableCell>{test.executionTime} µs</TableCell>
                 <TableCell>{test.ramUsage} kB</TableCell>
               </TableRow>

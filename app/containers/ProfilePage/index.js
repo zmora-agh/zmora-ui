@@ -32,7 +32,7 @@ ProfilePage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  profile: (state) => state.get('profilePage', Map()),
+  profile: (state) => state.get('profilePage', Map()).toJS(),
 });
 
 

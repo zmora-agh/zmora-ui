@@ -196,6 +196,7 @@ export default function createRoutes(store) {
     }, {
       path: profilePage(),
       name: 'Profile',
+      onEnter: requireAuth,
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           import('containers/ProfilePage/sagas'),

@@ -8,6 +8,8 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Button from 'material-ui/Button';
 import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';
+import { InputLabel } from 'material-ui/Input';
+
 /* import { LinearProgress } from 'material-ui/Progress'; */
 import ErrorTextField from '../ErrorTextField';
 import messages from './messages';
@@ -18,6 +20,7 @@ import { passwordChangePropType } from './constants';
 
 @componentRequireAuth
 class PasswordChangeForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +30,7 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
     };
 
     this.onSubmit = this.onSubmit.bind(this);
+    this.wasSubmitted = false;
     this.onOldPasswordChange = this.onOldPasswordChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onRepeatPasswordChange = this.onRepeatPasswordChange.bind(this);
@@ -46,6 +50,7 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
 
   onSubmit(event) {
     this.props.onSubmit(this.state.oldPassword, this.state.password);
+    this.wasSubmitted = true;
     event.preventDefault();
   }
 
@@ -54,6 +59,7 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
       password: PASSWORD_PATTERN.test(this.state.password),
     };
   }
+
 
   render() {
     const passwordsMatch = this.state.repeatedPassword === this.state.password;
@@ -92,6 +98,10 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
               errorText={<FormattedMessage {...messages.passwordsNotMatch} />}
               onChange={this.onRepeatPasswordChange}
             />
+            {this.props.error && <InputLabel error><FormattedMessage {...messages.passwordNotChanged} /></InputLabel>}
+            {!this.props.error && this.wasSubmitted && !this.props.loading && <InputLabel test>
+              <FormattedMessage {...messages.passwordChanged} />
+            </InputLabel>}
           </CardContent>
           <CardActions>
             <Button

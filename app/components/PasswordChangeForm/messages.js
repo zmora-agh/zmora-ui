@@ -50,4 +50,12 @@ export default defineMessages({
     id: 'app.components.ChangePasswordForm.passwordValid',
     defaultMessage: 'Password should have at least 8 characters',
   },
+  passwordChanged: {
+    id: 'app.components.ChangePasswordForm.passwordChanged',
+    defaultMessage: 'Password changed',
+  },
+  passwordNotChanged: {
+    id: 'app.components.ChangePasswordForm.passwordNotChanged',
+    defaultMessage: 'Password has not been changed',
+  },
 });

@@ -11,9 +11,30 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
+import Typography from 'material-ui/Typography';
 import MemberAvatar from '../../components/MemberAvatar';
 
+import GitHubLogo from '../../img/GitHub-Mark-64px.png';
+import MMAvatar from '../../img/avatars/mm.jpg';
+import MFAvatar from '../../img/avatars/mf.jpg';
+import KChAvatar from '../../img/avatars/kch.jpg';
+import KLAvatar from '../../img/avatars/kl.jpg';
+import KOAvatar from '../../img/avatars/ko.jpg';
+import MNAvatar from '../../img/avatars/mn.jpg';
+import MSAvatar from '../../img/avatars/ms.jpg';
+import IGAvatar from '../../img/avatars/ig.jpg';
+import FirstBackground from '../../img/backgrounds/bg1.png';
+import SecondBackground from '../../img/backgrounds/bg2.png';
+import ThirdBackground from '../../img/backgrounds/bg3.png';
+import FourthBackground from '../../img/backgrounds/bg4.png';
+import FifthBackground from '../../img/backgrounds/bg5.png';
+import SixthBackground from '../../img/backgrounds/bg6.png';
+import SeventhBackground from '../../img/backgrounds/bg7.png';
+import EighthBackground from '../../img/backgrounds/bg8.png';
+
+
 import messages from './messages';
+import homepageMessages from '../HomePage/messages';
 
 const styleSheet = createStyleSheet('zmoraAboutPage', (theme) => ({
   card: { maxWidth: 345 },
@@ -35,6 +56,10 @@ const styleSheet = createStyleSheet('zmoraAboutPage', (theme) => ({
     width: 150,
     height: 150,
   },
+  mailLink: {
+    color: 'blue',
+    textDecoration: 'underline',
+  },
 }));
 
 class AboutPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -49,7 +74,7 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
           <Grid item xs={2}>
             <a href="https://github.com/zmora-agh">
               <Chip
-                avatar={<Avatar src={require('../../img/GitHub-Mark-64px.png')} />}
+                avatar={<Avatar src={GitHubLogo} />}
                 label="zmora-agh"
                 onClick={() => {}}
                 className={classes.chip}
@@ -57,92 +82,93 @@ class AboutPage extends React.PureComponent { // eslint-disable-line react/prefe
             </a>
           </Grid>
           <Grid item xs={12}>
-            <FormattedMessage {...messages.aboutText} />
+            <p>
+              <FormattedMessage {...messages.aboutText} />
+            </p>
+            <p>
+              <FormattedMessage {...homepageMessages.zmoraDescription} />
+            </p>
+            <p>
+              <FormattedMessage {...homepageMessages.nameOrigin} />
+            </p>
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Janusz"
-              description="Człowiek sukcesu"
-              avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-01.jpg"
-              bgUrl="https://cdn.dribbble.com/users/58267/screenshots/1779481/attachments/291187/Perkse-Pattern.png"
+              name="Kasia Chrzanowska"
+              description={<FormattedMessage {...messages.frontendDeveloper} />}
+              avatar={KChAvatar}
+              background={FirstBackground}
               bgColor="#2196f3"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Andrzej"
-              description="Najlepszy developer"
-              avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-02.jpg"
-              bgUrl="http://www.bestpsdfreebies.com/wp-content/uploads/2014/05/shards_pattern.jpg"
+              name="Marcin Flis"
+              description={<FormattedMessage {...messages.backendDeveloper} />}
+              avatar={MFAvatar}
+              background={SecondBackground}
               bgColor="#4caf50"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Mirosław"
-              description="Tylko mirko"
-              avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-03.jpg"
-              bgUrl="https://goo.gl/32xGr3"
+              name="Inga Ginalska"
+              description={<FormattedMessage {...messages.graphicDesigner} />}
+              avatar={IGAvatar}
+              background={ThirdBackground}
+              bgColor="#4caf50"
+            />
+          </Grid>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
+            <MemberAvatar
+              name="Konrad Lewandowski"
+              description={<FormattedMessage {...messages.backendDeveloper} />}
+              avatar={KLAvatar}
+              background={FourthBackground}
               bgColor="#ff5722"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Przemysław"
-              description="Rekin przemysłu"
-              avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-04.jpg"
-              bgUrl="https://goo.gl/CaKbO2"
+              name="Marcin Moskal"
+              description={<FormattedMessage {...messages.fullstackDeveloper} />}
+              avatar={MMAvatar}
+              background={FifthBackground}
               bgColor="#fb8c00"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Zbigniew"
-              description="Prawdziwy patriota"
-              avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-05.jpg"
-              bgUrl="https://goo.gl/lZGpvu"
+              name="Mateusz Nowotyński"
+              description={<FormattedMessage {...messages.fullstackDeveloper} />}
+              avatar={MNAvatar}
+              background={SixthBackground}
               bgColor="#673ab7"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Van"
-              description="Artysta wykonawczy"
-              avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-06.jpg"
-              bgUrl="https://goo.gl/Kum3q4"
+              name="Kamil Osuch"
+              description={<FormattedMessage {...messages.frontendDeveloper} />}
+              avatar={KOAvatar}
+              background={SeventhBackground}
               bgColor="#607d8b"
             />
           </Grid>
-
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
+          <Grid style={{ padding: 20 }} item xs={12} md={6} lg={4}>
             <MemberAvatar
-              name="Jan"
-              description="member"
-              avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-07.jpg"
-              bgUrl="https://s-media-cache-ak0.pinimg.com/originals/88/eb/a5/88eba554eb141ad1bc126daaab018594.jpg"
+              name="Marcin Skowron"
+              description={<FormattedMessage {...messages.frontendDeveloper} />}
+              avatar={MSAvatar}
+              background={EighthBackground}
               bgColor="#039BE5"
             />
           </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
-            <MemberAvatar
-              name="Jan"
-              description="member"
-              avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-08.jpg"
-              bgUrl="http://ultrawidewallpapers.com/wp-content/uploads/2015/09/fog-of-war-3440x1440.jpg"
-              bgColor="#00796B"
-            />
-          </Grid>
-          <Grid style={{ padding: 20 }} item xs={12} sm={6} md={4}>
-            <MemberAvatar
-              name="Jan"
-              description="member"
-              avatarUrl="http://wstaw.org/m/2017/05/07/Dziwny-Pan-09.jpg"
-              bgUrl="https://cdn-images-1.medium.com/max/1400/1*278tqw9zNPe2WCAz29Wzdw.jpeg"
-              bgColor="#9C27B0"
-            />
-          </Grid>
           <Grid item xs={12}>
-            <FormattedMessage {...messages.aboutUs} />
+            <Typography>
+              <FormattedMessage {...messages.emailMessage} />
+              <a href="mailto:zmora-agh@googlegroups.com" className={classes.mailLink}>zmora-agh@googlegroups.com</a>
+            </Typography>
           </Grid>
         </Grid>
       </div>

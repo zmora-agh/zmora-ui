@@ -14,7 +14,7 @@ import makeSelectSubmit from './selectors';
 import { submit, submitModalClose, submitModalChangeContest } from './actions';
 
 import SubmitModal, { ContestsPropType, ProblemsPropType } from '../../components/SubmitModal';
-import { isContestInProgress } from '../../utils/model';
+import { isContestInProgress, isProblemBeforeHardDeadline } from '../../utils/model';
 
 export const ContestsListForLayout = gql`
   query ContestsListForSubmit { 
@@ -37,6 +37,7 @@ export const ProblemsForSubmitModal = gql`
         id
         name
         shortcode
+        hardDeadline
       }
     }
   }
@@ -96,7 +97,9 @@ class Submit extends React.Component {
     const contests = this.props.contests && !this.props.contests.loading &&
       this.props.contests.data.contests.filter((contest) => contest.joined)
         .filter((contest) => isContestInProgress(contest, serverTime));
-    const problems = this.props.problems && !this.props.problems.loading && this.props.problems.data.contest.problems;
+    const problems = this.props.problems && !this.props.problems.loading &&
+      this.props.problems.data.contest.problems
+        .filter((problem) => isProblemBeforeHardDeadline(problem, serverTime));
     const hasFiles = Object.values(this.state.inputs).some((input) => input);
     const submittable = this.state.contestId !== undefined && this.state.problemId !== undefined && hasFiles;
 

@@ -6,3 +6,6 @@ export const isContestInProgress = (contest, serverTime) => {
 
   return serverTime.isBetween(startTime, endTime);
 };
+
+export const isProblemBeforeHardDeadline = (problem, serverTime) =>
+  serverTime.isBefore(problem.hardDeadline);

@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 
 import List, { ListItem, ListSubheader, ListItemText } from 'material-ui/List';
 import Menu, { MenuItem } from 'material-ui/Menu';
-import CircularProgress from '../../../../node_modules/material-ui/Progress/CircularProgress';
+import CircularProgress from 'material-ui/Progress/CircularProgress';
+import { fromJS, is } from 'immutable';
 
 const Layout = (props) => <List subheader={<ListSubheader>{props.header}</ListSubheader>}>{props.children}</List>;
 
@@ -42,13 +43,13 @@ export default class SelectMenu extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.options !== this.props.options) {
+    if (!is(fromJS(nextProps.options), fromJS(this.props.options))) {
       this.setState({ selectedIndex: this.constructor.initialIndex(nextProps) });
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.options !== this.props.options) {
+    if (!is(fromJS(prevProps.options), fromJS(this.props.options))) {
       this.onIndexChange(this.state.selectedIndex);
     }
   }

@@ -60,7 +60,7 @@ class App extends React.PureComponent {
     children: React.PropTypes.node.isRequired,
     routes: React.PropTypes.array.isRequired,
     params: React.PropTypes.object.isRequired,
-    notifications: React.PropTypes.object.isRequired,
+    notifications: React.PropTypes.array.isRequired,
     user: React.PropTypes.object,
     fatalError: React.PropTypes.bool,
     dispatch: React.PropTypes.func,

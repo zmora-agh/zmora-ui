@@ -35,6 +35,11 @@ In project root directory run
 docker-compose up
 ```
 
+Note: If you have been using other method of running project you may have to remove node_modules directory
+```
+rm -rf node_modules
+```
+
 ### Running linter
 You can run linter while project is running with
 ```

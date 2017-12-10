@@ -4,11 +4,10 @@
 *
 */
 
-import { withStyles, createStyleSheet } from 'material-ui/styles';
-import Chip from 'material-ui/Chip';
-import IconButton from 'material-ui/IconButton';
-import Typography from 'material-ui/Typography';
 import TimeIcon from 'material-ui-icons/AccessTime';
+import Chip from 'material-ui/Chip';
+import { createStyleSheet, withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
 
 import moment from 'moment';
 import React from 'react';
@@ -20,6 +19,11 @@ import { makeSelectTime } from '../App/selectors';
 const styleSheet = createStyleSheet('zmoraServerTime', () => ({
   icon: {
     color: 'inherit',
+  },
+  font: {
+    color: 'inherit',
+    transition: 'width 1s',
+    overflow: 'hidden',
   },
 }));
 
@@ -56,35 +60,34 @@ class ServerTime extends React.Component {
 
   render() {
     const classes = this.props.classes;
+    const chipStyleExpanded = {
+      color: 'inherit',
+      background: 'rgba(255, 255, 255, 0.12)',
+      width: 130,
+      transition: 'width 1s',
+    };
 
     const chipStyle = {
       color: 'inherit',
-      background: 'rgba(255, 255, 255, 0.3)',
-      transition: 'inherit',
+      background: 'inherit',
+      width: 45,
+      transition: 'width 1s',
     };
 
-    if (this.state.showTime) {
-      const time = moment();
-      time.add(this.props.offset, 'seconds');
-
-      return (
-        <Chip
-          onClick={this.toggleTime}
-          style={Object.assign({}, chipStyle, this.props.style)}
-          avatar={<TimeIcon />}
-          label={
-            <Typography color="inherit" style={{ marginRight: 8 }} type="body2">
-              {time.format('HH:mm:ss')}
-            </Typography>
-          }
-        />
-      );
-    }
+    const time = moment();
+    time.add(this.props.offset, 'seconds');
 
     return (
-      <IconButton style={this.props.style} className={classes.icon} onClick={this.toggleTime}>
-        <TimeIcon />
-      </IconButton>
+      <Chip
+        onClick={this.toggleTime}
+        style={Object.assign({}, this.state.showTime ? chipStyleExpanded : chipStyle, this.props.style)}
+        avatar={<TimeIcon style={{ width: 28 }} />}
+        label={
+          <Typography className={classes.font} style={{ width: this.state.showTime ? 60 : 0 }} type="body2">
+            {time.format('HH:mm:ss')}
+          </Typography>
+        }
+      />
     );
   }
 }

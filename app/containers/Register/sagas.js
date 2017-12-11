@@ -3,6 +3,7 @@ import { gql } from 'react-apollo';
 import { push } from 'react-router-redux';
 import jwtDecode from 'jwt-decode';
 
+import { setJwtToken } from '../../utils/auth';
 import { bootstrap } from '../../utils/sagas';
 import { registerError, registerSuccess } from './actions';
 import { REGISTER } from './constants';
@@ -25,6 +26,7 @@ function* register({ user }) {
     const response = yield call(sendRegister, user);
     const token = response.data.register;
     const userInfo = jwtDecode(token);
+    setJwtToken(token);
     yield put(registerSuccess());
     yield put(loginSuccess(userInfo));
     yield put(push(homePage()));

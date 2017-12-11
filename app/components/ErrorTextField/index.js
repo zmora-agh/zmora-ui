@@ -1,8 +1,8 @@
 /**
-*
-* ErrorTextField
-*
-*/
+ *
+ * ErrorTextField
+ *
+ */
 
 import React from 'react';
 import TextField from 'material-ui/TextField';
@@ -10,6 +10,7 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 const styleSheet = createStyleSheet('zmoraErrorTextField', () => ({
   errorText: {
     position: 'relative',
+    marginTop: 8,
     bottom: 2,
     fontSize: 12,
     lineHeight: '12px',

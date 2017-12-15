@@ -32,7 +32,7 @@ function getProblems(contestId) {
 
 const notificationOpts = {
   title: 'Upload failed',
-  message: 'Sorry, something went wrong while uploading your submit',
+  message: 'Sorry, something went wrong while uploading your submit.',
   position: 'tr',
   autoDismiss: 10,
 };

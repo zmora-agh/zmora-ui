@@ -8,7 +8,6 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Button from 'material-ui/Button';
 import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';
-import { InputLabel } from 'material-ui/Input';
 
 import { LinearProgress } from 'material-ui/Progress';
 import ErrorTextField from '../ErrorTextField';
@@ -98,10 +97,6 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
               errorText={<FormattedMessage {...messages.passwordsNotMatch} />}
               onChange={this.onRepeatPasswordChange}
             />
-            {this.props.error && <InputLabel error><FormattedMessage {...messages.passwordNotChanged} /></InputLabel>}
-            {!this.props.error && this.wasSubmitted && !this.props.loading && <InputLabel test>
-              <FormattedMessage {...messages.passwordChanged} />
-            </InputLabel>}
           </CardContent>
           <CardActions>
             <Button

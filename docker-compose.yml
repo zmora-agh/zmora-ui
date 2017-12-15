@@ -1,7 +1,9 @@
 version: "2"
 services:
   ui:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile-devel
     volumes:
       - ./:/opt/zmora-ui
     ports:

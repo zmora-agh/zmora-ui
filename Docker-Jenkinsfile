@@ -1,0 +1,22 @@
+node {
+	env.NODEJS_HOME = "${tool 'default'}"
+    env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+	
+	def app
+	stage("Clone repository") {
+		checkout scm
+	}
+	stage("Prepare") {
+	    sh 'rm -rf build'
+	    sh 'npm install'
+	}
+	stage("Build") {
+	    sh 'npm run build'
+		app = docker.build("zmora-ui")
+	}
+	stage("Publish") {
+		docker.withRegistry('http://localhost:5000') {
+			app.push("${env.BRANCH_NAME.replaceAll('/','_')}")
+		}
+	}
+}

@@ -1,21 +1,20 @@
-FROM node:8
-
-EXPOSE 3000
+FROM ubuntu:16.04
 
 RUN apt-get update \
-  && apt-get install -qq -y apt-transport-https ca-certificates --fix-missing --no-install-recommends
+  && apt-get install -qq -y nginx gettext-base --fix-missing --no-install-recommends
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+WORKDIR /var/www/html
 
-RUN apt-get update \
-  && apt-get install -qq -y yarn --fix-missing --no-install-recommends
+RUN rm * \
+  && ln -sf /dev/stdout /var/log/nginx/access.log \
+  && ln -sf /dev/stderr /var/log/nginx/error.log
 
-ENV INSTALL_PATH /opt/zmora-ui
-RUN mkdir -p $INSTALL_PATH
+copy config/nginx.config /etc/nginx/sites-enabled/default 
 
-WORKDIR $INSTALL_PATH
+COPY build/* ./
 
-COPY . .
+EXPOSE 80
 
-CMD ["/bin/bash", "-c", "yarn && yarn run start"]
+STOPSIGNAL SIGTERM
+
+CMD ["/bin/bash", "-c","envsubst < index.html.template > index.html && nginx -g 'daemon off;'"]

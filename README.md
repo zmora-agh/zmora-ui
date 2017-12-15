@@ -1,6 +1,9 @@
 # zmora-ui
 Zmora online judge web interface
 
+## Documentation
+Conceptual and technical description is available on [the project wiki](https://github.com/zmora-agh/zmora-ui/wiki).
+
 ## Setting up development environment (Ubuntu)
 ### Install docker
 * Install packages to allow `apt` to use a repository over HTTPS:

@@ -10,7 +10,7 @@ import Button from 'material-ui/Button';
 import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';
 import { InputLabel } from 'material-ui/Input';
 
-/* import { LinearProgress } from 'material-ui/Progress'; */
+import { LinearProgress } from 'material-ui/Progress';
 import ErrorTextField from '../ErrorTextField';
 import messages from './messages';
 import { PASSWORD_PATTERN } from '../RegisterForm/constants';
@@ -69,7 +69,7 @@ class PasswordChangeForm extends React.PureComponent { // eslint-disable-line re
     return (
       <Card>
         <CardHeader title={<FormattedMessage {...messages.header} />} />
-
+        {this.props.loading && <LinearProgress mode="indeterminate" />}
         <form onSubmit={this.onSubmit}>
           <CardContent >
             <ErrorTextField

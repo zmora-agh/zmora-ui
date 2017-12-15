@@ -19,7 +19,7 @@ function sendPasswordChange(oldPassword, newPassword) {
 function* changePassword({ oldPassword, newPassword }) {
   try {
     const response = yield call(sendPasswordChange, oldPassword, newPassword);
-    yield put(response.data.changePassword.changed === true ? changePasswordSuccess() : changePasswordError());
+    yield put(response.data.changePassword === true ? changePasswordSuccess() : changePasswordError());
   } catch (e) {
     yield put(changePasswordError());
   }
